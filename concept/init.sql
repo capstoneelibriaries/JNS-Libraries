@@ -77,6 +77,7 @@ CREATE TABLE IF NOT EXISTS transactions (
   buyer_id INT UNSIGNED,
   trade_id INT UNSIGNED,
   date DATE,
+  datetime TIME,
   FOREIGN KEY (buyer_id) REFERENCES users(id),
   FOREIGN KEY (trade_id) REFERENCES trade_requests(id)
 );
