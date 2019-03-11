@@ -6,11 +6,11 @@
 1. A user clicks "create account".
 2. The user is redirected to the account creation page:
 
-    Username:   [_____]
-    Email:      [_____]
-    Phone:      [_____] *optional
-    Password:   [_____]
-    Confirm:    [_____]
+        Username:   [_____]
+        Email:      [_____]
+        Phone:      [_____] *optional
+        Password:   [_____]
+        Confirm:    [_____]
 
 3. The user fills out the form.
     3.A If the username, email, or phone already exists, the user is
@@ -23,14 +23,14 @@
 1. The user clicks "list a book"
 2. The is redirected to the list book form:
 
-    ISBN:	[_____] after set interval make fetch request to api to retrieve information to populate title genre and author
-    Title:          [_____]
-    Genre:          [_____]
-    Author:         [_____]
-    Price:          [_____]
-    Personal rating:[_____]
-    Synopsis:       [_____] *optional
-    Will trade for: [_____]
+        ISBN:	        [_____] after set interval make fetch request to api to retrieve information to populate title genre and author
+        Title:          [_____]
+        Genre:          [_____]
+        Author:         [_____]
+        Price:          [_____]
+        Personal rating:[_____]
+        Synopsis:       [_____] *optional
+        Will trade for: [_____]
 
     2.A The book name is compared to a blacklist of innapropriate books.
 3. The book is then listed.
@@ -42,8 +42,8 @@
 2. The user selects "Delete"
 3. The user is prompted with a message:
 
-    "Are you sure you want to delete this listing?"
-    [yes/no]
+        "Are you sure you want to delete this listing?"
+        [yes/no]
 
 4. The user selects "yes"
     4.A The book listing is deleted if no one has purchased it.
@@ -55,16 +55,16 @@
 2. The user selects "Edit"
 4. The user is redirected to the following form:
 
-    Title:          [_____] *immutable
-    Genere:         [_____] *immutable
-    Author:         [_____] *immutable
-    ISBN:	[_____] *immutable
-    Price:          [_____]
-    Personal rating:[_____]
-    Synopsis:       [_____]
-    Will trade for: [_____]
-
-    [Save/Cancel]
+        Title:          [_____] *immutable
+        Genere:         [_____] *immutable
+        Author:         [_____] *immutable
+        ISBN:	[_____] *immutable
+        Price:          [_____]
+        Personal rating:[_____]
+        Synopsis:       [_____]
+        Will trade for: [_____]
+        
+        [Save/Cancel]
 
 5. The user selects "Save"
 6. The book listing is updated
@@ -81,8 +81,8 @@
 	Billing information
 	Shipping information
 
-	For visitors, the shipping information will be saved under a sudo account along with a valid email address for order confirmation.
-	 This will allow the seller to contact the buyer and give them a place to ship to.
+    For visitors, the shipping information will be saved under a sudo account along with a valid email address for order confirmation.
+    This will allow the seller to contact the buyer and give them a place to ship to.
 
 3. User clicks on a book listing for trade and is shown details:
 
@@ -90,12 +90,12 @@
 
 	When the visitor clicks offer trade they will be directed (to log in/register if not authenticated already) to the trade form fill out information on the book they are willing to trade similarly to the book posting form:
 
-   ISBN:	[_____] after set interval make fetch request to api to retrieve information to populate title genre and author
-    Title:          [_____]
-    Genre:          [_____]
-    Author:         [_____]
-
-    [Confirm Offer/Cancel]
+        ISBN:	[_____] after set interval make fetch request to api to retrieve information to populate title genre and author
+        Title:          [_____]
+        Genre:          [_____]
+        Author:         [_____]
+        
+        [Confirm Offer/Cancel]
 
 
 4. Visitor that is now a user can click "Confirm Offer"
@@ -112,9 +112,9 @@
 0. A rank 2 or 3 admin logs in
 1. The admin selects "invite new admin" and is redirected to a form:
 
-    Email:          [_____]
+        Email:          [_____]
     
-    [Send/Cancel]
+        [Send/Cancel]
 
     1.A An email is sent to the potential admin's email with an auto
     generated code.
@@ -123,7 +123,7 @@
 3. The potential admin receives the email and follows a link to an admin
     sign up page. There, they encounter a form:
 
-    Please enter your invite code:  [_____]
+        Please enter your invite code:  [_____]
 
     3.A If the invite code is valid, the admin is redirected to an account
     creation form:
