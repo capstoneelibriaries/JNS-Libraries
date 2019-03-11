@@ -21,19 +21,22 @@
 
 0. A user logs in.
 1. The user clicks "list a book"
-2. The is redirected to the list book form:
+2. The user is redirected to the list book form:
+    
+    ISBN:	[_____] after set interval make fetch request to api to retrieve information to populate title genre and author
+    Title:          [_____]
+    Genre:          [_____]
+    Author:         [_____]
+    Price:          [_____]
+    Personal rating:[_____]
+    Synopsis:       [_____] *optional
+    Tradable: 	    [_____]
 
-        ISBN:	        [_____] after set interval make fetch request to api to retrieve information to populate title genre and author
-        Title:          [_____]
-        Genre:          [_____]
-        Author:         [_____]
-        Price:          [_____]
-        Personal rating:[_____]
-        Synopsis:       [_____] *optional
-        Will trade for: [_____]
-
-    2.A The book name is compared to a blacklist of innapropriate books.
-3. The book is then listed.
+2. If the user toggles Tradable a form will populate with fields for Author and Title.
+3. So now the book listing is also a wanted listing.
+ 4.A The book name is compared to a blacklist of inappropriate books.
+5.This is also where you will determine your own shipping cost.
+6. The book is then listed.
 
 ### Book Post Deletion
 
