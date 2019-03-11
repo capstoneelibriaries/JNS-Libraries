@@ -8,6 +8,7 @@ public class Ad {
     private boolean trabable;
 
     private User seller;
+    private Book books;
 
     public Ad(){
         // default
@@ -35,6 +36,14 @@ public class Ad {
 
     public User getSeller(){
         return seller;
+    }
+
+    public Book getBooks() {
+        return books;
+    }
+
+    public void setBooks(Book books) {
+        this.books = books;
     }
 
     public void setId(long id){
