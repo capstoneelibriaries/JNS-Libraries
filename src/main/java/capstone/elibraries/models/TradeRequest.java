@@ -1,4 +1,4 @@
-package models;
+package capstone.elibraries.models;
 
 public class TradeRequest {
 
