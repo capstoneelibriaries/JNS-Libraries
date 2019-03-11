@@ -106,3 +106,38 @@
 # User transactions
 
 0. From the profile page the user can view all his/her past transactions' information ( buying, selling or trading )
+
+# Admin Creation
+
+0. A rank 2 or 3 admin logs in
+1. The admin selects "invite new admin" and is redirected to a form:
+
+    Email:          [_____]
+    
+    [Send/Cancel]
+
+    1.A An email is sent to the potential admin's email with an auto
+    generated code.
+
+2. The rank 2/3 admin logs out.
+3. The potential admin receives the email and follows a link to an admin
+    sign up page. There, they encounter a form:
+
+    Please enter your invite code:  [_____]
+
+    3.A If the invite code is valid, the admin is redirected to an account
+    creation form:
+
+        Username:   [_____]
+        Email:      [_____]
+        Password:   [_____]
+        Confirm:    [_____]
+
+    4. The admin is then created, with a rank of 1. Only rank 3 admins can
+    alter the rank 1 and rank 2 admins.
+
+# Admin Duties
+
+0. A rank 1 admin logs in
+1. They are directed to a feed of new ads.
+3. Each ad has a [delete] button, which allows the admin to delete the ad.
