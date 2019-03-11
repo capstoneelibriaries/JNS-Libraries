@@ -1,5 +1,7 @@
 package models;
 
+import java.util.List;
+
 public class User {
 
     private long id;
@@ -8,6 +10,8 @@ public class User {
     private String phone;
     private String password;
     double rating;
+
+    private List<Ad> ads;
 
     public User(){
         // default
@@ -37,6 +41,10 @@ public class User {
         return rating;
     }
 
+    public List<Ad> getAds(){
+        return ads;
+    }
+
     public void setId(long id){
         this.id = id;
     }
@@ -59,6 +67,10 @@ public class User {
 
     public void setRating(Double rating){
         this.rating = rating;
+    }
+
+    public void addAd(Ad ad){
+        this.ads.add(ad);
     }
 
     public String toString(){
