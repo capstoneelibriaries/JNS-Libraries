@@ -1,22 +1,24 @@
+CREATE DATABASE IF NOT EXISTS elibs_db;
+USE elibs_db;
 -- Books
-CREATE TABLE books (
+CREATE TABLE IF NOT EXISTS books (
   id INT AUTO_INCREMENT PRIMARY KEY,
   isbn VARCHAR(32) NOT NULL,
   title VARCHAR(128) NOT NULL,
   author VARCHAR(128) NOT NULL,
   synopsis VARCHAR(1024),
-  condition INT
+  wear INT
 );
 
 -- Genres
-CREATE TABLE genres (
+CREATE TABLE IF NOT EXISTS genres (
   id INT AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(32)
 );
 -- Genres-Books
 -- [C] genre-id    -> [B]
 -- [D] book-id     -> [A]
-CREATE TABLE genres_books (
+CREATE TABLE IF NOT EXISTS genres_books (
   genre_id INT,
   book_id INT,
   FOREIGN KEY (genre_id) REFERENCES genres(id),
@@ -27,7 +29,7 @@ CREATE TABLE genres_books (
 #     price
 #     shipping
 #     tradable
-CREATE TABLE ads (
+CREATE TABLE IF NOT EXISTS ads (
   id INT AUTO_INCREMENT PRIMARY KEY,
   price DOUBLE,
   shipping DOUBLE,
@@ -37,7 +39,7 @@ CREATE TABLE ads (
 
 # [F] ad-id       -> [E]
 # [G] book-id     -> [A]
-CREATE TABLE ads_books(
+CREATE TABLE IF NOT EXISTS ads_books(
   ad_id INT,
   book_id INT,
   FOREIGN KEY (ad_id) REFERENCES ads(id),
@@ -49,7 +51,7 @@ CREATE TABLE ads_books(
 # [Q] id
 # [H] sale-ad-id  -> [F]
 # [I] wanted-ad-id-> [F]
-CREATE TABLE trades (
+CREATE TABLE IF NOT EXISTS trades (
   id INT AUTO_INCREMENT PRIMARY KEY,
   sale_ad_id INT,
   wanted_ad_id INT,
@@ -64,7 +66,7 @@ CREATE TABLE trades (
 #     password
 #     phone
 #     rating
-CREATE TABLE users (
+CREATE TABLE IF NOT EXISTS users (
   id INT AUTO_INCREMENT PRIMARY KEY,
   username VARCHAR(128),
   email VARCHAR(128),
@@ -83,7 +85,7 @@ CREATE TABLE users (
 #     city
 #     state
 #     zipcode
-CREATE Table addresses (
+CREATE Table IF NOT EXISTS addresses (
   id INT AUTO_INCREMENT PRIMARY KEY,
   type INT,
   address1 VARCHAR(256),
@@ -96,7 +98,7 @@ CREATE Table addresses (
 # Users-Addresses
 #     user-id     -> [J]
 #     address-id  -> [R]
-CREATE TABLE users_addresses (
+CREATE TABLE IF NOT EXISTS users_addresses (
   user_id INT,
   address_id INT,
   FOREIGN KEY (user_id) REFERENCES users(id),
@@ -106,7 +108,7 @@ CREATE TABLE users_addresses (
 
 # [K] book-id     -> [A]
 # [L] user-id     -> [J]
-CREATE TABLE users_books (
+CREATE TABLE IF NOT EXISTS users_books (
   book_id INT,
   user_id INT,
   FOREIGN KEY (book_id) REFERENCES books(id),
@@ -116,11 +118,11 @@ CREATE TABLE users_books (
 
 # [M] user-id     -> [J]
 # [N] ad-id       -> [E]
-CREATE TABLE users_ads (
+CREATE TABLE IF NOT EXISTS users_ads (
   user_id INT,
   ad_id INT,
   FOREIGN KEY (user_id) REFERENCES users(id),
-  FOREIGN KEY (ad_id) REFERENCES ad(id)
+  FOREIGN KEY (ad_id) REFERENCES ads(id)
 );
 # Admins
 
@@ -128,7 +130,7 @@ CREATE TABLE users_ads (
 #     username
 #     email
 #     password
-CREATE TABLE admins (
+CREATE TABLE IF NOT EXISTS admins (
   id INT AUTO_INCREMENT PRIMARY KEY,
   username VARCHAR(128),
   email VARCHAR(128),
@@ -141,7 +143,7 @@ CREATE TABLE admins (
 #     seller-id   -> [J]
 #     buyer-id    -> [J] or Anon
 #     trade-id    -> [Q]
-CREATE TABLE transactions (
+CREATE TABLE IF NOT EXISTS transactions (
   id INT AUTO_INCREMENT PRIMARY KEY,
   ad_id INT ,
   seller_id INT,
