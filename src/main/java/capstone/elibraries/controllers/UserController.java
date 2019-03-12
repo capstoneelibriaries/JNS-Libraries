@@ -9,22 +9,22 @@ public class UserController {
 
     @GetMapping("/user/register")
     public String getRegister() {
-        return "/user/register";
+        return "user/register";
     }
 
     @GetMapping("/login")
     public String getLogin(){
-        return "/user/login";
+        return "user/login";
     }
 
     @PostMapping("/login")
     public String postLogin(){
-        return "/user/profile";
+        return "user/profile";
     }
 
     @GetMapping("/logout")
     public String getLogout(){
-        return "/user/logout";
+        return "user/logout";
     }
 
 }
