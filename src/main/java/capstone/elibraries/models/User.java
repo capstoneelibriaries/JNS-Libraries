@@ -40,6 +40,9 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Address> addresses;
 
+    @Transient
+    private List<Transaction> transactions;
+
     public User(){
         // default
     }
@@ -117,6 +120,13 @@ public class User {
 
     public void addAd(Ad ad){
         this.ads.add(ad);
+    }
+
+    public void addTransaction(Transaction trn){
+        if(this.transactions == null){
+            this.transactions = new ArrayList<>(1);
+        }
+        this.transactions.add(trn);
     }
 
     public String toString(){

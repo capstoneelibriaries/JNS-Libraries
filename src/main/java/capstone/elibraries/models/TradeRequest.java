@@ -1,8 +1,7 @@
 package capstone.elibraries.models;
 import javax.persistence.*;
 
-@Entity
-@Table(name = "trade_requests")
+@Entity @Table(name = "trade_requests")
 public class TradeRequest {
 
     @Id @GeneratedValue
