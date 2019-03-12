@@ -1,3 +1,9 @@
+-- The following script completely removes the database
+-- by dropping all of its tables. This should only be
+-- use for developers who are making changes to the models.
+-- In some cases, there could be errors because spring
+-- is relying on existing tables, rather than generating
+-- new ones.
 USE elibs_db;
 
 SET FOREIGN_KEY_CHECKS = 0;
