@@ -5,12 +5,16 @@ import javax.persistence.*;
 @Table(name = "trade_requests")
 public class TradeRequest {
 
+    @Id @GeneratedValue
     private long id;
+    @Transient
     private User to;
+    @Transient
     private User from;
+    @OneToOne
     private Ad forSale;
+    @OneToOne
     private Ad wanted;
-
 
     public TradeRequest(){
         // default
