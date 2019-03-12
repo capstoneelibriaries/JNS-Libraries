@@ -1,5 +1,6 @@
 package capstone.elibraries.models;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
 
@@ -71,6 +72,10 @@ public class User {
         return ads;
     }
 
+    public List<Address> getAddresses() {
+        return addresses;
+    }
+
     public void setId(long id){
         this.id = id;
     }
@@ -93,6 +98,21 @@ public class User {
 
     public void setRating(Double rating){
         this.rating = rating;
+    }
+
+    public void setAds(List<Ad> ads){
+        this.ads = ads;
+    }
+
+    public void setAddresses(List<Address> addresses){
+        this.addresses = addresses;
+    }
+
+    public void addAddress(Address address){
+        if(this.addresses == null){
+            this.addresses = new ArrayList<>(1);
+        }
+        this.addresses.add(address);
     }
 
     public void addAd(Ad ad){
