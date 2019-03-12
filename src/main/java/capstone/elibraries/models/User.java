@@ -74,6 +74,13 @@ public class User {
     }
 
     public String toString(){
-        return "";
+        return "{\n" +
+                "\tusername:" + username + ",\n" +
+                "\temail:" + email + ",\n" +
+                "\tphone:" + phone + ",\n" +
+                "\tpassword:" + password + ",\n" +
+                "\trating:" + rating + ",\n" +
+                "\tads:" + ads.toString() + ",\n" +
+                "}";
     }
 }
