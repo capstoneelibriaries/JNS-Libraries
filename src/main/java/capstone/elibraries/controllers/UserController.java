@@ -17,4 +17,9 @@ public class UserController {
         return "/user/profile";
     }
 
+    @GetMapping("/logout")
+    public String getLogout(){
+        return "/user/logout";
+    }
+
 }
