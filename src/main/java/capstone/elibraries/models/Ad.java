@@ -65,4 +65,13 @@ public class Ad {
     public void setSeller(User seller){
         this.seller = seller;
     }
+
+    public String toString(){
+        return "{\n" +
+                "\tid:" + this.id + "\n" +
+                "\tprice:" + this.price + "\n" +
+                "\tshipping:" + this.shipping + "\n" +
+                "\ttradable:" + this.trabable + "\n" +
+                "}";
+    }
 }
