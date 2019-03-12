@@ -5,15 +5,24 @@ import javax.persistence.*;
 @Entity
 @Table(name = "addresses")
 public class Address {
-    
+
+    @Id @GeneratedValue
     private long id;
+    @ManyToOne @JoinColumn(name = "addresses")
     private User user;
+    @Column
     private boolean billing;
+    @Column
     private String streetAddr;
+    @Column
     private String subAddr;
+    @Column
     private String country;
+    @Column
     private String city;
+    @Column
     private String state;
+    @Column
     private String zipcode;
 
     public Address(){

@@ -3,25 +3,19 @@ package capstone.elibraries.models;
 import java.util.List;
 import javax.persistence.*;
 
-@Entity
-@Table(name = "books")
+@Entity @Table(name = "books")
 public class Book {
-    @Id
-    @GeneratedValue
-    private long id;
 
+    @Id @GeneratedValue
+    private long id;
     @Column
     private String title;
-
     @Column
     private String author;
-
     @Column
     private String synopsis;
-
     @Column
     private String isbn;
-
     @Column
     private byte wear;
 

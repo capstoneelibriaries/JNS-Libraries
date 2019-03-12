@@ -6,8 +6,8 @@ import javax.persistence.*;
 @Entity
 @Table(name = "users")
 public class User {
-    @Id
-    @GeneratedValue
+
+    @Id @GeneratedValue
     private long id;
 
     @Column(nullable = false, length = 128)
@@ -27,6 +27,9 @@ public class User {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "seller")
     private List<Ad> ads;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<Address> addresses;
 
     public User(){
         // default
