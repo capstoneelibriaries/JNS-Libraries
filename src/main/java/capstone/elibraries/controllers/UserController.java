@@ -7,6 +7,11 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class UserController {
 
+    @GetMapping("/user/register")
+    public String getRegister() {
+        return "/user/register";
+    }
+
     @GetMapping("/login")
     public String getLogin(){
         return "/user/login";
