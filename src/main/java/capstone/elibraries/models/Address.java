@@ -88,4 +88,18 @@ public class Address {
         this.zipcode = zipcode;
     }
 
+    public String toString(){
+        return "{\n" +
+                "\tid:" + id + "\n" +
+                "\tuser:" + user.toString() + "\n" +
+                "\tbilling:" + billing + "\n" +
+                "\taddress1:" + streetAddr + "\n" +
+                "\taddress2:" + subAddr + "\n" +
+                "\tcountry:" + country + "\n" +
+                "\tcity:" + city + "\n" +
+                "\tstate:" + state + "\n" +
+                "\tzipcode:" + zipcode + "\n" +
+                "}";
+    }
+
 }
