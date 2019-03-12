@@ -7,19 +7,27 @@ import javax.persistence.*;
 @Table(name = "users")
 public class User {
 
+    // user ratings are in a range from 0 to 5
+    public static final double MAX_RATING = 5.0;
+    public static final double MIN_RATING = 0.0;
+    // max length of a phone number
+    public static final int PHONE_CAP = 20;
+    // max length of other vchar columns
+    public static final int VCHAR_CAP = 128;
+
     @Id @GeneratedValue
     private long id;
 
-    @Column(nullable = false, length = 128)
+    @Column(nullable = false, length = VCHAR_CAP)
     private String username;
 
-    @Column(nullable = false, length = 128)
+    @Column(nullable = false, length = VCHAR_CAP)
     private String email;
 
     @Column(nullable = false)
     private String password;
 
-    @Column(length = 20)
+    @Column(length = PHONE_CAP)
     private String phone;
 
     @Column
