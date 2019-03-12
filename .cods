@@ -1,0 +1,2 @@
+BUILD_COMMAND='./mvnw package'
+JAR_FILE=target/elibraries-1.0-SNAPSHOT.jar

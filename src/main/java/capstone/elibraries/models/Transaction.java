@@ -1,18 +1,27 @@
 package capstone.elibraries.models;
 
 import java.util.Date;
+import javax.persistence.*;
 
+@Entity @Table(name = "transactions")
 public class Transaction {
+
+    @Id @GeneratedValue
+    private long id;
+    @Transient
+    private User buyer;
+    @Transient
+    private User seller;
+    @OneToOne
+    private Ad item;
+    @OneToOne
+    private TradeRequest trade;
+    @Column
+    private Date date;
 
     public Transaction(){
         //default
     }
-
-    private User buyer;
-    private User seller;
-    private Ad item;
-    private TradeRequest trade;
-    private Date date;
 
     public User getBuyer() {
         return buyer;
@@ -38,11 +47,11 @@ public class Transaction {
         this.item = item;
     }
 
-    public TradeRequest getTrade() {
+    public TradeRequest getTradeRequest() {
         return trade;
     }
 
-    public void setTrade(TradeRequest trade) {
+    public void setTradeRequest(TradeRequest trade) {
         this.trade = trade;
     }
 
