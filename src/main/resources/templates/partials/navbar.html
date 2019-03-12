@@ -1,6 +1,21 @@
-<div th:fragment="navbar" xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 
-    <ul>
+
+<div th:fragment="navbar" xmlns:th="http://www.w3.org/1999/xhtml">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat|Overpass" rel="stylesheet"/>
+
+
+    <nav role="navigation">
+    <div id="menuToggle">
+        <input type="checkbox"/>
+
+        <span></span>
+        <span></span>
+        <span></span>
+
+
+        <ul id="menu">
+
 
         <li><a th:href="@{index}">Home</a></li>
 
@@ -20,4 +35,11 @@
 
     </ul>
 
+    </div>
+
+    </nav>
+
 </div>
+
+
+</html>
