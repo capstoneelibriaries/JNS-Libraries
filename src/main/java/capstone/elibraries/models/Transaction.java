@@ -1,7 +1,10 @@
 package capstone.elibraries.models;
 
 import java.util.Date;
+import javax.persistence.*;
 
+@Entity
+@Table(name = "ransactions")
 public class Transaction {
 
     public Transaction(){

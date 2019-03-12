@@ -1,16 +1,31 @@
 package capstone.elibraries.models;
 
 import java.util.List;
+import javax.persistence.*;
 
+@Entity
+@Table(name = "users")
 public class User {
-
+    @Id
+    @GeneratedValue
     private long id;
-    private String username;
-    private String email;
-    private String phone;
-    private String password;
-    double rating;
 
+    @Column(nullable = false, length = 128)
+    private String username;
+
+    @Column(nullable = false, length = 128)
+    private String email;
+
+    @Column(nullable = false)
+    private String password;
+
+    @Column(length = 20)
+    private String phone;
+
+    @Column
+    public double rating;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "seller")
     private List<Ad> ads;
 
     public User(){

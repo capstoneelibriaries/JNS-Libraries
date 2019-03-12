@@ -1,5 +1,8 @@
 package capstone.elibraries.models;
+import javax.persistence.*;
 
+@Entity
+@Table(name = "trade_requests")
 public class TradeRequest {
 
     private long id;
