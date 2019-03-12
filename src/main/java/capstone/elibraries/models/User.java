@@ -19,6 +19,9 @@ public class User {
     @Id @GeneratedValue
     private long id;
 
+    @Column
+    boolean isAdmin;
+
     @Column(nullable = false, length = VCHAR_CAP)
     private String username;
 
@@ -51,6 +54,10 @@ public class User {
         return id;
     }
 
+    public boolean isAdmin(){
+        return isAdmin;
+    }
+
     public String getUsername(){
         return username;
     }
@@ -81,6 +88,10 @@ public class User {
 
     public void setId(long id){
         this.id = id;
+    }
+
+    public void setAdmin(boolean val){
+        this.isAdmin = val;
     }
 
     public void setUsername(String username){
@@ -127,6 +138,14 @@ public class User {
             this.transactions = new ArrayList<>(1);
         }
         this.transactions.add(trn);
+    }
+
+    public Admin toAdmin(){
+        if(!this.isAdmin){
+            return null;
+        }else{
+            return (Admin)this;
+        }
     }
 
     public String toString(){

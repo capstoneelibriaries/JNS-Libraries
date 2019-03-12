@@ -3,11 +3,10 @@ package capstone.elibraries.models;
 import javax.persistence.*;
 import java.util.List;
 
-@Entity
-@Table(name = "ads")
+@Entity @Table(name = "ads")
 public class Ad {
-    @Id
-    @GeneratedValue
+
+    @Id @GeneratedValue
     private long id;
 
     @Column(nullable = false)
@@ -19,8 +18,7 @@ public class Ad {
     @Column
     private boolean trabable;
 
-    @ManyToOne
-    @JoinColumn (name = "user_id")
+    @ManyToOne @JoinColumn (name = "user_id")
     private User seller;
 
     @ManyToMany(cascade = CascadeType.ALL)
