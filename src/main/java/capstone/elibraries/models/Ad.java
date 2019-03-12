@@ -1,14 +1,33 @@
 package capstone.elibraries.models;
 
+import javax.persistence.*;
+import java.util.List;
+
+@Entity @Table(name = "ads")
 public class Ad {
 
+    @Id @GeneratedValue
     private long id;
+
+    @Column(nullable = false)
     private double price;
+
+    @Column(nullable = false)
     private double shipping;
+
+    @Column
     private boolean trabable;
 
+    @ManyToOne @JoinColumn (name = "user_id")
     private User seller;
-    private Book books;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name="ads_books",
+            joinColumns={@JoinColumn(name="ad_id")},
+            inverseJoinColumns={@JoinColumn(name="book_id")}
+    )
+    private List<Book> books;
 
     public Ad(){
         // default
@@ -18,52 +37,48 @@ public class Ad {
         return id;
     }
 
-    public double getPrice(){
-        return price;
-    }
-
-    public double getShipping(){
-        return shipping;
-    }
-
-    public double getTotal(){
-        return price + shipping;
-    }
-
-    public boolean isTrabable(){
-        return trabable;
-    }
-
-    public User getSeller(){
-        return seller;
-    }
-
-    public Book getBooks() {
-        return books;
-    }
-
-    public void setBooks(Book books) {
-        this.books = books;
-    }
-
     public void setId(long id){
         this.id = id;
+    }
+
+    public double getPrice(){
+        return price;
     }
 
     public void setPrice(double price){
         this.price = price;
     }
 
+    public double getShipping(){
+        return shipping;
+    }
+
     public void setShipping(double shipping){
         this.shipping = shipping;
+    }
+
+    public boolean isTrabable(){
+        return trabable;
     }
 
     public void setTrabable(boolean trabable){
         this.trabable = trabable;
     }
 
-    public void setSeller(User seller){
+    public User getSeller() {
+        return seller;
+    }
+
+    public void setSeller(User seller) {
         this.seller = seller;
+    }
+
+    public List<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(List<Book> books) {
+        this.books = books;
     }
 
     public String toString(){
