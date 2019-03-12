@@ -50,6 +50,37 @@ public class User {
         // default
     }
 
+    public User(User copy){
+        this.id = copy.id;
+        this.isAdmin = copy.isAdmin;
+        this.username = copy.username;
+        this.email = copy.email;
+        this.password = copy.password;
+        this.phone = copy.phone;
+        this.rating = copy.rating;
+        this.ads = copy.ads;
+        this.addresses = copy.addresses;
+        this.transactions = copy.transactions;
+    }
+
+    public User(boolean isAdmin, String username, String email, String password, String phone, double rating, List<Ad> ads, List<Address> addresses, List<Transaction> transactions) {
+        this.isAdmin = isAdmin;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.phone = phone;
+        this.rating = rating;
+        this.ads = ads;
+        this.addresses = addresses;
+        this.transactions = transactions;
+    }
+
+    public User(String username, String email, String password) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+    }
+
     public long getId(){
         return id;
     }
