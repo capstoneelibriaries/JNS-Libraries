@@ -9,18 +9,16 @@
     <h1>Edit your ad</h1>
 
     <div th:object="${ad}">
-        <h3><span th:="*{ad.seller}"></span> </h3>
+        <h3><span th:="*{seller}"></span> </h3>
 
 
     <form th:action="@{/ad/edit}" th:object="${ad}" th:method="post">
 
-        Title:<input th:field="*{ad.title}"/>
+        Price: <input th:field="*{price}"/>
 
-        Description:<input th:field="*{ad.description}"/>
+        Shipping Price: <input th:field="*{shipping}"/>
 
-        Price: <input th:field="*{ad.price}"/>
-
-        Tradeable? <input th:field="*{ad.tradable}"/>
+        Tradeable? <input th:field="*{tradable}"/>
 
         <button type="submit">Save Changes</button>
 

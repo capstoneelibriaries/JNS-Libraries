@@ -8,7 +8,11 @@
     <h1>profile</h1>
     <h1> welcome <span>User</span>!</h1>
 
-    <h1>Welcome!<span th:="text*{user.username}"></span> user!</h1>
+
+    <div th:object="${user}">
+        <h1>Welcome!<span th:="text*{username}"></span></h1>
+    </div>
+
 
     <div><h5>This will eventually be a profile photo</h5></div>
 
