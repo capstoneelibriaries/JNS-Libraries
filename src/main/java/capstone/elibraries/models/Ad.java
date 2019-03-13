@@ -16,7 +16,7 @@ public class Ad {
     private double shipping;
 
     @Column
-    private boolean trabable;
+    private boolean tradable;
 
     @ManyToOne @JoinColumn (name = "user_id")
     private User seller;
@@ -57,12 +57,12 @@ public class Ad {
         this.shipping = shipping;
     }
 
-    public boolean isTrabable(){
-        return trabable;
+    public boolean isTradable(){
+        return tradable;
     }
 
-    public void setTrabable(boolean trabable){
-        this.trabable = trabable;
+    public void setTradable(boolean tradable){
+        this.tradable = tradable;
     }
 
     public User getSeller() {
@@ -86,7 +86,7 @@ public class Ad {
                 "\tid:" + this.id + "\n" +
                 "\tprice:" + this.price + "\n" +
                 "\tshipping:" + this.shipping + "\n" +
-                "\ttradable:" + this.trabable + "\n" +
+                "\ttradable:" + this.tradable + "\n" +
                 "}";
     }
 
