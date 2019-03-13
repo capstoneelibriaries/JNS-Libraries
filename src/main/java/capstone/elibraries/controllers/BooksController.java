@@ -1,11 +1,10 @@
 package capstone.elibraries.controllers;
 
-import capstone.elibraries.models.Book;
-import capstone.elibraries.repositories.Books;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
+import capstone.elibraries.repositories.Books;
+import capstone.elibraries.models.Book;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 public class BooksController {
@@ -15,12 +14,12 @@ public class BooksController {
         this.books=books;
     }
     @GetMapping("/books")
-    public String getbooks(Model model){
+    public String getBooks(Model model){
         model.addAttribute("books",books.findAll());
         return "index";
     }
     @GetMapping("/books/{id}")
-    public String getOnebook(Model model, @PathVariable Long id){
+    public String getOneBook(Model model, @PathVariable Long id){
         model.addAttribute("book",books.findOne(id));
         return "book";
     }
@@ -29,5 +28,4 @@ public class BooksController {
         model.addAttribute("book",new Book());
         return "books/create";
     }
-
 }
