@@ -8,17 +8,16 @@
     <link rel="stylesheet" th:href="@{/css/mobileNavCss.css}"/>
 </head>
 <body>
+<div th:replace="partials/navbar :: navbar">
+</div>
     <h1>login form</h1>
 
-    <form th:action="@{home/login}" th:method="post">
-        <label>
-            Username:<input type="text" value="username" placeholder="username">
-            Phone Number:<input type="text" value="phone" placeholder="optional">
-            Email:<input type="text" value="email" placeholder="email">
-            Password:<input type="text" value="password" placeholder="password">
-            Confirm Password:<input type="text" value="confirmPassword" placeholder="confirm password">
+    <form th:action="@{/login}" th:object="${user}" th:method="post">
+
+            Username:<input th:field="*{username}"/>
+            Password:<input th:field="*{password}"/>
             <button type="submit">Register!</button>
-            </label>
+
     </form>
 </body>
 </html>
