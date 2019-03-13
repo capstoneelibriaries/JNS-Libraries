@@ -5,16 +5,29 @@
     <title>Register</title>
 </head>
 <body>
-    <h1>register page</h1>
+    <h1>Register</h1>
 
     <form>
         <label>
-            Username:<input type="text" value="username" placeholder="username">
-            Phone Number:<input type="text" value="phone" placeholder="optional">
-            Email:<input type="text" value="email" placeholder="email">
-            Password:<input type="text" value="password" placeholder="password">
-            Confirm Password:<input type="text" value="confirmPassword" placeholder="confirm password">
-            <button type="submit">Register!</button>
+            <form th:action="@{/register}" th:method="post" th:object="${user}">
+                Email:
+                <input th:field="*{email}" />
+                <br />
+                Username:
+                <input th:field="*{username}" />
+                <br />
+                Password:
+                <input th:field="*{password}" />
+                <br />
+                Confirm Password:
+                <input th:field="*{confirmPassword}" />
+                <br />
+                Phone Number: *optional
+                <input th:field="*{phone}" />
+                <br />
+
+                <input type="submit" />
+            </form>
         </label>
     </form>
 </body>
