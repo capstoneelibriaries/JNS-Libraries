@@ -6,6 +6,15 @@
 </head>
 <body>
     <h1> this will be one book</h1>
+
+    <div th:object="${book}">
+
+        <span th:text="*{cover}"> </span>
+        <span th:text="*{title}"> </span>
+        <span th:text="*{author}"> </span>
+        <span th:text="*{synopsis}"> </span>
+
+    </div>
     
 </body>
 </html>
