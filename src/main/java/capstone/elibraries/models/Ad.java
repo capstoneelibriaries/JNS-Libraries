@@ -89,4 +89,13 @@ public class Ad {
                 "\ttradable:" + this.trabable + "\n" +
                 "}";
     }
+
+    public String toString(){
+        return "{\n" +
+                "\tid:" + this.id + "\n" +
+                "\tprice:" + this.price + "\n" +
+                "\tshipping:" + this.shipping + "\n" +
+                "\ttradable:" + this.trabable + "\n" +
+                "}";
+    }
 }
