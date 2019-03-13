@@ -7,9 +7,13 @@
 <body>
     <h3>Here are all your books!</h3>
 
-    <div th:each="book : ${books}">
-        <p th:text="${book.title}" />
-        <p th:text="${book.synopsis}" />
+
+    <div th:object="${book}">
+
+        <div th:each="book : ${books}">
+            <p th:text="${book.title}"/>
+            <p th:text="${book.synopsis}"/>
+        </div>
     </div>
 </body>
 </html>

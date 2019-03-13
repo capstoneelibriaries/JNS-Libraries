@@ -21,12 +21,12 @@ public class AdsController {
     @GetMapping("/ads")
     public String getAds(Model model){
         model.addAttribute("ads",ads.findAll());
-        return "index";
+        return "ads/index";
     }
     @GetMapping("/ads/{id}")
     public String getOneAd(Model model, @PathVariable Long id){
         model.addAttribute("ad",ads.findOne(id));
-        return "ad";
+        return "ads/single";
     }
     @GetMapping("/ads/create")
     public String createAd(Model model){
