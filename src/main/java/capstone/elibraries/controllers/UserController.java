@@ -3,10 +3,9 @@ package capstone.elibraries.controllers;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import capstone.elibraries.models.User;
 import capstone.elibraries.repositories.Users;
+import capstone.elibraries.models.User;
 import org.springframework.ui.Model;
-
 
 @Controller
 public class UserController {
@@ -30,6 +29,5 @@ public class UserController {
         user.setPassword(hash);
         users.save(user);
     return "redirect:/login";
-    }
 
 }
