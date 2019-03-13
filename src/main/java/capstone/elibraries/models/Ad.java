@@ -90,12 +90,5 @@ public class Ad {
                 "}";
     }
 
-    public String toString(){
-        return "{\n" +
-                "\tid:" + this.id + "\n" +
-                "\tprice:" + this.price + "\n" +
-                "\tshipping:" + this.shipping + "\n" +
-                "\ttradable:" + this.trabable + "\n" +
-                "}";
-    }
+
 }
