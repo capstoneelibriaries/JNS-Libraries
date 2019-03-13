@@ -5,11 +5,26 @@
     <title>Title</title>
 </head>
 <body>
+
+    <h1>Edit your ad</h1>
+
+    <div th:object="${ad}">
+        <h3><span th:="*{ad.seller}"></span> </h3>
+
+
     <form th:action="@{/ad/edit}" th:object="${ad}" th:method="post">
 
         Title:<input th:field="*{ad.title}"/>
+
         Description:<input th:field="*{ad.description}"/>
+
+        Price: <input th:field="*{ad.price}"/>
+
+        Tradeable? <input th:field="*{ad.tradable}"/>
+
         <button type="submit">Save Changes</button>
+
     </form>
+    </div>
 </body>
 </html>
