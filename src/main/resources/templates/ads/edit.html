@@ -5,6 +5,11 @@
     <title>Title</title>
 </head>
 <body>
-    
+    <form th:action="@{/ad/edit}" th:object="${ad}" th:method="post">
+
+        Title:<input th:field="*{ad.title}"/>
+        Description:<input th:field="*{ad.description}"/>
+        <button type="submit">Save Changes</button>
+    </form>
 </body>
 </html>
