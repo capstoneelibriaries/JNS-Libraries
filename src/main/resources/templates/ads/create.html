@@ -9,9 +9,11 @@
 
 
     <form th:action="@{/ad/create}" th:object="${ad}" th:method="post">
+
+        Seller:<input th:field="*{seller}"/>
         Price:<input th:field="*{price}"/>
         Shipping Price:<input th:field="*{shipping}"/>
-        Tradeable:<input th:field="*{shipping}"/>
+        Tradeable:<input th:field="*{tradable}"/>
 
     </form>
 
