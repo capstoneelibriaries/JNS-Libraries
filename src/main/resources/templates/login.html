@@ -1,13 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+
 <head>
-    <meta charset="UTF-8">
-    <title>login</title>
+    <meta charset="UTF-8"/>
+    <title>Home</title>
+    <link rel="stylesheet" th:href="@{/css/mobileIndex.css}"/>
+    <link rel="stylesheet" th:href="@{/css/mobileNavCss.css}"/>
 </head>
 <body>
     <h1>login form</h1>
 
-    <form>
+    <form th:action="@{home/login}" th:method="post">
         <label>
             Username:<input type="text" value="username" placeholder="username">
             Phone Number:<input type="text" value="phone" placeholder="optional">
