@@ -28,8 +28,7 @@ body{
 }
 #profileLinks{
     list-style-type: none;
-    margin-top: 2px;
-    margin-left: -11px;
+    margin-top: -65px;
     font-size: inherit;
 }
 .separator{
@@ -40,10 +39,22 @@ body{
     border-radius: 100px;
     margin: 30px auto auto;
 }
-#editButton{
+
+#edit{
     background-color: #1B7DBE;
     border-radius: 5px;
-}
-#edit{
+    margin-left: 25px;
     color: #F7F9F9;
+}
+a, button {
+    text-decoration: none;
+    text-underline: none;
+    color: black;
+    font-family: Overpass;
+    border-color: rgba(216, 216, 216, 0) rgba(209, 209, 209, 0) rgba(173, 121, 121, 0);
+    border-style: solid;
+    border-width: 1px;
+    padding: 1px 7px 2px;
+    background-color: #ff000000;
+    font-size: 22px;
 }

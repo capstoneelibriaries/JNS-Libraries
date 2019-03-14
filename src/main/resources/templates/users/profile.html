@@ -14,12 +14,8 @@
         <!--<h1>Hey!<span th:="text*{username}"></span></h1>-->
     <!--</div>-->
 
-
-    <img th:src="@{/images/profilePic.jpg}" alt="book" id="profilePic"/>
     <div id="profileMenuBar">
-        <ul id="profileLinks">
-            <li><b id="editButton"><a th:href="@{/profile/edit}" id="edit">Edit Profile</a></b></li>
-        </ul>
+            <a th:href="@{/profile/edit}" id="edit"><button>Edit Profile</button></a>
     </div>
 
     <div class="separator">
