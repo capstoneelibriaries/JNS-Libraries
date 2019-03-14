@@ -1,0 +1,50 @@
+/* placeholder comment */
+
+@media screen and (min-width: 761px) and (max-width: 1040px){
+
+    /* psudo logical classes */
+    .hide-if-md {
+        display: none;
+    }
+
+    .column.md-col-100 {
+        width: 100%;
+    }
+    .column.md-col-90 {
+        width: 90%;
+    }
+    .column.md-col-80 {
+        width: 80%;
+    }
+    .column.md-col-75 {
+        width: 75%;
+    }
+    .column.md-col-70 {
+        width: 70%;
+    }
+    .column.md-col-60 {
+        width: 60%;
+    }
+    .column.md-col-50 {
+        width: 50%
+    }
+    .column.md-col-40 {
+        width: 40%;
+    }
+    .column.md-col-33 {
+        width: 33%;
+    }
+    .column.md-col-30 {
+        width: 30%;
+    }
+    .column.md-col-25 {
+        width: 25%;
+        padding: 0.5%;
+    }
+    .column.md-col-20 {
+        width: 20%;
+    }
+    .column.md-col-10 {
+        width: 10%;
+    }
+}

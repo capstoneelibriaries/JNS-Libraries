@@ -10,48 +10,28 @@
 <body>
 <div th:replace="partials/navbar :: navbar"></div>
 <div id="profile">
-    <!--<div th:object="${user}">-->
-        <!--<h1>Hey!<span th:="text*{username}"></span></h1>-->
-    <!--</div>-->
-
-    <div id="profileMenuBar">
-            <a th:href="@{/profile/edit}" id="edit"><button id="editButton">Edit Profile</button></a>
+    <div th:object="${user}">
+        <h1>Welcome!<span th:="field*{username}"></span></h1>
     </div>
-
-    <div class="separator">
-
-    </div>
+  
+    <div class="separator"></div>
 
     <h2 id="myListings">My Listings</h2>
 
-    <div class="separator">
-
-    </div>
-
-    <div class="card">
-        <img th:src="@{/images/bookexample.jpeg}" alt="book"/>
-        <div class="container">
-            <div th:each="ad:${user.ads}">
-                <div th:each="book:${ad.books}">
-                    <h4 th:text="${book.title}"></h4>
-                    <h5 th:text="${book.author}"></h5>
+    <div class="separator"></div>
+    <div>
+        <div class="adContainer" th:each="ad:${user.ads}">
+            <div class="card">
+                <div class="booksContainer" th:each="book:${ad.books}">
+                    <div class="container">
+                        <img th:src="${book.imageUrl}" alt="book"/>
+                        <h4 th:text="${book.title}"></h4>
+                        <h5 th:text="${book.author}"></h5>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
-
-    <!--this will be a list of all the users books that they can scroll through-->
-
-        <!--<div>-->
-            <!---->
-            <!--<li th:each="book : ${books}">-->
-
-
-        <!--</div>-->
-
-
-
 </div>
 </body>
 </html>
