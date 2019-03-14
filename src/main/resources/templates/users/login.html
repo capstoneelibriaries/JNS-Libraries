@@ -15,7 +15,7 @@
     <form th:action="@{/login}" th:object="${user}" th:method="post">
 
             Username:<input th:field="*{username}"/>
-            Password:<input th:field="*{password}"/>
+            Password:<input type="password" th:field="*{password}"/>
             <button type="submit">Login</button>
     </form>
 </body>
