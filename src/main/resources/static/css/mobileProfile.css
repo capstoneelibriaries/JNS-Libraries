@@ -1,0 +1,51 @@
+body{
+    background-color: #F7F9F9;
+    font-family: Monserrat;
+}
+
+#profile{
+    margin-top: 80px;
+    margin-left: 50px;
+}
+#profilePic{
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    height: 150px;
+    width: 175px;
+}
+#myListings{
+    text-align: center;
+    font-family: Overpass;
+}
+.card{
+    margin-left: 0;
+}
+#profileMenuBar{
+    display: contents;
+    position: absolute;
+    text-decoration: none;
+    font-size: large;
+    line-height: 2.2;
+}
+#profileLinks{
+    list-style-type: none;
+    margin-top: -65px;
+    font-size: inherit;
+}
+.separator{
+    width: 75%;
+    background-color: #1B7DBE;
+    opacity: .2;
+    height: 5px;
+    border-radius: 100px;
+    margin: 30px auto auto;
+}
+
+#edit{
+    background-color: #1B7DBE;
+    border-radius: 5px;
+    margin-left: 25px;
+    color: #F7F9F9;
+}
+#editButton{
+    color: #F7F9F9;
+}

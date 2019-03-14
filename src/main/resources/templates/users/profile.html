@@ -3,37 +3,35 @@
 <head>
     <meta charset="UTF-8"/>
     <title>profile</title>
+    <link rel="stylesheet" th:href="@{/css/mobileIndex.css}"/>
+    <link rel="stylesheet" th:href="@{/css/mobileNavCss.css}"/>
+    <link rel="stylesheet" th:href="@{/css/mobileProfile.css}"/>
 </head>
 <body>
-    <h1>profile</h1>
-    <h1> welcome <span>User</span>!</h1>
-
-
+<div th:replace="partials/navbar :: navbar"></div>
+<div id="profile">
     <div th:object="${user}">
         <h1>Welcome!<span th:="field*{username}"></span></h1>
     </div>
+  
+    <div class="separator"></div>
 
+    <h2 id="myListings">My Listings</h2>
 
-    <div><h5>This will eventually be a profile photo</h5></div>
-
-
-
-
-    <h2>here are your books:</h2>
-
-    <!--this will be a list of all the users books that they can scroll through-->
-
-        <!--<div>-->
-            <!---->
-            <!--<li th:each="book : ${books}">-->
-
-
-        <!--</div>-->
-
-
+    <div class="separator"></div>
     <div>
-        <h4>th: booooooooooooooooooooooooooooooooks</h4>
+        <div class="adContainer" th:each="ad:${user.ads}">
+            <div class="card">
+                <div class="booksContainer" th:each="book:${ad.books}">
+                    <div class="container">
+                        <img th:src="${book.imageUrl}" alt="book"/>
+                        <h4 th:text="${book.title}"></h4>
+                        <h5 th:text="${book.author}"></h5>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-
+</div>
 </body>
 </html>
