@@ -18,13 +18,13 @@ VALUES ('fancyreader117@gmail.com',false, '$2a$10$jBnR8Hx2QCT77PzEnTLlxOOeNyWxhF
        ('comicmeister@gmail.com',false,'$2a$10$jBnR8Hx2QCT77PzEnTLlxOOeNyWxhFNPIW89WKVAQYmkPkC2TVbtu','',0,'comicmeister'),
        ('harrypotterfan@gmail.com',false,'$2a$10$jBnR8Hx2QCT77PzEnTLlxOOeNyWxhFNPIW89WKVAQYmkPkC2TVbtu','',0,'hp_fan');
 
-INSERT into books (author, isbn, synopsis, title, wear)
-VALUES ("Zhizhong Cai", "0385472579", "", "Zen speaks", 3),
-       ("Wallace B. McClure ... [et al.].", "9780470112830", "", "Beginning asp.net 2.0 AJAX", 4.4),
-       ("Patrick Koetter, Ralf Hildebrandt", "9781593270018", "", "The Book of Postfix", 2),
-       ("Dave Taylor, James C. Armstrong, Jr.", "0672314800", "", "Sams teach yourself UNIX in 24 hours", 1),
-       ("John R. Levine, Margaret Levine Young, Carol Baroudi", "0764589962", "", "The Internet For Dummies (Internet for Dummies)", 3),
-       ("Jeanie Daniel Duck", "0609808818", "", "The change monster", 2);
+INSERT into books (author, isbn, synopsis, title, wear, image_url)
+VALUES ("Zhizhong Cai", "0385472579", "", "Zen speaks", 3, "/images/bookexample.jpeg"),
+       ("Wallace B. McClure ... [et al.].", "9780470112830", "", "Beginning asp.net 2.0 AJAX", 4.4, "/images/bookexample.jpeg"),
+       ("Patrick Koetter, Ralf Hildebrandt", "9781593270018", "", "The Book of Postfix", 2, "/images/bookexample.jpeg"),
+       ("Dave Taylor, James C. Armstrong, Jr.", "0672314800", "", "Sams teach yourself UNIX in 24 hours", 1, ""),
+       ("John R. Levine, Margaret Levine Young, Carol Baroudi", "0764589962", "", "The Internet For Dummies (Internet for Dummies)", 3, ""),
+       ("Jeanie Daniel Duck", "0609808818", "", "The change monster", 2, "");
 
 insert into ads (price, shipping, tradable, user_id)
 VALUES (14.99, 5.67, false, 1),

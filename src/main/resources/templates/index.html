@@ -15,7 +15,9 @@
         <!-- Generate the card -->
         <a href="#">
             <div class="card">
-                <img th:src="@{/images/bookexample.jpeg}" alt="book"/>
+                <div>
+                    <img th:src="${ad.books[0].imageUrl}" alt="book"/>
+                </div>
                 <div class="container">
                     <div>
                         <h4><b th:text="${ad.books[0].title}"></b></h4>
