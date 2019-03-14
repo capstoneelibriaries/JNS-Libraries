@@ -5,12 +5,23 @@
     <title>Home</title>
     <link rel="stylesheet" th:href="@{/css/mobileIndex.css}"/>
     <link rel="stylesheet" th:href="@{/css/mobileNavCss.css}"/>
+    <link rel="stylesheet" th:href="@{/css/skeleton.css}"/>
 </head>
 <body>
     <div th:replace="partials/navbar :: navbar"></div>
     <br/>
     <br/>
+    <div class="separator">
+
+    </div>
+
+    <h2 id="myListings">E-Libraries</h2>
+
+    <div class="separator">
+
+    </div>
     <!-- For each ad, create a card -->
+<div class="container">
 <div th:each="ad : ${ads}">
         <!-- Generate the card -->
         <a href="#">
@@ -18,7 +29,7 @@
                 <div>
                     <img th:src="${ad.books[0].imageUrl}" alt="book"/>
                 </div>
-                <div class="container">
+                <div class="Cardcontainer">
                     <div>
                         <h4><b th:text="${ad.books[0].title}"></b></h4>
                     </div>
@@ -32,5 +43,6 @@
             </div>
         </a>
     </div>
+</div>
 </body>
 </html>
