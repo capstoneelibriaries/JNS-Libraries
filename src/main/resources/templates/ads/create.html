@@ -5,45 +5,33 @@
     <title>Create an Ad</title>
 </head>
 <body>
-    <h1>Create a new ad for your book!</h1>
-
-    <h4>Enter in your book info:</h4>
-
-    <label>
-
+    <div>
+        <h1>Create an Ad</h1>
+    </div>
+    <div id="create-ad">
         <form th:action="@{/ads/create}" th:object="${ad}" th:method="post">
-
-            Price:<input th:field="*{price}"/>
-
-            <br/>
-
-            Shipping Price:<input th:field="*{shipping}"/>
-
-            <br/>
-
-            <!--ISBN:<input th:field="*{isbn}"/>-->
-
-            <br/>
-
-            <!--Title:<input th:field="*{title}">-->
-
-            <br/>
-
-            <!--Author:<input th:field="*{Author}">-->
-
-            <br/>
-
-            <!--Genre:<input th:field="*{genre}">-->
-
-            <br/>
-
-            Tradeable:<input type="checkbox" th:field="*{tradable}"/>
-
-            <br/>
-
-            <button type="submit">Create Ad!</button>
-
+            <div id="ad-price">
+                <label for="create-ad-price">Price <abbr title="required">*</abbr></label>
+                <input id="create-ad-price" type="number" name="ad-price" />
+            </div>
+            <div id="ad-shipping">
+                <label for="create-ad-shipping">Shipping <abbr title="required">*</abbr></label>
+                <input id="create-ad-shipping" type="number" name="ad-shipping" />
+            </div>
+            <div id="ad-tradable">
+                <label for="create-ad-tradable">Tradable</label>
+                <input id="create-ad-tradable" type="checkbox" name="ad-tradable" />
+            </div>
+            <div id="ad-new-book">
+                <button id="btn-ad-new-book" type="button">Ad a book</button>
+            </div>
+            <div id="ad-new-book-form">
+                <!-- Empty by default -->
+            </div>
+            <div id="ad-submit-all">
+                <button id="btn-ad-submit-all" type="submit">Submit</button>
+            </div>
         </form>
-    </label>
+    </div>
 </body>
 </html>
