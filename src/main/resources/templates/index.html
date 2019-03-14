@@ -8,22 +8,19 @@
     <link rel="stylesheet" th:href="@{/css/mobileNavCss.css}"/>
 </head>
 <body>
-
-    <div th:replace="partials/navbar :: navbar">
-    </div>
-
+<div th:replace="partials/navbar :: navbar">
+</div>
 <br/>
 <br/>
-    <a href="#">
 <div class="card">
     <img th:src="@{/images/bookexample.jpeg}" alt="book"/>
     <div class="container">
-<h4><b>Title</b></h4>
-        <h5>Author: </h5>
-        <h6>Condition: </h6>
+        <div th:each="book:${books}">
+            <h4 th:text="${book.title}"></h4>
+            <h5 th:text="${book.author}"></h5>
+            <h6 th:text="${book.wear}"></h6>
+        </div>
     </div>
 </div>
-    </a>
-
 </body>
 </html>
