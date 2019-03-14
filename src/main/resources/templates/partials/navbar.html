@@ -1,31 +1,33 @@
 <html xmlns:th="http://www.w3.org/1999/xhtml">
 
 
-<div th:fragment="navbar" xmlns:th="http://www.w3.org/1999/xhtml">
+    <div th:fragment="navbar" xmlns:th="http://www.w3.org/1999/xhtml">
+        <link href="https://fonts.googleapis.com/css?family=Montserrat|Overpass" rel="stylesheet"/>
 
-        <ul id="menu">
+        <nav role="navigation">
+            <div id="menuToggle">
+                <input type="checkbox"/>
+                <span></span>
+                <span></span>
+                <span></span>
+                <ul id="menu">
+                    <li><a th:href="@{/}">Home</a></li>
 
-            <!--if user is logged in then show these-->
+                    <li><a th:href="@{/profile}">Profile</a></li>
 
-            <li><a th:href="@{index}">Home</a></li>
+                    <li><a th:href="@{/buy}">Buy</a></li>
 
-            <li><a th:href="@{profile}">Profile</a></li>
+                    <li><a th:href="@{/sell}">Sell or Trade</a></li>
 
-            <li><a th:href="@{buy}">Buy</a></li>
+                    <li><a th:href="@{/logout}">Logout</a></li>
 
-            <li><a th:href="@{sell}">Sell or Trade</a></li>
+                    <!--if user is not logged in then show these-->
 
-            <li><a th:href="@{logout}">Logout</a></li>
+                    <li><a th:href="@{/login}">Login</a></li>
 
-            <li><a th:href="@{booksIndex}">My Books</a></li> <!-- maybe an extension of profile? -->
-
-            <!--if user is not logged in then show these-->
-
-            <li><a th:href="@{login}">Login</a></li>
-
-            <li><a th:href="@{register}">Register</a></li>
-        </ul>
-
+                    <li><a th:href="@{/register}">Register</a></li>
+                    </ul>
+            </div>
+        </nav>
     </div>
-
 </html>
