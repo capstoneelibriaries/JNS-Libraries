@@ -19,6 +19,10 @@ public class HomeController {
 
     @GetMapping("/")
     public String home(Model model){
+        Iterable<Ad> ads = adsDao.findAll();
+        for(Ad ad : ads){
+            System.out.println(ad.toString());
+        }
         model.addAttribute("ads", adsDao.findAll());
         return "index";
     }

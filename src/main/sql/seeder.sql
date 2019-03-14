@@ -26,7 +26,7 @@ VALUES ("Zhizhong Cai", "0385472579", "", "Zen speaks", 3),
        ("John R. Levine, Margaret Levine Young, Carol Baroudi", "0764589962", "", "The Internet For Dummies (Internet for Dummies)", 3),
        ("Jeanie Daniel Duck", "0609808818", "", "The change monster", 2);
 
-insert into ads (price, shipping, trabable, user_id)
+insert into ads (price, shipping, tradable, user_id)
 VALUES (14.99, 5.67, false, 1),
        (12.25, 0.0, true, 1),
        (28.00, 0.0, false, 2),
