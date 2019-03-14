@@ -18,16 +18,27 @@ public class UserController {
     }
 
     @GetMapping("/register")
-    public String showRegisterForm(Model model){
+    public String showRegisterForm(Model model) {
         model.addAttribute("user", new User());
         return "users/register";
     }
 
-    @PostMapping("/register")
-    public String saveUser(@ModelAttribute User user){
-        String hash = passwordEncoder.encode(user.getPassword());
-        user.setPassword(hash);
-        users.save(user);
-    return "redirect:/login";
+    @GetMapping("/profile")
+    public String showProfileForm(Model model) {
+        model.addAttribute("user", new User());
+        return "users/profile";
+    }
 
+    @PostMapping("/register")
+    public String saveUser(@ModelAttribute User user) {
+       if (user.getPassword().equals(user.getConfirmPassword())) {
+
+           String hash = passwordEncoder.encode(user.getPassword());
+           user.setPassword(hash);
+           users.save(user);
+           return "redirect:/login";
+       }else{
+           return "redirect:/register?error";
+       }
+    }
 }

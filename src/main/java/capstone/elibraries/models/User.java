@@ -30,6 +30,8 @@ public class User {
 
     @Column(nullable = false)
     private String password;
+    private String confirmPassword;
+
 
     @Column(length = PHONE_CAP)
     private String phone;
@@ -105,6 +107,10 @@ public class User {
         return password;
     }
 
+    public String getConfirmPassword(){
+        return confirmPassword;
+    }
+
     public double getRating(){
         return rating;
     }
@@ -139,6 +145,10 @@ public class User {
 
     public void setPassword(String password){
         this.password = password;
+    }
+
+    public void setConfirmPassword(String confirmPassword){
+        this.confirmPassword=confirmPassword;
     }
 
     public void setRating(Double rating){
