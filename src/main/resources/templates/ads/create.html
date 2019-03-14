@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8"/>
-    <title>Title</title>
+    <title>Create an Ad</title>
 </head>
 <body>
     <h1>Create a new ad for your book!</h1>
@@ -10,32 +10,40 @@
     <h4>Enter in your book info:</h4>
 
     <label>
+
         <form th:action="@{/ad/create}" th:object="${ad}" th:method="post">
 
             Price:<input th:field="*{price}"/>
 
+            <br/>
+
             Shipping Price:<input th:field="*{shipping}"/>
 
-            Tradeable:<input th:field="*{tradable}"/>
-
-            <button type="submit">Create!</button>
-        </form>
-    </label>
-    <label>
-        <form th:action="@{/ad/create}" th:object="${book}" th:method="post">
+            <br/>
 
             ISBN:<input th:field="*{isbn}"/>
 
+            <br/>
+
             Title:<input th:field="*{title}">
+
+            <br/>
 
             Author:<input th:field="*{Author}">
 
+            <br/>
+
             Genre:<input th:field="*{genre}">
 
-            <button type="submit"></button>
+            <br/>
+
+            Tradeable:<input type="checkbox" th:field="*{tradable}"/>
+
+            <br/>
+
+            <button type="submit">Create Ad!</button>
 
         </form>
     </label>
-
 </body>
 </html>
