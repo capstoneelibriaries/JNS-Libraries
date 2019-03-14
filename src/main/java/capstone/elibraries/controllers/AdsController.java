@@ -29,8 +29,18 @@ public class AdsController {
         return "ads/single";
     }
     @GetMapping("/ads/create")
-    public String createAd(Model model){
+    public String createAdForm(Model model){
         model.addAttribute("ad",new Ad());
+        return "ads/create";
+    }
+
+    @PostMapping("/ads/create")
+    public String createAd(@ModelAttribute Ad ad){
+
+        ad.setSeller(
+        users.findOne(((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId()));
+        ads.save(ad);
+
         return "ads/create";
     }
     @GetMapping("/ads/{id}/delete")
