@@ -8,28 +8,28 @@
     <div>
         <h1>Create an Ad</h1>
     </div>
-    <div id="create-ad">
+    <div th:id="create-ad">
         <form th:action="@{/ads/create}" th:object="${ad}" th:method="post">
-            <div id="ad-price">
-                <label for="create-ad-price">Price <abbr title="required">*</abbr></label>
-                <input id="create-ad-price" type="number" name="ad-price" />
+            <div th:id="ad-price">
+                <label th:for="create-ad-price">Price <abbr th:title="required">*</abbr></label>
+                <input th:id="create-ad-price" th:type="number" th:name="ad-price" />
             </div>
-            <div id="ad-shipping">
-                <label for="create-ad-shipping">Shipping <abbr title="required">*</abbr></label>
-                <input id="create-ad-shipping" type="number" name="ad-shipping" />
+            <div th:id="ad-shipping">
+                <label th:for="create-ad-shipping">Shipping <abbr th:title="required">*</abbr></label>
+                <input th:id="create-ad-shipping" th:type="number" th:name="ad-shipping" />
             </div>
-            <div id="ad-tradable">
-                <label for="create-ad-tradable">Tradable</label>
-                <input id="create-ad-tradable" type="checkbox" name="ad-tradable" />
+            <div th:id="ad-tradable">
+                <label th:for="create-ad-tradable">Tradable</label>
+                <input th:id="create-ad-tradable" th:type="checkbox" th:name="ad-tradable" />
             </div>
-            <div id="ad-new-book">
-                <button id="btn-ad-new-book" type="button">Ad a book</button>
+            <div th:id="ad-new-book">
+                <button th:id="btn-ad-new-book" th:type="button">Ad a book</button>
             </div>
-            <div id="ad-new-book-form">
+            <div th:id="ad-new-book-form">
                 <!-- Empty by default -->
             </div>
-            <div id="ad-submit-all">
-                <button id="btn-ad-submit-all" type="submit">Submit</button>
+            <div th:id="ad-submit-all">
+                <button th:id="btn-ad-submit-all" th:type="submit" th:disabled="disabled">Submit</button>
             </div>
         </form>
     </div>
