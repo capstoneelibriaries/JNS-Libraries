@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
-
 <head>
     <meta charset="UTF-8"/>
     <title>Home</title>
@@ -8,22 +7,30 @@
     <link rel="stylesheet" th:href="@{/css/mobileNavCss.css}"/>
 </head>
 <body>
-
-    <div th:replace="partials/navbar :: navbar">
+    <div th:replace="partials/navbar :: navbar"></div>
+    <br/>
+    <br/>
+    <!-- For each ad, create a card -->
+    <div th:each="ad : ${ads}">
+        <!-- Generate the card -->
+        <a href="#">
+            <div class="card">
+                <div>
+                    <img th:src="${ad.books[0].imageUrl}" alt="book"/>
+                </div>
+                <div class="container">
+                    <div>
+                        <h4><b th:text="${ad.books[0].title}"></b></h4>
+                    </div>
+                    <div>
+                        <h5 th:text="${ad.books[0].author}"></h5>
+                    </div>
+                    <div>
+                        <h6>Condition:<span th:text="${ad.books[0].wear}"></span></h6>
+                    </div>
+                </div>
+            </div>
+        </a>
     </div>
-
-<br/>
-<br/>
-    <a href="#">
-<div class="card">
-    <img th:src="@{/images/bookexample.jpeg}" alt="book"/>
-    <div class="container">
-<h4><b>Title</b></h4>
-        <h5>Author: </h5>
-        <h6>Condition: </h6>
-    </div>
-</div>
-    </a>
-
 </body>
 </html>
