@@ -41,7 +41,7 @@ public class AdsController {
         users.findOne(((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId()));
         ads.save(ad);
 
-        return "ads/create";
+        return "/ads/index";
     }
     @GetMapping("/ads/{id}/delete")
     public String deleteForm(Model model, @PathVariable Long id){
