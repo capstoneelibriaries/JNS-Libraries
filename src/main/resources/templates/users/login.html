@@ -8,22 +8,15 @@
     <link rel="stylesheet" th:href="@{/css/mobileNavCss.css}"/>
 </head>
 <body>
-
-    <div th:replace="partials/navbar :: navbar">
-    </div>
-
-<br/>
-<br/>
-    <a href="#">
-<div class="card">
-    <img th:src="@{/images/bookexample.jpeg}" alt="book"/>
-    <div class="container">
-<h4><b>Title</b></h4>
-        <h5>Author: </h5>
-        <h6>Condition: </h6>
-    </div>
+<div th:replace="partials/navbar :: navbar">
 </div>
-    </a>
+    <h1>login form</h1>
 
+    <form th:action="@{/login}" th:object="${user}" th:method="post">
+
+            Username:<input th:field="*{username}"/>
+            Password:<input th:field="*{password}"/>
+            <button type="submit">Register!</button>
+    </form>
 </body>
 </html>

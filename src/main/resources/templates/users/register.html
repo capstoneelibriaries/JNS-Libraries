@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Register</title>
+    <link rel="stylesheet" th:href="@{/css/mobileIndex.css}"/>
+    <link rel="stylesheet" th:href="@{/css/mobileNavCss.css}"/>
+</head>
+<body>
+<div th:replace="partials/navbar :: navbar">
+</div>
+<h1>Register</h1>
+
+<form th:action="@{/register}" th:method="post" th:object="${user}">
+            Email:
+            <input th:field="*{email}" />
+            <br />
+            Username:
+            <input th:field="*{username}" />
+            <br />
+            Phone Number: *optional
+            <input th:field="*{phone}" />
+            <br />
+            Password:
+            <input th:field="*{password}" />
+            <br />
+            Confirm Password:
+            <input th:field="*{confirmPassword}" />
+            <br />
+
+            <button type="submit" value="Register">Register</button>
+        </form>
+</body>
+</html>
+
+
+
+
