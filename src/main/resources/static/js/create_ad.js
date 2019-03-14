@@ -32,10 +32,11 @@ let bookc = 0;
 $(form.newBook.button).on("click", (event) => {
 
     let bookid = `new-book-${bookc}`;
-    $(form.newBook.form).html(
+    $(form.newBook.form).append(
        `<section id=${bookid}>` +
             `<label for="${bookid}-isbn">ISBN</label>` +
             `<input id="${bookid}-isbn" type="number" minlength="${isbn_min}" maxlength="${isbn_max}" name="${bookid}-isbn"/>` +
         `</section>`
     );
+    bookc++;
 });
