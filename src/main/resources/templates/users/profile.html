@@ -18,13 +18,19 @@
     <img th:src="@{/images/profilePic.jpg}" alt="book" id="profilePic"/>
     <div id="profileMenuBar">
         <ul id="profileLinks">
-            <li><a th:href="@{/}">Home</a></li>
-            <li><a th:href="@{/logout}">Logout</a></li>
-            <li><a th:href="@{/profile/edit}">Edit Profile</a></li>
+            <li><b id="editButton"><a th:href="@{/profile/edit}" id="edit">Edit Profile</a></b></li>
         </ul>
     </div>
 
+    <div class="separator">
+
+    </div>
+
     <h2 id="myListings">My Listings</h2>
+
+    <div class="separator">
+
+    </div>
 
     <div class="card">
         <img th:src="@{/images/bookexample.jpeg}" alt="book"/>
