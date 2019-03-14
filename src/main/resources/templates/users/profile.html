@@ -12,31 +12,29 @@
 <div id="profile">
 
     <div id="profileMenuBar">
-            <a th:href="@{/profile/edit}" id="edit"><button id="editButton">Edit Profile</button></a>
+        <a th:href="@{/profile/edit}" id="edit">
+            <button id="editButton">Edit Profile</button>
+        </a>
     </div>
 
-    <div class="separator">
-
-    </div>
+    <div class="separator"></div>
 
     <h2 id="myListings">My Listings</h2>
 
-    <div class="separator">
-
-    </div>
- <div>
-            <div class="adContainer" th:each="ad:${user.ads}">
-    <div class="card">
+    <div class="separator"></div>
+    <div>
+        <div class="adContainer" th:each="ad:${user.ads}">
+            <div class="card">
                 <div class="booksContainer" th:each="book:${ad.books}">
-        <div class="container">
-                    <img th:src="${book.imageUrl}" alt="book"/>
-                    <h4 th:text="${book.title}"></h4>
-                    <h5 th:text="${book.author}"></h5>
+                    <div class="container">
+                        <img th:src="${book.imageUrl}" alt="book"/>
+                        <h4 th:text="${book.title}"></h4>
+                        <h5 th:text="${book.author}"></h5>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 </div>
 </body>
 </html>

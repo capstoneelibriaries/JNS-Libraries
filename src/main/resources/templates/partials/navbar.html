@@ -12,19 +12,18 @@
             <span></span>
             <ul id="menu">
                 <li><a th:href="@{/}">Home</a></li>
-
                 <li><a th:href="@{/profile}">Profile</a></li>
-
                 <li><a th:href="@{/buy}">Buy</a></li>
-
                 <li><a th:href="@{/sell}">Sell or Trade</a></li>
-
-                <li><form th:action="@{/logout}" method="post"><button id="menuLogout" >Logout</button></form></li>
+                <li>
+                    <form th:action="@{/logout}" method="post">
+                        <button id="menuLogout">Logout</button>
+                    </form>
+                </li>
 
                 <!--if user is not logged in then show these-->
 
                 <li><a th:href="@{/login}">Login</a></li>
-
                 <li><a th:href="@{/register}">Register</a></li>
             </ul>
         </div>
