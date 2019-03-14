@@ -1,6 +1,6 @@
 body{
     background-color: #F7F9F9;
-    font-family: Overpass;
+    font-family: Monserrat;
 }
 
 #profile{
@@ -45,18 +45,6 @@ body{
     border-radius: 5px;
     margin-left: 25px;
     color: #F7F9F9;
-}
-a, button {
-    text-decoration: none;
-    text-underline: none;
-    color: black;
-    font-family: Overpass;
-    border-color: rgba(216, 216, 216, 0) rgba(209, 209, 209, 0) rgba(173, 121, 121, 0);
-    border-style: solid;
-    border-width: 1px;
-    padding: 1px 7px 2px;
-    background-color: #ff000000;
-    font-size: 22px;
 }
 #editButton{
     color: #F7F9F9;

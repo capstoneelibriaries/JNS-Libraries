@@ -19,7 +19,7 @@
 
                 <li><a th:href="@{/sell}">Sell or Trade</a></li>
 
-                <li><a th:href="@{/logout}">Logout</a></li>
+                <li><form th:action="@{/logout}" method="post"><button id="menuLogout" >Logout</button></form></li>
 
                 <!--if user is not logged in then show these-->
 

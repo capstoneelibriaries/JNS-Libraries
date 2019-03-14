@@ -1,6 +1,5 @@
 package capstone.elibraries.controllers;
 
-import capstone.elibraries.repositories.Ads;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -13,12 +12,10 @@ import org.springframework.ui.Model;
 public class UserController {
     private Users users;
     private PasswordEncoder passwordEncoder;
-    private Ads ads;
 
-    public UserController(Users users, PasswordEncoder passwordEncoder, Ads ads) {
+    public UserController(Users users, PasswordEncoder passwordEncoder) {
         this.users = users;
         this.passwordEncoder = passwordEncoder;
-        this.ads = ads;
     }
 
     @GetMapping("/register")
@@ -32,8 +29,6 @@ public class UserController {
         User databaseUser = users.findOne(((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId());
 
         model.addAttribute("user", databaseUser);
-        model.addAttribute("ads", ads.findAdBySeller(databaseUser));
-
         return "users/profile";
     }
 
