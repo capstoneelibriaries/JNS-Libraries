@@ -7,13 +7,33 @@
 <body>
     <h1>Create a new ad for your book!</h1>
 
+    <h4>Enter in your book info:</h4>
 
-    <form th:action="@{/ad/create}" th:object="${ad}" th:method="post">
-        Seller:<input th:field="*{seller}"/>
-        Price:<input th:field="*{price}"/>
-        Shipping Price:<input th:field="*{shipping}"/>
-        Tradeable:<input th:field="*{tradable}"/>
-        <button type="submit">Create!</button>
-    </form>
+    <label>
+        <form th:action="@{/ad/create}" th:object="${ad}" th:method="post">
+
+            Price:<input th:field="*{price}"/>
+
+            Shipping Price:<input th:field="*{shipping}"/>
+
+            Tradeable:<input th:field="*{tradable}"/>
+
+            <button type="submit">Create!</button>
+        </form>
+    </label>
+    <label>
+        <form th:action="@{/ad/create}" th:object="${book}" th:method="post">
+
+            ISBN:<input th:field="*{isbn}"/>
+
+            Title:<input th:field="*{title}">
+
+            Author:<input th:field="*{Author}">
+
+            Genre:<input th:field="*{genre}">
+
+        </form>
+    </label>
+
 </body>
 </html>
