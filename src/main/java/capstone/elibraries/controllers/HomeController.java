@@ -1,6 +1,7 @@
 package capstone.elibraries.controllers;
 
 import capstone.elibraries.models.Ad;
+import capstone.elibraries.models.Book;
 import capstone.elibraries.repositories.Ads;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,7 +22,9 @@ public class HomeController {
     public String home(Model model){
         Iterable<Ad> ads = adsDao.findAll();
         for(Ad ad : ads){
-            System.out.println(ad.toString());
+            for(Book book : ad.getBooks()){
+                book.setImageUrl(book.getImageUrl());
+            }
         }
         model.addAttribute("ads", adsDao.findAll());
         return "index";
