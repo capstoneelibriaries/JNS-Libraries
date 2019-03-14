@@ -1,0 +1,50 @@
+@media screen and (min-width: 1041px) {
+
+
+    /* psudo logical classes */
+    .hide-if-lg {
+        display: none;
+    }
+
+    .column.lg-col-100 {
+        width: 100%;
+    }
+    .column.lg-col-90 {
+        width: 90%;
+    }
+    .column.lg-col-80 {
+        width: 80%;
+    }
+    .column.lg-col-75 {
+        width: 75%;
+    }
+    .column.lg-col-70 {
+        width: 70%;
+    }
+    .column.lg-col-60 {
+        width: 60%;
+    }
+    .column.lg-col-50 {
+        width: 50%
+    }
+    .column.lg-col-40 {
+        width: 40%;
+    }
+    .column.lg-col-33 {
+        width: 33%;
+    }
+    .column.lg-col-30 {
+        width: 30%;
+    }
+    .column.lg-col-25 {
+        width: 25%;
+        padding: 0.5%;
+    }
+    .column.lg-col-20 {
+        width: 20%;
+    }
+    .column.lg-col-10 {
+        width: 10%;
+    }
+
+}
