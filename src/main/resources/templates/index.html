@@ -10,23 +10,25 @@
     <div th:replace="partials/navbar :: navbar"></div>
     <br/>
     <br/>
-<div>
-    <a href="#">
-        <div class="card">
-            <img th:src="@{/images/bookexample.jpeg}" alt="book"/>
-            <div class="container">
-                <div>
-                    <h4><b>Title</b></h4>
-                </div>
-                <div>
-                    <h5>Author: </h5>
-                </div>
-                <div>
-                    <h6>Condition: </h6>
+    <!-- For each ad, create a card -->
+    <div th:each="ad : ${ads}">
+        <!-- Generate the card -->
+        <a href="#">
+            <div class="card">
+                <img th:src="@{/images/bookexample.jpeg}" alt="book"/>
+                <div class="container">
+                    <div>
+                        <h4><b th:text="${ad.books[0].title}"></b></h4>
+                    </div>
+                    <div>
+                        <h5 th:text="${ad.books[0].author}"></h5>
+                    </div>
+                    <div>
+                        <h6>Condition:<span th:text="${ad.books[0].wear}"></span></h6>
+                    </div>
                 </div>
             </div>
-        </div>
-    </a>
-</div>
+        </a>
+    </div>
 </body>
 </html>
