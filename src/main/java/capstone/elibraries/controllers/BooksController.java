@@ -21,7 +21,7 @@ public class BooksController {
     @GetMapping("/books/{id}")
     public String getOneBook(Model model, @PathVariable Long id){
         model.addAttribute("book",books.findOne(id));
-        return "book";
+        return "single";
     }
     @GetMapping("/books/create")
     public String createBook(Model model){
