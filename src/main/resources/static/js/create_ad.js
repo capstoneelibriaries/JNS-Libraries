@@ -78,27 +78,11 @@ const bookFormToHtml = (bookForm) => {
 };
 
 const autoFill = (bookForm) => {
-
-    const isbn = $(bookForm.isbn).val();
-    let apiResponse = {};
-
-    $.ajax({
-        'url': `https://openlibrary.org/api/books?bibkeys=ISBN:${isbn}&jscmd=data&format=json`,
-        'type': 'GET',
-        'success': (data) => {
-            apiResponse = data[`ISBN:${isbn}`];
-            apiResponse.isbn = isbn;
-            //let book = newBookFrom(apiResponse);
-            let book = Book.from(apiResponse);
-            // console.log(apiResponse);
-            $(bookForm.title).val(book.title);
-            $(bookForm.author).val(book.author);
-            $(bookForm.synopsis).val(book.synopsis);
-        },
-        'error': (request, error) => {
-            console.log("Request: " + JSON.stringify(request));
-        }
-    });
+  console.log("DEBUG: autoFill(...)")
+  let book = Book.from(OpenBook.response);
+  $(bookForm.title).val(book.title);
+  $(bookForm.author).val(book.author);
+  $(bookForm.synopsis).val(book.synopsis);
 };
 
 const newBookForm = (index) => {
@@ -143,7 +127,7 @@ const generateISBN = (event) => {
            bookForm.synopsis = `#${bookForm.synopsis}`;
            bookForm.wear = `#${bookForm.wear}`;
            generatedForms++;
-           autoFill(Object.freeze(bookForm));
+           OpenBook.request(autoFill(Object.freeze(bookForm), isbn));
        }
     });
 };
