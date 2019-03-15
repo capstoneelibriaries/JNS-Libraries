@@ -6,15 +6,13 @@
 <body>
 <div th:replace="partials/navbar :: navbar"></div>
 <div id="profile">
-    <div th:object="${user}">
-        <h1>Welcome!<span th:="field*{username}"></span></h1>
-    </div>
-  
-    <div class="separator"></div>
+
+
+    <hr/>
 
     <h2 id="myListings">My Listings</h2>
 
-    <div class="separator"></div>
+    <hr/>
     <div>
         <div class="adContainer" th:each="ad:${user.ads}">
             <div class="card">

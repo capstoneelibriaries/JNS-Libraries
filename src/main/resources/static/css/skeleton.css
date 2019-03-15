@@ -390,6 +390,7 @@ hr {
 #myListings{
   margin: inherit;
   text-align: center;
+    font-family: Overpass;
 }
 .card{
   height: 100px;
