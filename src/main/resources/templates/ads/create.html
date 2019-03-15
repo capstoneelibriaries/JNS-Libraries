@@ -5,45 +5,35 @@
     <title>Create an Ad</title>
 </head>
 <body>
-    <h1>Create a new ad for your book!</h1>
-
-    <h4>Enter in your book info:</h4>
-
-    <label>
-
+    <div>
+        <h1>Create an Ad</h1>
+    </div>
+    <div th:id="create-ad">
         <form th:action="@{/ads/create}" th:object="${ad}" th:method="post">
-
-            Price:<input th:field="*{price}"/>
-
-            <br/>
-
-            Shipping Price:<input th:field="*{shipping}"/>
-
-            <br/>
-
-            <!--ISBN:<input th:field="*{isbn}"/>-->
-
-            <br/>
-
-            <!--Title:<input th:field="*{title}">-->
-
-            <br/>
-
-            <!--Author:<input th:field="*{Author}">-->
-
-            <br/>
-
-            <!--Genre:<input th:field="*{genre}">-->
-
-            <br/>
-
-            Tradeable:<input type="checkbox" th:field="*{tradable}"/>
-
-            <br/>
-
-            <button type="submit">Create Ad!</button>
-
+            <div th:id="ad-price">
+                <label th:for="create-ad-price">Price <abbr th:title="required">*</abbr></label>
+                <input th:id="create-ad-price" th:type="number" th:step="0.01" th:name="ad-price" />
+            </div>
+            <div th:id="ad-shipping">
+                <label th:for="create-ad-shipping">Shipping <abbr th:title="required">*</abbr></label>
+                <input th:id="create-ad-shipping" th:type="number" th:step="0.01" th:name="ad-shipping" />
+            </div>
+            <div th:id="ad-tradable">
+                <label th:for="create-ad-tradable">Tradable</label>
+                <input th:id="create-ad-tradable" th:type="checkbox" th:name="ad-tradable" />
+            </div>
+            <div th:id="ad-new-book">
+                <button th:id="btn-ad-new-book" th:type="button">Ad a book</button>
+            </div>
+            <div th:id="ad-new-book-form">
+                <!-- Empty by default -->
+            </div>
+            <div th:id="ad-submit-all">
+                <button th:id="btn-ad-submit-all" th:type="submit" th:disabled="disabled">Submit</button>
+            </div>
         </form>
-    </label>
+    </div>
+    <script th:src="@{/js/jquery.js}"></script>
+    <script th:src="@{/js/create_ad.js}"></script>
 </body>
 </html>
