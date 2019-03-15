@@ -10,7 +10,7 @@
 
         <form th:action="@{/register}" th:method="post" th:object="${user}">
             <section id="user-info">
-                <fieldset>
+                <fieldset id="registerForm">
                     <label>Username: <input th:field="*{username}"/></label>
                     <label>Email address: <input th:field="*{email}"/></label>
                     <label>Phone number: <input th:field="*{phone}"/></label>

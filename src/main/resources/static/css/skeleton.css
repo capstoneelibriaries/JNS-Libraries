@@ -36,6 +36,7 @@
   padding: 0 20px;
   box-sizing: border-box;
   right: -45px;
+    font-family: Overpass;
 }
 .column,
 .columns {
@@ -361,7 +362,7 @@ table,
 p,
 ul,
 ol {
-  margin-bottom: 2.5rem; }
+  margin-bottom: .5rem; }
 
 
 /* Utilities
@@ -390,6 +391,7 @@ hr {
 #myListings{
   margin: inherit;
   text-align: center;
+    font-family: Overpass;
 }
 .card{
   height: 100px;
@@ -400,6 +402,16 @@ hr {
 #bookImage{
   height: 100px;
   width: 150px;
+}
+#register{
+    font-family: Overpass;
+}
+#registerForm{
+    font-family: Overpass;
+    border-color: #1B7DBE;
+}
+#loginform{
+    border-color: #1B7DBE;
 }
 
 
