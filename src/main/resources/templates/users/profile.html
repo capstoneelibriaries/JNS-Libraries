@@ -13,18 +13,16 @@
     <h2 id="myListings">My Listings</h2>
 
     <hr/>
-    <div>
-        <div class="adContainer" th:each="ad:${user.ads}">
-            <div class="card">
-                <div class="booksContainer" th:each="book:${ad.books}">
-                    <div class="container">
+    <div class="container">
+        <div class="row u-max-full-width">
+        <div class="three columns" th:each="ad:${user.ads}">
+                <div class="card" th:each="book:${ad.books}">
                         <img th:src="${book.imageUrl}" alt="book"/>
                         <h4 th:text="${book.title}"></h4>
                         <h5 th:text="${book.author}"></h5>
                     </div>
                 </div>
             </div>
-        </div>
     </div>
 </div>
 </body>
