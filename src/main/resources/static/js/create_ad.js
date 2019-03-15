@@ -30,25 +30,50 @@ const isbn_max = 13;
 // book forms are pushed to this array
 let bookForms = [];
 
+const isbnToHtml = (bookForm) => {
+    return `` +
+    `<section id=${bookForm.section}>` +
+        `<label for="${bookForm.isbn}">ISBN</label>` +
+        `<input id="${bookForm.isbn}" type="number" minlength="${isbn_min}" maxlength="${isbn_max}" name="${bookForm.isbn}" />` +
+    `</section>`;
+};
+
+const bookFormToHtml = (bookForm) => {
+    return `` +
+    `<section>` +
+        `<div>` +
+            `<label for="${bookForm.title}">Title</label>` +
+            `<input id="${bookForm.title}" />` +
+        `</div>` +
+        `<div>` +
+            `<label for="${bookForm.author}">Author</label>` +
+            `<input id="${bookForm.author}" />` +
+        `</div>` +
+        `<div>` +
+            `<label for="${bookForm.synopsis}">Synopsis</label>` +
+            `<input id="${bookForm.synopsis}" />` +
+        `</div>` +
+        `<div>` +
+            `<label for="${bookForm.wear}">Condition</label>` +
+            `<input id="${bookForm.wear}" />` +
+        `</div>` +
+    `</section>`
+};
+
 const generateISBN = (event) => {
-    // TODO: do something useful with the event
+
     // create a form object for each book
     let bookForm = {
         section: `new-book-${bookForms.length}`,
         isbn: `new-book-${bookForms.length}-isbn`,
     };
     // append a new html section to the form
-    $(form.newBook.form).append(
-        `<section id=${bookForm.section}>` +
-        `<label for="${bookForm.isbn}">ISBN</label>` +
-        `<input id="${bookForm.isbn}" type="number" minlength="${isbn_min}" maxlength="${isbn_max}" name="${bookForm.isbn}" />` +
-        `</section>`
-    );
-    bookForms.push(bookForm);
+    $(form.newBook.form).append(isbnToHtml(bookForm));
 
     // alter the strings on section and isbn for jquery selection
     bookForm.section = `#${bookForm.section}`;
     bookForm.isbn = `#${bookForm.isbn}`;
+
     // append additional elements to the book form object, which
     //  we'll generate in jquery
     bookForm.title = `new-book-${bookForms.length}-title`;
@@ -56,32 +81,18 @@ const generateISBN = (event) => {
     bookForm.synopsis = `new-book-${bookForms.length}-wear`;
     bookForm.wear = `new-book-${bookForms.length}-wear`;
 
-    let generatedForms = 0; // only append to the form once
-    let isbn = "";  // create the isbn out here, so it isn't being re-instantiated
+    // ad the form to an array of forms
+    bookForms.push(bookForm);
+
+    // only append to the form once
+    let generatedForms = 0;
+    // create the isbn out here, so it isn't being re-instantiated
+    let isbn = "";
+
     $(`${bookForm.isbn}`).on("keyup", (event) => {
        isbn = $(`${bookForm.isbn}`).val();
        if(isbn.length >= isbn_min && generatedForms < 1){
-
-           $(`${bookForm.section}`).append(
-               `<section>` +
-                    `<div>` +
-                        `<label for="${bookForm.title}">Title</label>` +
-                        `<input id="${bookForm.title}" />` +
-                    `</div>` +
-                   `<div>` +
-                        `<label for="${bookForm.author}">Author</label>` +
-                        `<input id="${bookForm.author}" />` +
-                   `</div>` +
-                   `<div>` +
-                       `<label for="${bookForm.synopsis}">Synopsis</label>` +
-                       `<input id="${bookForm.synopsis}" />` +
-                   `</div>` +
-                   `<div>` +
-                       `<label for="${bookForm.wear}">Condition</label>` +
-                       `<input id="${bookForm.wear}" />` +
-                   `</div>` +
-               `</section>`
-           );
+           $(`${bookForm.section}`).append(bookFormToHtml(bookForm));
            generatedForms++;
        }
     });
