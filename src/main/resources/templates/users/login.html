@@ -5,14 +5,19 @@
     <link th:replace="partials/header :: header('Log in')"/>
 </head>
 <body>
-<nav th:replace="partials/navbar :: navbar"></nav>
-    <h1>login form</h1>
+    <nav th:replace="partials/navbar :: navbar"></nav>
 
-    <form th:action="@{/login}" th:object="${user}" th:method="post">
-
-            Username:<input th:field="*{username}"/>
-            Password:<input type="password" th:field="*{password}"/>
-            <button type="submit">Login</button>
-    </form>
+    <div class="container">
+        <h1 id="login">Login</h1>
+        <form th:action="@{/login}" th:object="${user}" th:method="post">
+            <section id="login-info">
+                <fieldset>
+                    <label>Username:<input th:field="*{username}"/></label>
+                    <label>Password:<input type="password" th:field="*{password}"/></label>
+                    <button type="submit" value="Login">Login</button>
+                </fieldset>
+            </section>
+        </form>
+    </div>
 </body>
 </html>
