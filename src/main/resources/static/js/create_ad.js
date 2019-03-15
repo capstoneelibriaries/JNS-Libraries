@@ -32,20 +32,20 @@ let bookForms = [];
 
 // book object constructor that creates a book from the openbook
 // api response
-const newBookFrom = (openbook) => {
-    let authors = "";
-    openbook.authors.forEach( (author) => {
-       authors += author.name + ", ";
-    });
-
-    let self = {
-        isbn: openbook.isbn,
-        title: openbook.title,
-        author: authors,
-        synopsis: openbook.excerpts[0].text,
-    };
-    return self;
-};
+// const newBookFrom = (openbook) => {
+//     let authors = "";
+//     openbook.authors.forEach( (author) => {
+//        authors += author.name + ", ";
+//     });
+//
+//     let self = {
+//         isbn: openbook.isbn,
+//         title: openbook.title,
+//         author: authors,
+//         synopsis: openbook.excerpts[0].text,
+//     };
+//     return self;
+// };
 
 const isbnToHtml = (bookForm) => {
     return `` +
@@ -60,27 +60,27 @@ const bookFormToHtml = (bookForm) => {
     `<section>` +
         `<div>` +
             `<label for="${bookForm.title}">Title</label>` +
-            `<input id="${bookForm.title}" />` +
+            `<input id="${bookForm.title}" name="${bookForm.title}" />` +
         `</div>` +
         `<div>` +
             `<label for="${bookForm.author}">Author</label>` +
-            `<input id="${bookForm.author}" />` +
+            `<input id="${bookForm.author}" name="${bookForm.author}" />` +
         `</div>` +
         `<div>` +
             `<label for="${bookForm.synopsis}">Synopsis</label>` +
-            `<input id="${bookForm.synopsis}" />` +
+            `<input id="${bookForm.synopsis}" name="${bookForm.synopsis}" />` +
         `</div>` +
         `<div>` +
             `<label for="${bookForm.wear}">Condition</label>` +
-            `<input id="${bookForm.wear}" />` +
+            `<input id="${bookForm.wear}" name="${bookForm.wear}" />` +
         `</div>` +
     `</section>`
 };
 
 const autoFill = (bookForm) => {
 
-    let apiResponse = {};
     const isbn = $(bookForm.isbn).val();
+    let apiResponse = {};
 
     $.ajax({
         'url': `https://openlibrary.org/api/books?bibkeys=ISBN:${isbn}&jscmd=data&format=json`,
@@ -88,7 +88,8 @@ const autoFill = (bookForm) => {
         'success': (data) => {
             apiResponse = data[`ISBN:${isbn}`];
             apiResponse.isbn = isbn;
-            let book = newBookFrom(apiResponse);
+            //let book = newBookFrom(apiResponse);
+            let book = Book.from(apiResponse);
             // console.log(apiResponse);
             $(bookForm.title).val(book.title);
             $(bookForm.author).val(book.author);
@@ -100,26 +101,29 @@ const autoFill = (bookForm) => {
     });
 };
 
+const newBookForm = (index) => {
+  let self = {
+      section: `new-book-${index}`,
+      isbn: `new-book-${index}-isbn`,
+      title: `new-book-${index}-title`,
+      author: `new-book-${index}-author`,
+      synopsis: `new-book-${index}-wear`,
+      wear: `new-book-${index}-wear`,
+  };
+  return self;
+}
+
 const generateISBN = (event) => {
 
     // create a form object for each book
-    let bookForm = {
-        section: `new-book-${bookForms.length}`,
-        isbn: `new-book-${bookForms.length}-isbn`,
-    };
+    let bookForm = newBookForm(bookForms.length);
+
     // append a new html section to the form
     $(form.newBook.form).append(isbnToHtml(bookForm));
 
     // alter the strings on section and isbn for jquery selection
     bookForm.section = `#${bookForm.section}`;
     bookForm.isbn = `#${bookForm.isbn}`;
-
-    // append additional elements to the book form object, which
-    //  we'll generate in jquery
-    bookForm.title = `new-book-${bookForms.length}-title`;
-    bookForm.author = `new-book-${bookForms.length}-author`;
-    bookForm.synopsis = `new-book-${bookForms.length}-wear`;
-    bookForm.wear = `new-book-${bookForms.length}-wear`;
 
     // ad the form to an array of forms
     bookForms.push(bookForm);
@@ -132,15 +136,13 @@ const generateISBN = (event) => {
     $(bookForm.isbn).on("keyup", (event) => {
        isbn = $(bookForm.isbn).val();
        if(isbn.length >= isbn_min && generatedForms < 1){
-           $(`${bookForm.section}`).append(bookFormToHtml(bookForm));
-           generatedForms++;
-           // convert the values of book form so they can be selected
-           // by jquery
+           $(bookForm.section).append(bookFormToHtml(bookForm));
+           // convert the values of book form so they can be selected by jquery
            bookForm.title = `#${bookForm.title}`;
            bookForm.author = `#${bookForm.author}`;
            bookForm.synopsis = `#${bookForm.synopsis}`;
            bookForm.wear = `#${bookForm.wear}`;
-
+           generatedForms++;
            autoFill(Object.freeze(bookForm));
        }
     });

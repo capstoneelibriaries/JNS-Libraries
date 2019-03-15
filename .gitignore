@@ -1,6 +1,12 @@
 /target/
 !.mvn/wrapper/maven-wrapper.jar
 
+### Vim ###
+.swp
+
+### Maven ###
+.mvn/
+
 ### STS ###
 .apt_generated
 .classpath
