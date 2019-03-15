@@ -89,8 +89,10 @@ const autoFill = (bookForm) => {
             apiResponse = data[`ISBN:${isbn}`];
             apiResponse.isbn = isbn;
             let book = newBookFrom(apiResponse);
-            console.log(apiResponse);
-            console.log(book);
+            // console.log(apiResponse);
+            $(bookForm.title).val(book.title);
+            $(bookForm.author).val(book.author);
+            $(bookForm.synopsis).val(book.synopsis);
         },
         'error': (request, error) => {
             console.log("Request: " + JSON.stringify(request));
