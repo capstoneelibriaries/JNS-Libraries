@@ -2,14 +2,10 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 
 <head>
-    <meta charset="UTF-8"/>
-    <title>Home</title>
-    <link rel="stylesheet" th:href="@{/css/mobileIndex.css}"/>
-    <link rel="stylesheet" th:href="@{/css/mobileNavCss.css}"/>
+    <link th:replace="partials/header :: header('Log in')"/>
 </head>
 <body>
-<div th:replace="partials/navbar :: navbar">
-</div>
+<nav th:replace="partials/navbar :: navbar"></nav>
     <h1>login form</h1>
 
     <form th:action="@{/login}" th:object="${user}" th:method="post">

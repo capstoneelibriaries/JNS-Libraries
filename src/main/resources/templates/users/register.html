@@ -1,52 +1,26 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
-    <meta charset="UTF-8"/>
-    <title>Register</title>
-    <link rel="stylesheet" th:href="@{/css/mobileIndex.css}"/>
-    <link rel="stylesheet" th:href="@{/css/mobileNavCss.css}"/>
+    <link th:replace="partials/header :: header('Register')"/>
 </head>
 <body>
-    <div th:replace="partials/navbar :: navbar">
-    </div>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-
-    <form th:action="@{/register}" th:method="post" th:object="${user}">
-        <section id="register-title">
-            <h1>Register</h1>
-        </section>
-        <section id="user-info">
-            <fieldset>
-                <h3>Username: <span><input th:field="*{username}"/></span></h3>
-                <h3>Email address: <span><input th:field="*{email}"/></span></h3>
-                <h3>Phone number: <span><input th:field="*{phone}"/></span></h3>
-            </fieldset>
-            <fieldset>
-                <h3>Password: <span><input type="password" th:field="*{password}"/></span></h3>
-                <h3>Confirm Password: <span><input type="password" th:field="*{confirmPassword}"/></span></h3>
-            </fieldset>
-            <button type="submit" value="Register">Register</button>
-        </section>
-    </form>
+    <div th:replace="partials/navbar :: navbar"></div>
     <div class="container">
-        <div class="main">
-            <form class="form" method="post" action="#">
-                <h2>Create Registration Form Using jQuery</h2>
-                <label>Name :</label>
-                <input type="text" name="dname" id="name">
-                <label>Email :</label>
-                <input type="text" name="demail" id="email">
-                <label>Password :</label>
-                <input type="password" name="password" id="password">
-                <label>Confirm Password :</label>
-                <input type="password" name="cpassword" id="cpassword">
-                <input type="button" name="register" id="register" value="Register">
-            </form>
-        </div>
+        <h1 id="register">Register</h1>
+
+        <form th:action="@{/register}" th:method="post" th:object="${user}">
+            <section id="user-info">
+                <fieldset>
+                    <label>Username: <input th:field="*{username}"/></label>
+                    <label>Email address: <input th:field="*{email}"/></label>
+                    <label>Phone number: <input th:field="*{phone}"/></label>
+                    <label>Password: <input type="password" th:field="*{password}"/></label>
+                    <label>Confirm Password: <input type="password" th:field="*{confirmPassword}"/></label>
+                    <button type="submit" value="Register">Register</button>
+                </fieldset>
+            </section>
+        </form>
+    </div>
 </body>
 </html>
 

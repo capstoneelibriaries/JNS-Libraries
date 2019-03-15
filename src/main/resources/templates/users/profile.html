@@ -1,11 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
-    <meta charset="UTF-8"/>
-    <title>profile</title>
-    <link rel="stylesheet" th:href="@{/css/mobileIndex.css}"/>
-    <link rel="stylesheet" th:href="@{/css/mobileNavCss.css}"/>
-    <link rel="stylesheet" th:href="@{/css/mobileProfile.css}"/>
+    <link th:replace="partials/header :: header('Profile')"/>
 </head>
 <body>
 <div th:replace="partials/navbar :: navbar"></div>
