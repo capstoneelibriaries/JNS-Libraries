@@ -11,7 +11,7 @@
         <h1 id="login">Login</h1>
         <form th:action="@{/login}" th:object="${user}" th:method="post">
             <section id="login-info">
-                <fieldset>
+                <fieldset id="loginform">
                     <label>Username:<input th:field="*{username}"/></label>
                     <label>Password:<input type="password" th:field="*{password}"/></label>
                     <button type="submit" value="Login">Login</button>

@@ -36,6 +36,7 @@
   padding: 0 20px;
   box-sizing: border-box;
   right: -45px;
+    font-family: Overpass;
 }
 .column,
 .columns {
@@ -407,6 +408,9 @@ hr {
 }
 #registerForm{
     font-family: Overpass;
+    border-color: #1B7DBE;
+}
+#loginform{
     border-color: #1B7DBE;
 }
 
