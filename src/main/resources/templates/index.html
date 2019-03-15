@@ -24,13 +24,10 @@
             <a href="#" class="card">
                 <div>
                     <img th:src="${ad.books[0].imageUrl}" id="bookImage"/>
-
                     <h6><i><b th:text="${ad.books[0].title}"></b></i></h6>
-
-                        <p th:text="${ad.books[0].author}"></p>
-
-                        <p>Condition:<span th:text="${ad.books[0].wear}"></span></p>
-                    </div>
+                    <p th:text="${ad.books[0].author}"></p>
+                    <p>Condition:<span th:text="${ad.books[0].wear}"></span></p>
+                </div>
             </a>
         </div>
     </div>
