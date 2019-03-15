@@ -1,11 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
-    <meta charset="UTF-8"/>
-    <title>Home</title>
-    <!--<link rel="stylesheet" th:href="@{/css/mobileIndex.css}"/>-->
-    <link rel="stylesheet" th:href="@{/css/mobileNavCss.css}"/>
-    <link rel="stylesheet" th:href="@{/css/skeleton.css}"/>
+    <link th:replace="partials/header :: header('Home')"/>
+
 </head>
 <body>
     <div th:replace="partials/navbar :: navbar"></div>
@@ -24,9 +21,9 @@
             <a href="#" class="card">
                 <div>
                     <img th:src="${ad.books[0].imageUrl}" id="bookImage"/>
-                    <h6><i><b th:text="${ad.books[0].title}"></b></i></h6>
-                    <p th:text="${ad.books[0].author}"></p>
-                    <p>Condition:<span th:text="${ad.books[0].wear}"></span></p>
+                    <p><b th:text="${ad.books[0].title}"></b></p>
+                    <i><h6 th:text="${ad.books[0].author}"></h6></i>
+                    <i><h6>Condition:<span th:text="${ad.books[0].wear}"></span></h6></i>
                 </div>
             </a>
         </div>
