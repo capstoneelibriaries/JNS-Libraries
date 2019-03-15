@@ -5,14 +5,15 @@
     <title th:text="'Ooops, ' + ${error}"></title>
 </head>
 <body>
-
-    <h1>Page not found!</h1>
+    <div class="container">
+    <h1>Page not found!!</h1>
     <h1 th:text="${timestamp}"></h1>
     <h1 th:text="${error}"></h1>
     <h1 th:text="${status}"></h1>
     <h1 th:text="${message}"></h1>
     <h1 th:text="${exception}"></h1>
     <h1 th:text="${trace}"></h1>
+    </div>
 
 </body>
 </html>
