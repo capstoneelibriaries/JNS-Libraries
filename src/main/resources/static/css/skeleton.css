@@ -402,6 +402,13 @@ hr {
   height: 100px;
   width: 150px;
 }
+#register{
+    font-family: Overpass;
+}
+#registerForm{
+    font-family: Overpass;
+    border-color: #1B7DBE;
+}
 
 
 /* Clearing
