@@ -30,6 +30,23 @@ const isbn_max = 13;
 // book forms are pushed to this array
 let bookForms = [];
 
+// book object constructor that creates a book from the openbook
+// api response
+const newBookFrom = (openbook) => {
+    let authors = "";
+    openbook.authors.forEach( (author) => {
+       authors += author.name + ", ";
+    });
+
+    let self = {
+        isbn: openbook.isbn,
+        title: openbook.title,
+        author: authors,
+        synopsis: openbook.excerpts[0].text,
+    };
+    return self;
+};
+
 const isbnToHtml = (bookForm) => {
     return `` +
     `<section id=${bookForm.section}>` +
@@ -58,6 +75,27 @@ const bookFormToHtml = (bookForm) => {
             `<input id="${bookForm.wear}" />` +
         `</div>` +
     `</section>`
+};
+
+const autoFill = (bookForm) => {
+
+    let apiResponse = {};
+    const isbn = $(bookForm.isbn).val();
+
+    $.ajax({
+        'url': `https://openlibrary.org/api/books?bibkeys=ISBN:${isbn}&jscmd=data&format=json`,
+        'type': 'GET',
+        'success': (data) => {
+            apiResponse = data[`ISBN:${isbn}`];
+            apiResponse.isbn = isbn;
+            let book = newBookFrom(apiResponse);
+            console.log(apiResponse);
+            console.log(book);
+        },
+        'error': (request, error) => {
+            console.log("Request: " + JSON.stringify(request));
+        }
+    });
 };
 
 const generateISBN = (event) => {
@@ -89,11 +127,19 @@ const generateISBN = (event) => {
     // create the isbn out here, so it isn't being re-instantiated
     let isbn = "";
 
-    $(`${bookForm.isbn}`).on("keyup", (event) => {
-       isbn = $(`${bookForm.isbn}`).val();
+    $(bookForm.isbn).on("keyup", (event) => {
+       isbn = $(bookForm.isbn).val();
        if(isbn.length >= isbn_min && generatedForms < 1){
            $(`${bookForm.section}`).append(bookFormToHtml(bookForm));
            generatedForms++;
+           // convert the values of book form so they can be selected
+           // by jquery
+           bookForm.title = `#${bookForm.title}`;
+           bookForm.author = `#${bookForm.author}`;
+           bookForm.synopsis = `#${bookForm.synopsis}`;
+           bookForm.wear = `#${bookForm.wear}`;
+
+           autoFill(Object.freeze(bookForm));
        }
     });
 };
