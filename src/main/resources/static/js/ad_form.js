@@ -54,18 +54,13 @@ function ImplAdForm(openbookApi) {
         // watch the for the user's input into the isbn field
         let isbn = "";
         $(bookform.isbn).on("keyup", () => {
-           isbn = $(bookform.isbn).val();
-           if(isbn.length === AdForm.isbn.min || isbn.length === AdForm.isbn.max){
+
+            isbn = $(bookform.isbn).val();
+
+            if(isbn.length === AdForm.isbn.min || isbn.length === AdForm.isbn.max){
                console.log(isbn);
                openbookApi.request(isbn, bookform);
-               // openbookApi.request(isbn, (isbn) => {
-               //     let book = Book.from(openbookApi.response);
-               //     book.isbn = isbn;
-               //     $(bookform.title).val(book.title);
-               //     $(bookform.author).val(book.author);
-               //     $(bookform.synopsis).val(book.synopsis);
-               // });
-           }
+            }
         });
     };
 }
