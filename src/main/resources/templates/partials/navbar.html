@@ -26,8 +26,6 @@
 
                 <li class="nav-item active" sec:authorize="isAuthenticated()"><a class="nav-link" th:href="@{/profile}">Profile</a></li>
 
-                <li class="nav-item active" sec:authorize="isAuthenticated()"><a class="nav-link" th:href="@{/logout}">Logout</a></li>
-
                     <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
                        aria-expanded="false">
@@ -42,8 +40,12 @@
 
                     </div>
                 </li>
-
             </ul>
+
+            <form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
+                <button class="btn-sm btn-outline-success" id="menuLogout">Logout</button>
+            </form>
+
         </div>
     </nav>
 </div>
