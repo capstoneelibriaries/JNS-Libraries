@@ -17,19 +17,19 @@ const Book = {
     return self;
   },
   parseAuthor: (openbook) => {
-    if(openbook.authors === "undefined"){
+    if(typeof(openbook.authors) === "undefined"){
       return "none";
     }else{
       let authors = "";
       openbook.authors.forEach( (author) => {
-        author += author.name + ", ";
+        authors += author.name + ", ";
       });
       // cut off the last comma and space
       return authors.substring(0, authors.length - 2);
     }
   },
   parseSynopsis: (openbook) => {
-    if(openbook.excerpts === "undefined" || openbook.excerpts.length == 0){
+    if(typeof(openbook.excerpts) === "undefined" || openbook.excerpts.length === 0){
       return "none";
     }else{
       return openbook.excerpts[0].text;
