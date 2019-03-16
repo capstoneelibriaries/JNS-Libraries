@@ -58,8 +58,12 @@ function ImplAdForm(openbookApi) {
             isbn = $(bookform.isbn).val();
 
             if(isbn.length === AdForm.isbn.min || isbn.length === AdForm.isbn.max){
-               console.log(isbn);
-               openbookApi.request(isbn, bookform);
+                console.log(isbn);
+                openbookApi.request(isbn, bookform);
+                // enable the submit button since the ajax request should be finished
+                if(this.bookCount() > 0){
+                    $(this.submit.button).prop('disabled', false);
+                }
             }
         });
     };
