@@ -47,7 +47,7 @@ function ImplBookForm(adform) {
     `<section id=${BookForm.idToString(this.section)}>` +
         `<div>` +
           `<label for="${BookForm.idToString(this.isbn)}">ISBN</label>` +
-          `<input id="${BookForm.idToString(this.isbn)}" type="number" minlength="${isbn_min}" maxlength="${isbn_max}" name="${bookForm.isbn}" />` +
+          `<input id="${BookForm.idToString(this.isbn)}" type="number" minlength="${isbn_min}" maxlength="${isbn_max}" name="${this.isbn}" />` +
         `</div>` +
         BookForm.genHtml("Title", BookForm.idToString(this.title)) +
         BookForm.genHtml("Author", BookForm.idToString(this.author)) +
