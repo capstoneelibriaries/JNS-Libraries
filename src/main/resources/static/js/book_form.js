@@ -40,7 +40,7 @@ const BookForm = {
   idToString: (id) => {
     return id.substring(1, id.length);
   },
-  autoFill(): (id) => {
+  autoFill: (id) => {
     // console.log("DEBUG: autoFill(...)")
     // let book = Book.from(OpenBook.response);
     // $(bookForm.title).val(book.title);
