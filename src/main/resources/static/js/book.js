@@ -1,21 +1,8 @@
 // test isbn: 0672314800
 const Book = {
-  // the template object
-  // self: {
-  //   isbn: "",
-  //   title: "",
-  //   author: "",
-  //   synopsis: "",
-  // },
   // constructor that creates a book from the openbook api
   from: (obResponse) => {
     return new ImplBook(obResponse);
-    // let self = Book.self;
-    // self.isbn = openbook.isbn;
-    // self.title = openbook.title;
-    // self.author = Book.parseAuthor(openbook);
-    // self.synopsis = Book.parseSynopsis(openbook);
-    // return self;
   },
   parseAuthor: (openbook) => {
     if(typeof(openbook.authors) === "undefined"){
@@ -38,11 +25,11 @@ const Book = {
   },
 };
 
+// obResponse is the response object of the OpenBook Api
 function ImplBook(obResponse){
 
   this.isbn = obResponse.isbn;
   this.title = obResponse.title;
   this.author = Book.parseAuthor(obResponse);
   this.synopsis = Book.parseSynopsis(obResponse);
-
 }
