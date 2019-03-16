@@ -40,6 +40,6 @@ function ImplAdForm() {
 
   this.addBookForm = (bookform) => {
     this.bookforms.push(bookform);
-    $(this.form).append(bookform);
+    $(this.form).append(bookform.toHtml());
   };
 }
