@@ -7,7 +7,7 @@ $(adform.book.button).on("click", (event) => {
   adform.addBookForm(BookForm.new(adform));
 });
 
-// when the submit button is pressed...
+//when the submit button is pressed...
 $(adform.submit.button).click( (event) => {
   event.preventDefault();
 
@@ -31,5 +31,4 @@ $(adform.submit.button).click( (event) => {
   let request = new XMLHttpRequest();
   request.open("POST", "/ads/create");
   request.send(post);
-
 });
