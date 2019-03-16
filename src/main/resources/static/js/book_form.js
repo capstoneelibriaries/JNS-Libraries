@@ -1,7 +1,11 @@
 const BookForm = {
-  new: (index) => {
-    return Object.freeze(new ImplBookForm(index));
+
+  adform: {},
+
+  new: (adform) => {
+    return Object.freeze(new ImplBookForm(adform));
   },
+
   genHtml: (label, id) => {
     return `` +
     `<div>` +
@@ -14,7 +18,11 @@ const BookForm = {
   },
 };
 
-function ImplBookForm(index) {
+function ImplBookForm(adform) {
+  // BookForms require an AdForm
+  const index = adform.bookCount();
+  // inject dependency
+  this.adform = adform;
   // json accessable values
   this.section = `#new-book-${index}`;
   this.isbn = `#new-book-${index}-isbn`;
@@ -32,6 +40,9 @@ function ImplBookForm(index) {
   };
 
   this.toHtml = () => {
+    const isbn_min = this.adform.getIsbnSize().min;
+    const isbn_max = this.adform.getIsbnSize().max;
+
     return `` +
     `<section id=${BookForm.idToString(this.section)}>` +
         `<div>` +

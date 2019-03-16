@@ -26,7 +26,8 @@ function ImplAdForm() {
       label: "#ad-new-book",
       button: "#btn-ad-new-book",
       form: "#ad-new-book-form",
-  }
+  };
+
   this.submit = {
       label: "#ad-submit-all",
       button: "#btn-ad-submit-all",
@@ -36,7 +37,11 @@ function ImplAdForm() {
 
   this.bookCount = () => {
     return this.bookforms.length;
-  }
+  };
+
+  this.getIsbnSize = () => {
+    return AdForm.isbn;
+  };
 
   this.addBookForm = (bookform) => {
     this.bookforms.push(bookform);
