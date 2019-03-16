@@ -2,32 +2,25 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <link th:replace="partials/header :: header('Home')"/>
-
 </head>
-<body>
+<body class="is-preload">
     <div th:replace="partials/navbar :: navbar"></div>
-    <br/>
-    <br/>
-    <hr/>
+    <div id="wrapper">
 
-    <h2 id="myListings">E-Libraries</h2>
+        <section id="main">
 
-    <hr/>
-    <!-- For each ad, create a card -->
-<div class="container">
-    <div class="row u-max-full-width">
-        <div th:each="ad : ${ads}" class="three columns">
-            <!-- Generate the card -->
-            <a href="#" class="card">
-                <div>
-                    <img th:src="${ad.books[0].imageUrl}" id="bookImage"/>
-                    <p><b th:text="${ad.books[0].title}"></b></p>
-                    <i><h6 th:text="${ad.books[0].author}"></h6></i>
-                    <i><h6>Condition:<span th:text="${ad.books[0].wear}"></span></h6></i>
+            <div class="items">
+
+                <div class="item intro span-2">
+                    <h1>JNS Libraries</h1>
+                    <p>A site for selling and buying used or like-new books.</p>
                 </div>
-            </a>
-        </div>
+                <article class="item thumb span-1">
+                </article>
+            </div>
+
+        </section>
     </div>
-</div>
+
 </body>
 </html>
