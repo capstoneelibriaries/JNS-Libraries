@@ -46,5 +46,13 @@ function ImplAdForm() {
   this.addBookForm = (bookform) => {
     this.bookforms.push(bookform);
     $(this.form).append(bookform.toHtml());
+
+    let isbn = "";
+    $(bookform.isbn).on("keyup", () => {
+       isbn = $(bookform.isbn).val();
+       if(isbn.length == AdForm.isbn.min || isbn.length == AdForm.isbn.max){
+           console.log(isbn);
+       }
+    });
   };
 }
