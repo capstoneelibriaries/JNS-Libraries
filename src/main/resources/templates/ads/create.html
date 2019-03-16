@@ -12,11 +12,11 @@
         <form th:action="@{/ads/create}" th:object="${ad}" th:method="post">
             <div th:id="ad-price">
                 <label th:for="create-ad-price">Price <abbr th:title="required">*</abbr></label>
-                <input th:id="create-ad-price" th:type="number" th:step="0.01" th:name="ad-price" />
+                <input th:id="create-ad-price" th:type="number" th:step="0.01" th:min="1.00" th:max="9999.99" th:name="ad-price" />
             </div>
             <div th:id="ad-shipping">
                 <label th:for="create-ad-shipping">Shipping <abbr th:title="required">*</abbr></label>
-                <input th:id="create-ad-shipping" th:type="number" th:step="0.01" th:name="ad-shipping" />
+                <input th:id="create-ad-shipping" th:type="number" th:step="0.01" th:min="1.00" th:max="9999.99" th:name="ad-shipping" />
             </div>
             <div th:id="ad-tradable">
                 <label th:for="create-ad-tradable">Tradable</label>
@@ -34,6 +34,11 @@
         </form>
     </div>
     <script th:src="@{/js/jquery.js}"></script>
+    <script th:src="@{/js/openbook.js}"></script>
+    <script th:src="@{/js/book.js}"></script>
+    <script th:src="@{/js/book_form.js}"></script>
+    <script th:src="@{/js/ad.js}"></script>
+    <script th:src="@{/js/ad_form.js}"></script>
     <script th:src="@{/js/create_ad.js}"></script>
 </body>
 </html>
