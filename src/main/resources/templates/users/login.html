@@ -2,21 +2,22 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 
 <head>
-    <meta charset="UTF-8"/>
-    <title>Home</title>
-    <link rel="stylesheet" th:href="@{/css/mobileIndex.css}"/>
-    <link rel="stylesheet" th:href="@{/css/mobileNavCss.css}"/>
+    <link th:replace="partials/header :: header('Log in')"/>
 </head>
 <body>
-<div th:replace="partials/navbar :: navbar">
-</div>
-    <h1>login form</h1>
+    <nav th:replace="partials/navbar :: navbar"></nav>
 
-    <form th:action="@{/login}" th:object="${user}" th:method="post">
-
-            Username:<input th:field="*{username}"/>
-            Password:<input th:field="*{password}"/>
-            <button type="submit">Register!</button>
-    </form>
+    <div class="container">
+        <h1 id="login">Login</h1>
+        <form th:action="@{/login}" th:object="${user}" th:method="post">
+            <section id="login-info">
+                <fieldset id="loginform">
+                    <label>Username:<input th:field="*{username}"/></label>
+                    <label>Password:<input type="password" th:field="*{password}"/></label>
+                    <button type="submit" value="Login">Login</button>
+                </fieldset>
+            </section>
+        </form>
+    </div>
 </body>
 </html>

@@ -67,6 +67,7 @@ public class AdsController {
     public String editAd(@ModelAttribute Ad ad, @PathVariable Long id){
         if (((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId() ==
                 users.findOne(ad.getSeller().getId()).getId()) {
+            ad.setId(id);
             ads.save(ad);
             return "redirect:/profile";
         }else{

@@ -2,11 +2,9 @@
 {
     display: block;
     position: relative;
-    top: 50px;
-    left: 50px;
-
+    top: 20px;
+    left: 20px;
     z-index: 1;
-
     -webkit-user-select: none;
     user-select: none;
 }
@@ -18,12 +16,9 @@
     position: absolute;
     top: -7px;
     left: -5px;
-
     cursor: pointer;
-
     opacity: 0; /* hide this */
     z-index: 2; /* and place it over the hamburger */
-
     -webkit-touch-callout: none;
 }
 /*
@@ -37,7 +32,7 @@
     margin-bottom: 5px;
     position: relative;
 
-    background: #EDAA3D;
+    background: #1B7DBE;
     border-radius: 3px;
 
     z-index: 1;
@@ -64,7 +59,7 @@
 {
     opacity: 1;
     transform: rotate(45deg) translate(-2px, -1px);
-    background: #E44D37;
+    background: #1B7DBE;
 }
 /*
  * But let's hide the middle one.
@@ -88,10 +83,13 @@
 #menu
 {
     position: absolute;
-    width: 300px;
-    margin: -100px 0 0 -50px;
-    padding: 50px;
-    padding-top: 125px;
+    width: 10em;
+    margin: -4em 0 0 -3em;
+    padding: 4em;
+    -webkit-box-shadow: 4px 4px 10px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 4px 4px 10px 0px rgba(0,0,0,0.75);
+    box-shadow: 4px 4px 10px 0px rgba(0,0,0,0.75);
+
 
     background: #F7F9F9;
     list-style-type: none;
@@ -119,5 +117,16 @@ a{
     text-decoration: none;
     text-underline: none;
     color: black;
-    font-family: Monserrat;
+}
+#menuLogout {
+    text-decoration: none;
+    font-family: Overpass;
+    font-size: 22px;
+    background-color: #ff000000;
+    border: rgba(0,0,0,0) solid 0;
+    color: black;
+    padding: 0;
+}
+#menuLogout:hover{
+    color: #1B7DBE;
 }

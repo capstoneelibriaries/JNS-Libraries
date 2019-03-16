@@ -1,39 +1,29 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
-    <meta charset="UTF-8"/>
-    <title>profile</title>
+    <link th:replace="partials/header :: header('Profile')"/>
 </head>
 <body>
-    <h1>profile</h1>
-    <h1> welcome <span>User</span>!</h1>
+<div th:replace="partials/navbar :: navbar"></div>
+<div id="profile">
 
 
-    <div th:object="${user}">
-        <h1>Welcome!<span th:="text*{username}"></span></h1>
+    <hr/>
+
+    <h2 id="myListings">My Listings</h2>
+
+    <hr/>
+    <div class="container">
+        <div class="row u-max-full-width">
+        <div class="three columns" th:each="ad:${user.ads}">
+                <div class="card" th:each="book:${ad.books}">
+                        <img th:src="${book.imageUrl}" alt="book"/>
+                        <h4 th:text="${book.title}"></h4>
+                        <h5 th:text="${book.author}"></h5>
+                    </div>
+                </div>
+            </div>
     </div>
-
-
-    <div><h5>This will eventually be a profile photo</h5></div>
-
-
-
-
-    <h2>here are your books:</h2>
-
-    <!--this will be a list of all the users books that they can scroll through-->
-
-        <!--<div>-->
-            <!---->
-            <!--<li th:each="book : ${books}">-->
-
-
-        <!--</div>-->
-
-
-    <div>
-        <h4>th: booooooooooooooooooooooooooooooooks</h4>
-    </div>
-
+</div>
 </body>
 </html>

@@ -20,7 +20,7 @@ body{
 }
 
 /* Add some padding inside the card container */
-.container {
+.Cardcontainer {
 
     width: 210px;
     font-family: Overpass;
@@ -32,3 +32,18 @@ h4{
     font-family: Monserrat;
 }
 
+.separator{
+    width: 75%;
+    background-color: #1B7DBE;
+    opacity: .2;
+    height: 5px;
+    border-radius: 100px;
+    margin: 30px auto auto;
+}
+#myListings{
+    text-align: center;
+    font-family: Overpass;
+}
+#books{
+
+}
