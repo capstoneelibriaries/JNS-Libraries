@@ -18,14 +18,17 @@
 
             <ul class="navbar-nav mr-auto">
 
-                <li class="nav-item active"><a class="nav-link" th:href="@{/}">Home</a></li>
+                <li class="nav-item active" sec:authorize="!isAuthenticated()"><a class="nav-link" th:href="@{/login}">Login</a></li>
 
-                <li class="nav-item active" sec:authorize="isAuthenticated()"><a th:href="@{/profile}">Profile</a></li>
+                <li class="nav-item active" sec:authorize="!isAuthenticated()"><a class="nav-link" th:href="@{/register}">Register</a></li>
 
-                <li class="nav-item active"
-                    sec:authorize="isAuthenticated()"><form th:action="@{/logout}" method="post"><button id="menuLogout">Logout</button></form></li>
+                <li class="nav-item active" sec:authorize="isAuthenticated()"><a class="nav-link" th:href="@{/}">Home</a></li>
 
-                <li class="nav-item dropdown">
+                <li class="nav-item active" sec:authorize="isAuthenticated()"><a class="nav-link" th:href="@{/profile}">Profile</a></li>
+
+                <li class="nav-item active" sec:authorize="isAuthenticated()"><a class="nav-link" th:href="@{/logout}">Logout</a></li>
+
+                    <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
                        aria-expanded="false">
                         Books
@@ -35,43 +38,13 @@
 
                         <a class="dropdown-item" th:href="@{/ads}">Buy Books</a>
 
-                        <a class="dropdown-item" th:href="@{/ads/create}">Sell Books</a>
+                        <a class="dropdown-item" sec:authorize="isAuthenticated()" th:href="@{/ads/create}">Sell Books</a>
 
                     </div>
                 </li>
 
-                <li class="nav-item active" sec:authorize="!isAuthenticated()"><a th:href="@{/login}">Login</a></li>
-
-                <li class="nav-item active" sec:authorize="!isAuthenticated()"><a th:href="@{/register}">Register</a></li>
             </ul>
         </div>
     </nav>
 </div>
 </html>
-
-
-
-<!--<div th:fragment="navbar">-->
-<!--<nav role="navigation">-->
-<!--<div id="menuToggle">-->
-<!--<input type="checkbox"/>-->
-
-<!--<ul id="menu">-->
-<!--<li><a th:href="@{/}">Home</a></li>-->
-<!--<li><a th:href="@{/ads}">Buy Books</a></li>-->
-<!--<li><a th:href="@{/ads/create}">Sell Books</a></li>-->
-
-
-<!--<li sec:authorize="isAuthenticated()"><a th:href="@{/profile}">Profile</a></li>-->
-    <!---->
-<!--<li sec:authorize="isAuthenticated()"><form th:action="@{/logout}" method="post"><button id="menuLogout">Logout</button></form></li>-->
-
-<!--if user is not logged in then show these-->
-
-<!--<li sec:authorize="!isAuthenticated()"><a th:href="@{/login}">Login</a></li>-->
-<!--<li sec:authorize="!isAuthenticated()"><a th:href="@{/register}">Register</a></li>-->
-<!--</ul>-->
-<!--</div>-->
-<!--</nav>-->
-<!--</div>-->
-<!--</html>-->
