@@ -1,18 +1,18 @@
 const OpenBook = {
   response: {},
-  request: (callback, isbn) => {
-    $.ajax({
-        'url': `https://openlibrary.org/api/books?bibkeys=ISBN:${isbn}&jscmd=data&format=json`,
-        'type': 'GET',
-        'success': (data) => {
-            OpenBook.response = data[`ISBN:${isbn}`];
-            OpenBook.response.isbn = isbn;
-            callback();
-        },
-        'error': (request, error) => {
-            OpenBook.response = error;
-        }
-    });
+  request: (isbn, callback) => {
+      $.ajax({
+          'url': `https://openlibrary.org/api/books?bibkeys=ISBN:${isbn}&jscmd=data&format=json`,
+          'type': 'GET',
+          'success': (data) => {
+              OpenBook.response = data[`ISBN:${isbn}`];
+              OpenBook.response.isbn = isbn;
+              callback(isbn);
+          },
+          'error': (request, error) => {
+              OpenBook.response = error;
+          }
+      });
   },
 };
 

@@ -3,8 +3,8 @@ const AdForm = {
     min: 10,
     max: 13,
   },
-  new: () => {
-    return Object.freeze(new ImplAdForm());
+  new: (openbookApi) => {
+    return Object.freeze(new ImplAdForm(openbookApi));
   }
 };
 
@@ -55,8 +55,15 @@ function ImplAdForm(openbookApi) {
         let isbn = "";
         $(bookform.isbn).on("keyup", () => {
            isbn = $(bookform.isbn).val();
-           if(isbn.length == AdForm.isbn.min || isbn.length == AdForm.isbn.max){
+           if(isbn.length === AdForm.isbn.min || isbn.length === AdForm.isbn.max){
                console.log(isbn);
+               openbookApi.request(isbn, (isbn) => {
+                   let book = Book.from(openbookApi.response);
+                   book.isbn = isbn;
+                   $(bookform.title).val(book.title);
+                   $(bookform.author).val(book.author);
+                   $(bookform.synopsis).val(book.synopsis);
+               });
            }
         });
     };
