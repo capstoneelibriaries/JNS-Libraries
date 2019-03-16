@@ -1,6 +1,6 @@
 console.log("DEBUG: Running create ad.js");
 
-let adform = AdForm.new();
+let adform = AdForm.new(OpenBook);
 
 $(adform.book.button).on("click", (event) => {
   console.log($(adform.book.button));
