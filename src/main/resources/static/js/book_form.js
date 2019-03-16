@@ -32,11 +32,11 @@ function ImplBookForm(adform) {
   this.wear = `#new-book-${index}-wear`;
 
   this.autoFill = () => {
-    console.log("DEBUG: autoFill(...)")
-    // let book = Book.from(OpenBook.response);
-    // $(bookForm.title).val(book.title);
-    // $(bookForm.author).val(book.author);
-    // $(bookForm.synopsis).val(book.synopsis);
+    console.log("DEBUG: autoFill(...)");
+    let book = Book.from(OpenBook.response);
+    $(this.title).val(book.title);
+    $(this.author).val(book.author);
+    $(this.synopsis).val(book.synopsis);
   };
 
   this.toHtml = () => {

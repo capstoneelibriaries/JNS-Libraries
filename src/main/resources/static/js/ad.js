@@ -27,4 +27,4 @@ const Ad = {
   new: () => {
     return Ad.self;
   }
-}
+};
