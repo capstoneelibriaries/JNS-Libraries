@@ -8,9 +8,9 @@ const BookForm = {
 
   genHtml: (label, id, type, misc) => {
     return `` +
-    `<div>` +
+    `<div class="form-label-group">` +
         `<label for="${id}">${label}</label>` +
-        `<input id="${id}" type="${type}" ${misc} name="${id}"/>` +
+        `<input class="form-control" id="${id}" type="${type}" ${misc} name="${id}"/>` +
     `</div>`;
   },
 
