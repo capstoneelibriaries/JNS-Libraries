@@ -31,9 +31,7 @@ $(adform.submit.button).click( (event) => {
 
     let request = new XMLHttpRequest();
     request.open("POST", "/ads/create");
-    request.send(post);
-    // TODO: change the ridirect so it is handled server side
-    // The redirect is handled here instread of the controller
-    request.redirect("/ads/index");
+    let response = request.send(post);
+    console.log(response);
   }
 });
