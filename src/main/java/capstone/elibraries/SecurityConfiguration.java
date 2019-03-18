@@ -46,7 +46,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 /* Pages that can be viewed without having to log in */
                 .and()
                 .authorizeRequests()
-                .antMatchers("/", "/ads", "/ads/{id}") // anyone can see the home and the ads pages
+                .antMatchers("/", "/ads/view={id}") // anyone can see the home and the ads pages
                 .permitAll()
                 /* Pages that require authentication */
                 .and()
@@ -61,5 +61,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 )
                 .authenticated()
         ;
+        http.csrf().disable();
     }
 }
