@@ -6,7 +6,6 @@
 </head>
 <body>
     <div th:replace="partials/navbar :: navbar"></div>
-    <body>
         <div class="container">
             <div class="row">
                 <div class="col-lg-10 col-xl-9 mx-auto">
@@ -16,22 +15,36 @@
                         <div class="card-body">
                             <h5 class="card-title text-center">Register <i class="fas fa-user-plus"></i></h5>
 
-                            <form class="form-signin" th:action="@{/register}" th:method="post" th:object="${user}">
+                            <form class="form-signin" data-toggle="validator" role="form" th:action="@{/register}" th:method="post" th:object="${user}">
 
-                                <div class="form-label-group">
+                                <div class="form-label-group has-feedback">
 
-                                    <input th:field="*{username}" type="text" id="inputUserame" class="form-control" placeholder="Username"/>
+                                    <input th:field="*{username}"
+                                           type="text"
+                                           id="inputUserame"
+                                           class="form-control"
+                                           placeholder="Username"
+                                    />
                                     <label for="inputUserame">Username</label>
                                 </div>
 
 
-                                <div class="form-label-group">
-                                    <input th:field="*{email}" type="email" id="inputEmail" class="form-control" placeholder="Email address"/>
+                                <div class="form-label-group has-feedback">
+                                    <input th:field="*{email}"
+                                           type="email"
+                                           id="inputEmail"
+                                           class="form-control control-label"
+                                           placeholder="Email address"
+                                    />
                                     <label for="inputEmail">Email address</label>
                                 </div>
 
                                 <div class="form-label-group">
-                                    <input th:field="*{phone}" id="inputPhone" class="form-control" placeholder="Phone Number"/>
+                                    <input th:field="*{phone}"
+                                           id="inputPhone"
+                                           class="form-control"
+                                           placeholder="Phone Number"
+                                    />
                                     <label for="inputPhone">Phone Number</label>
                                 </div>
 
@@ -43,22 +56,30 @@
                                            id="inputPassword"
                                            class="form-control"
                                            placeholder="Password"
-                                           minlength="3"
+                                           minlength="6"
                                            maxlength="32"
                                     />
                                     <label for="inputPassword">Password</label>
                                     <small id="passwordHelpBlock" class="text-muted">
-                                        Your password must be 3-32 characters long.
+                                        Your password must be 6-32 characters long.
                                     </small>
                                 </div>
 
                                 <div class="form-label-group">
-                                    <input th:field="*{confirmPassword}" type="password" id="inputConfirmPassword" class="form-control"
-                                           placeholder="Password"/>
+                                    <input th:field="*{confirmPassword}"
+                                           type="password"
+                                           id="inputConfirmPassword"
+                                           class="form-control"
+                                           placeholder="Password"
+                                           minlength="6"
+                                           maxlength="32"
+                                    />
                                     <label for="inputConfirmPassword">Confirm password</label>
                                 </div>
 
-                                <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Register</button>
+                                <button class="btn btn-lg btn-primary btn-block text-uppercase"
+                                        type="submit">Register
+                                </button>
                             </form>
                         </div>
                     </div>
@@ -66,7 +87,6 @@
             </div>
         </div>
     </body>
-</body>
 </html>
 
 
