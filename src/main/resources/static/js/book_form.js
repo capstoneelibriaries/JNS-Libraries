@@ -45,10 +45,11 @@ function ImplBookForm(adform) {
     const isbn_max = this.adform.getIsbnSize().max;
 
     return `` +
-    `<section id=${BookForm.idToString(this.section)}>` +
+    `<div class="form-label-group" id=${BookForm.idToString(this.section)}>` +
         `<div class="form-label-group">` +
           `<label for="${BookForm.idToString(this.isbn)}">ISBN</label>` +
-          `<input class="form-control" id="${BookForm.idToString(this.isbn)}" type="number" minlength="${isbn_min}" maxlength="${isbn_max}" name="${this.isbn}" />` +
+          `<input class="form-control" 
+id="${BookForm.idToString(this.isbn)}" type="number" minlength="${isbn_min}" maxlength="${isbn_max}" name="${this.isbn}" />` +
         `</div>` +
         BookForm.genHtml("Title", BookForm.idToString(this.title), "text",
             `pattern=".{1,255}" required`) +
@@ -58,6 +59,6 @@ function ImplBookForm(adform) {
             `pattern=".{1,255}" required`) +
         BookForm.genHtml("Condition", BookForm.idToString(this.wear), "number",
             `required step="1" min="1" max="5"`) +
-    `</section>`;
+    `</div>`;
   };
 }
