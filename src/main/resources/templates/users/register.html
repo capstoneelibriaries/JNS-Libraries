@@ -74,6 +74,14 @@
                                 <small id="passwordHelpBlock" class="text-muted">
                                     Your password must be 6-32 characters long.
                                 </small>
+
+                                <button class="btn-sm btn-light"
+                                        type="button"
+                                        name="showpassword"
+                                        id="showpassword"
+                                        value="Show Password">Show password
+                                </button>
+
                             </div>
 
                             <div class="form-label-group">
@@ -98,5 +106,19 @@
             </div>
         </div>
     </div>
+    <script>
+        $("#showpassword").on('click', function(){
+
+            var pass = $("#inputPassword");
+            var fieldtype = pass.attr('type');
+            if (fieldtype == 'password') {
+                pass.attr('type', 'text');
+                $(this).text("Hide Password");
+            }else{
+                pass.attr('type', 'password');
+                $(this).text("Show Password");
+            }
+        });
+    </script>
 </body>
 </html>
