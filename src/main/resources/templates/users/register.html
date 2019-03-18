@@ -38,8 +38,18 @@
                                 <hr/>
 
                                 <div class="form-label-group">
-                                    <input th:field="*{password}" type="password" id="inputPassword" class="form-control" placeholder="Password"/>
+                                    <input th:field="*{password}"
+                                           type="password"
+                                           id="inputPassword"
+                                           class="form-control"
+                                           placeholder="Password"
+                                           minlength="3"
+                                           maxlength="32"
+                                    />
                                     <label for="inputPassword">Password</label>
+                                    <small id="passwordHelpBlock" class="text-muted">
+                                        Your password must be 3-32 characters long.
+                                    </small>
                                 </div>
 
                                 <div class="form-label-group">
