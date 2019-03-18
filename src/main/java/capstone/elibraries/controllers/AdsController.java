@@ -68,7 +68,7 @@ public class AdsController {
             ad.addBook(bk);
         }
         System.out.println(ad.toString());
-        //ads.save(ad);
+        ads.save(ad);
         return "/ads/index";
     }
 
@@ -77,6 +77,7 @@ public class AdsController {
         model.addAttribute("ad",ads.findOne(id));
         return "ads/delete";
     }
+
     @PostMapping("/ads/{id}/delete")
     public String deleteAd(@ModelAttribute Ad ad, @PathVariable Long id){
         if (((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId() ==
@@ -87,11 +88,13 @@ public class AdsController {
             return "redirect:/profile";
         }
     }
+
     @GetMapping("/ads/{id}/edit")
     public String editForm(Model model, @PathVariable Long id){
         model.addAttribute("ad", ads.findOne(id));
         return "ads/edit";
     }
+
     @PostMapping("/ads/{id}/edit")
     public String editAd(@ModelAttribute Ad ad, @PathVariable Long id){
         if (((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId() ==
