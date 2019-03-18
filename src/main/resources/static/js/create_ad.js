@@ -11,7 +11,7 @@ $(adform.book.button).on("click", (event) => {
 $(adform.submit.button).click( (event) => {
   event.preventDefault();
 
-  // if no books are provided
+  //if no books are provided
   // if(adform.bookCount() < 1){
   //   alert("No books provided.");
   // }
