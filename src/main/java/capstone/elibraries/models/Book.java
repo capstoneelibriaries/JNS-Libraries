@@ -1,5 +1,7 @@
 package capstone.elibraries.models;
 
+import capstone.elibraries.error.IsbnException;
+
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
@@ -40,7 +42,9 @@ public class Book {
         // default
     }
 
-    public Book(String isbn, String title, String author, String synopsis, String image, byte wear){
+    public Book(String isbn, String title, String author, String synopsis, String image, byte wear)
+        throws IsbnException
+    {
         this.setIsbn(isbn);
         this.setTitle(title);
         this.setAuthor(author);
@@ -97,9 +101,14 @@ public class Book {
         }
     }
 
-    public void setIsbn(String isbn) {
-        if(isbn == null || isbn.length() != 10 || isbn.length() != 13){
-            // TODO: throw exception
+    public void setIsbn(String isbn) throws IsbnException {
+        if(isbn == null){
+            throw new IsbnException("null", "not null");
+        }if(isbn.length() != 10 || isbn.length() != 13){
+            throw new IsbnException(
+                    "isbn (" + isbn + ") of length: " + isbn.length(),
+                    "isbn of length 10 or 13"
+            );
         }else{
             this.isbn = isbn;
         }
