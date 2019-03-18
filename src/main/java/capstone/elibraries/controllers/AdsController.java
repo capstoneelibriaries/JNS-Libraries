@@ -9,6 +9,8 @@ import capstone.elibraries.models.User;
 import capstone.elibraries.models.Ad;
 import org.springframework.ui.Model;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Controller
 public class AdsController {
     private Ads ads;
@@ -23,7 +25,7 @@ public class AdsController {
         model.addAttribute("ads",ads.findAll());
         return "ads/index";
     }
-    @GetMapping("/ads/{id}")
+    @GetMapping("/ads/view={id}")
     public String getOneAd(Model model, @PathVariable Long id){
         model.addAttribute("ad",ads.findOne(id));
         return "ads/single";
@@ -35,14 +37,21 @@ public class AdsController {
     }
 
     @PostMapping("/ads/create")
-    public String createAd(@ModelAttribute Ad ad){
-
-        ad.setSeller(
-        users.findOne(((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId()));
-        ads.save(ad);
-
+    public String createAd(HttpServletRequest request){
+        System.out.println("DEBUG: createAd(...)");
+        System.out.println(request.getParameter("price"));
+        System.out.println(request.getParameter("shipping"));
         return "/ads/index";
     }
+//    @PostMapping("/ads/create")
+//    public String createAd(@ModelAttribute Ad ad){
+//
+//        ad.setSeller(
+//        users.findOne(((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId()));
+//        ads.save(ad);
+//
+//        return "/ads/index";
+//    }
     @GetMapping("/ads/{id}/delete")
     public String deleteForm(Model model, @PathVariable Long id){
         model.addAttribute("ad",ads.findOne(id));
