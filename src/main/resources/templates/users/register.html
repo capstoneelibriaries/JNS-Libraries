@@ -2,28 +2,123 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <link th:replace="partials/header :: header('Register')"/>
+    <link th:href="@{/css/register.css}" href="/static/css/register.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
     <div th:replace="partials/navbar :: navbar"></div>
     <div class="container">
-        <h1 id="register">Register</h1>
+        <div class="row">
+            <div class="col-lg-10 col-xl-9 mx-auto">
+                <div class="card card-signin flex-row my-5">
+                    <div class="card-img-left d-none d-md-flex">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Register <i class="fas fa-user-plus"></i></h5>
 
-        <form th:action="@{/register}" th:method="post" th:object="${user}">
-            <section id="user-info">
-                <fieldset id="registerForm">
-                    <label>Username: <input th:field="*{username}"/></label>
-                    <label>Email address: <input th:field="*{email}"/></label>
-                    <label>Phone number: <input th:field="*{phone}"/></label>
-                    <label>Password: <input type="password" th:field="*{password}"/></label>
-                    <label>Confirm Password: <input type="password" th:field="*{confirmPassword}"/></label>
-                    <button type="submit" value="Register">Register</button>
-                </fieldset>
-            </section>
-        </form>
+                        <form id="identicalForm" class="form-signin needs-validation"
+                              th:action="@{/register}" th:method="post" th:object="${user}" >
+
+                            <div class="form-label-group">
+
+                                <input th:field="*{username}"
+                                       type="text"
+                                       id="inputUserame"
+                                       class="form-control"
+                                       placeholder="Username"
+                                       required="required"
+                                       minlength="2"
+                                       maxlength="35"
+                                />
+                                <label for="inputUserame">Username</label>
+                            </div>
+
+
+                            <div class="form-label-group">
+                                <input th:field="*{email}"
+                                       type="email"
+                                       id="inputEmail"
+                                       class="form-control control-label"
+                                       placeholder="Email address"
+                                       required="required"
+                                       minlength="5"
+                                       maxlength="50"
+                                />
+                                <label for="inputEmail">Email address</label>
+                            </div>
+
+                            <div class="form-label-group">
+                                <input th:field="*{phone}"
+                                       id="inputPhone"
+                                       class="form-control"
+                                       placeholder="Phone Number"
+                                       required="required"
+                                       minlength="7"
+                                       maxlength="10"
+                                />
+                                <label for="inputPhone">Phone Number</label>
+                            </div>
+
+                            <hr/>
+
+                            <div class="form-label-group">
+                                <input th:field="*{password}"
+                                       type="password"
+                                       id="inputPassword"
+                                       class="form-control"
+                                       placeholder="Password"
+                                       minlength="6"
+                                       maxlength="32"
+                                       required="required"
+                                />
+                                <label for="inputPassword" class="control-label">Password</label>
+                                <small id="passwordHelpBlock" class="text-muted">
+                                    Your password must be 6-32 characters long.
+                                </small>
+
+                                <button class="btn-sm btn-light"
+                                        type="button"
+                                        name="showpassword"
+                                        id="showpassword"
+                                        value="Show Password">Show password
+                                </button>
+
+                            </div>
+
+                            <div class="form-label-group">
+                                <input th:field="*{confirmPassword}"
+                                       type="password"
+                                       id="inputConfirmPassword"
+                                       class="form-control"
+                                       placeholder="Password"
+                                       minlength="6"
+                                       maxlength="32"
+                                       required="required"
+                                />
+                                <label for="inputConfirmPassword">Confirm password</label>
+                            </div>
+
+                            <button class="btn btn-lg btn-primary btn-block text-uppercase"
+                                    type="submit">Register
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+    <script>
+        $("#showpassword").on('click', function(){
+
+            var pass = $("#inputPassword");
+            var fieldtype = pass.attr('type');
+            if (fieldtype == 'password') {
+                pass.attr('type', 'text');
+                $(this).text("Hide Password");
+            }else{
+                pass.attr('type', 'password');
+                $(this).text("Show Password");
+            }
+        });
+    </script>
 </body>
 </html>
-
-
-
-
