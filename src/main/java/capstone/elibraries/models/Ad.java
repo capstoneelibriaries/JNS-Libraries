@@ -1,6 +1,7 @@
 package capstone.elibraries.models;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity @Table(name = "ads")
@@ -31,6 +32,11 @@ public class Ad {
 
     public Ad(){
         // default
+    }
+
+    public Ad(double price, double shipping){
+        this.price = price;
+        this.shipping = shipping;
     }
 
     public long getId(){
@@ -79,6 +85,13 @@ public class Ad {
 
     public void setBooks(List<Book> books) {
         this.books = books;
+    }
+
+    public void addBook(Book book){
+        if(this.books == null){
+            this.books = new ArrayList<>(1);
+        }
+        this.books.add(book);
     }
 
     public String toString(){

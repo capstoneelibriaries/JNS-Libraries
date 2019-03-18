@@ -40,6 +40,13 @@ public class Book {
         // default
     }
 
+    public Book(String isbn, String title, String author, String synopsis, byte wear){
+        this.isbn = isbn;
+        this.title = title;
+        this.author = author;
+        this.synopsis = synopsis;
+        this.wear = wear;
+    }
     /*
     * Getters
     * */

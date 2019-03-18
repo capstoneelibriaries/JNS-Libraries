@@ -1,5 +1,6 @@
 package capstone.elibraries.controllers;
 
+import capstone.elibraries.models.Book;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.*;
@@ -48,19 +49,28 @@ public class AdsController {
     @PostMapping("/ads/create")
     public String createAd(HttpServletRequest request){
         System.out.println("DEBUG: createAd(...)");
-        System.out.println(request.getParameter("price"));
-        System.out.println(request.getParameter("shipping"));
+
+        double price = Double.parseDouble(request.getParameter("price"));
+        double shipping = Double.parseDouble(request.getParameter("shipping"));
+        Ad ad = new Ad(price, shipping);
+
+        for(int i = 0; i != -1; i++){
+            try{
+                String isbn = request.getParameter("book-isbn-" + i);
+                String title = request.getParameter("book-title-" + i);
+                String author = request.getParameter("book-author-" + i);
+                String synopsis = request.getParameter("book-synopsis-" + i);
+                byte wear = Byte.parseByte(request.getParameter("book-wear-" + i));
+                ad.addBook(new Book(isbn, title, author, synopsis, wear));
+            }catch(Exception e){
+                i = -1;
+            }
+        }
+
+        ads.save(ad);
         return "/ads/index";
     }
-//    @PostMapping("/ads/create")
-//    public String createAd(@ModelAttribute Ad ad){
-//
-//        ad.setSeller(
-//        users.findOne(((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId()));
-//        ads.save(ad);
-//
-//        return "/ads/index";
-//    }
+
     @GetMapping("/ads/{id}/delete")
     public String deleteForm(Model model, @PathVariable Long id){
         model.addAttribute("ad",ads.findOne(id));
