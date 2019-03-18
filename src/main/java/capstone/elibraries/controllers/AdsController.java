@@ -25,7 +25,7 @@ public class AdsController {
         model.addAttribute("ads",ads.findAll());
         return "ads/index";
     }
-    @GetMapping("/ads/{id}")
+    @GetMapping("/ads/view={id}")
     public String getOneAd(Model model, @PathVariable Long id){
         model.addAttribute("ad",ads.findOne(id));
         return "ads/single";
