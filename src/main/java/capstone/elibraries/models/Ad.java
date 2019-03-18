@@ -112,10 +112,10 @@ public class Ad {
 
     public String toString(){
         return "{\n" +
-                "\tprice:" + this.price + "\n," +
-                "\tshipping:" + this.shipping + "\n," +
+                "\tprice:" + this.price + ",\n" +
+                "\tshipping:" + this.shipping + ",\n" +
 //                "\ttradable:" + this.tradable + "\n" +
-                "\tbooks:" + this.booksToString() + "\n," +
+                "\tbooks:" + this.booksToString() + ",\n" +
                 "}";
     }
 
