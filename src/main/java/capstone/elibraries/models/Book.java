@@ -40,12 +40,13 @@ public class Book {
         // default
     }
 
-    public Book(String isbn, String title, String author, String synopsis, byte wear){
-        this.isbn = isbn;
-        this.title = title;
-        this.author = author;
-        this.synopsis = synopsis;
-        this.wear = wear;
+    public Book(String isbn, String title, String author, String synopsis, String image, byte wear){
+        this.setIsbn(isbn);
+        this.setTitle(title);
+        this.setAuthor(author);
+        this.setSynopsis(synopsis);
+        this.setWear(wear);
+        this.setImageUrl(image);
     }
     /*
     * Getters
@@ -97,7 +98,7 @@ public class Book {
     }
 
     public void setIsbn(String isbn) {
-        if(isbn == null || isbn.length() < 10){
+        if(isbn == null || isbn.length() != 10 || isbn.length() != 13){
             // TODO: throw exception
         }else{
             this.isbn = isbn;
@@ -162,7 +163,7 @@ public class Book {
         this.ads = ads;
     }
 
-    public void adAd(Ad ad){
+    public void addAd(Ad ad){
         if(this.ads == null){
             this.ads = new ArrayList<>(1);
         }else if(ad == null){
@@ -171,16 +172,16 @@ public class Book {
         this.ads.add(ad);
     }
 
-    // Default object methods
+    // toString methods and helpers
     public String toString(){
         return "{\n" +
-                "\tisbn: " + isbn + ",\n" +
-                "\ttitle: " + title + ",\n" +
-                "\tauthor: " + author + ",\n" +
-                "\tsynopsis: " + synopsis + ",\n" +
-//                "\timageUrl: " + imageUrl + ",\n" +
+                "\tisbn:" + isbn + ",\n" +
+                "\ttitle:" + title + ",\n" +
+                "\tauthor:" + author + ",\n" +
+                "\tsynopsis:" + synopsis + ",\n" +
+                "\timageUrl:" + imageUrl + ",\n" +
 //                "\tgenres: " + genres.toString() + ",\n" +
-//                "\tads: " + ads.toString() + ",\n" +
+//                "\tads:" + ads.toString() + ",\n" +
                 "}";
     }
 }

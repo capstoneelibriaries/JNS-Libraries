@@ -61,12 +61,13 @@ public class AdsController {
             String author = request.getParameter("book-author-" + i);
             String synopsis = request.getParameter("book-synopsis-" + i);
             byte wear = Byte.parseByte(request.getParameter("book-wear-" + i));
-            Book bk = new Book(isbn, title, author, synopsis, wear);
-            // DEBUG
-            System.out.println(bk.toString());
-            // END DEBUG
+            // TODO:
+            // Change the image url to a value from the form submission so it isn't always null
+            // and loading the default image
+            Book bk = new Book(isbn, title, author, synopsis, null, wear);
             ad.addBook(bk);
         }
+        System.out.println(ad.toString());
         //ads.save(ad);
         return "/ads/index";
     }

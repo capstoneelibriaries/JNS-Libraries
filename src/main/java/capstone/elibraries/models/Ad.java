@@ -92,14 +92,30 @@ public class Ad {
             this.books = new ArrayList<>(1);
         }
         this.books.add(book);
+        book.addAd(this);
+    }
+
+    // To String methods and helpers
+
+    private String booksToString(){
+        if(this.books == null){
+            return "none";
+        }else{
+            String bks = "[";
+            for(Book book : books){
+                bks = book.toString() + ",";
+            }
+            bks += "]";
+            return bks;
+        }
     }
 
     public String toString(){
         return "{\n" +
-                "\tid:" + this.id + "\n" +
-                "\tprice:" + this.price + "\n" +
-                "\tshipping:" + this.shipping + "\n" +
+                "\tprice:" + this.price + "\n," +
+                "\tshipping:" + this.shipping + "\n," +
 //                "\ttradable:" + this.tradable + "\n" +
+                "\tbooks:" + this.booksToString() + "\n," +
                 "}";
     }
 
