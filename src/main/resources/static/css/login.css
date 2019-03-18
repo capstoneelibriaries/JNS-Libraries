@@ -1,0 +1,9 @@
+body {
+    background: #619B8A;
+    background: linear-gradient(to right, #619B8A, #A1C181);
+}
+.btn-primary {
+    color: #fff;
+    background-color: #233D4D;
+    border-color: #233D4D;
+}
