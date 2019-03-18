@@ -12,23 +12,28 @@ $(adform.submit.button).click( (event) => {
   event.preventDefault();
 
   //if no books are provided
-  // if(adform.bookCount() < 1){
-  //   alert("No books provided.");
-  // }
+  if(adform.bookCount() < 1){
+    alert("No books provided.");
+  }else{
+    let post = new FormData();
+    post.append("price", $(adform.price.field).val());
+    post.append("shipping", $(adform.shipping.field).val());
+    post.append("tradable", $(adform.tradable.field).val());
+    post.append("book-count", adform.bookCount());
 
-  let post = new FormData();
-  post.append("price", $(adform.price.field).val());
-  post.append("shipping", $(adform.shipping.field).val());
-  post.append("tradable", $(adform.tradable.field).val());
-  adform.bookforms.forEach( (bookform, index) => {
-    post.append(`book-isbn-${index}`, $(bookform.isbn).val());
-    post.append(`book-title-${index}`, $(bookform.title).val());
-    post.append(`book-author-${index}`, $(bookform.author).val());
-    post.append(`book-synopsis-${index}`, $(bookform.synopsis).val());
-    post.append(`book-wear-${index}`, $(bookform.wear).val());
-  });
+    adform.bookforms.forEach( (bookform, index) => {
+      post.append(`book-isbn-${index}`, $(bookform.isbn).val());
+      post.append(`book-title-${index}`, $(bookform.title).val());
+      post.append(`book-author-${index}`, $(bookform.author).val());
+      post.append(`book-synopsis-${index}`, $(bookform.synopsis).val());
+      post.append(`book-wear-${index}`, $(bookform.wear).val());
+    });
 
-  let request = new XMLHttpRequest();
-  request.open("POST", "/ads/create");
-  request.send(post);
+    let request = new XMLHttpRequest();
+    request.open("POST", "/ads/create");
+    request.send(post);
+    // TODO: change the ridirect so it is handled server side
+    // The redirect is handled here instread of the controller
+    request.redirect("/ads/index");
+  }
 });

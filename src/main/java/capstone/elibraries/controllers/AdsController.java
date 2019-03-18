@@ -54,23 +54,19 @@ public class AdsController {
         double shipping = Double.parseDouble(request.getParameter("shipping"));
         Ad ad = new Ad(price, shipping);
 
-        for(int i = 0; i != -1; i++){
-            try{
-                String isbn = request.getParameter("book-isbn-" + i);
-                String title = request.getParameter("book-title-" + i);
-                String author = request.getParameter("book-author-" + i);
-                String synopsis = request.getParameter("book-synopsis-" + i);
-                byte wear = Byte.parseByte(request.getParameter("book-wear-" + i));
-                Book bk = new Book(isbn, title, author, synopsis, wear);
-                // DEBUG
-                System.out.println(bk.toString());
-                // END DEBUG
-                ad.addBook(bk);
-            }catch(Exception e){
-                i = -1;
-            }
+        int bookCount = Integer.parseInt(request.getParameter("book-count"));
+        for(int i = 0; i < bookCount; i++){
+            String isbn = request.getParameter("book-isbn-" + i);
+            String title = request.getParameter("book-title-" + i);
+            String author = request.getParameter("book-author-" + i);
+            String synopsis = request.getParameter("book-synopsis-" + i);
+            byte wear = Byte.parseByte(request.getParameter("book-wear-" + i));
+            Book bk = new Book(isbn, title, author, synopsis, wear);
+            // DEBUG
+            System.out.println(bk.toString());
+            // END DEBUG
+            ad.addBook(bk);
         }
-
         //ads.save(ad);
         return "/ads/index";
     }
