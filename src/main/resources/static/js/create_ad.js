@@ -12,9 +12,9 @@ $(adform.submit.button).click( (event) => {
   event.preventDefault();
 
   // if no books are provided
-  if(adform.bookCount() < 1){
-    alert("No books provided.");
-  }
+  // if(adform.bookCount() < 1){
+  //   alert("No books provided.");
+  // }
 
   let post = new FormData();
   post.append("price", $(adform.price.field).val());

@@ -36,22 +36,22 @@ public class AdsController {
         return "ads/create";
     }
 
-    @PostMapping("/ads/create")
-    public String createAd(HttpServletRequest request){
-        System.out.println("DEBUG: createAd(...)");
-        System.out.println(request.getParameter("price"));
-        System.out.println(request.getParameter("shipping"));
-        return "/ads/index";
-    }
 //    @PostMapping("/ads/create")
-//    public String createAd(@ModelAttribute Ad ad){
-//
-//        ad.setSeller(
-//        users.findOne(((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId()));
-//        ads.save(ad);
-//
+//    public String createAd(HttpServletRequest request){
+//        System.out.println("DEBUG: createAd(...)");
+//        System.out.println(request.getParameter("price"));
+//        System.out.println(request.getParameter("shipping"));
 //        return "/ads/index";
 //    }
+    @PostMapping("/ads/create")
+    public String createAd(@ModelAttribute Ad ad){
+
+        ad.setSeller(
+        users.findOne(((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId()));
+        ads.save(ad);
+
+        return "/ads/index";
+    }
     @GetMapping("/ads/{id}/delete")
     public String deleteForm(Model model, @PathVariable Long id){
         model.addAttribute("ad",ads.findOne(id));
