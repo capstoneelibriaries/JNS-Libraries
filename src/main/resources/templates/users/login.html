@@ -32,6 +32,8 @@
 
                                 <label for="inputPassword">Password</label>
                             </div>
+                            <button class="btn-sm btn-light" type="button" name="showpassword" id="showpassword" value="Show Password">Show
+                                password</button>
 
                             <div class="custom-control custom-checkbox mb-3">
                                 <input type="checkbox" class="custom-control-input" id="customCheck1"/>
@@ -46,34 +48,19 @@
             </div>
         </div>
     </div>
+    <script>
+        $("#showpassword").on('click', function(){
+
+            var pass = $("#inputPassword");
+            var fieldtype = pass.attr('type');
+            if (fieldtype == 'password') {
+                pass.attr('type', 'text');
+                $(this).text("Hide Password");
+            }else{
+                pass.attr('type', 'password');
+                $(this).text("Show Password");
+            }
+        });
+    </script>
 </body>
 </html>
-
-
-<!--<nav th:replace="partials/navbar :: navbar"></nav>-->
-
-<!--<div class="container">-->
-
-<!--<form th:action="@{/login}" th:object="${user}" th:method="post">-->
-
-<!--<div class="form-group container">-->
-
-<!--<label for="username">Username</label>-->
-
-<!--<input th:field="*{username}" class="form-control" id="username" aria-describedby="emailHelp" placeholder="Enter username"/>-->
-
-<!--<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
-<!--</div>-->
-
-<!--<div class="form-group container">-->
-
-<!--<label for="password">Password</label>-->
-
-<!--<input th:field="*{password}" type="password" class="form-control" id="password" placeholder="Password"/>-->
-<!--<br/>-->
-<!--<button type="submit" class="btn btn-primary" value="Login">Login</button>-->
-
-
-<!--</div>-->
-<!--</form>-->
-<!--</div>-->
