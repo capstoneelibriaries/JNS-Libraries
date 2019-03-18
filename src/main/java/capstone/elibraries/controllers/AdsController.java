@@ -1,6 +1,7 @@
 package capstone.elibraries.controllers;
 
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
 import capstone.elibraries.repositories.Users;
@@ -10,6 +11,7 @@ import capstone.elibraries.models.Ad;
 import org.springframework.ui.Model;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 
 @Controller
 public class AdsController {
@@ -30,28 +32,35 @@ public class AdsController {
         model.addAttribute("ad",ads.findOne(id));
         return "ads/single";
     }
+
     @GetMapping("/ads/create")
     public String createAdForm(Model model){
+
+        Date date = new Date();
+        String timehash = DigestUtils.md5DigestAsHex(date.toString().getBytes());
+        System.out.println(timehash);
+
+        model.addAttribute("timehash", timehash);
         model.addAttribute("ad",new Ad());
         return "ads/create";
     }
 
-//    @PostMapping("/ads/create")
-//    public String createAd(HttpServletRequest request){
-//        System.out.println("DEBUG: createAd(...)");
-//        System.out.println(request.getParameter("price"));
-//        System.out.println(request.getParameter("shipping"));
-//        return "/ads/index";
-//    }
     @PostMapping("/ads/create")
-    public String createAd(@ModelAttribute Ad ad){
-
-        ad.setSeller(
-        users.findOne(((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId()));
-        ads.save(ad);
-
+    public String createAd(HttpServletRequest request){
+        System.out.println("DEBUG: createAd(...)");
+        System.out.println(request.getParameter("price"));
+        System.out.println(request.getParameter("shipping"));
         return "/ads/index";
     }
+//    @PostMapping("/ads/create")
+//    public String createAd(@ModelAttribute Ad ad){
+//
+//        ad.setSeller(
+//        users.findOne(((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId()));
+//        ads.save(ad);
+//
+//        return "/ads/index";
+//    }
     @GetMapping("/ads/{id}/delete")
     public String deleteForm(Model model, @PathVariable Long id){
         model.addAttribute("ad",ads.findOne(id));
