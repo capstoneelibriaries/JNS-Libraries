@@ -99,7 +99,7 @@ public class Ad {
                 "\tid:" + this.id + "\n" +
                 "\tprice:" + this.price + "\n" +
                 "\tshipping:" + this.shipping + "\n" +
-                "\ttradable:" + this.tradable + "\n" +
+//                "\ttradable:" + this.tradable + "\n" +
                 "}";
     }
 

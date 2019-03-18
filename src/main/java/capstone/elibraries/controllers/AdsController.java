@@ -61,13 +61,17 @@ public class AdsController {
                 String author = request.getParameter("book-author-" + i);
                 String synopsis = request.getParameter("book-synopsis-" + i);
                 byte wear = Byte.parseByte(request.getParameter("book-wear-" + i));
-                ad.addBook(new Book(isbn, title, author, synopsis, wear));
+                Book bk = new Book(isbn, title, author, synopsis, wear);
+                // DEBUG
+                System.out.println(bk.toString());
+                // END DEBUG
+                ad.addBook(bk);
             }catch(Exception e){
                 i = -1;
             }
         }
 
-        ads.save(ad);
+        //ads.save(ad);
         return "/ads/index";
     }
 

@@ -178,9 +178,9 @@ public class Book {
                 "\ttitle: " + title + ",\n" +
                 "\tauthor: " + author + ",\n" +
                 "\tsynopsis: " + synopsis + ",\n" +
-                "\timageUrl: " + imageUrl + ",\n" +
-                "\tgenres: " + genres.toString() + ",\n" +
-                "\tads: " + ads.toString() + ",\n" +
+//                "\timageUrl: " + imageUrl + ",\n" +
+//                "\tgenres: " + genres.toString() + ",\n" +
+//                "\tads: " + ads.toString() + ",\n" +
                 "}";
     }
 }
