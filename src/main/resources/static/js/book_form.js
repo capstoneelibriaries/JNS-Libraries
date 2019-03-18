@@ -22,7 +22,7 @@ const BookForm = {
 function ImplBookForm(adform) {
   // BookForms require an AdForm
   const index = adform.bookCount();
-  // inject dependency
+  // inject dependenc
   this.adform = adform;
   // json accessable values
   this.section = `#new-book-${index}`;
