@@ -17,6 +17,8 @@ $(adform.submit.button).click( (event) => {
   // }
 
   let post = new FormData();
+  post.append("title", $(adform.title.field).val());
+  post.append("description", $(adform.description.field).val());
   post.append("price", $(adform.price.field).val());
   post.append("shipping", $(adform.shipping.field).val());
   post.append("tradable", $(adform.tradable.field).val());
