@@ -1,17 +1,48 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8"/>
-    <title>Title</title>
+    <link th:replace="partials/header :: header('Viewing Ad '+${ad.title})"/>
+
 </head>
 <body>
-    <h1>This is a single ad view</h1>
+<nav th:replace="partials/navbar :: navbar"></nav>
 
-    <div th:object="${ad}">
+    <div th:object="${ad}" class="">
+        <p th:text="*{title}"></p>
+        <p th:text="*{description}"></p>
+        <div th:each="book : *{books}">
+            <p th:text="${book.title}"></p>
+            <p th:text="${book.author}"></p>
+            <p th:text="'Condition: '+${book.wear}"></p>
+            <div>
+                <th:block th:each="genre : ${book.genres}">
+                    <span th:text="${genre}"></span>
+                </th:block>
+            </div>
+        </div>
 
+        <div>
+            <p>Sold by: <a th:href="@{/users/{id}(id=*{id})}" th:text="${ad.seller.username}"></a></p>
+            <p th:text="'Price: $'+*{price}"></p>
+            <p th:text="'Shipping: $'+*{shipping}" th:if="*{shipping>0}"></p>
+            <p th:text="'Shipping: '+'Free'" th:if="*{shipping==0}"></p>
+
+        </div>
+        <!-- TODO: Replace with paypal purchase button-->
+        <form th:action="@{/ads/{id}/buy(id=*{id})}" th:method="GET">
+            <button>Buy</button>
+        </form>
+
+
+        <!-- TODO: match styling with paypal button-->
+        <form th:action="@{/ads/{id}/trade(id=*{id})}" th:method="GET" th:if="*{tradable}" sec:authorize="isAuthenticated()">
+            <button>Offer Trade</button>
+        </form>
+        <div  th:if="*{tradable}" sec:authorize="!isAuthenticated()">
+            <button th:disabled="disabled">Offer Trade</button>
+            <a th:href="@{/login}">Sign in to trade</a>
+        </div>
     </div>
-
-    <button type="submit">Delete Ad</button>
 
 </body>
 </html>
