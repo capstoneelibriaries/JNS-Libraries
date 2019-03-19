@@ -93,5 +93,24 @@ public class AdsController {
         }
     }
 
+    @GetMapping("/ads/{id}/buy")
+    public String buyForm(Model model, @PathVariable Long id){
+        model.addAttribute("ad", ads.findOne(id));
+        return "ads/buy";
+    }
+    @GetMapping("/ads/{id}/trade")
+    public String tradeForm(Model model, @PathVariable Long id){
+        User user = users.findOne(((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId());
+        Ad ad = ads.findOne(id);
+        if (null == user ) {
+            return "redirect:/login?trade";
+        }
+        if (user.getId() == ad.getSeller().getId()){
+            return "redirect:/ads/" + id+ "?error";
+        }
+        model.addAttribute("ad", ad);
+        model.addAttribute("user", user);
+        return "ads/trade";
+    }
 
 }

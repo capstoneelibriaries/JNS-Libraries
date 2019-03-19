@@ -6,7 +6,9 @@
 </head>
 <body>
 <nav th:replace="partials/navbar :: navbar"></nav>
-
+<div th:if="${param.error}">
+    You not trade with yourself.
+</div>
     <div th:object="${ad}" class="">
         <p th:text="*{title}"></p>
         <p th:text="*{description}"></p>
