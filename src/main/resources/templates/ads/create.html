@@ -17,30 +17,71 @@
 
                         <form th:action="@{/ads/create}" th:object="${ad}" th:method="post" class="form-signin">
 
+                            <div class="form-label-group" th:id="ad-title">
+
+                                <input class="form-control"
+                                       th:id="create-ad-title"
+                                       th:type="text"
+                                       minlength="5"
+                                       maxlength="120"
+                                       th:name="ad-title"
+                                />
+                                <label th:for="create-ad-title">Title<abbr th:title="required"></abbr></label>
+
+                            </div>
+
+                            <div class="form-label-group" th:id="ad-description">
+
+                                <input class="form-control"
+                                       th:id="create-ad-description"
+                                       th:type="text"
+                                       minlength="5"
+                                       maxlength="225"
+                                       th:name="ad-description"
+                                />
+                                <label th:for="create-ad-description">Description<abbr th:title="required"></abbr></label>
+
+                            </div>
+
                             <div class="form-label-group" th:id="ad-price">
 
-                                <input class="form-control" th:id="create-ad-price" th:type="number" th:step="0.01" th:min="1.00"
-                                       th:max="9999.99" th:name="ad-price"/>
+                                <input class="form-control"
+                                       th:id="create-ad-price"
+                                       th:type="number"
+                                       th:step="0.01"
+                                       th:min="1.00"
+                                       th:max="9999.99"
+                                       th:name="ad-price"/>
                                 <label th:for="create-ad-price">Price<abbr th:title="required"></abbr></label>
 
                             </div>
 
                             <div class="form-label-group" th:id="ad-shipping">
-                                <input class="form-control" th:id="create-ad-shipping" th:type="number" th:step="0.01" th:min="1.00"
-                                       th:max="9999.99" th:name="ad-shipping"/>
+                                <input class="form-control"
+                                       th:id="create-ad-shipping"
+                                       th:type="number"
+                                       th:step="0.01"
+                                       th:min="1.00"
+                                       th:max="9999.99"
+                                       th:name="ad-shipping"/>
                                 <label th:for="create-ad-shipping">Shipping Price<abbr th:title="required"></abbr></label>
 
                             </div>
 
                             <div th:id="ad-tradable" class="custom-control custom-checkbox mb-3">
-                                <input class="custom-control-input" th:id="create-ad-tradable" th:type="checkbox" th:name="ad-tradable"/>
+                                <input class="custom-control-input"
+                                       th:id="create-ad-tradable"
+                                       th:type="checkbox"
+                                       th:value="false"
+                                       th:name="ad-tradable"/>
                                 <label class="custom-control-label" th:for="create-ad-tradable">Tradeable</label>
 
                             </div>
 
                             <div th:id="ad-new-book">
                                 <button class="btn btn-lg btn-primary btn-block text-uppercase"
-                                        th:id="btn-ad-new-book" th:type="button">Add a book
+                                        th:id="btn-ad-new-book"
+                                        th:type="button">Add a book
                                 </button>
                             </div>
 
