@@ -1,20 +1,14 @@
 package capstone.elibraries.controllers;
 
-import capstone.elibraries.error.AuthenticationException;
-import capstone.elibraries.error.ImageException;
-import capstone.elibraries.error.IsbnException;
-import capstone.elibraries.error.ValidationException;
-import capstone.elibraries.models.Book;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
 import capstone.elibraries.repositories.Users;
 import capstone.elibraries.repositories.Ads;
-import capstone.elibraries.models.User;
-import capstone.elibraries.models.Ad;
+import org.springframework.http.HttpStatus;
+import capstone.elibraries.models.*;
+import capstone.elibraries.error.*;
 import org.springframework.ui.Model;
-
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
@@ -122,6 +116,25 @@ public class AdsController {
         }
     }
 
+    @GetMapping("/ads/{id}/buy")
+    public String buyForm(Model model, @PathVariable Long id){
+        model.addAttribute("ad", ads.findOne(id));
+        return "ads/buy";
+    }
+    @GetMapping("/ads/{id}/trade")
+    public String tradeForm(Model model, @PathVariable Long id){
+        User user = users.findOne(((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId());
+        Ad ad = ads.findOne(id);
+        if (null == user ) {
+            return "redirect:/login?trade";
+        }
+        if (user.getId() == ad.getSeller().getId()){
+            return "redirect:/ads/" + id+ "?error";
+        }
+        model.addAttribute("ad", ad);
+        model.addAttribute("user", user);
+        return "ads/trade";
+    }
     private User getCurrentUser()
         throws AuthenticationException
     {
@@ -135,5 +148,4 @@ public class AdsController {
         User curUser = users.findOne(id);
         return curUser;
     }
-
 }
