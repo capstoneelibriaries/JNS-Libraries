@@ -1,5 +1,9 @@
 package capstone.elibraries.models;
 
+import capstone.elibraries.error.ImageException;
+import capstone.elibraries.error.IsbnException;
+import capstone.elibraries.error.Validator;
+
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
@@ -40,6 +44,16 @@ public class Book {
         // default
     }
 
+    public Book(String isbn, String title, String author, String synopsis, String image, byte wear)
+        throws IsbnException, ImageException
+    {
+        this.setIsbn(isbn);
+        this.setTitle(title);
+        this.setAuthor(author);
+        this.setSynopsis(synopsis);
+        this.setWear(wear);
+        this.setImageUrl(image);
+    }
     /*
     * Getters
     * */
@@ -89,9 +103,14 @@ public class Book {
         }
     }
 
-    public void setIsbn(String isbn) {
-        if(isbn == null || isbn.length() < 10){
-            // TODO: throw exception
+    public void setIsbn(String isbn) throws IsbnException {
+        if(isbn == null){
+            throw new IsbnException("null", "not null");
+        }if(!(isbn.length() == 10 || isbn.length() == 13)){
+            throw new IsbnException(
+                    "isbn (" + isbn + ") of length: " + isbn.length(),
+                    "isbn of length 10 or 13"
+            );
         }else{
             this.isbn = isbn;
         }
@@ -122,9 +141,13 @@ public class Book {
     }
     // In the setter, defualt to the book example image
     // when no image is provided.
-    public void setImageUrl(String imageUrl){
-        if(imageUrl == null || imageUrl.equals("")){
-            this.imageUrl = "/images/bookexample.jpeg";
+    public void setImageUrl(String imageUrl) throws ImageException {
+        String expect = ".jpeg, .jpg, .png";
+
+        if(imageUrl == null){
+            throw new ImageException("Recieved: null", "Expected: " + expect);
+        }else if(!Validator.validateImageUrl(imageUrl)){
+            throw new ImageException("Recieved: " + imageUrl, "Expected: " + expect);
         }else{
             this.imageUrl = imageUrl;
         }
@@ -155,7 +178,7 @@ public class Book {
         this.ads = ads;
     }
 
-    public void adAd(Ad ad){
+    public void addAd(Ad ad){
         if(this.ads == null){
             this.ads = new ArrayList<>(1);
         }else if(ad == null){
@@ -164,16 +187,16 @@ public class Book {
         this.ads.add(ad);
     }
 
-    // Default object methods
+    // toString methods and helpers
     public String toString(){
         return "{\n" +
-                "\tisbn: " + isbn + ",\n" +
-                "\ttitle: " + title + ",\n" +
-                "\tauthor: " + author + ",\n" +
-                "\tsynopsis: " + synopsis + ",\n" +
-                "\timageUrl: " + imageUrl + ",\n" +
-                "\tgenres: " + genres.toString() + ",\n" +
-                "\tads: " + ads.toString() + ",\n" +
+                "\t\"isbn\":\"" + isbn + "\",\n" +
+                "\t\"title\":\"" + title + "\",\n" +
+                "\t\"author\":\"" + author + "\",\n" +
+                "\t\"synopsis\":\"" + synopsis + "\",\n" +
+                "\t\"imageUrl\":\"" + imageUrl + "\",\n" +
+//                "\tgenres: " + genres.toString() + ",\n" +
+//                "\tads:" + ads.toString() + ",\n" +
                 "}";
     }
 }
