@@ -32,14 +32,16 @@
 
                             <div class="form-label-group" th:id="ad-description">
 
-                                <input class="form-control"
+                                <textarea class="form-control"
                                        th:id="create-ad-description"
-                                       th:type="text"
                                        minlength="5"
                                        maxlength="225"
                                        th:name="ad-description"
-                                />
-                                <label th:for="create-ad-description">Description<abbr th:title="required"></abbr></label>
+                                       th:placeholder="Descripiton"
+                                >
+                                </textarea>
+
+                                <label th:for="create-ad-description"><abbr th:title="required"></abbr></label>
 
                             </div>
 

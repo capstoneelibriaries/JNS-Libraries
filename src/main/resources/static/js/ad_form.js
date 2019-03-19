@@ -15,11 +15,11 @@ function ImplAdForm(openbookApi) {
     this.form = "#create-ad";
     this.title = {
         label: "#ad-title",
-        field: "#create-ad-title"
+        field: "#create-ad-title",
     };
     this.description = {
         label: "#ad-description",
-        field: "#create-ad-description"
+        field: "#create-ad-description",
     };
     this.price = {
       label: "#ad-price",
