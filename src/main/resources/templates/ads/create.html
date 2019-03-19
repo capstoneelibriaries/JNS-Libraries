@@ -33,15 +33,17 @@
                             <div class="form-label-group" th:id="ad-description">
 
                                 <textarea class="form-control"
-                                       th:id="create-ad-description"
-                                       minlength="5"
-                                       maxlength="225"
-                                       th:name="ad-description"
-                                       th:placeholder="Descripiton"
-                                >
-                                </textarea>
+                                          th:id="create-ad-description"
+                                          minlength="5"
+                                          maxlength="225"
+                                          th:name="ad-description"
+                                          th:rows="7"
+                                          th:columns="10"
+                                          th:placeholder="Description"
 
-                                <label th:for="create-ad-description"><abbr th:title="required"></abbr></label>
+                                ></textarea>
+
+                                <label th:for="ad-description"><abbr th:title="required"></abbr></label>
 
                             </div>
 
@@ -53,7 +55,8 @@
                                        th:step="0.01"
                                        th:min="1.00"
                                        th:max="9999.99"
-                                       th:name="ad-price"/>
+                                       th:name="ad-price"
+                                />
                                 <label th:for="create-ad-price">Price<abbr th:title="required"></abbr></label>
 
                             </div>
@@ -90,7 +93,7 @@
                                 </button>
                             </div>
 
-                             <!--bottom of the form-->
+                            <!--bottom of the form-->
                             <hr class="my-4"/>
 
                             <div th:id="ad-new-book-form">
@@ -100,7 +103,8 @@
                             <div th:id="ad-submit-all">
                                 <button class="btn btn-lg btn-primary btn-block text-uppercase"
                                         th:id="btn-ad-submit-all" th:type="submit"
-                                >Submit</button>
+                                >Submit
+                                </button>
 
                             </div>
 
@@ -119,5 +123,3 @@
     <script th:src="@{/js/create_ad.js}"></script>
 </body>
 </html>
-
-<!--th:disabled="disabled"-->
