@@ -72,9 +72,12 @@
                                 <input class="custom-control-input"
                                        th:id="create-ad-tradable"
                                        th:type="checkbox"
-                                       th:value="true"
-                                       th:name="ad-tradable"/>
-                                <label class="custom-control-label" th:for="create-ad-tradable">Tradeable</label>
+                                       th:name="ad-tradable"
+                                       th:checked="checked"
+                                />
+                                <label class="custom-control-label"
+                                       th:for="create-ad-tradable">Tradeable
+                                </label>
 
                             </div>
 
