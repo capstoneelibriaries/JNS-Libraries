@@ -135,6 +135,15 @@ public class AdsController {
         model.addAttribute("user", user);
         return "ads/trade";
     }
+
+    @PostMapping("/ads/{id}/trade")
+    public String trade(HttpServletRequest request, @PathVariable Long id){
+        User user = users.findOne(((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId());
+        Ad ad = ads.findOne(id);
+        request.getParameter("");
+        return "ads/profile";
+    }
+
     private User getCurrentUser()
         throws AuthenticationException
     {
