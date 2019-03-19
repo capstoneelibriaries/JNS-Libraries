@@ -1,6 +1,10 @@
 package capstone.elibraries.controllers;
 
+import capstone.elibraries.error.ImageException;
+import capstone.elibraries.error.IsbnException;
+import capstone.elibraries.error.ValidationException;
 import capstone.elibraries.models.Book;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.*;
@@ -61,11 +65,22 @@ public class AdsController {
             String author = request.getParameter("book-author-" + i);
             String synopsis = request.getParameter("book-synopsis-" + i);
             byte wear = Byte.parseByte(request.getParameter("book-wear-" + i));
+
             // TODO:
             // Change the image url to a value from the form submission so it isn't always null
             // and loading the default image
-            Book bk = new Book(isbn, title, author, synopsis, null, wear);
-            ad.addBook(bk);
+            try {
+                Book book = new Book(isbn, title, author, synopsis, null, wear);
+                ad.addBook(book);
+            }
+            catch(ValidationException e){
+                if(e.getClass().equals(ImageException.class)){
+                    e.setRedirect(String.format("%s", HttpStatus.UNSUPPORTED_MEDIA_TYPE));
+                }else if(e.getClass().equals(IsbnException.class)){
+                    e.setRedirect(String.format("%s", HttpStatus.LENGTH_REQUIRED));
+                }
+                return e.getRedirect();
+            }
         }
         System.out.println(ad.toString());
         ads.save(ad);

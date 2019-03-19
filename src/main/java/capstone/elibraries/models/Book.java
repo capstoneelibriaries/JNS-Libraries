@@ -1,6 +1,8 @@
 package capstone.elibraries.models;
 
+import capstone.elibraries.error.ImageException;
 import capstone.elibraries.error.IsbnException;
+import capstone.elibraries.error.Validator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +45,7 @@ public class Book {
     }
 
     public Book(String isbn, String title, String author, String synopsis, String image, byte wear)
-        throws IsbnException
+        throws IsbnException, ImageException
     {
         this.setIsbn(isbn);
         this.setTitle(title);
@@ -139,9 +141,13 @@ public class Book {
     }
     // In the setter, defualt to the book example image
     // when no image is provided.
-    public void setImageUrl(String imageUrl){
-        if(imageUrl == null || imageUrl.equals("")){
-            this.imageUrl = "/images/bookexample.jpeg";
+    public void setImageUrl(String imageUrl) throws ImageException {
+        String expect = ".jpeg, .jpg, .png";
+
+        if(imageUrl == null){
+            throw new ImageException("Recieved: null", "Expected: " + expect);
+        }else if(!Validator.validateImageUrl(imageUrl)){
+            throw new ImageException("Recieved: " + imageUrl, "Expected: " + expect);
         }else{
             this.imageUrl = imageUrl;
         }

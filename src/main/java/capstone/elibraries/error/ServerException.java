@@ -20,6 +20,10 @@ public class ServerException extends Exception {
         this.redirect = redirect;
     }
 
+    public void setRedirect(int httpStatus){
+        this.redirect = "" + httpStatus;
+    }
+
     public String getRedirect(){
         return this.redirect;
     }
