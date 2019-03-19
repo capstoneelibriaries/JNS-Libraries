@@ -34,8 +34,9 @@ public class Ad {
         // default
     }
 
-    public Ad(long id, double price, double shipping){
-        this.id = id;
+    public Ad(User seller, double price, double shipping){
+        this.seller = seller;
+        seller.addAd(this);
         this.price = price;
         this.shipping = shipping;
     }

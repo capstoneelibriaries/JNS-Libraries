@@ -47,7 +47,7 @@ public class AdsController {
     public String createAd(HttpServletRequest request){
         try{
             // create a new ad
-            Ad ad = new Ad(getCurrentUserId(),
+            Ad ad = new Ad(getCurrentUser(),
                     Double.parseDouble( request.getParameter("price") ),
                     Double.parseDouble( request.getParameter("shipping") ));
             // count the books
@@ -122,7 +122,7 @@ public class AdsController {
         }
     }
 
-    private long getCurrentUserId()
+    private User getCurrentUser()
         throws AuthenticationException
     {
         long id = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
@@ -132,7 +132,8 @@ public class AdsController {
                     "Received: user does not exist!"
             );
         }
-        return id;
+        User curUser = users.findOne(id);
+        return curUser;
     }
 
 }
