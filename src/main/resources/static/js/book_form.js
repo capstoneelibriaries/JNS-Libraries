@@ -47,17 +47,18 @@ function ImplBookForm(adform) {
         return `` +
             `<div class="form-label-group" id=${BookForm.idToString(this.section)}>` +
             `<div class="form-label-group">` +
-            `<label for="${BookForm.idToString(this.isbn)}">ISBN</label>` +
-            `<input class="form-control" 
-id="${BookForm.idToString(this.isbn)}" type="number" minlength="${isbn_min}" maxlength="${isbn_max}" name="${this.isbn}" />` +
+            `<label for="${BookForm.idToString(this.isbn)}"></label>` +
+            `<input 
+class="form-control" 
+id="${BookForm.idToString(this.isbn)}" type="number" minlength="${isbn_min}" maxlength="${isbn_max}" name="${this.isbn}" placeholder="ISBN" />` +
             `</div>` +
-            BookForm.genHtml("Title", BookForm.idToString(this.title), "text",
+            BookForm.genHtml("", BookForm.idToString(this.title), "text",
                 `pattern=".{1,255}" readonly required`) +
-            BookForm.genHtml("Author", BookForm.idToString(this.author), "text",
+            BookForm.genHtml("", BookForm.idToString(this.author), "text",
                 `pattern=".{1,255}" readonly required`) +
-            BookForm.genHtml("Synopsis", BookForm.idToString(this.synopsis), "text",
+            BookForm.genHtml("", BookForm.idToString(this.synopsis), "text",
                 `pattern=".{1,255}" required`) +
-            BookForm.genHtml("Condition", BookForm.idToString(this.wear), "number",
+            BookForm.genHtml("", BookForm.idToString(this.wear), "number",
                 `required step="1" min="1" max="5"`) +
             `</div>`;
     };
