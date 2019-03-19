@@ -2,8 +2,8 @@ package capstone.elibraries.error;
 
 public class ValidationException extends ServerException {
 
-    private String input;
-    private String expected;
+    protected String input;
+    protected String expected;
 
     public ValidationException(String input, String expected){
         this(null, input, expected);
@@ -23,4 +23,11 @@ public class ValidationException extends ServerException {
         return this.expected;
     }
 
+    public String toString(){
+        return "{\n" +
+                "\t\"input\":\"" + input + "\",\n" +
+                "\t\"expected\":\"" + expected + "\",\n" +
+                "\t\"response\":\"" + this.redirect + "\",\n" +
+                "}";
+    }
 }

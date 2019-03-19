@@ -6,7 +6,6 @@ import capstone.elibraries.error.ValidationException;
 import capstone.elibraries.models.Book;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
 import capstone.elibraries.repositories.Users;
@@ -16,7 +15,6 @@ import capstone.elibraries.models.Ad;
 import org.springframework.ui.Model;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Date;
 
 @Controller
 public class AdsController {
@@ -40,12 +38,6 @@ public class AdsController {
 
     @GetMapping("/ads/create")
     public String createAdForm(Model model){
-
-        Date date = new Date();
-        String timehash = DigestUtils.md5DigestAsHex(date.toString().getBytes());
-        System.out.println(timehash);
-
-        model.addAttribute("timehash", timehash);
         model.addAttribute("ad",new Ad());
         return "ads/create";
     }
@@ -64,13 +56,14 @@ public class AdsController {
             String title = request.getParameter("book-title-" + i);
             String author = request.getParameter("book-author-" + i);
             String synopsis = request.getParameter("book-synopsis-" + i);
+            String image = "/images/bookexample.jpeg";
             byte wear = Byte.parseByte(request.getParameter("book-wear-" + i));
 
             // TODO:
             // Change the image url to a value from the form submission so it isn't always null
             // and loading the default image
             try {
-                Book book = new Book(isbn, title, author, synopsis, null, wear);
+                Book book = new Book(isbn, title, author, synopsis, image, wear);
                 ad.addBook(book);
             }
             catch(ValidationException e){
@@ -79,6 +72,9 @@ public class AdsController {
                 }else if(e.getClass().equals(IsbnException.class)){
                     e.setRedirect(String.format("%s", HttpStatus.LENGTH_REQUIRED));
                 }
+                // DEBUG
+                System.out.println(e.toString());
+                // END DEBUG
                 return e.getRedirect();
             }
         }

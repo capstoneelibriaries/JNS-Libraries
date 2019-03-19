@@ -2,7 +2,7 @@ package capstone.elibraries.error;
 
 public class ServerException extends Exception {
 
-    private String redirect;
+    protected String redirect;
 
     public ServerException(){
         this.redirect = "404";

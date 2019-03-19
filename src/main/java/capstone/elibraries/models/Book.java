@@ -106,7 +106,7 @@ public class Book {
     public void setIsbn(String isbn) throws IsbnException {
         if(isbn == null){
             throw new IsbnException("null", "not null");
-        }if(isbn.length() != 10 || isbn.length() != 13){
+        }if(!(isbn.length() == 10 || isbn.length() == 13)){
             throw new IsbnException(
                     "isbn (" + isbn + ") of length: " + isbn.length(),
                     "isbn of length 10 or 13"
@@ -190,11 +190,11 @@ public class Book {
     // toString methods and helpers
     public String toString(){
         return "{\n" +
-                "\tisbn:" + isbn + ",\n" +
-                "\ttitle:" + title + ",\n" +
-                "\tauthor:" + author + ",\n" +
-                "\tsynopsis:" + synopsis + ",\n" +
-                "\timageUrl:" + imageUrl + ",\n" +
+                "\t\"isbn\":\"" + isbn + "\",\n" +
+                "\t\"title\":\"" + title + "\",\n" +
+                "\t\"author\":\"" + author + "\",\n" +
+                "\t\"synopsis\":\"" + synopsis + "\",\n" +
+                "\t\"imageUrl\":\"" + imageUrl + "\",\n" +
 //                "\tgenres: " + genres.toString() + ",\n" +
 //                "\tads:" + ads.toString() + ",\n" +
                 "}";
