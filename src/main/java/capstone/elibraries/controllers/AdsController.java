@@ -1,7 +1,12 @@
 package capstone.elibraries.controllers;
 
+import capstone.elibraries.error.AuthenticationException;
+import capstone.elibraries.error.ImageException;
+import capstone.elibraries.error.IsbnException;
+import capstone.elibraries.error.ValidationException;
+import capstone.elibraries.models.Book;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
 import capstone.elibraries.repositories.Users;
@@ -11,7 +16,6 @@ import capstone.elibraries.models.Ad;
 import org.springframework.ui.Model;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Date;
 
 @Controller
 public class AdsController {
@@ -35,37 +39,60 @@ public class AdsController {
 
     @GetMapping("/ads/create")
     public String createAdForm(Model model){
-
-        Date date = new Date();
-        String timehash = DigestUtils.md5DigestAsHex(date.toString().getBytes());
-        System.out.println(timehash);
-
-        model.addAttribute("timehash", timehash);
         model.addAttribute("ad",new Ad());
         return "ads/create";
     }
 
     @PostMapping("/ads/create")
     public String createAd(HttpServletRequest request){
-        System.out.println("DEBUG: createAd(...)");
-        System.out.println(request.getParameter("price"));
-        System.out.println(request.getParameter("shipping"));
-        return "/ads/index";
+        try{
+            // create a new ad
+            Ad ad = new Ad(getCurrentUser(),
+                    Double.parseDouble( request.getParameter("price") ),
+                    Double.parseDouble( request.getParameter("shipping") ));
+            // count the books
+            int bookCount = Integer.parseInt(request.getParameter("book-count"));
+            // add each book to the ad object
+            for(int i = 0; i < bookCount; i++) {
+                Book book = new Book(request.getParameter("book-isbn-" + i),
+                        request.getParameter("book-title-" + i),
+                        request.getParameter("book-author-" + i),
+                        request.getParameter("book-synopsis-" + i),
+                        "/images/bookexample.jpeg",
+                        Byte.parseByte(request.getParameter("book-wear-" + i)));
+                ad.addBook(book);
+            }
+            // save the ads and the books to the database
+            ads.save(ad);
+            return "/ads/index";
+        }catch(ValidationException e){
+            // if the image is bad
+            if(e.getClass().equals(ImageException.class)){
+                e.setRedirect(String.format("%s", HttpStatus.UNSUPPORTED_MEDIA_TYPE));
+            }
+            // if the isbn is bad
+            else if(e.getClass().equals(IsbnException.class)){
+                e.setRedirect(String.format("%s", HttpStatus.LENGTH_REQUIRED));
+            }
+            // if the user authentication is bad
+            else if(e.getClass().equals(AuthenticationException.class)){
+                e.setRedirect(String.format("%s", HttpStatus.EXPECTATION_FAILED));
+            }
+            // DEBUG
+            System.out.println(e.toString());
+            // END DEBUG
+            return e.getRedirect();
+        }catch(NumberFormatException e){
+            return String.format("%s", HttpStatus.BAD_REQUEST);
+        }
     }
-//    @PostMapping("/ads/create")
-//    public String createAd(@ModelAttribute Ad ad){
-//
-//        ad.setSeller(
-//        users.findOne(((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId()));
-//        ads.save(ad);
-//
-//        return "/ads/index";
-//    }
+
     @GetMapping("/ads/{id}/delete")
     public String deleteForm(Model model, @PathVariable Long id){
         model.addAttribute("ad",ads.findOne(id));
         return "ads/delete";
     }
+
     @PostMapping("/ads/{id}/delete")
     public String deleteAd(@ModelAttribute Ad ad, @PathVariable Long id){
         if (((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId() ==
@@ -76,11 +103,13 @@ public class AdsController {
             return "redirect:/profile";
         }
     }
+
     @GetMapping("/ads/{id}/edit")
     public String editForm(Model model, @PathVariable Long id){
         model.addAttribute("ad", ads.findOne(id));
         return "ads/edit";
     }
+
     @PostMapping("/ads/{id}/edit")
     public String editAd(@ModelAttribute Ad ad, @PathVariable Long id){
         if (((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId() ==
@@ -93,5 +122,18 @@ public class AdsController {
         }
     }
 
+    private User getCurrentUser()
+        throws AuthenticationException
+    {
+        long id = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
+        if(!users.exists(id)){
+            throw new AuthenticationException(
+                    "Expected: user id of " + id,
+                    "Received: user does not exist!"
+            );
+        }
+        User curUser = users.findOne(id);
+        return curUser;
+    }
 
 }

@@ -1,6 +1,7 @@
 package capstone.elibraries.models;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity @Table(name = "ads")
@@ -31,6 +32,13 @@ public class Ad {
 
     public Ad(){
         // default
+    }
+
+    public Ad(User seller, double price, double shipping){
+        this.seller = seller;
+        seller.addAd(this);
+        this.price = price;
+        this.shipping = shipping;
     }
 
     public long getId(){
@@ -81,12 +89,35 @@ public class Ad {
         this.books = books;
     }
 
+    public void addBook(Book book){
+        if(this.books == null){
+            this.books = new ArrayList<>(1);
+        }
+        this.books.add(book);
+        book.addAd(this);
+    }
+
+    // To String methods and helpers
+
+    private String booksToString(){
+        if(this.books == null){
+            return "none";
+        }else{
+            String bks = "[";
+            for(Book book : books){
+                bks = book.toString() + ",";
+            }
+            bks += "]";
+            return bks;
+        }
+    }
+
     public String toString(){
         return "{\n" +
-                "\tid:" + this.id + "\n" +
-                "\tprice:" + this.price + "\n" +
-                "\tshipping:" + this.shipping + "\n" +
-                "\ttradable:" + this.tradable + "\n" +
+                "\t\"price\":\"" + this.price + "\",\n" +
+                "\t\"shipping\":\"" + this.shipping + "\",\n" +
+//                "\ttradable:" + this.tradable + "\n" +
+                "\t\"books\":\"" + this.booksToString() + "\",\n" +
                 "}";
     }
 
