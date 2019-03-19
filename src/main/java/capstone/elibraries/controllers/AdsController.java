@@ -1,5 +1,6 @@
 package capstone.elibraries.controllers;
 
+import capstone.elibraries.error.AuthenticationException;
 import capstone.elibraries.error.ImageException;
 import capstone.elibraries.error.IsbnException;
 import capstone.elibraries.error.ValidationException;
@@ -44,26 +45,32 @@ public class AdsController {
 
     @PostMapping("/ads/create")
     public String createAd(HttpServletRequest request){
-        System.out.println("DEBUG: createAd(...)");
 
-        double price = Double.parseDouble(request.getParameter("price"));
-        double shipping = Double.parseDouble(request.getParameter("shipping"));
-        Ad ad = new Ad(price, shipping);
+        Ad ad;
+        try{
+            ad = new Ad(getCurrentUserId(),
+                    Double.parseDouble( request.getParameter("price") ),
+                    Double.parseDouble( request.getParameter("shipping") ));
+        }catch(AuthenticationException e){
+            e.setRedirect(String.format("%s", HttpStatus.EXPECTATION_FAILED));
+            // DEBUG
+            System.out.println(e.toString());
+            // END DEBUG
+            return e.getRedirect();
+        }
 
         int bookCount = Integer.parseInt(request.getParameter("book-count"));
         for(int i = 0; i < bookCount; i++){
-            String isbn = request.getParameter("book-isbn-" + i);
-            String title = request.getParameter("book-title-" + i);
-            String author = request.getParameter("book-author-" + i);
-            String synopsis = request.getParameter("book-synopsis-" + i);
-            String image = "/images/bookexample.jpeg";
-            byte wear = Byte.parseByte(request.getParameter("book-wear-" + i));
-
             // TODO:
             // Change the image url to a value from the form submission so it isn't always null
             // and loading the default image
             try {
-                Book book = new Book(isbn, title, author, synopsis, image, wear);
+                Book book = new Book(request.getParameter("book-isbn-" + i),
+                        request.getParameter("book-title-" + i),
+                        request.getParameter("book-author-" + i),
+                        request.getParameter("book-synopsis-" + i),
+                        "/images/bookexample.jpeg",
+                        Byte.parseByte(request.getParameter("book-wear-" + i)));
                 ad.addBook(book);
             }
             catch(ValidationException e){
@@ -78,7 +85,9 @@ public class AdsController {
                 return e.getRedirect();
             }
         }
+        // DEBUG
         System.out.println(ad.toString());
+        // DEBUG
         ads.save(ad);
         return "/ads/index";
     }
@@ -118,5 +127,17 @@ public class AdsController {
         }
     }
 
+    private long getCurrentUserId()
+        throws AuthenticationException
+    {
+        long id = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
+        if(!users.exists(id)){
+            throw new AuthenticationException(
+                    "Expected: user id of " + id,
+                    "Received: user does not exist!"
+            );
+        }
+        return id;
+    }
 
 }

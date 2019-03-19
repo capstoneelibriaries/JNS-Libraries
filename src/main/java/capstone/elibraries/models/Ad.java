@@ -34,7 +34,8 @@ public class Ad {
         // default
     }
 
-    public Ad(double price, double shipping){
+    public Ad(long id, double price, double shipping){
+        this.id = id;
         this.price = price;
         this.shipping = shipping;
     }
