@@ -45,26 +45,15 @@ public class AdsController {
 
     @PostMapping("/ads/create")
     public String createAd(HttpServletRequest request){
-
-        Ad ad;
         try{
-            ad = new Ad(getCurrentUserId(),
+            // create a new ad
+            Ad ad = new Ad(getCurrentUserId(),
                     Double.parseDouble( request.getParameter("price") ),
                     Double.parseDouble( request.getParameter("shipping") ));
-        }catch(AuthenticationException e){
-            e.setRedirect(String.format("%s", HttpStatus.EXPECTATION_FAILED));
-            // DEBUG
-            System.out.println(e.toString());
-            // END DEBUG
-            return e.getRedirect();
-        }
-
-        int bookCount = Integer.parseInt(request.getParameter("book-count"));
-        for(int i = 0; i < bookCount; i++){
-            // TODO:
-            // Change the image url to a value from the form submission so it isn't always null
-            // and loading the default image
-            try {
+            // count the books
+            int bookCount = Integer.parseInt(request.getParameter("book-count"));
+            // add each book to the ad object
+            for(int i = 0; i < bookCount; i++) {
                 Book book = new Book(request.getParameter("book-isbn-" + i),
                         request.getParameter("book-title-" + i),
                         request.getParameter("book-author-" + i),
@@ -73,23 +62,29 @@ public class AdsController {
                         Byte.parseByte(request.getParameter("book-wear-" + i)));
                 ad.addBook(book);
             }
-            catch(ValidationException e){
-                if(e.getClass().equals(ImageException.class)){
-                    e.setRedirect(String.format("%s", HttpStatus.UNSUPPORTED_MEDIA_TYPE));
-                }else if(e.getClass().equals(IsbnException.class)){
-                    e.setRedirect(String.format("%s", HttpStatus.LENGTH_REQUIRED));
-                }
-                // DEBUG
-                System.out.println(e.toString());
-                // END DEBUG
-                return e.getRedirect();
+            // save the ads and the books to the database
+            ads.save(ad);
+            return "/ads/index";
+        }catch(ValidationException e){
+            // if the image is bad
+            if(e.getClass().equals(ImageException.class)){
+                e.setRedirect(String.format("%s", HttpStatus.UNSUPPORTED_MEDIA_TYPE));
             }
+            // if the isbn is bad
+            else if(e.getClass().equals(IsbnException.class)){
+                e.setRedirect(String.format("%s", HttpStatus.LENGTH_REQUIRED));
+            }
+            // if the user authentication is bad
+            else if(e.getClass().equals(AuthenticationException.class)){
+                e.setRedirect(String.format("%s", HttpStatus.EXPECTATION_FAILED));
+            }
+            // DEBUG
+            System.out.println(e.toString());
+            // END DEBUG
+            return e.getRedirect();
+        }catch(NumberFormatException e){
+            return String.format("%s", HttpStatus.BAD_REQUEST);
         }
-        // DEBUG
-        System.out.println(ad.toString());
-        // DEBUG
-        ads.save(ad);
-        return "/ads/index";
     }
 
     @GetMapping("/ads/{id}/delete")
