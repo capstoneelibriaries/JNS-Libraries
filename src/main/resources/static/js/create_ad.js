@@ -12,9 +12,9 @@ $(adform.submit.button).click( (event) => {
   event.preventDefault();
 
   //if no books are provided
-  // if(adform.bookCount() < 1){
-  //   alert("No books provided.");
-  // }
+  if(adform.bookCount() < 1){
+    alert("No books provided.");
+  }else{
 
   let post = new FormData();
   post.append("title", $(adform.title.field).val());
@@ -30,7 +30,10 @@ $(adform.submit.button).click( (event) => {
     post.append(`book-wear-${index}`, $(bookform.wear).val());
   });
 
-  let request = new XMLHttpRequest();
-  request.open("POST", "/ads/create");
-  request.send(post);
+    let request = new XMLHttpRequest();
+    request.open("POST", "/ads/create");
+    let response = request.send(post);
+    console.log(response);
+  }
+  
 });

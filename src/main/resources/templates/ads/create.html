@@ -3,20 +3,16 @@
 <head>
     <link th:replace="partials/header :: header('Create Ad')"/>
     <link th:href="@{/css/createAd.css}" href="/static/css/createAd.css" rel="stylesheet" type="text/css"/>
-
 </head>
 <body>
     <div th:replace="partials/navbar :: navbar"></div>
-
     <div th:id="create-ad" class="container">
         <div class="row">
             <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
                 <div class="card card-signin my-5">
                     <div class="card-body">
                         <h5 class="card-title text-center">Create an Ad</h5>
-
                         <form th:action="@{/ads/create}" th:object="${ad}" th:method="post" class="form-signin">
-
                             <div class="form-label-group" th:id="ad-title">
 
                                 <input class="form-control"
@@ -58,9 +54,7 @@
                                        th:name="ad-price"
                                 />
                                 <label th:for="create-ad-price">Price<abbr th:title="required"></abbr></label>
-
                             </div>
-
                             <div class="form-label-group" th:id="ad-shipping">
                                 <input class="form-control"
                                        th:id="create-ad-shipping"
@@ -70,9 +64,7 @@
                                        th:max="9999.99"
                                        th:name="ad-shipping"/>
                                 <label th:for="create-ad-shipping">Shipping Price<abbr th:title="required"></abbr></label>
-
                             </div>
-
                             <div th:id="ad-tradable" class="custom-control custom-checkbox mb-3">
                                 <input class="custom-control-input"
                                        th:id="create-ad-tradable"
@@ -85,17 +77,13 @@
                                 </label>
 
                             </div>
-
                             <div th:id="ad-new-book">
                                 <button class="btn btn-lg btn-primary btn-block text-uppercase"
                                         th:id="btn-ad-new-book"
                                         th:type="button">Add a book
                                 </button>
                             </div>
-
-                            <!--bottom of the form-->
                             <hr class="my-4"/>
-
                             <div th:id="ad-new-book-form">
                                 <!-- Empty by default -->
                             </div>
