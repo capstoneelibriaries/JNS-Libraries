@@ -55,24 +55,30 @@ function ImplAdForm(openbookApi) {
     };
 
     this.addBookForm = (bookform) => {
-        // add the book form to a list of bookforms
-        this.bookforms.push(bookform);
-        // embed the new form in the html
-        $(this.form).append(bookform.toHtml());
-        // watch the for the user's input into the isbn field
-        let isbn = "";
-        $(bookform.isbn).on("keyup", () => {
 
-            isbn = $(bookform.isbn).val();
+        // check if the previous book form is complete
+        if(this.bookCount() > 0 && $(adform.bookforms[adform.bookCount() - 1].isbn).val().length != (10||13) ){
+            alert("Previous form incomplete. Please enter an isbn.");
+        }else{
+            // add the book form to a list of bookforms
+            this.bookforms.push(bookform);
+            // embed the new form in the html
+            $(this.form).append(bookform.toHtml());
+            // watch the for the user's input into the isbn field
+            let isbn = "";
+            $(bookform.isbn).on("keyup", () => {
 
-            if(isbn.length === AdForm.isbn.min || isbn.length === AdForm.isbn.max){
-                console.log(isbn);
-                openbookApi.request(isbn, bookform);
-                // enable the submit button since the ajax request should be finished
-                if(this.bookCount() > 0){
-                    $(this.submit.button).prop('disabled', false);
+                isbn = $(bookform.isbn).val();
+
+                if(isbn.length === AdForm.isbn.min || isbn.length === AdForm.isbn.max){
+                    console.log(isbn);
+                    openbookApi.request(isbn, bookform);
+                    // enable the submit button since the ajax request should be finished
+                    if(this.bookCount() > 0){
+                        $(this.submit.button).prop('disabled', false);
+                    }
                 }
-            }
-        });
+            });
+        }
     };
 }
