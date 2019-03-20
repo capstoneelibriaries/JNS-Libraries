@@ -19,10 +19,10 @@ public class Ad {
     @Column
     private boolean tradable;
 
-    @Column
+    @Column(nullable = false, length = 128)
     private String title;
 
-    @Column
+    @Column(nullable = false, length = 256)
     private String description;
 
     @ManyToOne @JoinColumn (name = "user_id")
