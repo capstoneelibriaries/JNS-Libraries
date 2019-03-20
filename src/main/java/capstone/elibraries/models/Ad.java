@@ -40,8 +40,10 @@ public class Ad {
         // default
     }
 
-    public Ad(User seller, double price, double shipping){
+    public Ad(User seller, String title, String description, double price, double shipping){
         this.seller = seller;
+        this.title = title;
+        this.description = description;
         seller.addAd(this);
         this.price = price;
         this.shipping = shipping;

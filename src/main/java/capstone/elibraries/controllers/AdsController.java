@@ -45,6 +45,8 @@ public class AdsController {
         try{
             // create a new ad
             Ad ad = new Ad(getCurrentUser(),
+                    request.getParameter("title"),
+                    request.getParameter("description"),
                     Double.parseDouble( request.getParameter("price") ),
                     Double.parseDouble( request.getParameter("shipping") ));
             // count the books

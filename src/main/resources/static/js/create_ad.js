@@ -24,11 +24,16 @@ $(adform.submit.button).click( (event) => {
     post.append("book-count", adform.bookCount());
 
     adform.bookforms.forEach( (bookform, index) => {
-      post.append(`book-isbn-${index}`, $(bookform.isbn).val());
-      post.append(`book-title-${index}`, $(bookform.title).val());
-      post.append(`book-author-${index}`, $(bookform.author).val());
-      post.append(`book-synopsis-${index}`, $(bookform.synopsis).val());
-      post.append(`book-wear-${index}`, $(bookform.wear).val());
+      const book = bookform.getBook();
+      post.append(`book-isbn-${index}`, book.isbn);
+      post.append(`book-title-${index}`, book.title);
+      post.append(`book-author-${index}`, book.author);
+      post.append(`book-synopsis-${index}`, book.synopsis);
+      post.append(`book-wear-${index}`, book.wear);
+      // additional items that are not displayed in the ad yet
+      post.append(`book-pages-${index}`, book.pages);
+      post.append(`book-publish-date-${index}`, book.publishDate);
+      post.append(`book-image-${index}`, book.image);
     });
 
     let request = new XMLHttpRequest();

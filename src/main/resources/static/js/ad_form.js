@@ -57,7 +57,7 @@ function ImplAdForm(openbookApi) {
     this.addBookForm = (bookform) => {
 
         // check if the previous book form is complete
-        if(this.bookCount() > 0 && $(adform.bookforms[adform.bookCount() - 1].isbn).val().length != (10||13) ){
+        if(this.bookCount() > 0 && $(adform.bookforms[adform.bookCount() - 1].isbn).val().length !== (10||13) ){
             alert("Previous form incomplete. Please enter an isbn.");
         }else{
             // add the book form to a list of bookforms

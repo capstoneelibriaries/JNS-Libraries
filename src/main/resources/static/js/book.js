@@ -32,4 +32,9 @@ function ImplBook(obResponse){
   this.title = obResponse.title;
   this.author = Book.parseAuthor(obResponse);
   this.synopsis = Book.parseSynopsis(obResponse);
+  this.pages = obResponse.number_of_pages;
+  this.publishDate = obResponse.publish_date;
+  this.image = obResponse.cover.large;
+  this.wear = 1;
+
 }

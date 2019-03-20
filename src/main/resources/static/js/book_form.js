@@ -3,7 +3,7 @@ const BookForm = {
     adform: {},
 
     new: (adform) => {
-        return Object.freeze(new ImplBookForm(adform));
+        return new ImplBookForm(adform);
     },
 
     genHtml: (label, id, type, misc) => {
@@ -31,13 +31,26 @@ function ImplBookForm(adform) {
     this.author = `#new-book-${index}-author`;
     this.synopsis = `#new-book-${index}-synopsis`;
     this.wear = `#new-book-${index}-wear`;
+    // book value gets set later
+    this.book = {};
 
     this.autoFill = () => {
-        console.log("DEBUG: autoFill(...)");
-        let book = Book.from(OpenBook.response);
-        $(this.title).val(book.title);
-        $(this.author).val(book.author);
-        $(this.synopsis).val(book.synopsis);
+        console.log("DEBUG: autoFill()");
+        this.book = Book.from(OpenBook.response);
+        console.log(this.book);
+        $(this.title).val(this.book.title);
+        $(this.author).val(this.book.author);
+        $(this.synopsis).val(this.book.synopsis);
+    };
+
+    this.getBook = () => {
+        console.log("DEBUG: getBook()");
+        this.book.isbn = $(this.isbn).val();
+        this.book.title = $(this.title).val();
+        this.book.author = $(this.author).val();
+        this.book.synopsis = $(this.synopsis).val();
+        this.book.wear = $(this.wear).val();
+        return this.book;
     };
 
     this.toHtml = () => {
@@ -48,8 +61,7 @@ function ImplBookForm(adform) {
             `<div class="card card-signin my-5"></div>` +
             `<div class="card-body" ></div>` +
             `<div class="form-signin"></div>` +
-            `<div class="form-label-group" 
-id=${BookForm.idToString(this.section)}>` +
+            `<div class="form-label-group" id=${BookForm.idToString(this.section)}>` +
             `<div class="form-label-group">` +
             `<label for="${BookForm.idToString(this.isbn)}"></label>` +
             `<input class="form-control" id="${BookForm.idToString(this.isbn)}" 
