@@ -39,6 +39,9 @@ public class AdsController {
 
     @PostMapping("/ads/create")
     public String createAd(HttpServletRequest request){
+        // DEBUG
+        System.out.println("DEBUG: createAd(...)");
+        // END DEBUG
         try{
             // create a new ad
             Ad ad = new Ad(getCurrentUser(),
@@ -77,6 +80,9 @@ public class AdsController {
             // END DEBUG
             return e.getRedirect();
         }catch(NumberFormatException e){
+            // DEBUG
+            e.printStackTrace();
+            // END DEBUG
             return String.format("%s", HttpStatus.BAD_REQUEST);
         }
     }

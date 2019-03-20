@@ -21,6 +21,7 @@ $(adform.submit.button).click( (event) => {
     post.append("description", $(adform.description.field).val());
     post.append("price", $(adform.price.field).val());
     post.append("shipping", $(adform.shipping.field).val());
+    post.append("book-count", adform.bookCount());
 
     adform.bookforms.forEach( (bookform, index) => {
       post.append(`book-isbn-${index}`, $(bookform.isbn).val());
