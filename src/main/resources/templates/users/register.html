@@ -2,7 +2,18 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <link th:replace="partials/header :: header('Register')"/>
-    <link th:href="@{/css/register.css}" href="/static/css/register.css" rel="stylesheet" type="text/css"/>
+    <style>
+        body {
+            background: #619B8A;
+            background: linear-gradient(to right, #619B8A, #A1C181);
+        }
+
+        .btn-primary {
+            color: #fff;
+            background-color: #E4572E;
+            border-color: #233D4D;
+        }
+    </style>
 </head>
 <body>
     <div th:replace="partials/navbar :: navbar"></div>
@@ -107,7 +118,6 @@
     </div>
     <script>
         $("#showpassword").on('click', function(){
-
             var pass = $("#inputPassword");
             var fieldtype = pass.attr('type');
             if (fieldtype == 'password') {

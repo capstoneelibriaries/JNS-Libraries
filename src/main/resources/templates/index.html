@@ -2,6 +2,8 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <link th:replace="partials/header :: header('ELibraries')"/>
+    <link th:href="@{/css/login.css}" href="/static/css/login.css" rel="stylesheet" type="text/css"/>
+
 </head>
 <body>
     <div th:replace="partials/navbar :: navbar"></div>
@@ -9,30 +11,36 @@
         <div class="row">
             <div class="col-lg-10 col-xl-9 mx-auto">
                 <div class="card card-signin flex-row my-5">
-                    <div class="card-img-left d-none d-md-flex">
-                    </div>
+
                     <div class="card-body">
                         <div>
-                            <h1 class="card-title text-center">ELibraries</h1>
+                            <h1 class="card-title text-center">Search</h1>
                         </div>
-                        <form class="form-signin" th:action="@{/search}" th:method="get">
+
+                        <label for="adSearch"></label>
+                        <form id="adSearch" class="form-signin" th:action="@{/search}" th:method="get">
                             <div>
                                 <div class="form-label-group">
-                                    <input th:type="text" class="form-control" th:placeholder="Search" name="q"/>
+
+                                    <input th:type="text" class="card card-signin form-control" th:placeholder="Search" name="q"/>
+
                                 </div>
                                 <div class="form-label-group">
                                     <div class="row">
                                         <div class="column md-col-80 lg-col-80">
+                                            <label>
                                             <select class="form-control" th:name="option">
                                                 <option th:value="ads">Search Ads</option>
                                                 <option th:value="books">Search Books</option>
                                             </select>
+                                            </label>
                                         </div>
-                                        <div class="column md-col-20 lg-col-20">
-                                            <button class="btn btn-md btn-primary btn-block text-uppercase"
-                                                    th:formaction="@{/advanced}"
-                                                    type="submit">advanced</button>
-                                        </div>
+                                    </div>
+                                    <hr/>
+                                    <div>
+                                        <button class="btn btn-lg btn-primary btn-block text-uppercase"
+                                                th:formaction="@{/advanced}"
+                                                type="submit">advanced</button>
                                     </div>
                                 </div>
                             </div>
