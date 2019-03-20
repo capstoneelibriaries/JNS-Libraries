@@ -19,6 +19,13 @@ public class TradeRequest {
         // default
     }
 
+    public TradeRequest(User to, User from, Ad forSale, Ad wanted) {
+        this.to = to;
+        this.from = from;
+        this.forSale = forSale;
+        this.wanted = wanted;
+    }
+
     public long getId() {
         return id;
     }
