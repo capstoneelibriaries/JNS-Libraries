@@ -19,6 +19,12 @@ public class Ad {
     @Column
     private boolean tradable;
 
+    @Column
+    private String title;
+
+    @Column
+    private String description;
+
     @ManyToOne @JoinColumn (name = "user_id")
     private User seller;
 
@@ -73,6 +79,22 @@ public class Ad {
         this.tradable = tradable;
     }
 
+    public void setTitle(String title){
+        this.title = title;
+    }
+
+    public String getTitle(){
+        return this.title;
+    }
+
+    public void setDescription(String description){
+        this.description = description;
+    }
+
+    public String getDescription(){
+        return this.description;
+    }
+    
     public User getSeller() {
         return seller;
     }
