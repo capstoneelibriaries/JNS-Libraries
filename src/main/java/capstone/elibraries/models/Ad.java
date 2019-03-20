@@ -22,7 +22,7 @@ public class Ad {
     @Column(nullable = false, length = 128)
     private String title;
 
-    @Column(nullable = false, length = 256)
+    @Column(nullable = false, length = 512)
     private String description;
 
     @ManyToOne @JoinColumn (name = "user_id")
