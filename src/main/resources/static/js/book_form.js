@@ -45,13 +45,21 @@ function ImplBookForm(adform) {
         const isbn_max = this.adform.getIsbnSize().max;
 
         return `` +
-            `<div class="form-label-group" id=${BookForm.idToString(this.section)}>` +
+            `<div class="card card-signin my-5"></div>` +
+            `<div class="card-body" ></div>` +
+            `<div class="form-signin"></div>` +
+            `<div class="form-label-group" 
+id=${BookForm.idToString(this.section)}>` +
             `<div class="form-label-group">` +
             `<label for="${BookForm.idToString(this.isbn)}"></label>` +
-            `<input 
-class="form-control" 
-id="${BookForm.idToString(this.isbn)}" type="number" minlength="${isbn_min}" maxlength="${isbn_max}" name="${this.isbn}"/>` +
-            `</div>` +
+            `<input class="form-control" id="${BookForm.idToString(this.isbn)}" 
+                type="number" minlength="${isbn_min}" maxlength="${isbn_max}" 
+                name="${this.isbn}"/>` +
+                    `</div>` +
+                    `</div>` +
+                    `</div>` +
+                    `</div>` +
+                    `</div>` +
             BookForm.genHtml("", BookForm.idToString(this.title), "text",
                 `pattern=".{1,255}" readonly required`) +
             BookForm.genHtml("", BookForm.idToString(this.author), "text",
