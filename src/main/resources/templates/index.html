@@ -1,60 +1,49 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
-    <link th:replace="partials/header :: header('JNS Libs')"/>
+    <link th:replace="partials/header :: header('ELibraries')"/>
 </head>
 <body>
     <div th:replace="partials/navbar :: navbar"></div>
-
-    <!-- Wrapper -->
-    <div id="wrapper">
-
-        <!-- Main -->
-        <section id="main">
-
-            <!-- Items -->
-            <div class="items">
-
-                <div class="item intro span-2">
-                    <h1>Book Booker Bookings</h1>
-                    <p>A site for selling and buying used or like-new books.</p>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 col-xl-9 mx-auto">
+                <div class="card card-signin flex-row my-5">
+                    <div class="card-img-left d-none d-md-flex">
+                    </div>
+                    <div class="card-body">
+                        <div>
+                            <h1 class="card-title text-center">ELibraries</h1>
+                        </div>
+                        <form class="form-signin" th:action="@{/search}" th:method="get">
+                            <div>
+                                <div class="form-label-group">
+                                    <input th:type="text" class="form-control" th:placeholder="Search" name="q"/>
+                                </div>
+                                <div class="form-label-group">
+                                    <div class="row">
+                                        <div class="column md-col-80 lg-col-80">
+                                            <select class="form-control" th:name="option">
+                                                <option th:value="ads">Search Ads</option>
+                                                <option th:value="books">Search Books</option>
+                                            </select>
+                                        </div>
+                                        <div class="column md-col-20 lg-col-20">
+                                            <button class="btn btn-md btn-primary btn-block text-uppercase"
+                                                    th:formaction="@{/advanced}"
+                                                    type="submit">advanced</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+                            <button class="btn btn-lg btn-primary btn-block text-uppercase"
+                                    th:type="submit">search</button>
+                        </form>
+                    </div>
                 </div>
-
-                <!--Front page display books-->
-
-                <article class="item thumb span-1">
-                    <!--Book cover image-->
-                </article>
-
-
-                <article class="item thumb span-1">
-                </article>
-
-                <article class="item thumb span-1">
-                    <h2>Different.</h2>
-                </article>
-
-                <article class="item thumb span-1">
-                    <h2>Elysium </h2>
-                </article>
-
-                <article class="item thumb span-1">
-                    <h2>Kingdom of the Wind </h2>
-                </article>
-
-                <article class="item thumb span-1">
-                    <h2>The Pursuit</h2>
-                </article>
-
-                <article class="item thumb span-1">
-                    <h2>Boundless </h2>
-                </article>
-
-                <article class="item thumb span-1">
-                    <h2>The Spectators </h2>
-                </article>
             </div>
-        </section>
+        </div>
     </div>
 </body>
 </html>

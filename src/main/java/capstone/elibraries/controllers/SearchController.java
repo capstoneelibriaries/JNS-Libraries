@@ -1,17 +1,28 @@
 package capstone.elibraries.controllers;
 
-import org.hibernate.annotations.Parameter;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class SearchController {
 
-    @PostMapping("/search")
-    public String postSearch(@RequestParam String query, Model model){
-        //TODO: add search results to the model
-        return "search";
+    private final String[] options = {"books", "ads"};
+
+    @GetMapping("search")
+    public String getSearch(@RequestParam("q") String query, @RequestParam("option") String option){
+        // DEBUG
+        System.out.println("DEBUG: getSearch(...): query = " + query + ", option = " + option);
+        // END DEBUG
+        return "index";
     }
+
+    @GetMapping("advanced")
+    public String getAdvanced(@RequestParam("q") String query, @RequestParam("option") String option){
+        // DEBUG
+        System.out.println("DEBUG: getAdvance(...): query = " + query + ", option = " + option);
+        // END DEBUG
+        return "advanced";
+    }
+
 }
