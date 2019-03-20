@@ -2,33 +2,26 @@ package capstone.elibraries.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class SearchController {
 
     private final String[] options = {"books", "ads"};
 
-    @GetMapping("/search")
-    public String getSearch(){
-        return "redirect:/";
+    @GetMapping("search")
+    public String getSearch(@RequestParam("q") String query, @RequestParam("option") String option){
+        // DEBUG
+        System.out.println("DEBUG: getSearch(...): query = " + query + ", option = " + option);
+        // END DEBUG
+        return "index";
     }
 
-    @GetMapping("/search?q=&option={option}")
-    public String getSearch(@PathVariable String option){
-        //TODO: do stuff
-        return "search";
-    }
-
-    @GetMapping("/search?q={query}&option={option}")
-    public String getSearch(@PathVariable String query, @PathVariable String option){
-        // TODO: do stuff
-        return "search";
-    }
-
-    @GetMapping("/advanced?q={query}&option={option}")
-    public String getAdvanced(@PathVariable String query, @PathVariable String option){
-        // TODO: advanced search page
+    @GetMapping("advanced")
+    public String getAdvanced(@RequestParam("q") String query, @RequestParam("option") String option){
+        // DEBUG
+        System.out.println("DEBUG: getAdvance(...): query = " + query + ", option = " + option);
+        // END DEBUG
         return "advanced";
     }
 
