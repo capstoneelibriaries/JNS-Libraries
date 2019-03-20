@@ -94,7 +94,7 @@ public class Ad {
     public String getDescription(){
         return this.description;
     }
-    
+
     public User getSeller() {
         return seller;
     }
