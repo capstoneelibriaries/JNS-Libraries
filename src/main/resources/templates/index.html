@@ -2,8 +2,28 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <link th:replace="partials/header :: header('ELibraries')"/>
-    <link th:href="@{/css/form.css}" href="/static/css/form.css" rel="stylesheet" type="text/css"/>
+    <style>
+        body {
+            background: #619B8A;
+            background: linear-gradient(to right, #619B8A, #A1C181);
+        }
+        .btn-primary {
+            color: #fff;
+            background-color: #233D4D;
+            border-color: #233D4D;
+        }
+        .search {
+            color: white;
+            background-color: #FCCA46;
+            border-color: black;
+        }
 
+        .search-bar {
+            color: white;
+            background-color: ghostwhite;
+            border-color: #495057;
+        }
+    </style>
 </head>
 <body>
     <div th:replace="partials/navbar :: navbar"></div>
@@ -11,42 +31,58 @@
         <div class="row">
             <div class="col-lg-10 col-xl-9 mx-auto">
                 <div class="card card-signin flex-row my-5">
-
                     <div class="card-body">
                         <div>
                             <h1 class="card-title text-center">Search</h1>
                         </div>
-
                         <label for="adSearch"></label>
                         <form id="adSearch" class="form-signin" th:action="@{/search}" th:method="get">
                             <div>
                                 <div class="form-label-group">
 
-                                    <input th:type="text" class="card card-signin form-control" th:placeholder="Search" name="q"/>
+                                    <!--<input th:type="text" class="card card-signin form-control search-bar" th:placeholder="Search" name="q"/>-->
+
+
+                                    <div class="input-group">
+
+                                        <input type="text" class="form-control" placeholder="Recipient's username"
+                                               aria-label="Recipient's username with two button addons" aria-describedby="button-addon4"/>
+
+                                        <div class="input-group-append" id="button-addon4" th:name="option" th:default="books">
+
+                                            <button class="btn btn-outline-secondary" type="button" th:value="ads">ads</button>
+                                            <button class="btn btn-outline-secondary" type="button" th:value="books">books</button>
+
+                                        </div>
+                                    </div>
+
+
 
                                 </div>
                                 <div class="form-label-group">
                                     <div class="row">
-                                        <div class="column md-col-80 lg-col-80">
-                                            <label>
-                                            <select class="form-control" th:name="option">
-                                                <option th:value="ads">Search Ads</option>
-                                                <option th:value="books">Search Books</option>
-                                            </select>
-                                            </label>
-                                        </div>
+                                        <!--<div class="column md-col-80 lg-col-80 btn-group">-->
+                                                <!--<label>-->
+                                                    <!--<select class="btn-group" th:name="option">-->
+                                                        <!--<option th:value="ads">Search Ads</option>-->
+                                                        <!--<option th:value="books">Search Books</option>-->
+                                                    <!--</select>-->
+                                                <!--</label>-->
+                                        <!--</div>-->
                                     </div>
                                     <hr/>
                                     <div>
                                         <button class="btn btn-lg btn-primary btn-block text-uppercase"
                                                 th:formaction="@{/advanced}"
-                                                type="submit">advanced</button>
+                                                type="submit">advanced
+                                        </button>
                                     </div>
                                 </div>
                             </div>
-                            <br />
-                            <button class="btn btn-lg btn-primary btn-block text-uppercase"
-                                    th:type="submit">search</button>
+                            <br/>
+                            <button class="btn btn-lg btn-primary btn-block text-uppercase search"
+                                    th:type="submit">search
+                            </button>
                         </form>
                     </div>
                 </div>
