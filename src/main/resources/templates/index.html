@@ -17,12 +17,6 @@
             background-color: #FCCA46;
             border-color: black;
         }
-
-        .search-bar {
-            color: white;
-            background-color: ghostwhite;
-            border-color: #495057;
-        }
     </style>
 </head>
 <body>
@@ -40,13 +34,9 @@
                             <div>
                                 <div class="form-label-group">
 
-                                    <!--<input th:type="text" class="card card-signin form-control search-bar" th:placeholder="Search" name="q"/>-->
-
-
                                     <div class="input-group">
 
-                                        <input type="text" class="form-control" placeholder="Recipient's username"
-                                               aria-label="Recipient's username with two button addons" aria-describedby="button-addon4"/>
+                                        <input type="text" class="form-control" th:placeholder="Search..." name="q"/>
 
                                         <div class="input-group-append" id="button-addon4" th:name="option" th:default="books">
 
