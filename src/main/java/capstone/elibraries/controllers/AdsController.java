@@ -1,5 +1,6 @@
 package capstone.elibraries.controllers;
 
+import capstone.elibraries.repositories.TradeRequests;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
@@ -15,10 +16,12 @@ import javax.servlet.http.HttpServletRequest;
 public class AdsController {
     private Ads ads;
     private Users users;
+    private TradeRequests trades;
 
-    public AdsController(Ads ads, Users users){
+    public AdsController(Ads ads, Users users, TradeRequests trades){
         this.ads=ads;
         this.users=users;
+        this.trades=trades;
     }
     @GetMapping("/ads")
     public String getAds(Model model){
@@ -122,8 +125,8 @@ public class AdsController {
         return "ads/buy";
     }
     @GetMapping("/ads/{id}/trade")
-    public String tradeForm(Model model, @PathVariable Long id){
-        User user = users.findOne(((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId());
+    public String tradeForm(Model model, @PathVariable Long id) throws AuthenticationException{
+        User user = getCurrentUser();
         Ad ad = ads.findOne(id);
         if (null == user ) {
             return "redirect:/login?trade";
@@ -137,10 +140,17 @@ public class AdsController {
     }
 
     @PostMapping("/ads/{id}/trade")
-    public String trade(HttpServletRequest request, @PathVariable Long id){
-        User user = users.findOne(((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId());
+    public String trade(@RequestParam(name = "ad") Long adid, @PathVariable Long id) throws AuthenticationException{
+        User requestingUser = getCurrentUser();
         Ad ad = ads.findOne(id);
-        request.getParameter("");
+        Ad userAd = ads.findOne(adid);
+        trades.save( new TradeRequest(
+            ad.getSeller(), // Owner of ad
+            requestingUser, // User requesting trade
+            ad,             // Owner's ad
+            userAd          // User's offered ad
+        ));
+
         return "ads/profile";
     }
 
@@ -154,7 +164,6 @@ public class AdsController {
                     "Received: user does not exist!"
             );
         }
-        User curUser = users.findOne(id);
-        return curUser;
+        return users.findOne(id);
     }
 }

@@ -1,5 +1,7 @@
 package capstone.elibraries.controllers;
 
+import capstone.elibraries.models.TradeRequest;
+import capstone.elibraries.repositories.TradeRequests;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -12,10 +14,13 @@ import org.springframework.ui.Model;
 public class UserController {
     private Users users;
     private PasswordEncoder passwordEncoder;
+    private TradeRequests trades;
 
-    public UserController(Users users, PasswordEncoder passwordEncoder) {
+
+    public UserController(Users users, PasswordEncoder passwordEncoder, TradeRequests trades) {
         this.users = users;
         this.passwordEncoder = passwordEncoder;
+        this.trades = trades;
     }
 
     @GetMapping("/register")
@@ -30,6 +35,37 @@ public class UserController {
 
         model.addAttribute("user", databaseUser);
         return "users/profile";
+    }
+
+    @GetMapping("/profile/transactions")
+    public String showTransactions(Model model) {
+        User databaseUser = users.findOne(((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId());
+        model.addAttribute("user", databaseUser);
+        return "users/transactions";
+    }
+
+    @GetMapping("/profile/trades")
+    public String showTradeRequests(Model model) {
+        User databaseUser = users.findOne(((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId());
+        Iterable<TradeRequest> t = trades.findTradeRequestsByTo(databaseUser) ;
+        model.addAttribute("trades", t);
+        return "users/trades";
+    }
+
+    @PostMapping("/profile/trades")
+    public String confirmDenyTradeRequests(@RequestParam( name = "choice") String choice, @ModelAttribute TradeRequest trade) {
+        TradeRequest tradeRequest = trades.findOne(trade.getId());
+
+        if (choice.equalsIgnoreCase("confirm")){
+            User databaseUser = users.findOne(((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId());
+
+            tradeRequest.getWanted().setSeller(tradeRequest.getForSale().getSeller());
+            tradeRequest.getForSale().setSeller(databaseUser);
+            trades.save(tradeRequest);
+            // TODO: send email and/or notification that trade is complete and exchange shipping addresses
+        }
+        trades.delete(tradeRequest);
+        return "redirect:/profile/trades";
     }
 
     @PostMapping("/register")
