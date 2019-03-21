@@ -44,8 +44,9 @@ $(adform.submit.button).click( (event) => {
     // when the post is complete
     request.onload = () => {
       // redirect
+      console.log(request);
       if(request.status === 200){
-        $(location).attr('href', `${origin}/ads/index`);
+        $(location).attr('href', `${origin}/profile`);
       }else{
         $(location).attr('href', `${origin}/${request.status}`);
       }

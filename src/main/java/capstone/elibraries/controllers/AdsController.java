@@ -63,7 +63,7 @@ public class AdsController {
             }
             // save the ads and the books to the database
             ads.save(ad);
-            return "/ads/index";
+            return "profile";
         }catch(ValidationException e){
             // if the image is bad
             if(e.getClass().equals(ImageException.class)){
