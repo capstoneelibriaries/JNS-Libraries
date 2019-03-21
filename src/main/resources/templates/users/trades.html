@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link th:replace="partials/header :: header('Profile')"/>
+
+</head>
+<body>
+<div th:replace="partials/navbar :: navbar"></div>
+
+
+<div class="container mt-3">
+    <div class="row u-max-full-width">
+        <div class="three columns" th:each="trade:${trades}">
+
+            <div class="card" th:object="${trade}">
+                <p><span th:text="*{from.username}"></span> wants to trade</p>
+                <h4 th:text="${trade.wanted.books[0].title}"></h4>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

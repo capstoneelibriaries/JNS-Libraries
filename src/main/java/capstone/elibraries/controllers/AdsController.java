@@ -151,7 +151,7 @@ public class AdsController {
             userAd          // User's offered ad
         ));
 
-        return "ads/profile";
+        return "redirect:/users/profile";
     }
 
     private User getCurrentUser()

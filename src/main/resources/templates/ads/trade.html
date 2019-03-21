@@ -14,13 +14,16 @@
                     <div class="col-lg-9 col-md-9 col-sm-12" th:object="${ad}">
                         <!--<p th:text="*{title}"></p>-->
                         <!--<p th:text="*{description}"></p>-->
-                        <div class="card" th:each="book : *{books}">
-                            <p th:text="${book.title}"></p>
-                            <p th:text="${book.author}"></p>
-                            <p th:text="'Condition: '+${book.wear}"></p>
+                        <div class="card">
+                            <th:block th:each="book : *{books}">
+                                <p th:text="'Condition: '+${book.wear}"></p>
+                                <p th:text="${book.title}"></p>
+                                <p th:text="${book.author}"></p>
+                            </th:block>
                         </div>
                     </div>
-                    <img class="col-lg-3 col-md-3 col-sm-12" th:src="@{/images/trade-arrow.png}" alt="trade icon" id="trade"/>
+                    <img class="col-lg-3 col-md-3 col-sm-12" th:src="@{/images/trade-arrow.png}" alt="trade icon"
+                         id="trade"/>
                 </div>
                 <div class="row">
                     <button class="offset-3 col-6 btn btn-lg btn-primary btn-block text-uppercase mb-3" id="send-offer" type="submit">Make Offer</button>
@@ -37,7 +40,6 @@
                                     <!--<img th:src="${book.imageUrl}" alt="book"/>-->
                                     <p th:text="${book.title}"></p>
                                     <p th:text="${book.author}"></p>
-                                    <p th:text="'Condition: '+${book.wear}"></p>
                                 </div>
                             </label>
                         </div>
