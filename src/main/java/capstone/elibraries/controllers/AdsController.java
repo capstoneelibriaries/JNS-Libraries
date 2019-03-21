@@ -1,5 +1,6 @@
 package capstone.elibraries.controllers;
 
+import capstone.elibraries.repositories.TradeRequests;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
@@ -15,10 +16,12 @@ import javax.servlet.http.HttpServletRequest;
 public class AdsController {
     private Ads ads;
     private Users users;
+    private TradeRequests trades;
 
-    public AdsController(Ads ads, Users users){
+    public AdsController(Ads ads, Users users, TradeRequests trades){
         this.ads=ads;
         this.users=users;
+        this.trades=trades;
     }
     @GetMapping("/ads")
     public String getAds(Model model){
@@ -39,9 +42,14 @@ public class AdsController {
 
     @PostMapping("/ads/create")
     public String createAd(HttpServletRequest request){
+        // DEBUG
+        System.out.println("DEBUG: createAd(...)");
+        // END DEBUG
         try{
             // create a new ad
             Ad ad = new Ad(getCurrentUser(),
+                    request.getParameter("title"),
+                    request.getParameter("description"),
                     Double.parseDouble( request.getParameter("price") ),
                     Double.parseDouble( request.getParameter("shipping") ));
             // count the books
@@ -58,7 +66,7 @@ public class AdsController {
             }
             // save the ads and the books to the database
             ads.save(ad);
-            return "/ads/index";
+            return "profile";
         }catch(ValidationException e){
             // if the image is bad
             if(e.getClass().equals(ImageException.class)){
@@ -77,6 +85,9 @@ public class AdsController {
             // END DEBUG
             return e.getRedirect();
         }catch(NumberFormatException e){
+            // DEBUG
+            e.printStackTrace();
+            // END DEBUG
             return String.format("%s", HttpStatus.BAD_REQUEST);
         }
     }
@@ -122,8 +133,8 @@ public class AdsController {
         return "ads/buy";
     }
     @GetMapping("/ads/{id}/trade")
-    public String tradeForm(Model model, @PathVariable Long id){
-        User user = users.findOne(((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId());
+    public String tradeForm(Model model, @PathVariable Long id) throws AuthenticationException{
+        User user = getCurrentUser();
         Ad ad = ads.findOne(id);
         if (null == user ) {
             return "redirect:/login?trade";
@@ -135,6 +146,22 @@ public class AdsController {
         model.addAttribute("user", user);
         return "ads/trade";
     }
+
+    @PostMapping("/ads/{id}/trade")
+    public String trade(@RequestParam(name = "ad") Long adid, @PathVariable Long id) throws AuthenticationException{
+        User requestingUser = getCurrentUser();
+        Ad ad = ads.findOne(id);
+        Ad userAd = ads.findOne(adid);
+        trades.save( new TradeRequest(
+            ad.getSeller(), // Owner of ad
+            requestingUser, // User requesting trade
+            ad,             // Owner's ad
+            userAd          // User's offered ad
+        ));
+
+        return "redirect:/users/profile";
+    }
+
     private User getCurrentUser()
         throws AuthenticationException
     {
@@ -145,7 +172,6 @@ public class AdsController {
                     "Received: user does not exist!"
             );
         }
-        User curUser = users.findOne(id);
-        return curUser;
+        return users.findOne(id);
     }
 }

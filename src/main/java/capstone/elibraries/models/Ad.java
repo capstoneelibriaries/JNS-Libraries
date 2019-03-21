@@ -19,6 +19,12 @@ public class Ad {
     @Column
     private boolean tradable;
 
+    @Column(nullable = false, length = 128)
+    private String title;
+
+    @Column(nullable = false, length = 512)
+    private String description;
+
     @ManyToOne @JoinColumn (name = "user_id")
     private User seller;
 
@@ -34,8 +40,10 @@ public class Ad {
         // default
     }
 
-    public Ad(User seller, double price, double shipping){
+    public Ad(User seller, String title, String description, double price, double shipping){
         this.seller = seller;
+        this.title = title;
+        this.description = description;
         seller.addAd(this);
         this.price = price;
         this.shipping = shipping;
@@ -71,6 +79,22 @@ public class Ad {
 
     public void setTradable(boolean tradable){
         this.tradable = tradable;
+    }
+
+    public void setTitle(String title){
+        this.title = title;
+    }
+
+    public String getTitle(){
+        return this.title;
+    }
+
+    public void setDescription(String description){
+        this.description = description;
+    }
+
+    public String getDescription(){
+        return this.description;
     }
 
     public User getSeller() {

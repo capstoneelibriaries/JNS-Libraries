@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
-    <link th:replace="partials/header :: header('Viewing Ad '+${ad.title})"/>
+                                                    <!-- +${ad.title} -->
+    <link th:replace="partials/header :: header('Viewing Ad')"/>
 
 </head>
 <body>
@@ -10,8 +11,8 @@
     You not trade with yourself.
 </div>
     <div th:object="${ad}" class="">
-        <p th:text="*{title}"></p>
-        <p th:text="*{description}"></p>
+        <!--<p th:text="*{title}"></p>-->
+        <!--<p th:text="*{description}"></p>-->
         <div th:each="book : *{books}">
             <p th:text="${book.title}"></p>
             <p th:text="${book.author}"></p>

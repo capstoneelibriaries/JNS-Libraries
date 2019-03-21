@@ -28,8 +28,8 @@
                                 <input class="form-control"
                                        th:id="create-ad-title"
                                        th:type="text"
-                                       minlength="5"
-                                       maxlength="120"
+                                       minlength="8"
+                                       maxlength="128"
                                        th:name="ad-title"
                                 />
                                 <label th:for="create-ad-title">Title<abbr th:title="required"></abbr></label>
@@ -40,13 +40,12 @@
 
                                 <textarea class="form-control"
                                           th:id="create-ad-description"
-                                          minlength="5"
-                                          maxlength="225"
+                                          minlength="8"
+                                          maxlength="512"
                                           th:name="ad-description"
                                           th:rows="7"
                                           th:columns="10"
                                           th:placeholder="Description"
-
                                 ></textarea>
 
                                 <label th:for="ad-description"><abbr th:title="required"></abbr></label>
@@ -75,18 +74,18 @@
                                        th:name="ad-shipping"/>
                                 <label th:for="create-ad-shipping">Shipping Price<abbr th:title="required"></abbr></label>
                             </div>
-                            <div th:id="ad-tradable" class="custom-control custom-checkbox mb-3">
-                                <input class="custom-control-input"
-                                       th:id="create-ad-tradable"
-                                       th:type="checkbox"
-                                       th:name="ad-tradable"
-                                       th:checked="checked"
-                                />
-                                <label class="custom-control-label"
-                                       th:for="create-ad-tradable">Tradeable
-                                </label>
+                            <!--<div th:id="ad-tradable" class="custom-control custom-checkbox mb-3">-->
+                                <!--<input class="custom-control-input"-->
+                                       <!--th:id="create-ad-tradable"-->
+                                       <!--th:type="checkbox"-->
+                                       <!--th:name="ad-tradable"-->
+                                       <!--th:checked="checked"-->
+                                <!--/>-->
+                                <!--<label class="custom-control-label"-->
+                                       <!--th:for="create-ad-tradable">Tradeable-->
+                                <!--</label>-->
 
-                            </div>
+                            <!--</div>-->
                             <div th:id="ad-new-book">
                                 <button class="btn btn-lg btn-primary btn-block text-uppercase"
                                         th:id="btn-ad-new-book"
