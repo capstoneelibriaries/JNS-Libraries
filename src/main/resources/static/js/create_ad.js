@@ -36,10 +36,23 @@ $(adform.submit.button).click( (event) => {
       post.append(`book-image-${index}`, book.image);
     });
 
+    // get the name of the site
+    const origin = window.location.origin;
+
     let request = new XMLHttpRequest();
-    request.open("POST", "/ads/create");
-    let response = request.send(post);
-    console.log(response);
+    request.open("POST", `${origin}/ads/create`);
+    // when the post is complete
+    request.onload = () => {
+      // redirect
+      if(request.status === 200){
+        $(location).attr('href', `${origin}/ads/index`);
+      }else{
+        $(location).attr('href', `${origin}/${request.status}`);
+      }
+    };
+    // submit the post
+    request.send(post);
+    // the redirect happens here
   }
   
 });
