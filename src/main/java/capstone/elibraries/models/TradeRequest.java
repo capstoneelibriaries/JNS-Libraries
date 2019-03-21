@@ -6,9 +6,9 @@ public class TradeRequest {
 
     @Id @GeneratedValue
     private long id;
-    @Transient
+    @OneToOne
     private User to;
-    @Transient
+    @OneToOne
     private User from;
     @OneToOne
     private Ad forSale;

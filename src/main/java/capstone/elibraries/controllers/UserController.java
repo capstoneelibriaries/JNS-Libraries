@@ -47,7 +47,7 @@ public class UserController {
     @GetMapping("/profile/trades")
     public String showTradeRequests(Model model) {
         User databaseUser = users.findOne(((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId());
-        Iterable<TradeRequest> t = trades.findByTo(databaseUser) ;
+        Iterable<TradeRequest> t = trades.findTradeRequestsByTo(databaseUser) ;
         model.addAttribute("trades", t);
         return "users/trades";
     }
