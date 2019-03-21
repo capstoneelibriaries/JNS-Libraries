@@ -9,15 +9,49 @@
 
 
 <div class="container mt-3">
-    <div class="row u-max-full-width">
-        <div class="three columns" th:each="trade:${trades}">
+    <th:block th:if="${trades.iterator().hasNext()}">
+    <div class="row" th:each="trade:${trades}">
+        <div class="col-12">
+            <div class="card">
+                <form th:action="@{/profile/trades}" th:object="${trade}">
+                <div class="offer" >
+                    <h5><span th:text="*{from.username}" class="text-capitalize"></span> wants to trade</h5>
 
-            <div class="card" th:object="${trade}">
-                <p><span th:text="*{from.username}"></span> wants to trade</p>
-                <h4 th:text="${trade.wanted.books[0].title}"></h4>
+                    <ul th:field="*{id}" th:value="*{id}">
+                        <th:block th:each="book: *{wanted.books}">
+                            <li th:text="${book.title}"></li>
+                        </th:block>
+                    </ul>
+
+
+                </div>
+                <div class="yours">
+                    <h5>wants to trade</h5>
+
+                    <ul>
+                        <th:block th:each="book: *{wanted.books}">
+                            <li th:text="${book.title}"></li>
+                        </th:block>
+                    </ul>
+                </div>
+
+                    <button class="btn btn-primary mt-3" name="choice" th:value="'confirm'">Confirm Trade Offer</button>
+                    <button class="btn btn-danger mt-3" name="choice" th:value="'deny'">Reject Trade Offer</button>
+
+                </form>
             </div>
         </div>
     </div>
+    </th:block>
+    <th:block th:if="${!trades.iterator().hasNext()}">
+        <div>
+            <div class="col">
+                <div class="card ">
+                    <h4> You have no pending trade requests.</h4>
+                </div>
+            </div>
+        </div>
+    </th:block>
 </div>
 </body>
 </html>
