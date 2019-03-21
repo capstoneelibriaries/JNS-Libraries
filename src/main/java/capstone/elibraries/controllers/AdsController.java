@@ -42,9 +42,14 @@ public class AdsController {
 
     @PostMapping("/ads/create")
     public String createAd(HttpServletRequest request){
+        // DEBUG
+        System.out.println("DEBUG: createAd(...)");
+        // END DEBUG
         try{
             // create a new ad
             Ad ad = new Ad(getCurrentUser(),
+                    request.getParameter("title"),
+                    request.getParameter("description"),
                     Double.parseDouble( request.getParameter("price") ),
                     Double.parseDouble( request.getParameter("shipping") ));
             // count the books
@@ -61,7 +66,7 @@ public class AdsController {
             }
             // save the ads and the books to the database
             ads.save(ad);
-            return "/ads/index";
+            return "profile";
         }catch(ValidationException e){
             // if the image is bad
             if(e.getClass().equals(ImageException.class)){
@@ -80,6 +85,9 @@ public class AdsController {
             // END DEBUG
             return e.getRedirect();
         }catch(NumberFormatException e){
+            // DEBUG
+            e.printStackTrace();
+            // END DEBUG
             return String.format("%s", HttpStatus.BAD_REQUEST);
         }
     }
