@@ -3,7 +3,17 @@
 
 <head>
     <link th:replace="partials/header :: header('Log in')"/>
-    <link th:href="@{/css/login.css}" href="/static/css/login.css" rel="stylesheet" type="text/css"/>
+    <style>
+        body {
+            background: #619B8A;
+            background: linear-gradient(to right, #619B8A, #A1C181);
+        }
+        .btn-primary {
+            color: #fff;
+            background-color: #233D4D;
+            border-color: #233D4D;
+        }
+    </style>
 </head>
 <body>
     <nav th:replace="partials/navbar :: navbar"></nav>

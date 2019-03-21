@@ -2,7 +2,17 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <link th:replace="partials/header :: header('Create Ad')"/>
-    <link th:href="@{/css/createAd.css}" href="/static/css/createAd.css" rel="stylesheet" type="text/css"/>
+    <style>
+        body {
+            background: #233D4D;
+            background: linear-gradient(to right, #233D4D, #619B8A);
+        }
+        .btn-primary {
+            color: #fff;
+            background-color: #233D4D;
+            border-color: #233D4D;
+        }
+    </style>
 </head>
 <body>
     <div th:replace="partials/navbar :: navbar"></div>
