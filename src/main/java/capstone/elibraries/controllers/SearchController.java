@@ -8,8 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.List;
-
 @Controller
 public class SearchController {
 
@@ -36,7 +34,7 @@ public class SearchController {
             return String.format("%s", HttpStatus.BAD_REQUEST);
         }
 
-        model.addAttribute("Ads", results);
+        model.addAttribute("ads", results);
         return "search/index";
     }
 
