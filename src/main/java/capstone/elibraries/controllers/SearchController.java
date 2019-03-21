@@ -9,6 +9,7 @@ public class SearchController {
 
     private final String[] options = {"books", "ads"};
 
+    // The default search page
     @GetMapping("search")
     public String getSearch(@RequestParam("q") String query, @RequestParam("option") String option){
         // DEBUG
@@ -17,6 +18,7 @@ public class SearchController {
         return "index";
     }
 
+    // The advanced search page
     @GetMapping("advanced")
     public String getAdvanced(@RequestParam("q") String query, @RequestParam("option") String option){
         // DEBUG
