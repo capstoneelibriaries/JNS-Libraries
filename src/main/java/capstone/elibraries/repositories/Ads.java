@@ -14,5 +14,9 @@ public interface Ads extends CrudRepository<Ad, Long> {
     List<Ad> findByTitleIsLikeOrDescriptionIsLike(String title, String description);
 
     List<Ad> findByBooks(List<Book> books);
+
+    List<Ad> findByTitleIsContainingOrDescriptionIsContaining(String title, String description);
+
+    List<Ad> findByTitleIsInOrDescriptionIsIn(String title, String description);
 }
 

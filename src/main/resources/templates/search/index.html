@@ -10,24 +10,22 @@
             <h2>No Results :(</h2>
         </div>
     </div>
-    <div th:unless="${ads.size() > 0}">
-        <div th:each="ad : ${ads}" >
-            <div>
-                <h2>*{title}</h2>
-            </div>
-            <div>
-                <h3>*{price}</h3>
-            </div>
-            <div>
-                <p>*{description}</p>
-            </div>
-            <div th:each="book : ${ad.books}">
-                <div>
-                    <h4>*{title}</h4>
-                </div>
-            </div>
-            <br/>
+    <div th:each="ad : ${ads}" >
+        <div>
+            <h2 th:text="${ad.title}"></h2>
         </div>
+        <div>
+            <h3 th:text="${ad.price}"></h3>
+        </div>
+        <div>
+            <p th:text="${ad.description}"></p>
+        </div>
+        <div th:each="book : ${ad.books}">
+            <div>
+                <h4 th:text="${book.title}"></h4>
+            </div>
+        </div>
+        <br/>
     </div>
 </body>
 </html>

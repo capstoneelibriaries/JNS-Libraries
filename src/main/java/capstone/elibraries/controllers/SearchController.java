@@ -30,12 +30,14 @@ public class SearchController {
         System.out.println("DEBUG: getSearch(...): query = " + query + ", option = " + option);
         // END DEBUG
 
+        query = "%" + query + "%";
         List<Ad> results = null;
         if(option.equals(options[0])){
             results = adsDao.findByBooks(
                     booksDao.findByTitleIsLikeOrAuthorIsLikeOrSynopsisIsLike(query, query, query)
             );
         }else if(option.equals(options[1])){
+            //results = adsDao.findByTitleIsLikeOrDescriptionIsLike(query, query);
             results = adsDao.findByTitleIsLikeOrDescriptionIsLike(query, query);
         }else{
             return String.format("%s", HttpStatus.BAD_REQUEST);
