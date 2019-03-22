@@ -25,6 +25,9 @@
                 <h4 th:text="${book.title}"></h4>
             </div>
         </div>
+        <div>
+            <a th:href="@{/ads/view={id} (id=${ad.id})}">View</a>
+        </div>
         <br/>
     </div>
 </body>
