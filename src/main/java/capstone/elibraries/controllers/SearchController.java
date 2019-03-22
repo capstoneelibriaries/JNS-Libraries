@@ -9,6 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+
 @Controller
 public class SearchController {
 
@@ -28,7 +30,7 @@ public class SearchController {
         System.out.println("DEBUG: getSearch(...): query = " + query + ", option = " + option);
         // END DEBUG
 
-        Iterable<Ad> results = null;
+        List<Ad> results = null;
         if(option.equals(options[0])){
             results = adsDao.findByBooks(
                     booksDao.findByTitleIsLikeOrAuthorIsLikeOrSynopsisIsLike(query, query, query)

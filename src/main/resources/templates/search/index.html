@@ -5,22 +5,29 @@
 </head>
 <body>
     <div th:replace="partials/navbar :: navbar"></div>
-    <div th:each="ad : ${ads}" >
+    <div th:if="${ads.size() == 0}">
         <div>
-            <h2>*{title}</h2>
+            <h2>No Results :(</h2>
         </div>
-        <div>
-            <h3>*{price}</h3>
-        </div>
-        <div>
-            <p>*{description}</p>
-        </div>
-        <div th:each="book : ${ad.books}">
+    </div>
+    <div th:unless="${ads.size() > 0}">
+        <div th:each="ad : ${ads}" >
             <div>
-                <h4>*{title}</h4>
+                <h2>*{title}</h2>
             </div>
+            <div>
+                <h3>*{price}</h3>
+            </div>
+            <div>
+                <p>*{description}</p>
+            </div>
+            <div th:each="book : ${ad.books}">
+                <div>
+                    <h4>*{title}</h4>
+                </div>
+            </div>
+            <br/>
         </div>
-        <br/>
     </div>
 </body>
 </html>
