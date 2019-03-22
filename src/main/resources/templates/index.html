@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
-    <link th:replace="partials/header :: header('ELibraries')"/>
+    <link th:replace="partials/header :: header('JNS Libraries')"/>
     <style>
         body {
             background: #619B8A;
@@ -31,48 +31,28 @@
                         </div>
                         <label for="adSearch"></label>
                         <form id="adSearch" class="form-signin" th:action="@{/search}" th:method="get">
-                            <div>
-                                <div class="form-label-group">
-
-                                    <div class="input-group">
-
-                                        <input type="text" class="form-control" th:placeholder="Search..." name="q"/>
-
-                                        <div class="input-group-append" id="button-addon4" th:name="option" th:default="books">
-
-                                            <button class="btn btn-outline-secondary" type="button" th:value="ads">ads</button>
-                                            <button class="btn btn-outline-secondary" type="button" th:value="books">books</button>
-
-                                        </div>
-                                    </div>
-
-
-
-                                </div>
-                                <div class="form-label-group">
-                                    <div class="row">
-                                        <!--<div class="column md-col-80 lg-col-80 btn-group">-->
-                                                <!--<label>-->
-                                                    <!--<select class="btn-group" th:name="option">-->
-                                                        <!--<option th:value="ads">Search Ads</option>-->
-                                                        <!--<option th:value="books">Search Books</option>-->
-                                                    <!--</select>-->
-                                                <!--</label>-->
-                                        <!--</div>-->
-                                    </div>
-                                    <hr/>
-                                    <div>
-                                        <button class="btn btn-lg btn-primary btn-block text-uppercase"
-                                                th:formaction="@{/advanced}"
-                                                type="submit">advanced
-                                        </button>
+                            <div class="form-label-group">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" th:placeholder="Search..." name="q"/>
+                                    <div class="input-group-append">
+                                        <select class="custom-select" th:name="option">
+                                            <option th:value="ads">Ads</option>
+                                            <option th:value="books">Books</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
                             <br/>
-                            <button class="btn btn-lg btn-primary btn-block text-uppercase search"
-                                    th:type="submit">search
-                            </button>
+                            <div class="form-label-group">
+                                <button class="btn btn-lg btn-primary btn-block text-uppercase search"
+                                        th:type="submit">search
+                                </button>
+                                <br/>
+                                <button class="btn btn-lg btn-primary btn-block text-uppercase"
+                                        th:formaction="@{/advanced}"
+                                        type="submit">advanced
+                                </button>
+                            </div>
                         </form>
                     </div>
                 </div>

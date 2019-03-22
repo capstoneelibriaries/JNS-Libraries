@@ -10,6 +10,8 @@ import capstone.elibraries.repositories.Users;
 import capstone.elibraries.models.User;
 import org.springframework.ui.Model;
 
+import java.util.List;
+
 @Controller
 public class UserController {
     private Users users;
@@ -53,9 +55,9 @@ public class UserController {
     }
 
     @PostMapping("/profile/trades")
-    public String confirmDenyTradeRequests(@RequestParam( name = "choice") String choice, @ModelAttribute TradeRequest trade) {
-        TradeRequest tradeRequest = trades.findOne(trade.getId());
-
+    public String confirmDenyTradeRequests(@RequestParam( name = "choice") String choice, @RequestParam( name = "id") Long trade) {
+        TradeRequest tradeRequest = trades.findOne(trade);
+        System.out.println(trade);
         if (choice.equalsIgnoreCase("confirm")){
             User databaseUser = users.findOne(((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId());
 
@@ -74,6 +76,7 @@ public class UserController {
 
            String hash = passwordEncoder.encode(user.getPassword());
            user.setPassword(hash);
+           user.setConfirmPassword("");
            users.save(user);
            return "redirect:/login";
        }else{

@@ -140,7 +140,7 @@ public class AdsController {
             return "redirect:/login?trade";
         }
         if (user.getId() == ad.getSeller().getId()){
-            return "redirect:/ads/" + id+ "?error";
+            return "redirect:/ads/view=" + id+ "?error";
         }
         model.addAttribute("ad", ad);
         model.addAttribute("user", user);
@@ -159,7 +159,7 @@ public class AdsController {
             userAd          // User's offered ad
         ));
 
-        return "redirect:/users/profile";
+        return "redirect:/profile";
     }
 
     private User getCurrentUser()

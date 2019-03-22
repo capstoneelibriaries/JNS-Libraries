@@ -21,11 +21,6 @@ public class HomeController {
     @GetMapping("/")
     public String home(Model model){
         Iterable<Ad> ads = adsDao.findAll();
-//        for(Ad ad : ads){
-//            for(Book book : ad.getBooks()){
-//                book.setImageUrl(book.getImageUrl());
-//            }
-//        }
         model.addAttribute("ads", adsDao.findAll());
         return "index";
     }
