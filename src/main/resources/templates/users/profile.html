@@ -2,12 +2,12 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <link th:replace="partials/header :: header('Profile')"/>
-<style>
-    body {
-        background: #233D4D;
-        background: linear-gradient(to right, #233D4D, #619B8A);
-    }
-</style>
+    <style>
+        body {
+            background: #233D4D;
+            background: linear-gradient(to right, #233D4D, #619B8A);
+        }
+    </style>
 </head>
 <body>
 <div th:replace="partials/navbar :: navbar"></div>
@@ -21,82 +21,40 @@
         <hr class="mt-2 mb-5"/>
 
         <div class="row text-center text-lg-left">
+            <th:block th:if="${user.ads.isEmpty()}">
+                <div class="offset-lg-3 col-lg-6  offset-md-3 col-md-6 col-sm-12">
+                    <div class="card text-center">
+                        <h4> No ads have been created.</h4>
+                    </div>
+                </div>
+            </th:block>
+            <th:block th:if="${!user.ads.isEmpty()}">
 
-            <div class="col-lg-3 col-md-4 col-6">
-                <a class="d-block mb-4 h-100">
-                    <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/pWkk7iiCoDM/400x300" alt=""/>
-                </a>
-            </div>
-            <div class="col-lg-3 col-md-4 col-6">
-                <a class="d-block mb-4 h-100">
-                    <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/aob0ukAYfuI/400x300" alt=""/>
-                </a>
-            </div>
-            <div class="col-lg-3 col-md-4 col-6">
-                <a class="d-block mb-4 h-100">
-                    <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/EUfxH-pze7s/400x300" alt=""/>
-                </a>
-            </div>
-            <div class="col-lg-3 col-md-4 col-6">
-                <a class="d-block mb-4 h-100">
-                    <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/M185_qYH8vg/400x300" alt=""/>
-                </a>
-            </div>
-            <div class="col-lg-3 col-md-4 col-6">
-                <a class="d-block mb-4 h-100">
-                    <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/sesveuG_rNo/400x300" alt=""/>
-                </a>
-            </div>
-            <div class="col-lg-3 col-md-4 col-6">
-                <a class="d-block mb-4 h-100">
-                    <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/AvhMzHwiE_0/400x300" alt=""/>
-                </a>
-            </div>
-            <div class="col-lg-3 col-md-4 col-6">
-                <a  class="d-block mb-4 h-100">
-                    <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/2gYsZUmockw/400x300" alt=""/>
-                </a>
-            </div>
-            <div class="col-lg-3 col-md-4 col-6">
-                <a  class="d-block mb-4 h-100">
-                    <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/EMSDtjVHdQ8/400x300" alt=""/>
-                </a>
-            </div>
-            <div class="col-lg-3 col-md-4 col-6">
-                <a  class="d-block mb-4 h-100">
-                    <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/8mUEy0ABdNE/400x300" alt=""/>
-                </a>
-            </div>
-            <div class="col-lg-3 col-md-4 col-6">
-                <a  class="d-block mb-4 h-100">
-                    <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/G9Rfc1qccH4/400x300" alt=""/>
-                </a>
-            </div>
-            <div class="col-lg-3 col-md-4 col-6">
-                <a  class="d-block mb-4 h-100">
-                    <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/aJeH0KcFkuc/400x300" alt=""/>
-                </a>
-            </div>
-            <div class="col-lg-3 col-md-4 col-6">
-                <a  class="d-block mb-4 h-100">
-                    <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/p2TQ-3Bh3Oo/400x300" alt=""/>
-                </a>
-            </div>
+                <div class="col-lg-3 col-md-4 col-6" th:each="ad:${user.ads}">
+                    <a class="d-block mb-4 h-100 img-thumbnail">
+                        <h5 th:text="${ad.title}"></h5>
+                        <th:block th:each="book:${ad.books}">
+                            <img class="img-fluid" th:src="${book.imageUrl}" alt="book-image"/>
+                            <h6 th:text="${book.title}"></h6>
+                            <p th:text="${book.author}"></p>
+                        </th:block>
+                    </a>
+                </div>
+            </th:block>
         </div>
-
     </div>
 
 
     <!--<div class="container">-->
-        <!--<div class="row u-max-full-width">-->
-        <!--<div class="three columns" th:each="ad:${user.ads}">-->
-                <!--<div class="card" th:each="book:${ad.books}">-->
-                        <!--<img th:src="${book.imageUrl}" alt="book"/>-->
-                        <!--<h4 th:text="${book.title}"></h4>-->
-                        <!--<h5 th:text="${book.author}"></h5>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
+    <!--<div class="row u-max-full-width">-->
+    <!--<div class="three columns" th:each="ad:${user.ads}">-->
+    <!--<div class="card" th:each="book:${ad.books}">-->
+    <!--<img th:src="${book.imageUrl}" alt="book"/>-->
+    <!--<h4 th:text="${book.title}"></h4>-->
+    <!--<h5 th:text="${book.author}"></h5>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
     <!--</div>-->
 </div>
 </body>
