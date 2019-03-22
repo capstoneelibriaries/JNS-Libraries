@@ -2,20 +2,25 @@ package capstone.elibraries.controllers;
 
 import capstone.elibraries.models.Ad;
 import capstone.elibraries.repositories.Ads;
+import capstone.elibraries.repositories.Books;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+
 @Controller
 public class SearchController {
 
-    private final Ads adsDao;
+    private Ads adsDao;
+    private Books booksDao;
     private final String[] options = {"books", "ads"};
 
-    public SearchController(Ads adsDao){
+    public SearchController(Ads adsDao, Books booksDao){
         this.adsDao = adsDao;
+        this.booksDao = booksDao;
     }
 
     // The default search page
@@ -25,11 +30,15 @@ public class SearchController {
         System.out.println("DEBUG: getSearch(...): query = " + query + ", option = " + option);
         // END DEBUG
 
-        Iterable<Ad> results = null;
+        query = "%" + query + "%";
+        List<Ad> results = null;
         if(option.equals(options[0])){
-            results = adsDao.findAdByBook(query, query, query);
+            results = adsDao.findByBooks(
+                    booksDao.findByTitleIsLikeOrAuthorIsLikeOrSynopsisIsLike(query, query, query)
+            );
         }else if(option.equals(options[1])){
-            results = adsDao.findAdByAd(query, query);
+            //results = adsDao.findByTitleIsLikeOrDescriptionIsLike(query, query);
+            results = adsDao.findByTitleIsLikeOrDescriptionIsLike(query, query);
         }else{
             return String.format("%s", HttpStatus.BAD_REQUEST);
         }
