@@ -25,7 +25,9 @@
                     </div>
                     <div class="card-body">
                         <h5 class="card-title text-center">Register <i class="fas fa-user-plus"></i></h5>
-
+                        <div th:if="${param.error}" class="alert alert-danger" role="alert">
+                            Passwords do not match.
+                        </div>
                         <form id="identicalForm" class="form-signin needs-validation"
                               th:action="@{/register}" th:method="post" th:object="${user}" >
 

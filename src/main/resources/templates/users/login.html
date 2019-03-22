@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 
 <head>
-    <link th:replace="partials/header :: header('Log in')"/>
+    <link th:replace="partials/header :: header('Sign In')"/>
     <style>
         body {
             background: #619B8A;
@@ -25,12 +25,17 @@
                     <div class="card-body">
                         <h5 class="card-title text-center">Sign In <i class="fas fa-user"></i></h5>
 
-
+                        <div th:if="${param.error}" class="alert alert-danger" role="alert">
+                            Invalid credentials.
+                        </div>
+                        <div th:if="${param.logout}" class="alert alert-info" role="alert">
+                            You have logged out successfully.
+                        </div>
                         <form class="form-signin" th:action="@{/login}" th:object="${user}" th:method="post">
 
                             <div class="form-label-group">
 
-                                <input th:field="*{username}" id="inputUsername" class="form-control" placeholder="Username"/>
+                                <input th:field="*{username}" id="inputUsername" class="form-control" placeholder="Username" required="required"/>
 
                                 <label for="inputUsername">Username</label>
 
@@ -38,7 +43,7 @@
 
                             <div class="form-label-group">
 
-                                <input th:field="*{password}" type="password" class="form-control" id="inputPassword" placeholder="Password"/>
+                                <input th:field="*{password}" type="password" class="form-control" id="inputPassword" placeholder="Password" required="required" minlength="8"/>
 
                                 <label for="inputPassword">Password</label>
                             </div>
