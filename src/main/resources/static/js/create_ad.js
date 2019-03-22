@@ -5,10 +5,13 @@ let adform = AdForm.new(OpenBook);
 $(adform.book.button).on("click", (event) => {
   console.log($(adform.book.button));
   adform.addBookForm(BookForm.new(adform));
+  console.log(adform);
+  console.log("DEBUG: click event...");
 });
 
 //when the submit button is pressed...
 $(adform.submit.button).click( (event) => {
+  console.log("DEBUG: submit button click event...");
   event.preventDefault();
 
   //if no books are provided
@@ -17,6 +20,7 @@ $(adform.submit.button).click( (event) => {
   }else{
 
     let post = new FormData();
+    console.log("creating new form data");
     post.append("title", $(adform.title.field).val());
     post.append("description", $(adform.description.field).val());
     post.append("price", $(adform.price.field).val());
@@ -25,6 +29,7 @@ $(adform.submit.button).click( (event) => {
 
     adform.bookforms.forEach( (bookform, index) => {
       const book = bookform.getBook();
+      console.log("getting book information");
       post.append(`book-isbn-${index}`, book.isbn);
       post.append(`book-title-${index}`, book.title);
       post.append(`book-author-${index}`, book.author);

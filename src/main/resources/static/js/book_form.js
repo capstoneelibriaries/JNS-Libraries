@@ -3,23 +3,28 @@ const BookForm = {
     adform: {},
 
     new: (adform) => {
+        console.log("DEBUG: new Adform(...)");
         return new ImplBookForm(adform);
     },
 
     genHtml: (label, id, type, misc) => {
+        console.log("DEBUG: genHTML(...)");
         return `` +
-            `<div class="form-label-group">` +
+            `<div class="ad-new-book-form">` +
             `<label for="${id}">${label}</label>` +
-            `<input class="form-control" id="${id}" type="${type}" ${misc} name="${id}"/>` +
+            `<input class="form-control" id="${id}" type="${type}"
+${misc} name="${id}"/>` +
             `</div>`;
     },
 
     idToString: (id) => {
+        console.log("DEBUG: idToString(...)");
         return id.substring(1, id.length);
     },
 };
 
 function ImplBookForm(adform) {
+    console.log("DEBUG: ImplBookForm(...)");
     // BookForms require an AdForm
     const index = adform.bookCount();
     // inject dependency
@@ -34,8 +39,9 @@ function ImplBookForm(adform) {
     // book value gets set later
     this.book = {};
 
+
     this.autoFill = () => {
-        console.log("DEBUG: autoFill()");
+        console.log("DEBUG: autoFill(...)");
         this.book = Book.from(OpenBook.response);
         console.log(this.book);
         $(this.title).val(this.book.title);
@@ -44,7 +50,7 @@ function ImplBookForm(adform) {
     };
 
     this.getBook = () => {
-        console.log("DEBUG: getBook()");
+        console.log("DEBUG: getBook(...)");
         this.book.isbn = $(this.isbn).val();
         this.book.title = $(this.title).val();
         this.book.author = $(this.author).val();
@@ -54,22 +60,18 @@ function ImplBookForm(adform) {
     };
 
     this.toHtml = () => {
+        console.log("DEBUG: toHtml(...)");
         const isbn_min = this.adform.getIsbnSize().min;
         const isbn_max = this.adform.getIsbnSize().max;
 
         return `` +
-            `<div class="card card-signin my-5"></div>` +
-            `<div class="card-body" ></div>` +
-            `<div class="form-signin"></div>` +
             `<div class="form-label-group" id=${BookForm.idToString(this.section)}>` +
-            `<div class="form-label-group">` +
+            `<div 
+class="form-label-group">` +
             `<label for="${BookForm.idToString(this.isbn)}"></label>` +
             `<input class="form-control" id="${BookForm.idToString(this.isbn)}" 
                 type="number" minlength="${isbn_min}" maxlength="${isbn_max}" 
                 name="${this.isbn}"/>` +
-                    `</div>` +
-                    `</div>` +
-                    `</div>` +
                     `</div>` +
                     `</div>` +
             BookForm.genHtml("", BookForm.idToString(this.title), "text",

@@ -9,6 +9,7 @@ const AdForm = {
 };
 
 function ImplAdForm(openbookApi) {
+    console.log("DEBUG: ImplAdForm(...)");
 
     this.openbookApi = openbookApi;
 
@@ -47,14 +48,17 @@ function ImplAdForm(openbookApi) {
     this.bookforms = [];
 
     this.bookCount = () => {
+        console.log("DEBUG: adform.bookCount()");
         return this.bookforms.length;
     };
 
     this.getIsbnSize = () => {
+        console.log("DEBUG: adform.getIsbnSize");
         return AdForm.isbn;
     };
 
     this.addBookForm = (bookform) => {
+        console.log("DEBUG: adform.addBookForm");
 
         // check if the previous book form is complete
         if(this.bookCount() > 0 && $(adform.bookforms[adform.bookCount() - 1].isbn).val().length !== (10||13) ){

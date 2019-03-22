@@ -14,7 +14,115 @@
         }
     </style>
 </head>
+
 <body>
+
+    <!--<div th:replace="partials/navbar :: navbar"></div>-->
+
+    <!--<section class="pricing py-5">-->
+        <!--<div class="container">-->
+            <!--<div class="row">-->
+                <!--&lt;!&ndash; Ad Information &ndash;&gt;-->
+                <!--<div class="col-lg-4">-->
+                    <!--<div class="card mb-5 mb-lg-0">-->
+                        <!--<div class="card-body">-->
+                            <!--<h5 class="card-title text-center">Create an Ad</h5>-->
+                            <!--<hr/>-->
+
+                            <!--<form th:action="@{/ads/create}" th:object="${ad}" th:method="post" class="form-signin">-->
+                            <!--<div class="form-label-group" th:id="ad-title">-->
+                            <!--<input class="form-control"-->
+                            <!--th:id="create-ad-title"-->
+                            <!--th:type="text"-->
+                            <!--minlength="8"-->
+                            <!--maxlength="128"-->
+                            <!--th:name="ad-title"-->
+                            <!--/>-->
+                            <!--<label th:for="create-ad-title">Title<abbr th:title="required"></abbr></label>-->
+                            <!--</div>-->
+                            <!--<div class="form-label-group" th:id="ad-description">-->
+                            <!--<textarea class="form-control"-->
+                            <!--th:id="create-ad-description"-->
+                            <!--minlength="8"-->
+                            <!--maxlength="512"-->
+                            <!--th:name="ad-description"-->
+                            <!--th:rows="7"-->
+                            <!--th:columns="10"-->
+                            <!--th:placeholder="Description"-->
+                            <!--&gt;</textarea>-->
+                            <!--<label th:for="ad-description"><abbr th:title="required"></abbr></label>-->
+                            <!--</div>-->
+                            <!--<div class="form-label-group" th:id="ad-price">-->
+                            <!--<input class="form-control"-->
+                            <!--th:id="create-ad-price"-->
+                            <!--th:type="number"-->
+                            <!--th:step="0.01"-->
+                            <!--th:min="1.00"-->
+                            <!--th:max="9999.99"-->
+                            <!--th:name="ad-price"-->
+                            <!--/>-->
+                            <!--<label th:for="create-ad-price">Price<abbr th:title="required"></abbr></label>-->
+                            <!--</div>-->
+                            <!--<div class="form-label-group" th:id="ad-shipping">-->
+                            <!--<input class="form-control"-->
+                            <!--th:id="create-ad-shipping"-->
+                            <!--th:type="number"-->
+                            <!--th:step="0.01"-->
+                            <!--th:min="1.00"-->
+                            <!--th:max="9999.99"-->
+                            <!--th:name="ad-shipping"/>-->
+                            <!--<label th:for="create-ad-shipping">Shipping Price<abbr th:title="required"></abbr></label>-->
+                            <!--</div>-->
+                            <!--&lt;!&ndash;<div th:id="ad-tradable" class="custom-control custom-checkbox mb-3">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<input class="custom-control-input"&ndash;&gt;-->
+                            <!--&lt;!&ndash;th:id="create-ad-tradable"&ndash;&gt;-->
+                            <!--&lt;!&ndash;th:type="checkbox"&ndash;&gt;-->
+                            <!--&lt;!&ndash;th:name="ad-tradable"&ndash;&gt;-->
+                            <!--&lt;!&ndash;th:checked="checked"&ndash;&gt;-->
+                            <!--&lt;!&ndash;/>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<label class="custom-control-label"&ndash;&gt;-->
+                            <!--&lt;!&ndash;th:for="create-ad-tradable">Tradeable&ndash;&gt;-->
+                            <!--&lt;!&ndash;</label>&ndash;&gt;-->
+                            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                            <!--</form>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--&lt;!&ndash; Book Cover &ndash;&gt;-->
+                <!--<div class="col-lg-4">-->
+                    <!--<div class="card mb-5 mb-lg-0">-->
+                        <!--<div class="card-body">-->
+                            <!--<h5 class="card-title text-center">this will be the book cover</h5>-->
+                            <!--<hr/>-->
+                           <!--<h4>booook</h4>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--&lt;!&ndash; Adding book info &ndash;&gt;-->
+                <!--<div class="col-lg-4">-->
+                    <!--<div class="card">-->
+                        <!--<div class="card-body">-->
+                                <!--<h5 class="card-title text-center">Add a book</h5>-->
+                            <!--<hr class="my-4"/>-->
+                            <!--<div th:id="ad-new-book-form">-->
+                                <!--&lt;!&ndash; Empty by default &ndash;&gt;-->
+                            <!--</div>-->
+
+                            <!--&lt;!&ndash;Book info needs to go here&ndash;&gt;-->
+                            <!--<button class="btn btn-lg btn-primary btn-block"-->
+                            <!--th:id="btn-ad-new-book"-->
+                            <!--th:type="button">Add a book-->
+                            <!--</button>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</section>-->
+
+    <!--This is the previous layout for reference-->
+
+
     <div th:replace="partials/navbar :: navbar"></div>
     <div th:id="create-ad" class="container">
         <div class="row">
@@ -24,7 +132,6 @@
                         <h5 class="card-title text-center">Create an Ad</h5>
                         <form th:action="@{/ads/create}" th:object="${ad}" th:method="post" class="form-signin">
                             <div class="form-label-group" th:id="ad-title">
-
                                 <input class="form-control"
                                        th:id="create-ad-title"
                                        th:type="text"
@@ -33,11 +140,8 @@
                                        th:name="ad-title"
                                 />
                                 <label th:for="create-ad-title">Title<abbr th:title="required"></abbr></label>
-
                             </div>
-
                             <div class="form-label-group" th:id="ad-description">
-
                                 <textarea class="form-control"
                                           th:id="create-ad-description"
                                           minlength="8"
@@ -47,13 +151,9 @@
                                           th:columns="10"
                                           th:placeholder="Description"
                                 ></textarea>
-
                                 <label th:for="ad-description"><abbr th:title="required"></abbr></label>
-
                             </div>
-
                             <div class="form-label-group" th:id="ad-price">
-
                                 <input class="form-control"
                                        th:id="create-ad-price"
                                        th:type="number"
@@ -84,7 +184,6 @@
                                 <!--<label class="custom-control-label"-->
                                        <!--th:for="create-ad-tradable">Tradeable-->
                                 <!--</label>-->
-
                             <!--</div>-->
                             <div th:id="ad-new-book">
                                 <button class="btn btn-lg btn-primary btn-block text-uppercase"
@@ -102,15 +201,14 @@
                                         th:id="btn-ad-submit-all" th:type="submit"
                                 >Submit
                                 </button>
-
                             </div>
-
                         </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
     <script th:src="@{/js/jquery.js}"></script>
     <script th:src="@{/js/openbook.js}"></script>
     <script th:src="@{/js/book.js}"></script>
