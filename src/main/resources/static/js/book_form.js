@@ -14,6 +14,9 @@ function ImplBookForm(adform, index) {
     this.book = {};
 
     if(index === undefined){
+        // TEST
+        console.assert(adform.bookCount() === 0);
+        // END TEST
         this.isbn = "#book-isbn";
         this.title = "#book-title";
         this.author = "#book-author";
@@ -21,6 +24,9 @@ function ImplBookForm(adform, index) {
         this.image = "#book-image";
         this.wear = "#book-wear";
     }else{
+        // TEST
+        console.assert(adform.bookCount() > 1);
+        // END TEST
         this.isbn = `#book-${index}-isbn`;
         this.title = `#book-${index}-title`;
         this.author = `#book-${index}-author`;

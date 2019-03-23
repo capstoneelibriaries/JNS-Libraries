@@ -22,7 +22,7 @@ function ImplAdForm(openbookApi) {
     };
 
     // all book forms are listed in the following array
-    this.bookforms = [{}];
+    this.bookforms = [];
 
     this.bookCount = () => {
         console.log("DEBUG: ImplAdForm.bookCount(...)");

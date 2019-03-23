@@ -176,19 +176,12 @@
     <script th:src="@{/js/book.js}"></script>
     <script th:src="@{/js/book_form.js}"></script>
     <script th:src="@{/js/ad_form.js}"></script>
+    <script th:scr="@{/js/create_ad.js}"></script>
     <script th:inline="javascript">
         /*<![CDATA[*/
-        let adform = AdForm.new(OpenBook);
-        adform.addBookForm(BookForm.new(adform));
-        console.assert(adform.bookCount() === 1);
-
+        console.assert(createAd !== undefined);
         const bookc = /*[[${ad.books.size()}]]*/ 0;
-        console.assert(typeof(bookc) === "number");
-
-        for(let i = 0 ; i < bookc; i++){
-            addform.addBookForm(BookForm.new(adform));
-            console.assert(adform.bookCount() === (i + 1));
-        }
+        createAd(bookc);
         /*]]>*/
     </script>
 </body>
