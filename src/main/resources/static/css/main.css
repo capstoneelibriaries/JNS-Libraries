@@ -38,3 +38,7 @@ input[type="radio"]:checked  {
         margin: 2em auto;
     }
 }
+.img-thumbnail{
+    background-color: #81a1a975;
+    border: 1px solid #79797938;
+}
