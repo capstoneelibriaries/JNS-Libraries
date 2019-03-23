@@ -17,98 +17,108 @@
 <body>
     <div th:replace="partials/navbar :: navbar"></div>
     <div th:id="create-ad" class="container">
-        <div class="row">
-            <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
-                <div class="card card-signin my-5">
-                    <div class="card-body">
-                        <h5 class="card-title text-center">Create an Ad</h5>
-                        <form th:action="@{/ads/create}" th:object="${ad}" th:method="post" class="form-signin">
-                            <div class="form-label-group" th:id="ad-title">
-
-                                <input class="form-control"
-                                       th:id="create-ad-title"
-                                       th:type="text"
-                                       minlength="8"
-                                       maxlength="128"
-                                       th:name="ad-title"
-                                />
-                                <label th:for="create-ad-title">Title<abbr th:title="required"></abbr></label>
-
-                            </div>
-
-                            <div class="form-label-group" th:id="ad-description">
-
-                                <textarea class="form-control"
-                                          th:id="create-ad-description"
-                                          minlength="8"
-                                          maxlength="512"
-                                          th:name="ad-description"
-                                          th:rows="7"
-                                          th:columns="10"
-                                          th:placeholder="Description"
-                                ></textarea>
-
-                                <label th:for="ad-description"><abbr th:title="required"></abbr></label>
-
-                            </div>
-
-                            <div class="form-label-group" th:id="ad-price">
-
-                                <input class="form-control"
-                                       th:id="create-ad-price"
-                                       th:type="number"
-                                       th:step="0.01"
-                                       th:min="1.00"
-                                       th:max="9999.99"
-                                       th:name="ad-price"
-                                />
-                                <label th:for="create-ad-price">Price<abbr th:title="required"></abbr></label>
-                            </div>
-                            <div class="form-label-group" th:id="ad-shipping">
-                                <input class="form-control"
-                                       th:id="create-ad-shipping"
-                                       th:type="number"
-                                       th:step="0.01"
-                                       th:min="1.00"
-                                       th:max="9999.99"
-                                       th:name="ad-shipping"/>
-                                <label th:for="create-ad-shipping">Shipping Price<abbr th:title="required"></abbr></label>
-                            </div>
-                            <!--<div th:id="ad-tradable" class="custom-control custom-checkbox mb-3">-->
-                                <!--<input class="custom-control-input"-->
-                                       <!--th:id="create-ad-tradable"-->
-                                       <!--th:type="checkbox"-->
-                                       <!--th:name="ad-tradable"-->
-                                       <!--th:checked="checked"-->
-                                <!--/>-->
-                                <!--<label class="custom-control-label"-->
-                                       <!--th:for="create-ad-tradable">Tradeable-->
-                                <!--</label>-->
-
-                            <!--</div>-->
-                            <div th:id="ad-new-book">
-                                <button class="btn btn-lg btn-primary btn-block text-uppercase"
-                                        th:id="btn-ad-new-book"
-                                        th:type="button">Add a book
-                                </button>
-                            </div>
-                            <hr class="my-4"/>
-                            <div th:id="ad-new-book-form">
-                                <!-- Empty by default -->
-                            </div>
-
-                            <div th:id="ad-submit-all">
-                                <button class="btn btn-lg btn-primary btn-block text-uppercase"
-                                        th:id="btn-ad-submit-all" th:type="submit"
-                                >Submit
-                                </button>
-
-                            </div>
-
-                        </form>
+        <div>
+            <div>
+                <h1>Create an Ad</h1>
+            </div>
+            <form th:method="post" th:action="@{/ads/create}">
+                <div th:object="${ad}">
+                    <div>
+                        <label>Title</label>
+                        <input th:field="*{title}" type="text"/>
+                    </div>
+                    <div>
+                        <label>
+                            Description
+                            <textarea th:field="*{description}" type="text"></textarea>
+                        </label>
+                    </div>
+                    <div>
+                        <label>Price</label>
+                        <input th:field="*{price}" type="number" step="0.01"/>
+                    </div>
+                    <div>
+                        <label>Shipping</label>
+                        <input th:field="*{shipping}" type="number" step="0.01"/>
                     </div>
                 </div>
-            </div>
+                <div th:each="book, stat : ${ad.books}">
+                    <div>
+                        <label>Isbn</label>
+                        <input th:field="*{ad.books[__${stat.index}__].isbn}"
+                               th:minlength="10"
+                               th:maxlength="13"
+                               type="number"/>
+                    </div>
+                    <div>
+                        <label>Title</label>
+                        <input th:field="*{ad.books[__${stat.index}__].title}"
+                               type="text"/>
+                    </div>
+                    <div>
+                        <label>Author</label>
+                        <input th:field="*{ad.books[__${stat.index}__].author}"
+                               type="text"/>
+                    </div>
+                    <div>
+                        <label>
+                            Synopsis
+                            <textarea th:field="*{ad.books[__${stat.index}__].synopsis}"
+                                    th:name="'synopsis-' + ${stat.index}"></textarea>
+                        </label>
+                    </div>
+                    <div>
+                        <label>Condition</label>
+                        <input th:field="*{ad.books[__${stat.index}__].wear}"
+                               th:min="1"
+                               th:max="5"
+                               type="number"
+                               step="1"/>
+                    </div>
+                    <div>
+                        <label>Image</label>
+                        <input th:field="*{ad.books[__${stat.index}__].imageUrl}"
+                               type="text"/>
+                    </div>
+                    <div>
+                        <input th:value="'Delete'" type="submit" th:formaction="@{/ads/deletebook/{id} (id = ${stat.index})}" />
+                    </div>
+                </div>
+                <div th:object="${newbook}">
+                    <h2>New Book</h2>
+                    <div>
+                        <label>Isbn</label>
+                        <input th:field="*{isbn}"
+                               th:minlength="10"
+                               th:maxlength="13"
+                               type="number"/>
+                    </div>
+                    <div>
+                        <label>Title</label>
+                        <input th:field="*{title}" type="text"/>
+                    </div>
+                    <div>
+                        <label>Author</label>
+                        <input th:field="*{author}" type="text"/>
+                    </div>
+                    <div>
+                        <label>
+                            Synopsis
+                            <textarea th:field="*{synopsis}" ></textarea>
+                        </label>
+                    </div>
+                    <div>
+                        <label>Condition</label>
+                        <input th:field="*{wear}" type="number" th:min="1" th:max="5" step="1"/>
+                    </div>
+                    <div>
+                        <label>Image</label>
+                        <input th:field="*{imageUrl}" type="text" />
+                    </div>
+                </div>
+                <button type="submit">Create New Ad</button>
+                <button type="submit" formaction="/ads/newbook">Add a New Book</button>
+            </form>
         </div>
     </div>
     <script th:src="@{/js/jquery.js}"></script>
