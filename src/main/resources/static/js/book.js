@@ -1,4 +1,3 @@
-// test isbn: 0672314800
 const Book = {
   // constructor that creates a book from the openbook api
   from: (obResponse) => {

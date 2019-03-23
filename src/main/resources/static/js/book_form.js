@@ -37,7 +37,7 @@ function ImplBookForm(adform, index) {
         $(this.author).val(this.book.author);
         $(this.synopsis).val(this.book.synopsis);
         $(this.image).val(this.book.image);
-        $(this.wear).val("1");
+        $(this.wear).val(this.book.wear);
     };
 
     this.getBook = () => {
