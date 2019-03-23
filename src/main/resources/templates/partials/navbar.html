@@ -2,7 +2,7 @@
 
 <div th:fragment="navbar">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand"><i class="fas fa-book-open"></i> JNS Libraries</a>
+        <a class="navbar-brand" th:href="@{/}"><i class="fas fa-book-open"></i> JNS Libraries</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -16,9 +16,6 @@
                     <a class="nav-link" th:href="@{/register}">Register</a>
                 </li>
                 <li class="nav-item active" sec:authorize="isAuthenticated()">
-                    <a class="nav-link" th:href="@{/}">Home</a>
-                </li>
-                <li class="nav-item active" sec:authorize="isAuthenticated()">
                     <a class="nav-link" th:href="@{/profile}">Profile</a>
                 </li>
                 <li class="nav-item dropdown">
@@ -30,8 +27,8 @@
                        aria-expanded="false">Books
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" th:href="@{/ads}">Buy Books</a>
-                        <a class="dropdown-item" sec:authorize="isAuthenticated()" th:href="@{/ads/create}">Sell Books</a>
+                        <a class="dropdown-item" sec:authorize="isAuthenticated()" th:href="@{/ads/create}">Create an Ad</a>
+                        <a class="dropdown-item" sec:authorize="isAuthenticated()" th:href="@{/profile/trades}">Trade Requests</a>
                     </div>
                 </li>
             </ul>
