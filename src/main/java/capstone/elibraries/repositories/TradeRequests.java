@@ -5,7 +5,7 @@ import capstone.elibraries.models.User;
 import org.springframework.data.repository.CrudRepository;
 
 public interface TradeRequests extends CrudRepository<TradeRequest, Long> {
-    Iterable<TradeRequest> findTradeRequestsByTo(User user);
+    Iterable<TradeRequest> findTradeRequestByPendingIsTrueAndTo(User user);
 
 }
 
