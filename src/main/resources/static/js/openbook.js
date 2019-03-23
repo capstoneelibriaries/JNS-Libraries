@@ -1,6 +1,8 @@
 const OpenBook = {
   response: {},
   request: (isbn, bookform) => {
+      console.log("DEBUG: OpenBook.request(...)");
+
       $.ajax({
           'url': `https://openlibrary.org/api/books?bibkeys=ISBN:${isbn}&jscmd=data&format=json`,
           'type': 'GET',
@@ -15,4 +17,3 @@ const OpenBook = {
       });
   },
 };
-//apiRequest("9780980200447");

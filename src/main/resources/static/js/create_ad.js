@@ -1,64 +1,36 @@
-console.log("DEBUG: Running create ad.js");
+function createAd(args){
+    { // TEST
+        console.assert(OpenBook !== undefined);
+        console.assert(AdForm !== undefined);
+        console.assert(BookForm !== undefined);
+        console.assert(typeof(args) === "number");
+    } // END TEST
 
-let adform = AdForm.new(OpenBook);
+    let adform = AdForm.new(OpenBook);
+    Object.seal(adform);
 
-$(adform.book.button).on("click", (event) => {
-  console.log($(adform.book.button));
-  adform.addBookForm(BookForm.new(adform));
-  console.log(adform);
-  console.log("DEBUG: click event...");
-});
+    { // TEST
+        console.assert(adform.openbookApi !== undefined);
+        console.assert($(adform.title) !== undefined);
+        console.assert($(adform.description) !== undefined);
+        console.assert($(adform.price) !== undefined);
+        console.assert($(adform.shipping) !== undefined);
+        console.assert($(adform.btn.newad) !== undefined);
+        console.assert($(adform.btn.newbook) !== undefined);
+    } // END TEST
 
-//when the submit button is pressed...
-$(adform.submit.button).click( (event) => {
-  console.log("DEBUG: submit button click event...");
-  event.preventDefault();
+    adform.addBookForm(Object.seal(BookForm.new(adform)));
 
-  //if no books are provided
-  if(adform.bookCount() < 1){
-    alert("No books provided.");
-  }else{
+    { // TEST
+        console.assert(adform.bookCount() === 1);
+        console.assert(adform.bookforms[0] !== {});
+    } // END TEST
 
-    let post = new FormData();
-    console.log("creating new form data");
-    post.append("title", $(adform.title.field).val());
-    post.append("description", $(adform.description.field).val());
-    post.append("price", $(adform.price.field).val());
-    post.append("shipping", $(adform.shipping.field).val());
-    post.append("book-count", adform.bookCount());
+    const bookc = args;
+    console.assert(typeof(bookc) === "number");
 
-    adform.bookforms.forEach( (bookform, index) => {
-      const book = bookform.getBook();
-      console.log("getting book information");
-      post.append(`book-isbn-${index}`, book.isbn);
-      post.append(`book-title-${index}`, book.title);
-      post.append(`book-author-${index}`, book.author);
-      post.append(`book-synopsis-${index}`, book.synopsis);
-      post.append(`book-wear-${index}`, book.wear);
-      // additional items that are not displayed in the ad yet
-      post.append(`book-pages-${index}`, book.pages);
-      post.append(`book-publish-date-${index}`, book.publishDate);
-      post.append(`book-image-${index}`, book.image);
-    });
-
-    // get the name of the site
-    const origin = window.location.origin;
-
-    let request = new XMLHttpRequest();
-    request.open("POST", `${origin}/ads/create`);
-    // when the post is complete
-    request.onload = () => {
-      // redirect
-      console.log(request);
-      if(request.status === 200){
-        $(location).attr('href', `${origin}/profile`);
-      }else{
-        $(location).attr('href', `${origin}/${request.status}`);
-      }
-    };
-    // submit the post
-    request.send(post);
-    // the redirect happens here
-  }
-  
-});
+    for(let i = 0 ; i < bookc; i++){
+        addform.addBookForm(BookForm.new(adform));
+        console.assert(adform.bookCount() === (i + 1));
+    }
+};
