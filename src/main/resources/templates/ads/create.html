@@ -156,13 +156,18 @@
                     <div>
                         <label>Image</label>
                         <input th:field="*{imageUrl}"
-                               th:id="book-isbn"
+                               th:id="book-image"
                                type="text"
                                readonly="readonly" required="required"/>
                     </div>
                 </div>
-                <button type="submit">Create New Ad</button>
-                <button type="submit" formaction="/ads/newbook">Add a New Book</button>
+                <button th:id="btn-new-ad"
+                        type="submit"
+                        disabled="disabled">Create New Ad</button>
+                <button th:id="btn-new-book"
+                        type="submit"
+                        formaction="/ads/newbook"
+                        disabled="disabled">Add a New Book</button>
             </form>
         </div>
     </div>

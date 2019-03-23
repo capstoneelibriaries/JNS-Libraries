@@ -16,6 +16,10 @@ function ImplAdForm(openbookApi) {
     this.description = "#ad-description";
     this.price = "#ad-price";
     this.shipping = "#ad-shipping";
+    this.btn = {
+      newad: "#btn-new-ad",
+      newbook: "btn-new-book"
+    };
 
     // all book forms are listed in the following array
     this.bookforms = [{}];
@@ -44,9 +48,8 @@ function ImplAdForm(openbookApi) {
                 console.log(isbn);
                 openbookApi.request(isbn, bookform);
                 // enable the submit button since the ajax request should be finished
-                if(this.bookCount() > 0){
-                    $(this.submit.button).prop('disabled', false);
-                }
+                $(this.btn.newad).prop('disabled', false);
+                $(this.btn.newbook).prop('disabled', false);
             }
         });
     }

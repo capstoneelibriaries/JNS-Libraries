@@ -25,6 +25,22 @@ const Book = {
       return openbook.excerpts[0].text;
     }
   },
+  parseImage: (openbook) => {
+    console.log("DEBUG: Book.parseImage(...)");
+
+    if(openbook.cover.large !== undefined){
+      return openbook.cover.large;
+    }
+    else if(openbook.cover.medium !== undefined){
+      return openbook.cover.medium;
+    }
+    else if(openbook.cover.small !== undefined){
+      return openbook.cover.small;
+    }
+    else{
+      return "/images/bookexample.jpeg";
+    }
+  },
 };
 
 // obResponse is the response object of the OpenBook Api
@@ -37,7 +53,7 @@ function ImplBook(obResponse){
   this.synopsis = Book.parseSynopsis(obResponse);
   this.pages = obResponse.number_of_pages;        // TODO: use this
   this.publishDate = obResponse.publish_date;     // TODO: use this
-  this.image = obResponse.cover.large;
+  this.image = Book.parseImage(obResponse);
   this.wear = 1;
   // TODO: get weight as well
 }
