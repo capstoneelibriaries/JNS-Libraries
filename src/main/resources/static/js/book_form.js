@@ -9,7 +9,7 @@ function ImplBookForm(adform, index) {
     console.log("ImplBookForm(..., ...)");
     // BookForms require an AdForm
     // inject dependency
-    this.adform = adform;
+    this.adform = adform;   // TODO: unused - resolve this
     // book value gets set later
     this.book = {};
 
