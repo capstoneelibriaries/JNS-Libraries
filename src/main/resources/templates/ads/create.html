@@ -180,10 +180,15 @@
         /*<![CDATA[*/
         let adform = AdForm.new(OpenBook);
         adform.addBookForm(BookForm.new(adform));
+        console.assert(adform.bookCount() === 1);
 
         const bookc = /*[[${ad.books.size()}]]*/ 0;
-        console.log(bookc);
-        console.log(typeof bookc);
+        console.assert(typeof(bookc) === "number");
+
+        for(let i = 0 ; i < bookc; i++){
+            addform.addBookForm(BookForm.new(adform));
+            console.assert(adform.bookCount() === (i + 1));
+        }
         /*]]>*/
     </script>
 </body>

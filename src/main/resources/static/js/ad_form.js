@@ -36,6 +36,7 @@ function ImplAdForm(openbookApi) {
 
     this.addBookForm = (bookform) => {
         console.log("DEBUG: ImplAdForm.adBookForm(...)");
+        console.assert(typeof(bookform) === "object");
 
         this.bookforms.push(bookform);
 
