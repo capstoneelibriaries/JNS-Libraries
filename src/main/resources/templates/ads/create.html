@@ -60,6 +60,12 @@
                 </div>
                 <div th:each="book, stat : ${ad.books}">
                     <div>
+                        <img th:src="${ad.books[__${stat.index}__].imageUrl}"
+                             width="400"
+                             height="300"
+                        />
+                    </div>
+                    <div>
                         <label>Isbn</label>
                         <input th:field="*{ad.books[__${stat.index}__].isbn}"
                                th:id="'book-' + ${stat.index} + '-isbn'"
