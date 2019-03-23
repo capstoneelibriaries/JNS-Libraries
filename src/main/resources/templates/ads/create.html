@@ -21,6 +21,7 @@
             <div>
                 <h1>Create an Ad</h1>
             </div>
+            <!-- The Ad portion of the form -->
             <form th:method="post" th:action="@{/ads/create}">
                 <div th:object="${ad}">
                     <div>
@@ -58,6 +59,7 @@
                         />
                     </div>
                 </div>
+                <!-- The books that are already in the ad, on display and still editable -->
                 <div th:each="book, stat : ${ad.books}">
                     <div>
                         <img th:src="${ad.books[__${stat.index}__].imageUrl}"
@@ -122,6 +124,7 @@
                         <input th:value="'Delete'" type="submit" th:formaction="@{/ads/deletebook/{id} (id = ${stat.index})}" />
                     </div>
                 </div>
+                <!-- A new book the user can add to the list of books -->
                 <div th:object="${newbook}">
                     <h2>New Book</h2>
                     <div>
