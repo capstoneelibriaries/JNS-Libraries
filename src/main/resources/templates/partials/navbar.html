@@ -15,11 +15,29 @@
                 <li class="nav-item active" sec:authorize="!isAuthenticated()">
                     <a class="nav-link" th:href="@{/register}">Register</a>
                 </li>
-                <li class="nav-item active" sec:authorize="isAuthenticated()">
-                    <a class="nav-link" th:href="@{/profile}">Profile</a>
-                </li>
-                <li class="nav-item dropdown">
+
+                <li class="nav-item dropdown active">
                     <a class="nav-link dropdown-toggle"
+                       sec:authorize="isAuthenticated()"
+                       href="#" id="navbarDropdown1"
+                       role="button"
+                       data-toggle="dropdown"
+                       aria-haspopup="true"
+                       aria-expanded="false">Profile
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
+                        <a class="dropdown-item" sec:authorize="isAuthenticated()" th:href="@{/profile}">My Profile</a>
+                        <form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
+                            <button class="dropdown-item" id="menuLogout">Logout</button>
+                        </form>
+
+                    </div>
+                </li>
+
+
+                <li class="nav-item dropdown active">
+                    <a class="nav-link dropdown-toggle"
+                       sec:authorize="isAuthenticated()"
                        href="#" id="navbarDropdown"
                        role="button"
                        data-toggle="dropdown"
@@ -32,9 +50,22 @@
                     </div>
                 </li>
             </ul>
-            <form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
-                <button class="btn-sm btn-warning" id="menuLogout">Logout</button>
+            <form sec:authorize="isAuthenticated()" class="form-inline my-2 my-lg-0" th:action="@{/search}" th:method="get">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q"/>
+                <div class="input-group-append">
+                    <select class="custom-select" th:name="option">
+                        <option th:value="ads">Ads</option>
+                        <option th:value="books">Books</option>
+                    </select>
+                    <button class="btn btn-outline-success my-2 my-sm-0 ml-1" type="submit"><i class="fas fa-search"></i></button>
+                </div>
             </form>
+
+
+
+            <!--<form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">-->
+                <!--<button class="btn-sm btn-warning" id="menuLogout"><i class="fas fa-sign-out-alt"></i></button>-->
+            <!--</form>-->
         </div>
     </nav>
 </div>
