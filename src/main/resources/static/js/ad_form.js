@@ -18,7 +18,7 @@ function ImplAdForm(openbookApi) {
     this.shipping = "#ad-shipping";
     this.btn = {
       newad: "#btn-new-ad",
-      newbook: "btn-new-book"
+      newbook: "#btn-new-book",
     };
 
     // all book forms are listed in the following array

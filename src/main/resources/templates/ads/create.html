@@ -176,10 +176,9 @@
     <script th:src="@{/js/book.js}"></script>
     <script th:src="@{/js/book_form.js}"></script>
     <script th:src="@{/js/ad_form.js}"></script>
-    <script th:scr="@{/js/create_ad.js}"></script>
+    <script th:src="@{/js/create_ad.js}"></script>
     <script th:inline="javascript">
         /*<![CDATA[*/
-        console.assert(createAd !== undefined);
         const bookc = /*[[${ad.books.size()}]]*/ 0;
         createAd(bookc);
         /*]]>*/
