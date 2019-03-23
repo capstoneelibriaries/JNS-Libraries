@@ -1,6 +1,7 @@
 const BookForm = {
-    new: (adform) => {
-        return new ImplBookForm(adform);
+    new: (adform, index) => {
+        console.log("DEBUG: BookForm.new(...)");
+        return new ImplBookForm(adform, index);
     }
 };
 
