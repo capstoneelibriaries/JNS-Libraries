@@ -1,34 +1,70 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
-    <link th:replace="partials/header :: header('$$')"/>
+    <link th:replace="partials/header :: header('Search Results')"/>
 </head>
 <body>
     <div th:replace="partials/navbar :: navbar"></div>
     <div th:if="${ads.size() == 0}">
         <div>
-            <h2>No Results :(</h2>
+            <span class="d-block p-2 bg-primary text-white">Nothing to show here!</span>
+
         </div>
     </div>
-    <div th:each="ad : ${ads}" >
-        <div>
+    <div class="container">
+    <div th:each="ad : ${ads}">
+        <div class="row">
+            <div class="col-md-7">
+                <a href="#">
+                    <img class="img-fluid rounded mb-3 mb-md-0" src="http://placehold.it/200x300" alt=""/>
+                </a>
+            </div> <!-- end of div class row -->
+            <div class="col-md-5">
             <h2 th:text="${ad.title}"></h2>
-        </div>
-        <div>
-            <h3 th:text="${ad.price}"></h3>
-        </div>
-        <div>
-            <p th:text="${ad.description}"></p>
-        </div>
-        <div th:each="book : ${ad.books}">
-            <div>
-                <h4 th:text="${book.title}"></h4>
+                <h3 th:text="${ad.price}">$</h3>
+                <p th:text="${ad.description}"></p>
+                <div th:each="book : ${ad.books}">
+                    <h4 th:text="${book.title}"></h4>
+                </div>
+                <a class="btn btn-primary" th:href="@{/ads/view={id} (id=${ad.id})}">View Ad</a>
+
             </div>
         </div>
-        <div>
-            <a th:href="@{/ads/view={id} (id=${ad.id})}">View</a>
-        </div>
-        <br/>
+        <hr/>
+    </div>
     </div>
 </body>
 </html>
+<!--</div>-->
+<!--<div>-->
+<!--<h3 th:text="${ad.price}"></h3>-->
+<!--</div>-->
+<!--<div>-->
+<!--<p th:text="${ad.description}"></p>-->
+<!--</div>-->
+<!--<div th:each="book : ${ad.books}">-->
+<!--<div>-->
+<!--<h4 th:text="${book.title}"></h4>-->
+<!--</div>-->
+<!--</div>-->
+<!--<div>-->
+<!--<a th:href="@{/ads/view={id} (id=${ad.id})}">View</a>-->
+<!--</div>-->
+<!--<br/>-->
+<!--</div>-->
+<!--</div>-->
+
+<!--<div class="row">-->
+<!--<div class="col-md-7">-->
+<!--<a href="#">-->
+<!--<img class="img-fluid rounded mb-3 mb-md-0" src="http://placehold.it/700x300" alt=""/>-->
+<!--</a>-->
+<!--</div>-->
+
+<!--<div class="col-md-5">-->
+<!--<h3>Project One</h3>-->
+<!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium veniam exercitationem expedita laborum at voluptate. Labore, voluptates totam at aut nemo deserunt rem magni pariatur quos perspiciatis atque eveniet unde.</p>-->
+<!--<a class="btn btn-primary" href="#">View Ad</a>-->
+<!--</div>-->
+<!--</div>-->
+<!--src="http://placehold.it/200x300"-->
