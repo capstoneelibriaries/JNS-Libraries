@@ -27,27 +27,35 @@
                         <label>Title</label>
                         <input th:field="*{title}"
                                th:id="ad-title"
-                               type="text"/>
+                               type="text"
+                               required
+                        />
                     </div>
                     <div>
                         <label>
                             Description
                             <textarea th:field="*{description}"
                                       th:id="ad-description"
-                                      type="text"></textarea>
+                                      type="text"
+                                      required
+                            ></textarea>
                         </label>
                     </div>
                     <div>
                         <label>Price</label>
                         <input th:field="*{price}"
                                th:id="ad-price"
-                               type="number" step="0.01"/>
+                               type="number" step="0.01" min="0.99" max="9999.99"
+                               required
+                        />
                     </div>
                     <div>
                         <label>Shipping</label>
                         <input th:field="*{shipping}"
                                th:id="ad-shipping"
-                               type="number" step="0.01"/>
+                               type="number" step="0.01" min="0.00" max="9999.99"
+                               required
+                        />
                     </div>
                 </div>
                 <div th:each="book, stat : ${ad.books}">
@@ -57,26 +65,34 @@
                                th:id="'book-' + ${stat.index} + '-isbn'"
                                th:minlength="10"
                                th:maxlength="13"
-                               type="number"/>
+                               type="number"
+                               required
+                        />
                     </div>
                     <div>
                         <label>Title</label>
                         <input th:field="*{ad.books[__${stat.index}__].title}"
                                th:id="'book-' + ${stat.index} + '-title'"
-                               type="text"/>
+                               type="text"
+                               readonly required
+                        />
                     </div>
                     <div>
                         <label>Author</label>
                         <input th:field="*{ad.books[__${stat.index}__].author}"
                                th:id="'book-' + ${stat.index} + '-author'"
-                               type="text"/>
+                               type="text"
+                               readonly required
+                        />
                     </div>
                     <div>
                         <label>
                             Synopsis
                             <textarea th:field="*{ad.books[__${stat.index}__].synopsis}"
                                       th:id="'book-' + ${stat.index} + '-synopsis'"
-                                      th:name="'synopsis-' + ${stat.index}"></textarea>
+                                      th:name="'synopsis-' + ${stat.index}"
+                                      required
+                            ></textarea>
                         </label>
                     </div>
                     <div>
@@ -84,13 +100,17 @@
                         <input th:field="*{ad.books[__${stat.index}__].wear}"
                                th:id="'book-' + ${stat.index} + '-wear'"
                                th:min="1" th:max="5"
-                               type="number" step="1"/>
+                               type="number" step="1"
+                               required
+                        />
                     </div>
                     <div>
                         <label>Image</label>
                         <input th:field="*{ad.books[__${stat.index}__].imageUrl}"
                                th:id="'book-' + ${stat.index} + '-image'"
-                               type="text"/>
+                               type="text"
+                               readonly required
+                        />
                     </div>
                     <div>
                         <input th:value="'Delete'" type="submit" th:formaction="@{/ads/deletebook/{id} (id = ${stat.index})}" />
@@ -103,38 +123,50 @@
                         <input th:field="*{isbn}"
                                th:id="book-isbn"
                                th:minlength="10" th:maxlength="13"
-                               type="number"/>
+                               type="number"
+                               required
+                        />
                     </div>
                     <div>
                         <label>Title</label>
                         <input th:field="*{title}"
                                th:id="book-title"
-                               type="text"/>
+                               type="text"
+                               readonly required
+                        />
                     </div>
                     <div>
                         <label>Author</label>
                         <input th:field="*{author}"
                                th:id="book-author"
-                               type="text"/>
+                               type="text"
+                               readonly required
+                        />
                     </div>
                     <div>
                         <label>
                             Synopsis
                             <textarea th:field="*{synopsis}"
-                                      th:id="book-synopsis"></textarea>
+                                      th:id="book-synopsis"
+                                      required
+                            ></textarea>
                         </label>
                     </div>
                     <div>
                         <label>Condition</label>
                         <input th:field="*{wear}"
                                th:id="book-wear"
-                               type="number" th:min="1" th:max="5" step="1"/>
+                               type="number" th:min="1" th:max="5" step="1"
+                               readonly required
+                        />
                     </div>
                     <div>
                         <label>Image</label>
                         <input th:field="*{imageUrl}"
                                th:id="book-isbn"
-                               type="text" />
+                               type="text"
+                               readonly required
+                        />
                     </div>
                 </div>
                 <button type="submit">Create New Ad</button>
