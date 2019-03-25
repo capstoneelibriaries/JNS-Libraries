@@ -59,7 +59,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         "/ads/{id}/edit", // only authenticated users can edit book ads
                         "/ads/{id}/delete", // only authenticated users can delete book ads
                         "/profile", // only authenticated users view profile
-                        "/profile/{x}"
+                        "/profile/{x}",
+                        "/ads/{id}/trade"
                 )
                 .authenticated()
         ;

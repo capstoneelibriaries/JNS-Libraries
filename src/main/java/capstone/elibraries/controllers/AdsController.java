@@ -103,10 +103,9 @@ public class AdsController {
     @GetMapping("/ads/{id}/trade")
     public String tradeForm(Model model, @PathVariable Long id) throws AuthenticationException{
         User user = getCurrentUser();
-        Ad ad = adsDao.findOne(id);
-        if (null == user ) {
-            return "redirect:/login?trade";
-        }
+        Ad ad = ads.findOne(id);
+        if (user.getAds().isEmpty()){
+            return "redirect:/ads/view=" + id+ "?noads";
         if (user.getId() == ad.getSeller().getId()){
             return "redirect:/ads/view=" + id+ "?error";
         }
@@ -124,7 +123,8 @@ public class AdsController {
             ad.getSeller(), // Owner of ad
             requestingUser, // User requesting trade
             ad,             // Owner's ad
-            userAd          // User's offered ad
+            userAd,         // User's offered ad
+            true    // Active status of the trade
         ));
 
         return "redirect:/profile";
