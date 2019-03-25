@@ -8,12 +8,12 @@ public class Transaction {
 
     @Id @GeneratedValue
     private long id;
-    @Transient
+    @OneToOne
     private User buyer;
-    @Transient
+    @OneToOne
     private User seller;
     @OneToOne
-    private Ad item;
+    private Ad sellerItem;
     @OneToOne
     private TradeRequest trade;
     @Column
@@ -21,6 +21,14 @@ public class Transaction {
 
     public Transaction(){
         //default
+    }
+
+    public Transaction(User buyer, User seller, Ad sellerItem, TradeRequest trade, Date date) {
+        this.buyer = buyer;
+        this.seller = seller;
+        this.sellerItem = sellerItem;
+        this.trade = trade;
+        this.date = date;
     }
 
     public User getBuyer() {
@@ -40,19 +48,11 @@ public class Transaction {
     }
 
     public Ad getItem() {
-        return item;
+        return sellerItem;
     }
 
     public void setItem(Ad item) {
-        this.item = item;
-    }
-
-    public TradeRequest getTradeRequest() {
-        return trade;
-    }
-
-    public void setTradeRequest(TradeRequest trade) {
-        this.trade = trade;
+        this.sellerItem = item;
     }
 
     public Date getDate() {
@@ -63,4 +63,19 @@ public class Transaction {
         this.date = date;
     }
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public TradeRequest getTrade() {
+        return trade;
+    }
+
+    public void setTrade(TradeRequest trade) {
+        this.trade = trade;
+    }
 }

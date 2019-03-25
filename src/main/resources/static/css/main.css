@@ -29,16 +29,22 @@ label:focus, input:focus  {
     max-height: 4em;
     max-width: 8em;
 }
-input[type="radio"]:checked  {
-    box-shadow: 0 0 0 3px orange;
-}
 @media screen and (max-width: 768px) {
     #trade  {
         transform: rotate(90deg);
         margin: 2em auto;
     }
 }
+
 .img-thumbnail{
     background-color: #ffffff80;
     border: 1px solid #79797938;
+}
+.completed{
+    color: #117F65;
+    border: 1px solid #21ce93;
+    padding: 2px 10px;
+    font-size: 79%;
+    margin-left: 8px;
+    text-transform: uppercase;
 }

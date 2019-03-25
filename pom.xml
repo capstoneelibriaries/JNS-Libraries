@@ -55,6 +55,13 @@
             <artifactId>thymeleaf-extras-springsecurity4</artifactId>
             <version>2.1.2.RELEASE</version>
         </dependency>
+        <!--Test-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <!--End Test-->
     </dependencies>
 
     <build>
