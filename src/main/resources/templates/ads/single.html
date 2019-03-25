@@ -33,10 +33,14 @@
             <p th:text="'Shipping: $'+*{shipping}" th:if="*{shipping>0}"></p>
             <p th:text="'Shipping: '+'Free'" th:if="*{shipping==0}"></p>
         </div>
+        <button class="btn btn-md btn-warning" type="submit" sec:authorize="isAuthenticated()">Edit</button>
+        <button class="btn btn-md btn-danger" type="submit" sec:authorize="isAuthenticated()">Delete</button>
+
+
         <!-- TODO: Replace with paypal purchase button-->
-        <form th:action="@{/ads/{id}/buy(id=*{id})}" th:method="GET">
-            <button>Buy</button>
-        </form>
+        <!--<form th:action="@{/ads/{id}/buy(id=*{id})}" th:method="GET">-->
+            <!--<button>Buy</button>-->
+        <!--</form>-->
         <!-- TODO: match styling with paypal button-->
         <form th:action="@{/ads/{id}/trade(id=*{id})}" th:method="GET" th:if="*{tradable}" sec:authorize="isAuthenticated()">
             <button>Offer Trade</button>
