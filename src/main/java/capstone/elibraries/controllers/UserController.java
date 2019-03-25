@@ -56,19 +56,28 @@ public class UserController {
         User databaseUser = users.findOne(((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId());
 
         model.addAttribute("user", databaseUser);
-        return "users/profile";
+        return "profile";
     }
 
     @GetMapping("/profile/addresses")
-    public String setAddress(Model model){
+    public String getAddress(Model model){
         User user = getCurrentUser();
 
-        if(user.getAddresses() != null || user.getAddresses().size() == 0){
+        if(user.getAddresses() == null || user.getAddresses().size() == 0){
             user.addAddress(new Address());
         }
 
         model.addAttribute("user", user);
         return "users/addresses";
+    }
+
+    @PostMapping("/profile/addresses")
+    public String setAddress(@ModelAttribute User userAddr){
+        User user = getCurrentUser();
+        user.setAddresses(userAddr.getAddresses());
+
+        users.save(user);
+        return "redirect:users/profile";
     }
 
     @GetMapping("/profile/transactions")
