@@ -1,5 +1,6 @@
 package capstone.elibraries.models;
 
+import capstone.elibraries.error.ValidationException;
 import org.junit.Test;
 
 /*
@@ -60,13 +61,13 @@ public class UserTest {
         user.setUsername(null);
     }
 
-    @Test(expected = Exception.class)
+    @Test(expected = ValidationException.class)
     public void userNameCannotBeEmpty(){
         user = new User();
         user.setUsername("");
     }
 
-    @Test(expected = Exception.class)
+    @Test(expected = ValidationException.class)
     public void userNameCannotBeOversized(){
         user = new User();
         user.setUsername(randomString(200));
@@ -81,19 +82,19 @@ public class UserTest {
         user.setEmail(null);
     }
 
-    @Test(expected = Exception.class)
+    @Test(expected = ValidationException.class)
     public void userEmailCannotBeEmpty(){
         user = new User();
         user.setEmail("");
     }
 
-    @Test(expected = Exception.class)
+    @Test(expected = ValidationException.class)
     public void userEmailMustBeValidAddress(){
         user = new User();
         user.setEmail("loremipsumdolor");
     }
 
-    @Test(expected = Exception.class)
+    @Test(expected = ValidationException.class)
     public void userEmailMustEndInDotString(){
         user = new User();
         user.setEmail("alice@email-com");
@@ -118,19 +119,19 @@ public class UserTest {
     /*
     * Tests for phone input
     * */
-    @Test(expected = Exception.class)
+    @Test(expected = ValidationException.class)
     public void userPhoneCannotBeEmpty(){
         user = new User();
         user.setPhone("");
     }
 
-    @Test(expected = Exception.class)
+    @Test(expected = ValidationException.class)
     public void userPhoneCannotBeLessThanTenNumbers(){
         user = new User();
         user.setPhone("120333476");
     }
 
-    @Test(expected = Exception.class)
+    @Test(expected = ValidationException.class)
     public void userPhoneDoesNotAcceptLetters(){
         user = new User();
         user.setPhone("210444AABF");

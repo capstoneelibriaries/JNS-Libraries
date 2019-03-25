@@ -1,5 +1,6 @@
 package capstone.elibraries.models;
 
+import capstone.elibraries.error.ValidationException;
 import org.junit.Test;
 
 /*
@@ -71,7 +72,7 @@ public class AdTest {
         ad.setTitle(null);
     }
 
-    @Test(expected = Exception.class)
+    @Test(expected = ValidationException.class)
     public void adTitleCannotBeEmpty(){
         ad = new Ad();
         ad.setTitle("");
@@ -87,7 +88,7 @@ public class AdTest {
         assert(ad.getTitle().equals(title));
     }
 
-    @Test(expected = Exception.class)
+    @Test(expected = ValidationException.class)
     public void adTitleCannotBeOversized(){
         StringBuilder oversizedTitle = new StringBuilder(2000);
         for(int i = 0; i < 2000; i++){
@@ -107,7 +108,7 @@ public class AdTest {
         ad.setDescription(null);
     }
 
-    @Test(expected = Exception.class)
+    @Test(expected = ValidationException.class)
     public void adDescriptionCannotBeEmpty(){
         ad = new Ad();
         ad.setDescription("");
@@ -125,7 +126,7 @@ public class AdTest {
         assert(ad.getDescription().equals(description));
     }
 
-    @Test(expected = Exception.class)
+    @Test(expected = ValidationException.class)
     public void adDescriptionCannotBeOversized(){
         StringBuilder description = new StringBuilder(5000);
         for(int i = 0; i < 5000; i++){

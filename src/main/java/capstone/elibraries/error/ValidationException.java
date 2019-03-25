@@ -23,6 +23,14 @@ public class ValidationException extends ServerException {
         return this.expected;
     }
 
+    public String getInputAsMessage(){
+        return "Input: " + this.input;
+    }
+
+    public String getExpectedAsMessage(){
+        return "Expected: " + this.expected;
+    }
+
     public String toString(){
         return "{\n" +
                 "\t\"input\":\"" + input + "\",\n" +
