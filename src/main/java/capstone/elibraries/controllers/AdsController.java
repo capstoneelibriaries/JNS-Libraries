@@ -31,8 +31,9 @@ public class AdsController {
         return "ads/index";
     }
     @GetMapping("/ads/view={id}")
-    public String getOneAd(Model model, @PathVariable Long id){
+    public String getOneAd(Model model, @PathVariable Long id) throws AuthenticationException {
         model.addAttribute("ad", adsDao.findOne(id));
+        model.addAttribute("user", getCurrentUser());
         return "ads/single";
     }
 
@@ -87,9 +88,15 @@ public class AdsController {
     @PostMapping("/ads/{id}/edit")
     public String editAd(@ModelAttribute Ad ad, @PathVariable Long id){
         if (((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId() ==
-                usersDao.findOne(ad.getSeller().getId()).getId()) {
-            ad.setId(id);
-            adsDao.save(ad);
+                adsDao.findOne(ad.getId()).getSeller().getId()) {
+
+            Ad dbAd = adsDao.findOne(id);
+            dbAd.setTitle(ad.getTitle());
+            dbAd.setDescription(ad.getDescription());
+            dbAd.setPrice(ad.getPrice());
+            dbAd.setShipping(ad.getShipping());
+
+            adsDao.save(dbAd);
             return "redirect:/profile";
         }else{
             return "redirect:/profile";

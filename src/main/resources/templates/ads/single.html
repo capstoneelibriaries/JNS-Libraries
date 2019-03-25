@@ -31,15 +31,14 @@
             <p th:text="'Shipping: $'+*{shipping}" th:if="*{shipping>0}"></p>
             <p th:text="'Shipping: '+'Free'" th:if="*{shipping==0}"></p>
         </div>
+        <th:block th:if="${user.getId() == ad.seller.getId()}">
+            <form th:action="@{/ads/{id}/edit (id=*{id})}">
 
-        <form>
+                <button class="btn btn-md btn-warning" type="submit" sec:authorize="isAuthenticated()">Edit</button>
 
-            <button th:action="@{/ad/{id}/edit (id=*{id})}" class="btn btn-md btn-warning" type="submit" sec:authorize="isAuthenticated()">Edit
-            </button>
-
-        </form>
-        <button class="btn btn-md btn-danger" type="submit" sec:authorize="isAuthenticated()">Delete</button>
-
+            </form>
+            <button class="btn btn-md btn-danger" type="submit" sec:authorize="isAuthenticated()">Delete</button>
+        </th:block>
 
         <!-- TODO: Replace with paypal purchase button-->
         <!--<form th:action="@{/ads/{id}/buy(id=*{id})}" th:method="GET">-->

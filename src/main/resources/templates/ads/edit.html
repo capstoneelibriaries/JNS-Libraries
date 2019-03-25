@@ -21,10 +21,13 @@
         <h3><span th:="*{seller}"></span> </h3>
 
 
-    <form th:action="@{/ad/edit}" th:object="${ad}" th:method="post">
-
+    <form th:action="@{/ads/{id}/edit (id=*{id})}" th:object="${ad}" th:method="post">
+        <input  th:field="*{id}" hidden="hidden"/>
         <h3>Title</h3>
         <input  th:field="*{title}"/>
+        <br/>
+        <h3>Description</h3>
+        <input th:field="*{description}"/>
         <br/>
         <h3>Price</h3>
         <input  th:field="*{price}"/>
