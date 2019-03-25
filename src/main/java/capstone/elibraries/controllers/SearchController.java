@@ -38,7 +38,7 @@ public class SearchController {
             );
         }else if(option.equals(options[1])){
             //results = adsDao.findByTitleIsLikeOrDescriptionIsLike(query, query);
-            results = adsDao.findByTitleIsLikeOrDescriptionIsLike(query, query);
+            results = adsDao.findByAdTitleIsLikeOrDescriptionIsLike(query, query);
         }else{
             return String.format("%s", HttpStatus.BAD_REQUEST);
         }
