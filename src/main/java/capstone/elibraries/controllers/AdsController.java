@@ -25,14 +25,29 @@ public class AdsController {
         this.usersDao = users;
         this.tradesDao = trades;
     }
+
+    private User getCurrentUser()
+            throws AuthenticationException
+    {
+        long id = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
+        if(!usersDao.exists(id)){
+            throw new AuthenticationException(
+                    "Expected: user id of " + id,
+                    "Received: user does not exist!"
+            );
+        }
+        return usersDao.findOne(id);
+    }
+
     @GetMapping("/ads")
     public String getAds(Model model){
         model.addAttribute("ads", adsDao.findAll());
         return "ads/index";
     }
     @GetMapping("/ads/view={id}")
-    public String getOneAd(Model model, @PathVariable Long id){
+    public String getOneAd(Model model, @PathVariable Long id) throws AuthenticationException {
         model.addAttribute("ad", adsDao.findOne(id));
+        model.addAttribute("user", getCurrentUser());
         return "ads/single";
     }
 
@@ -44,12 +59,13 @@ public class AdsController {
     }
 
     @PostMapping("/ads/create")
-    public String createAd(@ModelAttribute Ad ad, @ModelAttribute Book book){
+    public String createAd(@ModelAttribute Ad ad, @ModelAttribute Book book) throws AuthenticationException {
         System.out.println(ad.toString());
         System.out.println(book.toString());
         ad.addBook(book);
+        ad.setSeller(getCurrentUser());
         adsDao.save(ad);
-        return "users/profile";
+        return "redirect:/profile";
     }
 
     @PostMapping("/ads/newbook")
@@ -86,9 +102,15 @@ public class AdsController {
     @PostMapping("/ads/{id}/edit")
     public String editAd(@ModelAttribute Ad ad, @PathVariable Long id){
         if (((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId() ==
-                usersDao.findOne(ad.getSeller().getId()).getId()) {
-            ad.setId(id);
-            adsDao.save(ad);
+                adsDao.findOne(ad.getId()).getSeller().getId()) {
+
+            Ad dbAd = adsDao.findOne(id);
+            dbAd.setTitle(ad.getTitle());
+            dbAd.setDescription(ad.getDescription());
+            dbAd.setPrice(ad.getPrice());
+            dbAd.setShipping(ad.getShipping());
+
+            adsDao.save(dbAd);
             return "redirect:/profile";
         }else{
             return "redirect:/profile";
@@ -100,46 +122,35 @@ public class AdsController {
         model.addAttribute("ad", adsDao.findOne(id));
         return "ads/buy";
     }
+
     @GetMapping("/ads/{id}/trade")
     public String tradeForm(Model model, @PathVariable Long id) throws AuthenticationException{
         User user = getCurrentUser();
-        Ad ad = ads.findOne(id);
+        Ad ad = adsDao.findOne(id);
         if (user.getAds().isEmpty()){
             return "redirect:/ads/view=" + id+ "?noads";
-        if (user.getId() == ad.getSeller().getId()){
+        }
+        else if (user.getId() == ad.getSeller().getId()){
             return "redirect:/ads/view=" + id+ "?error";
         }
         model.addAttribute("ad", ad);
         model.addAttribute("user", user);
         return "ads/trade";
     }
+    
+    @PostMapping("/ads/{id}/trade")	
+    public String trade(@RequestParam(name = "ad") Long adid, @PathVariable Long id) throws AuthenticationException{	
+        User requestingUser = getCurrentUser();	
+        Ad ad = adsDao.findOne(id);	
+        Ad userAd = adsDao.findOne(adid);	
+        tradesDao.save( new TradeRequest(	
+            ad.getSeller(), // Owner of ad	
+            requestingUser, // User requesting trade	
+            ad,             // Owner's ad	
+            userAd,         // User's offered ad	
+            true    // Active status of the trade	
+        ));	
 
-    @PostMapping("/ads/{id}/trade")
-    public String trade(@RequestParam(name = "ad") Long adid, @PathVariable Long id) throws AuthenticationException{
-        User requestingUser = getCurrentUser();
-        Ad ad = adsDao.findOne(id);
-        Ad userAd = adsDao.findOne(adid);
-        tradesDao.save( new TradeRequest(
-            ad.getSeller(), // Owner of ad
-            requestingUser, // User requesting trade
-            ad,             // Owner's ad
-            userAd,         // User's offered ad
-            true    // Active status of the trade
-        ));
-
-        return "redirect:/profile";
-    }
-
-    private User getCurrentUser()
-        throws AuthenticationException
-    {
-        long id = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
-        if(!usersDao.exists(id)){
-            throw new AuthenticationException(
-                    "Expected: user id of " + id,
-                    "Received: user does not exist!"
-            );
-        }
-        return usersDao.findOne(id);
+         return "redirect:/profile";	
     }
 }
