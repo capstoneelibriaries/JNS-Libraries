@@ -37,10 +37,12 @@ public class Ad {
     private List<Book> books;
 
     public Ad(){
-        // default
+        this.books = new ArrayList<>(0);
+        // DEFAULT
     }
 
     public Ad(User seller, String title, String description, double price, double shipping){
+        this();
         this.seller = seller;
         this.title = title;
         this.description = description;
