@@ -9,14 +9,13 @@
 
 
 <div class="container mt-3">
-    <th:block th:if="${trades.iterator().hasNext()}">
-        <div class="row" th:each="trade:${trades}">
+    <th:block th:if="${!trades.isEmpty()}">
+        <div class="row" th:each="trade:${trades}" th:if="${trade.pending}">
             <div class="col-12 mx-auto">
                 <div class="card" th:object="${trade}">
                     <div class="row">
                     <div class="offer col-lg-6 col-md-6 col-sm-12">
-                        <h5 class="text-center"><span th:text="*{from.username}" class="text-capitalize"></span> offers:
-                        </h5>
+                        <h5 class="text-center"><span th:text="*{from.username}" class="text-capitalize"></span> offers:</h5>
                         <ul class="list-unstyled ">
                             <th:block th:each="book: *{wanted.books}">
                                 <li class="border-bottom" th:text="${book.title} + ' by ' + ${book.author}"></li>
@@ -41,7 +40,7 @@
             </div>
         </div>
     </th:block>
-    <th:block th:if="${!trades.iterator().hasNext()}">
+    <th:block th:if="${trades.isEmpty()}">
         <div>
             <div class="offset-lg-3 col-lg-6">
                 <div class="card text-center">

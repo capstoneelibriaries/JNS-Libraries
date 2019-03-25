@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link th:replace="partials/header :: header('Transactions')"/>
+
+</head>
+<body>
+<div th:replace="partials/navbar :: navbar"></div>
+
+
+<div class="container mt-3">
+    <div class="my-3">
+    <a th:href="@{/profile}" style="display: inline-block;" >&lt; Back to Activity</a>
+    </div>
+    <th:block th:if="${!transactions.isEmpty()}">
+        <div class="row" th:each="transaction:${transactions}" >
+            <div class="col-12 mx-auto">
+                <div class="card" th:object="${transaction}">
+                    <div class="row">
+                        <div class="offer col-lg-6 col-md-6 col-sm-12">
+                            <h1>Transactions</h1>
+                            <h5 class="text-left" th:if="${user.username.equalsIgnoreCase({a} (a=${transaction.buyer.username}))}">Book trade with <span th:text="*{buyer.username}" class="text-capitalize"></span></h5>
+                            <h5 class="text-left" th:if="${user.username.equalsIgnoreCase({a} (a=${transaction.seller.username}))}">Book trade with <span th:text="*{seller.username}" class="text-capitalize"></span></h5>
+                            <p th:text="*{date}">Trade Status: <span class="completed">Completed</span></p>
+                            <ul class="list-unstyled">
+                                <th:block th:each="book:*{trade.wanted.books}">
+                                    <li class="border-bottom" th:text="${book.title}+' by '+${book.author}"></li>
+                                </th:block>
+                            </ul>
+                        </div>
+                        <div class="yours col-lg-6 col-md-6 col-sm-12">
+                            <h5 class="text-center">In exchange for:</h5>
+                            <ul class="list-unstyled">
+                                <th:block th:each="book: *{trade.forSale.books}">
+                                    <li class="border-bottom" th:text="${book.title}+' by '+${book.author}"></li>
+                                </th:block>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </th:block>
+    <th:block th:if="${transactions.isEmpty()}">
+        <div>
+            <div class="offset-lg-3 col-lg-6">
+                <div class="card text-center">
+                    <h4> There no transactions to display.</h4>
+                </div>
+            </div>
+        </div>
+    </th:block>
+</div>
+</body>
+</html>

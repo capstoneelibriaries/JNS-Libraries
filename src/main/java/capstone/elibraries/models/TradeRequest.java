@@ -14,16 +14,19 @@ public class TradeRequest {
     private Ad forSale;
     @OneToOne
     private Ad wanted;
+    @Column(name = "pending")
+    private boolean pending;
 
     public TradeRequest(){
         // default
     }
 
-    public TradeRequest(User to, User from, Ad forSale, Ad wanted) {
+    public TradeRequest(User to, User from, Ad forSale, Ad wanted, boolean pending) {
         this.to = to;
         this.from = from;
         this.forSale = forSale;
         this.wanted = wanted;
+        this.pending = pending;
     }
 
     public long getId() {
@@ -66,4 +69,11 @@ public class TradeRequest {
         this.wanted = wanted;
     }
 
+    public boolean isPending() {
+        return pending;
+    }
+
+    public void setPending(boolean pending) {
+        this.pending = pending;
+    }
 }
