@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
-                                                    <!-- +${ad.title} -->
     <link th:replace="partials/header :: header('Viewing Ad')"/>
-
 </head>
 <body>
 <nav th:replace="partials/navbar :: navbar"></nav>
@@ -33,7 +31,13 @@
             <p th:text="'Shipping: $'+*{shipping}" th:if="*{shipping>0}"></p>
             <p th:text="'Shipping: '+'Free'" th:if="*{shipping==0}"></p>
         </div>
-        <button class="btn btn-md btn-warning" type="submit" sec:authorize="isAuthenticated()">Edit</button>
+
+        <form>
+
+            <button th:action="@{/ad/{id}/edit (id=*{id})}" class="btn btn-md btn-warning" type="submit" sec:authorize="isAuthenticated()">Edit
+            </button>
+
+        </form>
         <button class="btn btn-md btn-danger" type="submit" sec:authorize="isAuthenticated()">Delete</button>
 
 
@@ -42,6 +46,8 @@
             <!--<button>Buy</button>-->
         <!--</form>-->
         <!-- TODO: match styling with paypal button-->
+
+
         <form th:action="@{/ads/{id}/trade(id=*{id})}" th:method="GET" th:if="*{tradable}" sec:authorize="isAuthenticated()">
             <button>Offer Trade</button>
         </form>
