@@ -56,7 +56,7 @@ public class UserController {
         User databaseUser = users.findOne(((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId());
 
         model.addAttribute("user", databaseUser);
-        return "profile";
+        return "users/profile";
     }
 
     @GetMapping("/profile/addresses")
