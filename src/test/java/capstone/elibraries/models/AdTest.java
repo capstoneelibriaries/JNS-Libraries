@@ -2,8 +2,9 @@ package capstone.elibraries.models;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
+/*
+* Tests for the Ad Class in isolation
+* */
 public class AdTest {
 
     private Ad ad;
