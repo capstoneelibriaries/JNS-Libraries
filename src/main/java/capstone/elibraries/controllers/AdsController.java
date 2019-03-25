@@ -111,7 +111,7 @@ public class AdsController {
     @GetMapping("/ads/{id}/trade")
     public String tradeForm(Model model, @PathVariable Long id) throws AuthenticationException{
         User user = getCurrentUser();
-        Ad ad = ads.findOne(id);
+        Ad ad = adsDao.findOne(id);
         if (user.getAds().isEmpty()){
             return "redirect:/ads/view=" + id+ "?noads";
         }
