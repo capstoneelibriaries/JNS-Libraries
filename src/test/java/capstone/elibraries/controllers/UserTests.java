@@ -51,4 +51,16 @@ public class UserTests {
                 .andExpect(redirectedUrl("/login"));
     }
 
+    @Test
+    public void testRegisterPostMismatchedPasswords() throws Exception{
+        this.mvc.perform(post("/register")
+                .param("username", "alice")
+                .param("email", "alice@email.com")
+                .param("phone", "2223334455")
+                .param("password", "password123")
+                .param("confirmPassword", "password321")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED))
+                .andExpect(status().isFound())
+                .andExpect(redirectedUrl("/register?error"));
+    }
 }
