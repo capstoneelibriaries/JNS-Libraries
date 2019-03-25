@@ -71,4 +71,92 @@ public class UserTest {
         user = new User();
         user.setUsername(randomString(200));
     }
+
+    /*
+    * User email tests
+    * */
+    @Test(expected = NullPointerException.class)
+    public void userEmailCannotBeNull(){
+        user = new User();
+        user.setEmail(null);
+    }
+
+    @Test(expected = Exception.class)
+    public void userEmailCannotBeEmpty(){
+        user = new User();
+        user.setEmail("");
+    }
+
+    @Test(expected = Exception.class)
+    public void userEmailMustBeValidAddress(){
+        user = new User();
+        user.setEmail("loremipsumdolor");
+    }
+
+    @Test(expected = Exception.class)
+    public void userEmailMustEndInDotString(){
+        user = new User();
+        user.setEmail("alice@email-com");
+    }
+
+    @Test(expected = Exception.class)
+    public void userEmailMustHaveCharsBeforeAtSign(){
+        user = new User();
+        user.setEmail("@email.com");
+    }
+
+    @Test
+    public void userEmailGetterRetunsSetValue(){
+        String email = "bob@email.com";
+
+        user = new User();
+        user.setEmail(email);
+
+        assert(user.getEmail().equals(email));
+    }
+
+    /*
+    * Tests for phone input
+    * */
+    @Test(expected = Exception.class)
+    public void userPhoneCannotBeEmpty(){
+        user = new User();
+        user.setPhone("");
+    }
+
+    @Test(expected = Exception.class)
+    public void userPhoneCannotBeLessThanTenNumbers(){
+        user = new User();
+        user.setPhone("120333476");
+    }
+
+    @Test(expected = Exception.class)
+    public void userPhoneDoesNotAcceptLetters(){
+        user = new User();
+        user.setPhone("210444AABF");
+    }
+
+    @Test
+    public void userPhoneAcceptsRemovesDashes(){
+        user = new User();
+        user.setPhone("1-210-322-7722");
+
+        assert(user.getPhone().equals("12103227722"));
+    }
+
+    @Test
+    public void userPhoneAcceptsAndRemovesPeriods(){
+        user = new User();
+        user.setPhone("1.210.332.7722");
+
+        assert(user.getPhone().equals("1203327722"));
+    }
+
+    @Test
+    public void userPhoneAcceptsAndRemovedParenthesis(){
+        user = new User();
+        user.setPhone("1-(210)-332-7722");
+
+        assert(user.getPhone().equals("1203327722"));
+    }
 }
