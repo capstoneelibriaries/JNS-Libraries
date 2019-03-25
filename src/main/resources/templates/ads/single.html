@@ -16,8 +16,8 @@
             <h5 th:text="*{description}"></h5>
         </div>
         <div th:each="book : *{books}">
-            <p th:text="${book.title}"></p>
             <p th:text="${book.author}"></p>
+
             <p th:text="'Condition: '+${book.wear}"></p>
             <div>
                 <th:block th:each="genre : ${book.genres}">
