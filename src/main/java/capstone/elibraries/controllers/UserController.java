@@ -14,6 +14,7 @@ import capstone.elibraries.repositories.Users;
 import capstone.elibraries.models.User;
 import org.springframework.ui.Model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.sql.Timestamp;
 import java.util.List;
@@ -35,6 +36,15 @@ public class UserController {
         this.transactions = transactions;
     }
 
+    private User getCurrentUser(){
+        return users.findOne(
+                ((User) SecurityContextHolder
+                        .getContext()
+                        .getAuthentication()
+                        .getPrincipal()
+                ).getId());
+    }
+
     @GetMapping("/register")
     public String showRegisterForm(Model model) {
         model.addAttribute("user", new User());
@@ -47,6 +57,18 @@ public class UserController {
 
         model.addAttribute("user", databaseUser);
         return "users/profile";
+    }
+
+    @GetMapping("/profile/addresses")
+    public String setAddress(Model model){
+        User user = getCurrentUser();
+
+        if(user.getAddresses() != null || user.getAddresses().size() == 0){
+            user.addAddress(new Address());
+        }
+
+        model.addAttribute("user", user);
+        return "users/addresses";
     }
 
     @GetMapping("/profile/transactions")
@@ -103,4 +125,5 @@ public class UserController {
            return "redirect:/register?error";
        }
     }
+
 }
