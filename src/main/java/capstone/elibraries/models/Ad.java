@@ -19,8 +19,8 @@ public class Ad {
     @Column
     private boolean tradable;
 
-    @Column(nullable = false, length = 128)
-    private String title;
+    @Column(nullable = false, length = 128, name = "ad_title")
+    private String adTitle;
 
     @Column(nullable = false, length = 512)
     private String description;
@@ -44,7 +44,7 @@ public class Ad {
     public Ad(User seller, String title, String description, double price, double shipping){
         this();
         this.seller = seller;
-        this.title = title;
+        this.adTitle = title;
         this.description = description;
         seller.addAd(this);
         this.price = price;
@@ -84,11 +84,11 @@ public class Ad {
     }
 
     public void setTitle(String title){
-        this.title = title;
+        this.adTitle = title;
     }
 
     public String getTitle(){
-        return this.title;
+        return this.adTitle;
     }
 
     public void setDescription(String description){

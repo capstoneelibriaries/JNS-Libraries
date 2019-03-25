@@ -26,7 +26,7 @@ VALUES ("Zhizhong Cai", "0385472579", "", "Zen speaks", 3, "/images/bookexample.
        ("John R. Levine, Margaret Levine Young, Carol Baroudi", "0764589962", "", "The Internet For Dummies (Internet for Dummies)", 3, ""),
        ("Jeanie Daniel Duck", "0609808818", "", "The change monster", 2, "");
 
-insert into ads (title, description, price, shipping, tradable, user_id)
+insert into ads (ad_title, description, price, shipping, tradable, user_id)
 VALUES ("Ipsum dolor", "Morbi dictum dui diam, ut luctus quam commodo sed. Morbi in porta lectus. Integer dapibus justo est.", 14.99, 5.67, true, 1),
        ("Lorem dolor", "Suspendisse fringilla sollicitudin arcu. Aenean egestas justo lacus, sit amet pretium neque ullamcorper eget. In in metus commodo, dapibus turpis in, ultrices tortor. Proin sodales at libero malesuada imperdiet.", 12.25, 0.0, true, 1),
        ("Mercator in foro", "Nullam et arcu lorem. Aenean sed orci dui. Suspendisse id enim eget massa ullamcorper aliquet. Aliquam vehicula tellus eu nisl semper porta. Sed a dolor nec lacus dapibus egestas. Proin lobortis congue maximus.", 28.00, 0.0, true, 2),

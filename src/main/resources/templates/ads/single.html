@@ -12,7 +12,7 @@
 </div>
     <div th:object="${ad}" class="">
         <div>
-            <h1 th:text="*{title}"></h1>
+            <h1 th:text="${ad.title}"></h1>
         </div>
         <div>
             <h5 th:text="*{description}"></h5>

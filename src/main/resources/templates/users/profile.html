@@ -34,7 +34,7 @@
             <th:block th:if="${!user.ads.isEmpty()}">
 
                 <div class="col-lg-3 col-md-4 col-6" th:each="ad:${user.ads}">
-                    <a class="d-block mb-4 h-100 img-thumbnail">
+                    <a th:href="@{/ads/view={id} (id=${ad.id})}" class="d-block mb-4 h-100 img-thumbnail">
                         <h5 th:text="${ad.title}"></h5>
                         <th:block th:each="book:${ad.books}">
 
