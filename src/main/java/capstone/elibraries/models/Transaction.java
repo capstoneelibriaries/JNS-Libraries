@@ -55,14 +55,6 @@ public class Transaction {
         this.sellerItem = item;
     }
 
-    public TradeRequest getTradeRequest() {
-        return trade;
-    }
-
-    public void setTradeRequest(TradeRequest trade) {
-        this.trade = trade;
-    }
-
     public Date getDate() {
         return date;
     }

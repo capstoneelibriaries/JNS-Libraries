@@ -52,6 +52,7 @@ public class UserController {
     @GetMapping("/profile/transactions")
     public String showTransactions(Model model) {
         User databaseUser = users.findOne(((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId());
+        model.addAttribute("transactions", transactions.findAllBySellerOrBuyerOrderByDateAsc(databaseUser, databaseUser));
         model.addAttribute("user", databaseUser);
         return "users/transactions";
     }
