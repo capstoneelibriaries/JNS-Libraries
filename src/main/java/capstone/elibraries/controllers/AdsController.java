@@ -106,7 +106,8 @@ public class AdsController {
         Ad ad = ads.findOne(id);
         if (user.getAds().isEmpty()){
             return "redirect:/ads/view=" + id+ "?noads";
-        if (user.getId() == ad.getSeller().getId()){
+        }
+        else if (user.getId() == ad.getSeller().getId()){
             return "redirect:/ads/view=" + id+ "?error";
         }
         model.addAttribute("ad", ad);
