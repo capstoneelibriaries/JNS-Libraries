@@ -44,10 +44,11 @@ public class AdsController {
     }
 
     @PostMapping("/ads/create")
-    public String createAd(@ModelAttribute Ad ad, @ModelAttribute Book book){
+    public String createAd(@ModelAttribute Ad ad, @ModelAttribute Book book) throws AuthenticationException {
         System.out.println(ad.toString());
         System.out.println(book.toString());
         ad.addBook(book);
+        ad.setSeller(getCurrentUser());
         adsDao.save(ad);
         return "users/profile";
     }
