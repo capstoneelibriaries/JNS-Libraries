@@ -129,5 +129,20 @@ public class AdsController {
         model.addAttribute("user", user);
         return "ads/trade";
     }
+    
+    @PostMapping("/ads/{id}/trade")	
+    public String trade(@RequestParam(name = "ad") Long adid, @PathVariable Long id) throws AuthenticationException{	
+        User requestingUser = getCurrentUser();	
+        Ad ad = adsDao.findOne(id);	
+        Ad userAd = adsDao.findOne(adid);	
+        tradesDao.save( new TradeRequest(	
+            ad.getSeller(), // Owner of ad	
+            requestingUser, // User requesting trade	
+            ad,             // Owner's ad	
+            userAd,         // User's offered ad	
+            true    // Active status of the trade	
+        ));	
 
+         return "redirect:/profile";	
+    }
 }
