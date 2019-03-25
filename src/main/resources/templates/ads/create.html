@@ -16,6 +16,7 @@
 </head>
 <body>
     <div th:replace="partials/navbar :: navbar"></div>
+    <div th:replace="partials/navbar :: navbar"></div>
     <div th:id="create-ad" class="container">
         <div>
             <div>
@@ -110,7 +111,8 @@
                                readonly="readonly" required="required"/>
                     </div>
                     <div>
-                        <input th:value="'Delete'" type="submit" th:formaction="@{/ads/deletebook/{id} (id = ${stat.index})}" />
+                        <!--<input th:value="'Delete'" type="submit" th:formaction="@{/ads/deletebook/{id} (id = ${stat.index})}" /> NOT WORKING
+                        PROPERLY, upon hitting enter, you are redirected to a page that doesn't exist-->
                     </div>
                 </div>
                 <!-- A new book the user can add to the list of books -->

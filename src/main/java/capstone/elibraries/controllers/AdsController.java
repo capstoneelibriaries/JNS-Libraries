@@ -50,7 +50,7 @@ public class AdsController {
         ad.addBook(book);
         ad.setSeller(getCurrentUser());
         adsDao.save(ad);
-        return "users/profile";
+        return "redirect:/profile";
     }
 
     @PostMapping("/ads/newbook")

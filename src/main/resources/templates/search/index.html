@@ -12,16 +12,15 @@
         </div>
     </div>
     <div class="container">
-    <div th:each="ad : ${ads}">
-        <div class="row">
-            <div class="col-md-7">
-                <a href="#">
-                    <img class="img-fluid rounded mb-3 mb-md-0" src="http://placehold.it/200x300" alt=""/>
-                </a>
-            </div> <!-- end of div class row -->
+    <div th:each="ad : ${ads}" >
+        <div class="row" >
+            <div class="col-md-7" th:each="book : ${ad.books}">
+                <!--Image needs to be 200x300-->
+                    <img class="img-fluid rounded mb-3 mb-md-0" th:src="${book.getImageUrl()}" alt=""/>
+            </div>
             <div class="col-md-5">
             <h2 th:text="${ad.title}"></h2>
-                <h3 th:text="${ad.price}">$</h3>
+                <h3 th:text="${ad.price}"></h3>
                 <p th:text="${ad.description}"></p>
                 <div th:each="book : ${ad.books}">
                     <h4 th:text="${book.title}"></h4>
