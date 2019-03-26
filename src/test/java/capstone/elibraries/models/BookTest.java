@@ -10,17 +10,13 @@ import static capstone.elibraries.testhelpers.DataGenerator.randomString;
 
 public class BookTest {
 
-    /*
-    @Column
-    private String imageUrl;*/
-
     private Book book;
 
     /*
     * id tests
     * */
     @Test
-    public void testIdGetterReturnsSetValue(){
+    public void testIdGetterReturnsSetValue() throws Exception {
         long id = randomLong();
 
         book = new Book();
@@ -30,7 +26,7 @@ public class BookTest {
     }
 
     @Test(expected = NumberFormatException.class)
-    public void testIdCannotBeNegative(){
+    public void testIdCannotBeNegative() throws Exception {
         long id = -1 * randomLong();
 
         book = new Book();
@@ -41,19 +37,19 @@ public class BookTest {
     * title tests
     * */
     @Test(expected = NullPointerException.class)
-    public void testTitleCannotBeNull(){
+    public void testTitleCannotBeNull() throws Exception {
         book = new Book();
         book.setTitle(null);
     }
 
     @Test(expected = ValidationException.class)
-    public void testTitleCannotBeEmpty(){
+    public void testTitleCannotBeEmpty() throws Exception {
         book = new Book();
         book.setTitle("");
     }
 
     @Test
-    public void testTitleGetterReturnsSetValue(){
+    public void testTitleGetterReturnsSetValue() throws Exception {
         String title = "lorem ipsum";
 
         book = new Book();
@@ -66,19 +62,19 @@ public class BookTest {
     * author tests
     * */
     @Test(expected = NullPointerException.class)
-    public void testAuthorCannotBeNull(){
+    public void testAuthorCannotBeNull() throws Exception {
         book = new Book();
         book.setAuthor(null);
     }
 
     @Test(expected = ValidationException.class)
-    public void testAuthorCannotBeEmpty(){
+    public void testAuthorCannotBeEmpty() throws Exception {
         book = new Book();
         book.setAuthor("");
     }
 
     @Test
-    public void testAuthorGetterReturnsSetValue(){
+    public void testAuthorGetterReturnsSetValue() throws Exception {
         String author = randomString(50);
         book = new Book();
         book.setAuthor(author);
@@ -90,13 +86,13 @@ public class BookTest {
     * Synopsis Tests
     * */
     @Test(expected = NullPointerException.class)
-    public void testSynopsisCannotBeNull(){
+    public void testSynopsisCannotBeNull() throws Exception{
         book = new Book();
         book.setSynopsis(null);
     }
 
     @Test
-    public void testSynopsisCanBeEmpty(){
+    public void testSynopsisCanBeEmpty() throws Exception{
         book = new Book();
         book.setSynopsis("");
 
@@ -104,7 +100,7 @@ public class BookTest {
     }
 
     @Test
-    public void testSynopsisGetterReturnsSetValue(){
+    public void testSynopsisGetterReturnsSetValue() throws Exception{
         String synopsis = randomString(100);
 
         book = new Book();
