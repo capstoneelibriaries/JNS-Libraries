@@ -10,6 +10,9 @@
         .profile-header{
             color: lightgrey;
         }
+        .books{
+            color: white;
+        }
     </style>
 </head>
 <body>
@@ -19,7 +22,7 @@
 
     <div class="container">
 
-        <h1 class="font-weight-medium text-center text-lg-left mt-4 mb-0 profile-header">My Books</h1>
+        <h1 class="font-weight-medium text-center text-lg-left mt-4 mb-0 profile-header"><i class="fas fa-book"></i> My Books</h1>
 
         <hr class="mt-2 mb-5"/>
 
@@ -34,7 +37,8 @@
             <th:block th:if="${!user.ads.isEmpty()}">
 
                 <div class="col-lg-3 col-md-4 col-6 mb-3 mt-1" th:each="ad:${user.ads}">
-                    <a th:href="@{/ads/view={id} (id=${ad.id})}" class="d-block mb-4 h-100 img-thumbnail">
+                    <!--d-block mb-4 h-100 img-thumbnail-->
+                    <a th:href="@{/ads/view={id} (id=${ad.id})}" class="books module">
                         <h5 th:text="*{ad.title}"></h5>
                         <th:block th:each="book:${ad.books}">
                             <img class="img-fluid" th:src="${book.imageUrl}" alt="book-image"/>
