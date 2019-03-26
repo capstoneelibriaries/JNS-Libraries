@@ -53,7 +53,7 @@
         <form th:action="@{/ads/{id}/trade(id=*{id})}" th:method="GET" th:if="*{tradable}" sec:authorize="isAuthenticated()">
             <button>Offer Trade</button>
         </form>
-        <div th:if="*{tradable}" sec:authorize="!isAuthenticated()">
+        <div th:if="*{tradable}">
             <button th:disabled="disabled">Offer Trade</button>
             <a th:href="@{/login}">Sign in to trade</a>
         </div>
