@@ -9,4 +9,11 @@ public class Validator {
         return false;
     }
 
+    public static ValidationException validateId(long id){
+        if(id < 1){
+            return new ValidationException("id greater than 1", "id of " + id);
+        }else{
+            return null;
+        }
+    }
 }
