@@ -6,6 +6,7 @@ import org.junit.Test;
 /*
 * Tests for the Ad Class in isolation
 * */
+
 public class AdTest {
 
     private Ad ad;
