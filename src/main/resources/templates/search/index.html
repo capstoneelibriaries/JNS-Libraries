@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <link th:replace="partials/header :: header('Search Results')"/>
 </head>
@@ -25,7 +25,7 @@
                 <div th:each="book : ${ad.books}">
                     <h4 th:text="${book.title}"></h4>
                 </div>
-                <a class="btn btn-primary" th:href="@{/ads/view={id} (id=${ad.id})}">View Ad</a>
+                <a class="btn btn-primary" th:href="@{/ads/view={id} (id=${ad.id})}" sec:authorize="isAuthenticated()">View Ad</a>
             </div>
         </div>
         <hr/>
