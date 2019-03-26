@@ -1,5 +1,7 @@
 package capstone.elibraries.models;
 
+import capstone.elibraries.error.ValidationException;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +43,9 @@ public class Ad {
         // DEFAULT
     }
 
-    public Ad(User seller, String title, String description, double price, double shipping){
+    public Ad(User seller, String title, String description, double price, double shipping)
+        throws ValidationException
+    {
         this();
         this.seller = seller;
         this.adTitle = title;
