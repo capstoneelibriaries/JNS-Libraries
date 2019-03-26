@@ -1,7 +1,11 @@
 package capstone.elibraries.models;
 
 import capstone.elibraries.error.ValidationException;
+import capstone.elibraries.testhelpers.DataGenerator;
 import org.junit.Test;
+
+import static capstone.elibraries.testhelpers.DataGenerator.randomLong;
+import static capstone.elibraries.testhelpers.DataGenerator.randomString;
 
 /*
 * Tests for the User Class in isolation
@@ -9,22 +13,6 @@ import org.junit.Test;
 public class UserTest {
 
     private User user;
-
-    private long randomLong(){
-        return (long)(Math.abs(Math.random() * 1000));
-    }
-
-    private char randomAscii(){
-        return (char)(Math.abs(Math.random() * 64) + 32);
-    }
-
-    private String randomString(int len){
-        StringBuilder rand = new StringBuilder(len);
-        for(int i = 0; i < len; i++){
-            rand.append(randomAscii());
-        }
-        return rand.toString();
-    }
 
     /*
     * User Id tests
