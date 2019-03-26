@@ -1,5 +1,6 @@
 package capstone.elibraries.controllers;
 
+import capstone.elibraries.error.ValidationException;
 import capstone.elibraries.models.Address;
 import capstone.elibraries.models.TradeRequest;
 import capstone.elibraries.models.Transaction;
@@ -60,7 +61,7 @@ public class UserController {
     }
 
     @GetMapping("/profile/addresses")
-    public String getAddress(Model model){
+    public String getAddress(Model model) throws ValidationException {
         User user = getCurrentUser();
 
         if(user.getAddresses() == null || user.getAddresses().size() == 0){
@@ -72,7 +73,7 @@ public class UserController {
     }
 
     @PostMapping("/profile/addresses")
-    public String setAddress(@ModelAttribute User userAddr){
+    public String setAddress(@ModelAttribute User userAddr) throws ValidationException {
         User user = getCurrentUser();
         user.setAddresses(userAddr.getAddresses());
 
@@ -122,7 +123,7 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public String saveUser(@ModelAttribute User user) {
+    public String saveUser(@ModelAttribute User user) throws ValidationException {
        if (user.getPassword().equals(user.getConfirmPassword())) {
 
            String hash = passwordEncoder.encode(user.getPassword());

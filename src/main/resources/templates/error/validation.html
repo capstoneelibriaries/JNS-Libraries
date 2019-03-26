@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <link th:replace="partials/header :: header('Validation Error')"/>
+</head>
+<body>
+<div th:replace="partials/navbar :: navbar"></div>
+    <h1>Validation Error</h1>
+    <div>
+        <p th:text="${error.getExpectedAsMessage()}"></p>
+        <p th:text="${error.getInputAsMessage()}"></p>
+    </div>
+</body>
+</html>
