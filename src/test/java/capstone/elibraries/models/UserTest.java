@@ -1,7 +1,11 @@
 package capstone.elibraries.models;
 
 import capstone.elibraries.error.ValidationException;
+import capstone.elibraries.testhelpers.DataGenerator;
 import org.junit.Test;
+
+import static capstone.elibraries.testhelpers.DataGenerator.randomLong;
+import static capstone.elibraries.testhelpers.DataGenerator.randomString;
 
 /*
 * Tests for the User Class in isolation
@@ -10,27 +14,11 @@ public class UserTest {
 
     private User user;
 
-    private long randomLong(){
-        return (long)(Math.abs(Math.random() * 1000));
-    }
-
-    private char randomAscii(){
-        return (char)(Math.abs(Math.random() * 64) + 32);
-    }
-
-    private String randomString(int len){
-        StringBuilder rand = new StringBuilder(len);
-        for(int i = 0; i < len; i++){
-            rand.append(randomAscii());
-        }
-        return rand.toString();
-    }
-
     /*
     * User Id tests
     * */
     @Test(expected = NumberFormatException.class)
-    public void userIdCannotBeNegetive(){
+    public void userIdCannotBeNegetive() throws Exception {
         long badId = -1 * randomLong();
 
         user = new User();
@@ -38,7 +26,7 @@ public class UserTest {
     }
 
     @Test
-    public void userIdGetterReturnsSetValue(){
+    public void userIdGetterReturnsSetValue() throws Exception {
         long id = randomLong();
 
         user = new User();
@@ -47,7 +35,7 @@ public class UserTest {
     }
 
     @Test
-    public void userIdGetterReturnsZeroWhenNotInstantiated(){
+    public void userIdGetterReturnsZeroWhenNotInstantiated() throws Exception {
         user = new User();
         assert(user.getId() == 0);
     }
@@ -56,19 +44,19 @@ public class UserTest {
     * User name tests
     * */
     @Test(expected = NullPointerException.class)
-    public void userNameCannotBeNull(){
+    public void userNameCannotBeNull() throws Exception {
         user = new User();
         user.setUsername(null);
     }
 
     @Test(expected = ValidationException.class)
-    public void userNameCannotBeEmpty(){
+    public void userNameCannotBeEmpty() throws Exception {
         user = new User();
         user.setUsername("");
     }
 
     @Test(expected = ValidationException.class)
-    public void userNameCannotBeOversized(){
+    public void userNameCannotBeOversized() throws Exception {
         user = new User();
         user.setUsername(randomString(200));
     }
@@ -77,37 +65,37 @@ public class UserTest {
     * User email tests
     * */
     @Test(expected = NullPointerException.class)
-    public void userEmailCannotBeNull(){
+    public void userEmailCannotBeNull() throws Exception {
         user = new User();
         user.setEmail(null);
     }
 
     @Test(expected = ValidationException.class)
-    public void userEmailCannotBeEmpty(){
+    public void userEmailCannotBeEmpty() throws Exception {
         user = new User();
         user.setEmail("");
     }
 
     @Test(expected = ValidationException.class)
-    public void userEmailMustBeValidAddress(){
+    public void userEmailMustBeValidAddress() throws Exception {
         user = new User();
         user.setEmail("loremipsumdolor");
     }
 
     @Test(expected = ValidationException.class)
-    public void userEmailMustEndInDotString(){
+    public void userEmailMustEndInDotString() throws Exception {
         user = new User();
         user.setEmail("alice@email-com");
     }
 
     @Test(expected = Exception.class)
-    public void userEmailMustHaveCharsBeforeAtSign(){
+    public void userEmailMustHaveCharsBeforeAtSign() throws Exception {
         user = new User();
         user.setEmail("@email.com");
     }
 
     @Test
-    public void userEmailGetterRetunsSetValue(){
+    public void userEmailGetterRetunsSetValue() throws Exception {
         String email = "bob@email.com";
 
         user = new User();
@@ -120,25 +108,25 @@ public class UserTest {
     * Tests for phone input
     * */
     @Test(expected = ValidationException.class)
-    public void userPhoneCannotBeEmpty(){
+    public void userPhoneCannotBeEmpty() throws Exception {
         user = new User();
         user.setPhone("");
     }
 
     @Test(expected = ValidationException.class)
-    public void userPhoneCannotBeLessThanTenNumbers(){
+    public void userPhoneCannotBeLessThanTenNumbers() throws Exception {
         user = new User();
         user.setPhone("120333476");
     }
 
     @Test(expected = ValidationException.class)
-    public void userPhoneDoesNotAcceptLetters(){
+    public void userPhoneDoesNotAcceptLetters() throws Exception {
         user = new User();
         user.setPhone("210444AABF");
     }
 
     @Test
-    public void userPhoneAcceptsRemovesDashes(){
+    public void userPhoneAcceptsRemovesDashes() throws Exception {
         user = new User();
         user.setPhone("1-210-322-7722");
 
@@ -146,7 +134,7 @@ public class UserTest {
     }
 
     @Test
-    public void userPhoneAcceptsAndRemovesPeriods(){
+    public void userPhoneAcceptsAndRemovesPeriods() throws Exception {
         user = new User();
         user.setPhone("1.210.332.7722");
 
@@ -154,7 +142,7 @@ public class UserTest {
     }
 
     @Test
-    public void userPhoneAcceptsAndRemovedParenthesis(){
+    public void userPhoneAcceptsAndRemovedParenthesis() throws Exception {
         user = new User();
         user.setPhone("1-(210)-332-7722");
 
