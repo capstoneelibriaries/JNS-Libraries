@@ -9,11 +9,20 @@ public class Validator {
         return false;
     }
 
-    public static ValidationException validateId(long id){
+    public static ValidationException checkId(long id){
         if(id < 1){
-            return new ValidationException("id greater than 1", "id of " + id);
+            return new ValidationException("id of " + id, "id greater than 1");
         }else{
             return null;
         }
     }
+
+    public static ValidationException checkNotNull(Object obj){
+        if(obj == null){
+            return new ValidationException("null", "not null");
+        }else{
+            return null;
+        }
+    }
+
 }
