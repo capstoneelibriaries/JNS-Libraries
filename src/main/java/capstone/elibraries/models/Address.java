@@ -1,5 +1,8 @@
 package capstone.elibraries.models;
 
+import capstone.elibraries.error.ValidationException;
+import capstone.elibraries.error.Validator;
+
 import javax.persistence.*;
 
 @Entity @Table(name = "addresses")
@@ -24,6 +27,9 @@ public class Address {
     @Column
     private String zipcode;
 
+    @Transient
+    private ValidationException isvalid;
+
     public Address(){
         // default
     }
@@ -32,7 +38,10 @@ public class Address {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(long id) throws ValidationException {
+
+        Validator.throwIf(Validator.checkId(id));
+
         this.id = id;
     }
 
@@ -40,7 +49,10 @@ public class Address {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(User user) throws ValidationException {
+
+        Validator.throwIf(Validator.checkNotNull(user));
+
         this.user = user;
     }
 
@@ -56,7 +68,10 @@ public class Address {
         return streetAddr;
     }
 
-    public void setStreetAddr(String streetAddr) {
+    public void setStreetAddr(String streetAddr) throws ValidationException {
+
+        Validator.throwIf(Validator.checkNotNullAndNotEmpty(streetAddr));
+
         this.streetAddr = streetAddr;
     }
 
@@ -65,6 +80,10 @@ public class Address {
     }
 
     public void setSubAddr(String subAddr) {
+        if(subAddr == null){
+            subAddr = "";
+        }
+
         this.subAddr = subAddr;
     }
 
@@ -72,7 +91,10 @@ public class Address {
         return country;
     }
 
-    public void setCountry(String country) {
+    public void setCountry(String country) throws ValidationException{
+
+        Validator.throwIf(Validator.checkNotNullAndNotEmpty(country));
+
         this.country = country;
     }
 
@@ -80,7 +102,10 @@ public class Address {
         return city;
     }
 
-    public void setCity(String city) {
+    public void setCity(String city) throws ValidationException {
+
+        Validator.throwIf(Validator.checkNotNullAndNotEmpty(city));
+
         this.city = city;
     }
 
@@ -97,6 +122,11 @@ public class Address {
     }
 
     public void setZipcode(String zipcode) {
+
+        if(zipcode == null){
+            zipcode = "";
+        }
+
         this.zipcode = zipcode;
     }
 

@@ -19,7 +19,7 @@ public class AddressTest {
 //    }
 
     @Test(expected = ValidationException.class)
-    public void testIdCannotBeNegetive() {
+    public void testIdCannotBeNegetive() throws Exception {
         addr = new Address();
         addr.setId(-1 * randomLong());
     }
@@ -33,7 +33,7 @@ public class AddressTest {
 //    }
 
     @Test(expected = ValidationException.class)
-    public void testUserCanotBeNull(){
+    public void testUserCanotBeNull() throws Exception  {
         addr = new Address();
         addr.setUser(null);
     }
@@ -55,13 +55,13 @@ public class AddressTest {
 //    }
 
     @Test(expected = ValidationException.class)
-    public void testStreetAddrCannotBeNull(){
+    public void testStreetAddrCannotBeNull() throws Exception {
         addr = new Address();
         addr.setStreetAddr(null);
     }
 
     @Test(expected = ValidationException.class)
-    public void testStreetAddrCannotBeEmpty(){
+    public void testStreetAddrCannotBeEmpty() throws Exception {
         addr = new Address();
         addr.setStreetAddr("");
     }
@@ -75,7 +75,7 @@ public class AddressTest {
 //    }
 
     @Test
-    public void testSubAddrReturnsEmptyStringOnNUllInput(){
+    public void testSubAddrReturnsEmptyStringOnNUllInput() throws Exception {
         addr = new Address();
         addr.setSubAddr(null);
 
@@ -91,13 +91,13 @@ public class AddressTest {
 //    }
 
     @Test(expected = ValidationException.class)
-    public void testCountryCannotBeNull(){
+    public void testCountryCannotBeNull() throws Exception {
         addr = new Address();
         addr.setCountry(null);
     }
 
     @Test(expected = ValidationException.class)
-    public void testCountryCannotBeEmpty(){
+    public void testCountryCannotBeEmpty() throws Exception {
         addr = new Address();
         addr.setCountry("");
     }
@@ -110,14 +110,14 @@ public class AddressTest {
 //    public void setCity() {
 //    }
 
-    @Test
-    public void testCityCannotBeNull(){
+    @Test(expected = ValidationException.class)
+    public void testCityCannotBeNull() throws Exception {
         addr = new Address();
         addr.setCity(null);
     }
 
-    @Test
-    public void testCityCannotBeEmpty(){
+    @Test(expected = ValidationException.class)
+    public void testCityCannotBeEmpty() throws Exception {
         addr = new Address();
         addr.setCity("");
     }
@@ -131,14 +131,14 @@ public class AddressTest {
 //    }
 
     @Test(expected = ValidationException.class)
-    public void testStateCannotBeEmptyIfCountryIsUS(){
+    public void testStateCannotBeEmptyIfCountryIsUS() throws Exception {
         addr = new Address();
         addr.setCountry("United States");
         addr.setState("");
     }
 
     @Test(expected = ValidationException.class)
-    public void testStateIsEmptyIfSetToNull(){
+    public void testStateIsEmptyIfSetToNull() throws Exception {
         addr = new Address();
         addr.setState(null);
 
@@ -154,7 +154,7 @@ public class AddressTest {
 //    }
 
     @Test
-    public void testZipCodeReturnsEmptyIfSetToNull(){
+    public void testZipCodeReturnsEmptyIfSetToNull() throws Exception {
         addr = new Address();
         addr.setZipcode(null);
 

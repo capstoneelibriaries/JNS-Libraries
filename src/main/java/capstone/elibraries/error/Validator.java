@@ -9,6 +9,12 @@ public class Validator {
         return false;
     }
 
+    public static void throwIf(ValidationException e) throws ValidationException{
+        if(e != null){
+            throw e;
+        }
+    }
+
     public static ValidationException checkId(long id){
         if(id < 1){
             return new ValidationException("id of " + id, "id greater than 1");
@@ -31,6 +37,12 @@ public class Validator {
         }else{
             return null;
         }
+    }
+
+    public static ValidationException checkNotNullAndNotEmpty(String str){
+        return check(checkNotNull(str))
+                .andCheck(checkNotEmpty(str))
+                .done();
     }
 
     public static ValidationException checkLenLessThan(String str, int len){
