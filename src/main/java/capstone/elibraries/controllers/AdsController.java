@@ -50,7 +50,7 @@ public class AdsController {
             model.addAttribute("error", e);
             return "redirect:/error/validation";
         } catch (Exception e){
-            //
+            // catch cast exception
         }
         return "ads/single";
     }
