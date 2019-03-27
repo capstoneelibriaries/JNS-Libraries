@@ -52,8 +52,7 @@
         <!--TODO: match styling with paypal button -->
     </th:block>
 
-    <form th:action="@{/ads/{id}/trade(id=*{id})}" th:method="GET" th:if="*{tradable}"
-          sec:authorize="isAuthenticated()">
+    <form th:action="@{/ads/{id}/trade(id=*{id})}" th:method="GET" th:if="*{tradable}">
         <button>Offer Trade</button>
     </form>
     <div th:if="*{tradable}" sec:authorize="!isAuthenticated()">
