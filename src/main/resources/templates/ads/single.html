@@ -37,7 +37,9 @@
             <form th:action="@{/ads/{id}/edit (id=*{id})}">
                 <button class="btn btn-md btn-warning" type="submit" sec:authorize="isAuthenticated()">Edit</button>
             </form>
+            <form th:action="@{/ads/{id}/delete (id=*{id})}" method="POST">
             <button class="btn btn-md btn-danger" type="submit" sec:authorize="isAuthenticated()">Delete</button>
+            </form>
         </th:block>
 
         <th:block th:if="${false}">

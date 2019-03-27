@@ -94,7 +94,8 @@ public class AdsController {
     @PostMapping("/ads/{id}/delete")
     public String deleteAd(@ModelAttribute Ad ad, @PathVariable Long id){
         if (((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId() ==
-                usersDao.findOne(ad.getSeller().getId()).getId()) {
+                adsDao.findOne(ad.getId()).getSeller().getId()) {
+
                  adsDao.delete(adsDao.findOne(id));
                  return "redirect:/profile";
         }else{

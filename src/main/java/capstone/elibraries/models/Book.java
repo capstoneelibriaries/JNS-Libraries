@@ -37,7 +37,7 @@ public class Book {
     )
     private List<Genre> genres;
 
-    @ManyToMany(mappedBy = "books")
+    @ManyToMany(mappedBy = "books", cascade = CascadeType.ALL)
     private List<Ad> ads;
 
     public Book(){

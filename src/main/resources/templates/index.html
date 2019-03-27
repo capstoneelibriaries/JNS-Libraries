@@ -27,13 +27,13 @@
                 <div class="card card-signin flex-row my-5">
                     <div class="card-body">
                         <div>
-                            <h1 class="card-title text-center">Search</h1>
+                            <h1 class="card-title text-center"><i class="fas fa-globe-americas"></i></h1>
                         </div>
                         <label for="adSearch"></label>
                         <form id="adSearch" class="form-signin" th:action="@{/search}" th:method="get">
                             <div class="form-label-group">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" th:placeholder="Search..." name="q"/>
+                                    <input type="text" class="form-control" th:required="required" th:placeholder="Search..." name="q"/>
                                     <div class="input-group-append">
                                         <select class="custom-select" th:name="option">
                                             <option th:value="ads">Ads</option>
@@ -46,11 +46,6 @@
                             <div class="form-label-group">
                                 <button class="btn btn-lg btn-primary btn-block text-uppercase search"
                                         th:type="submit">search
-                                </button>
-                                <br/>
-                                <button class="btn btn-lg btn-primary btn-block text-uppercase"
-                                        th:formaction="@{/advanced}"
-                                        type="submit">advanced
                                 </button>
                             </div>
                         </form>

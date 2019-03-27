@@ -17,49 +17,56 @@
 <body>
     <div th:replace="partials/navbar :: navbar"></div>
     <div th:id="create-ad" class="container">
-        <div>
-            <div>
-                <h1>Create an Ad</h1>
-            </div>
+        <div class="row">
+            <div class="card mb-5 mb-lg-0 mt-5">
+                    <div class="card-body">
+                <h5 class="card-title text-center">Create a trade request</h5>
+
             <!-- The Ad portion of the form -->
-            <form th:method="post" th:action="@{/ads/create}">
+            <form th:method="post" th:action="@{/ads/create}" class="form-signin">
                 <div th:object="${ad}">
+                    <div class="form-label-group">
                     <div>
                         <label>Title</label>
                         <input th:field="*{title}"
                                th:id="ad-title"
                                type="text"
-                               required="required"/>
+                               required="required"
+                               class="form-control"/>
                     </div>
                     <div>
-                        <label>
+                        <label th:for="ad-description">
                             Description
                             <textarea th:field="*{description}"
                                       th:id="ad-description"
                                       type="text"
-                                      required="required"></textarea>
+                                      required="required"
+                                      class="form-control"></textarea>
                         </label>
                     </div>
                     <div>
-                        <label>Price</label>
+                        <label th:for="ad-price">Price</label>
                         <input th:field="*{price}"
                                th:id="ad-price"
                                type="number" step="0.01" min="0.99" max="9999.99"
-                               required="required"/>
+                               required="required"
+                               class="form-control"/>
                     </div>
                     <div>
                         <label>Shipping</label>
                         <input th:field="*{shipping}"
                                th:id="ad-shipping"
                                type="number" step="0.01" min="0.00" max="9999.99"
-                               required="required"/>
+                               required="required"
+                               class="form-control"/>
                     </div>
+                </div>
                 </div>
                 <!-- The books that are already in the ad, on display and still editable -->
                 <div th:each="book, stat : ${ad.books}">
                     <div>
                         <img th:src="${ad.books[__${stat.index}__].imageUrl}"
-                             width="400"
+                             width="200"
                              height="300"/>
                     </div>
                     <div>
@@ -170,6 +177,8 @@
                         formaction="/ads/newbook"
                         disabled="disabled">Add a New Book</button>
             </form>
+                </div>
+            </div>
         </div>
     </div>
     <script th:src="@{/js/jquery.js}"></script>
