@@ -61,7 +61,7 @@ public class SearchControllerTest {
                 .param("option", "books"))
                 .andExpect(status().isOk());
     }
-    
+
     @Test
     public void testBookSearch() throws Exception {
         this.mvc.perform(get("/search")
