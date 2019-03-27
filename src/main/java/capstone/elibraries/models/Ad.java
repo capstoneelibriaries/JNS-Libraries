@@ -38,6 +38,7 @@ public class Ad {
 
     public Ad(){
         this.books = new ArrayList<>(0);
+        this.tradable = true;
         // DEFAULT
     }
 
@@ -79,8 +80,9 @@ public class Ad {
         return tradable;
     }
 
+    @Deprecated
     public void setTradable(boolean tradable){
-        this.tradable = tradable;
+        this.tradable = true;
     }
 
     public void setTitle(String title){

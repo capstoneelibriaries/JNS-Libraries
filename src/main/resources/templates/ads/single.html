@@ -4,13 +4,13 @@
     <link th:replace="partials/header :: header('Viewing Ad')"/>
 </head>
 <body>
-<nav th:replace="partials/navbar :: navbar"></nav>
-<div th:if="${param.error}" class="alert alert-warning" role="alert">
-    You can not trade with yourself.
-</div>
-<div th:if="${param.noads}" class="alert alert-warning" role="alert">
-    You have no books to trade.
-</div>
+    <nav th:replace="partials/navbar :: navbar"></nav>
+    <div th:if="${param.error}" class="alert alert-warning" role="alert">
+        You can not trade with yourself.
+    </div>
+    <div th:if="${param.noads}" class="alert alert-warning" role="alert">
+        You have no books to trade.
+    </div>
     <div th:object="${ad}" class="">
         <div>
             <h1 th:text="${ad.title}"></h1>
@@ -38,23 +38,24 @@
                 <button class="btn btn-md btn-warning" type="submit" sec:authorize="isAuthenticated()">Edit</button>
             </form>
             <form th:action="@{/ads/{id}/delete (id=*{id})}" method="POST">
-            <button class="btn btn-md btn-danger" type="submit" sec:authorize="isAuthenticated()">Delete</button>
+                <button class="btn btn-md btn-danger" type="submit" sec:authorize="isAuthenticated()">Delete</button>
             </form>
         </th:block>
 
-        <th:block th:if="${false}">
-        <!-- TODO: Replace with paypal purchase button -->
-        <form th:action="@{/ads/{id}/buy(id=*{id})}" th:method="GET">
-            <button>Buy</button>
-        </form>
-        <!--TODO: match styling with paypal button -->
-        </th:block>
+        <!--<th:block th:if="${false}">-->
+            <!--&lt;!&ndash; TODO: Replace with paypal purchase button &ndash;&gt;-->
+            <!--<form th:action="@{/ads/{id}/buy(id=*{id})}" th:method="GET">-->
+                <!--<button>Buy</button>-->
+            <!--</form>-->
+            <!--&lt;!&ndash;TODO: match styling with paypal button &ndash;&gt;-->
+        <!--</th:block>-->
 
-        <form th:action="@{/ads/{id}/trade(id=*{id})}" th:method="GET" th:if="*{tradable}" sec:authorize="isAuthenticated()">
+        <form th:action="@{/ads/{id}/trade(id=*{id})}" th:method="GET">
             <button>Offer Trade</button>
         </form>
-        <div th:if="*{tradable}">
-            <button th:disabled="disabled">Offer Trade</button>
+
+        <div sec:authorize="!isAuthenticated()">
+            <button>Offer Trade</button>
             <a th:href="@{/login}">Sign in to trade</a>
         </div>
     </div>
