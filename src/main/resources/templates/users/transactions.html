@@ -10,11 +10,11 @@
 
 <div class="container mt-3">
     <div class="my-3">
-    <a th:href="@{/profile}" style="display: inline-block;" >&lt; Back to Profile</a>
+        <a th:href="@{/profile}" style="display: inline-block;">&lt; Back to Profile</a>
     </div>
-                            <h1>Transactions</h1>
+    <h1>Transactions</h1>
     <th:block th:if="${!transactions.isEmpty()}">
-        <div class="row" th:each="transaction:${transactions}" >
+        <div class="row" th:each="transaction:${transactions}">
             <div class="col-12 mx-auto">
                 <div class="card" th:object="${transaction}">
                     <div class="row">

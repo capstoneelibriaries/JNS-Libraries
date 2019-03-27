@@ -36,19 +36,24 @@ public class Ad {
     )
     private List<Book> books;
 
+    @Column(name= "pending")
+    private boolean pending;
+
     public Ad(){
         this.books = new ArrayList<>(0);
+        pending = true;
         // DEFAULT
     }
 
-    public Ad(User seller, String title, String description, double price, double shipping){
+    public Ad(User seller, String adTitle, String description, double price, double shipping){
         this();
         this.seller = seller;
-        this.adTitle = title;
+        this.adTitle = adTitle;
         this.description = description;
         seller.addAd(this);
         this.price = price;
         this.shipping = shipping;
+        pending = true;
     }
 
     public long getId(){
@@ -83,14 +88,6 @@ public class Ad {
         this.tradable = tradable;
     }
 
-    public void setTitle(String title){
-        this.adTitle = title;
-    }
-
-    public String getTitle(){
-        return this.adTitle;
-    }
-
     public void setDescription(String description){
         this.description = description;
     }
@@ -123,6 +120,22 @@ public class Ad {
         book.addAd(this);
     }
 
+    public String getAdTitle() {
+        return adTitle;
+    }
+
+    public void setAdTitle(String adTitle) {
+        this.adTitle = adTitle;
+    }
+
+    public boolean isPending() {
+        return pending;
+    }
+
+    public void setPending(boolean pending) {
+        this.pending = pending;
+    }
+
     // To String methods and helpers
 
     private String booksToString(){
@@ -140,6 +153,8 @@ public class Ad {
 
     public String toString(){
         return "{\n" +
+                "\t\"title\":\"" + this.adTitle + "\",\n" +
+                "\t\"description\":\"" + this.description + "\",\n" +
                 "\t\"price\":\"" + this.price + "\",\n" +
                 "\t\"shipping\":\"" + this.shipping + "\",\n" +
 //                "\ttradable:" + this.tradable + "\n" +

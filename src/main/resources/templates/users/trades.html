@@ -14,38 +14,40 @@
             <div class="col-12 mx-auto">
                 <div class="card" th:object="${trade}">
                     <div class="row">
-                    <div class="offer col-lg-6 col-md-6 col-sm-12">
-                        <h5 class="text-center"><span th:text="*{from.username}" class="text-capitalize"></span> offers:</h5>
-                        <ul class="list-unstyled ">
-                            <th:block th:each="book: *{wanted.books}">
-                                <li class="border-bottom" th:text="${book.title} + ' by ' + ${book.author}"></li>
-                            </th:block>
-                        </ul>
-                    </div>
-                    <div class="yours col-lg-6 col-md-6 col-sm-12">
-                        <h5 class="text-center">In exchange for:</h5>
-                        <ul class="list-unstyled">
-                            <th:block th:each="book: *{forSale.books}">
-                                <li class="border-bottom" th:text="${book.title} + ' by ' + ${book.author}"></li>
-                            </th:block>
-                        </ul>
-                    </div>
+                        <div class="offer col-lg-6 col-md-6 col-sm-12">
+                            <h5 class="text-center"><span th:text="*{from.username}" class="text-capitalize"></span>
+                                offers:</h5>
+                            <ul class="list-unstyled ">
+                                <th:block th:each="book: *{wanted.books}">
+                                    <li class="border-bottom" th:text="${book.title} + ' by ' + ${book.author}"></li>
+                                </th:block>
+                            </ul>
+                        </div>
+                        <div class="yours col-lg-6 col-md-6 col-sm-12">
+                            <h5 class="text-center">In exchange for:</h5>
+                            <ul class="list-unstyled">
+                                <th:block th:each="book: *{forSale.books}">
+                                    <li class="border-bottom" th:text="${book.title} + ' by ' + ${book.author}"></li>
+                                </th:block>
+                            </ul>
+                        </div>
                     </div>
                     <form th:action="@{/profile/trades}" method="post">
                         <input type="text" name="id" th:value="*{id}" hidden="hidden"/>
-                        <button class="btn btn-success offset-1 col-4" name="choice" th:value="'confirm'">Confirm Trade</button>
-                        <button class="btn btn-danger offset-2 col-4" name="choice" th:value="'deny'">Reject Trade</button>
+                        <button class="btn btn-success offset-1 col-4" name="choice" th:value="'confirm'">Confirm
+                            Trade
+                        </button>
+                        <button class="btn btn-danger offset-2 col-4" name="choice" th:value="'deny'">Reject Trade
+                        </button>
                     </form>
                 </div>
             </div>
         </div>
     </th:block>
     <th:block th:if="${trades.isEmpty()}">
-        <div>
-            <div class="offset-lg-3 col-lg-6">
-                <div class="card text-center">
-                    <h4> You have no pending trade requests.</h4>
-                </div>
+        <div class="offset-lg-3 col-lg-6">
+            <div class="card text-center">
+                <h4> You have no pending trade requests.</h4>
             </div>
         </div>
     </th:block>

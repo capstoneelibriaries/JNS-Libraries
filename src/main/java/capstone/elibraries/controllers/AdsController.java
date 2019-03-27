@@ -78,6 +78,7 @@ public class AdsController {
 
     @GetMapping("/ads/{id}/delete")
     public String deleteForm(Model model, @PathVariable Long id){
+
         model.addAttribute("ad", adsDao.findOne(id));
         return "ads/delete";
     }
@@ -106,7 +107,7 @@ public class AdsController {
                 adsDao.findOne(ad.getId()).getSeller().getId()) {
 
             Ad dbAd = adsDao.findOne(id);
-            dbAd.setTitle(ad.getTitle());
+            dbAd.setAdTitle(ad.getAdTitle());
             dbAd.setDescription(ad.getDescription());
             dbAd.setPrice(ad.getPrice());
             dbAd.setShipping(ad.getShipping());
