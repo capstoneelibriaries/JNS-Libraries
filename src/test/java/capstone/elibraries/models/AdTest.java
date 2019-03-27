@@ -138,4 +138,10 @@ public class AdTest {
         ad.setDescription(description.toString());
     }
 
+    @Test
+    public void testIsAlwaysTradeable(){
+        ad = new Ad();
+        assert(ad.isTradable());
+    }
+
 }
