@@ -47,6 +47,22 @@ public class SearchControllerTest {
     }
 
     @Test
+    public void testOneCharacterAdSearch() throws Exception {
+        this.mvc.perform(get("/search")
+                .param("q", randomString(1))
+                .param("option", "ads"))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void testOneCharacterBookSearch() throws Exception {
+        this.mvc.perform(get("/search")
+                .param("q", randomString(1))
+                .param("option", "books"))
+                .andExpect(status().isOk());
+    }
+    
+    @Test
     public void testBookSearch() throws Exception {
         this.mvc.perform(get("/search")
                 .param("q", randomString(20))
