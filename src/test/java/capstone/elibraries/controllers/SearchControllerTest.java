@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static capstone.elibraries.testhelpers.DataGenerator.randomString;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 import static org.junit.Assert.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -32,9 +33,40 @@ public class SearchControllerTest {
 //    }
 
     @Test
-    public void getHomePage() throws Exception {
+    public void testGetHomePage() throws Exception {
         this.mvc.perform(get("/"))
-                .andDo(print())
                 .andExpect(status().isOk());
+    }
+
+    @Test
+    public void testAdSearch() throws Exception {
+        this.mvc.perform(get("/search")
+                .param("q", randomString(20))
+                .param("option", "ads"))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void testBookSearch() throws Exception {
+        this.mvc.perform(get("/search")
+                .param("q", randomString(20))
+                .param("option", "books"))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void testBookSearchWithBadOption() throws Exception {
+        this.mvc.perform(get("/search")
+                .param("q", randomString(20))
+                .param("option", randomString(3)))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    public void testBookSearchWithBadQuery() throws Exception {
+        this.mvc.perform(get("/search")
+                .param("Q", randomString(20))
+                .param("option", "ads"))
+                .andExpect(status().isBadRequest());
     }
 }
