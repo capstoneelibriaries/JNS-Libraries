@@ -72,7 +72,7 @@ public class UserController {
             return "users/addresses";
         }catch(ValidationException e){
             model.addAttribute("error", e);
-            return "redirect:error/validation";
+            return "redirect:/error/validation";
         }
     }
 
@@ -86,7 +86,7 @@ public class UserController {
             return "redirect:users/profile";
         }catch(ValidationException e){
             model.addAttribute("error", e);
-            return "redirect:error/validation";
+            return "redirect:/error/validation";
         }
     }
 
