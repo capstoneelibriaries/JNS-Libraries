@@ -1,5 +1,8 @@
 package capstone.elibraries.models;
 
+import capstone.elibraries.error.ValidationException;
+import capstone.elibraries.error.Validator;
+
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
@@ -47,6 +50,9 @@ public class User {
 
     @Transient
     private List<Transaction> transactions;
+
+    @Transient
+    private ValidationException isvalid;
 
     public User(){
         // default
@@ -123,7 +129,12 @@ public class User {
         return addresses;
     }
 
-    public void setId(long id){
+    public void setId(long id) throws ValidationException{
+        isvalid = Validator.checkId(id);
+        if(isvalid != null){
+            throw isvalid;
+        }
+
         this.id = id;
     }
 
@@ -131,63 +142,122 @@ public class User {
         this.isAdmin = val;
     }
 
-    public void setUsername(String username){
+    public void setUsername(String username) throws ValidationException{
+
+        isvalid = Validator.checkNotNull(username);
+        if(isvalid != null){
+            throw isvalid;
+        }
         this.username = username;
     }
 
-    public void setEmail(String email){
+    public void setEmail(String email) throws ValidationException{
+
+        isvalid = Validator.checkNotNull(email);
+        if(isvalid != null){
+            throw isvalid;
+        }
+
         this.email = email;
     }
 
-    public void setPhone(String phone){
+    public void setPhone(String phone) throws ValidationException {
+
+        isvalid = Validator.checkNotNull(phone);
+        if(isvalid != null){
+            throw isvalid;
+        }
+
         this.phone = phone;
     }
 
-    public void setPassword(String password){
+    public void setPassword(String password) throws ValidationException {
+
+        isvalid = Validator.checkNotNull(password);
+        if(isvalid != null){
+            throw isvalid;
+        }
+
         this.password = password;
     }
 
-    public void setConfirmPassword(String confirmPassword){
-        this.confirmPassword=confirmPassword;
+    public void setConfirmPassword(String confirmPassword) throws ValidationException {
+
+        isvalid = Validator.checkNotNull(confirmPassword);
+        if(isvalid != null){
+            throw isvalid;
+        }
+
+        this.confirmPassword = confirmPassword;
     }
 
     public void setRating(Double rating){
         this.rating = rating;
     }
 
-    public void setAds(List<Ad> ads){
+    public void setAds(List<Ad> ads) throws ValidationException {
+
+        isvalid = Validator.checkNotNull(ads);
+        if(isvalid != null){
+            throw isvalid;
+        }
+
         this.ads = ads;
     }
 
-    public void setAddresses(List<Address> addresses){
+    public void setAddresses(List<Address> addresses) throws ValidationException {
+
+        isvalid = Validator.checkNotNull(addresses);
+        if(isvalid != null){
+            throw isvalid;
+        }
+
         this.addresses = addresses;
     }
 
-    public void addAddress(Address address){
+    public void addAddress(Address address) throws ValidationException {
+
+        isvalid = Validator.checkNotNull(address);
+        if(isvalid != null){
+            throw isvalid;
+        }
+
         if(this.addresses == null){
             this.addresses = new ArrayList<>(1);
         }
         this.addresses.add(address);
     }
 
-    public void addAd(Ad ad){
+    public void addAd(Ad ad) throws ValidationException {
+
+        isvalid = Validator.checkNotNull(ad);
+        if(isvalid != null){
+            throw isvalid;
+        }
+
         this.ads.add(ad);
     }
 
-    public void addTransaction(Transaction trn){
+    public void addTransaction(Transaction trn) throws ValidationException {
+
+        isvalid = Validator.checkNotNull(trn);
+        if(isvalid != null){
+            throw isvalid;
+        }
+
         if(this.transactions == null){
             this.transactions = new ArrayList<>(1);
         }
         this.transactions.add(trn);
     }
 
-    public Admin toAdmin(){
-        if(!this.isAdmin){
-            return null;
-        }else{
-            return (Admin)this;
-        }
-    }
+//    public Admin toAdmin(){
+//        if(!this.isAdmin){
+//            return null;
+//        }else{
+//            return (Admin)this;
+//        }
+//    }
 
 //    public String toString(){
 //        return "{\n" +
