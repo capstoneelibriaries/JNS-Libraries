@@ -38,12 +38,17 @@ public class AdsController {
 
     @GetMapping("/ads")
     public String getAds(Model model){
-        model.addAttribute("ads", adsDao.findAll());
+        model.addAttribute("ads", adsDao.findAllByPendingIsTrue());
         return "ads/index";
     }
+
     @GetMapping("/ads/view={id}")
     public String getOneAd(Model model, @PathVariable Long id) {
-        model.addAttribute("ad", adsDao.findOne(id));
+        if ( adsDao.findByIdAndPendingIsTrue(id) != null) {
+            model.addAttribute("ad", adsDao.findByIdAndPendingIsTrue(id));
+        } else {
+            return "ads/delete";
+        }
         try {
             model.addAttribute("user", getCurrentUser());
         } catch (ValidationException e){
@@ -95,7 +100,7 @@ public class AdsController {
     @GetMapping("/ads/{id}/delete")
     public String deleteForm(Model model, @PathVariable Long id){
 
-        model.addAttribute("ad", adsDao.findOne(id));
+        model.addAttribute("ad", adsDao.findByIdAndPendingIsTrue(id));
         return "ads/delete";
     }
 
@@ -103,10 +108,11 @@ public class AdsController {
     public String deleteAd(@ModelAttribute Ad ad, @PathVariable Long id){
         if (((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId() ==
                 adsDao.findOne(ad.getId()).getSeller().getId()) {
-
-                 adsDao.delete(adsDao.findOne(id));
-                 return "redirect:/profile";
-        }else{
+            Ad toDelete = adsDao.findOne(id);
+            toDelete.setPending(false);
+            adsDao.save(toDelete);
+            return "redirect:/profile";
+        } else {
             return "redirect:/profile";
         }
     }
@@ -149,7 +155,7 @@ public class AdsController {
     @GetMapping("/ads/{id}/trade")
     public String tradeForm(Model model, @PathVariable Long id) throws AuthenticationException{
         User user = getCurrentUser();
-        Ad ad = adsDao.findOne(id);
+        Ad ad = adsDao.findByIdAndPendingIsTrue(id);
         if (user.getAds().isEmpty()){
             return "redirect:/ads/view=" + id+ "?noads";
         }
@@ -160,20 +166,20 @@ public class AdsController {
         model.addAttribute("user", user);
         return "ads/trade";
     }
-    
-    @PostMapping("/ads/{id}/trade")	
-    public String trade(@RequestParam(name = "ad") Long adid, @PathVariable Long id) throws AuthenticationException{	
-        User requestingUser = getCurrentUser();	
-        Ad ad = adsDao.findOne(id);	
-        Ad userAd = adsDao.findOne(adid);	
-        tradesDao.save( new TradeRequest(	
-            ad.getSeller(), // Owner of ad	
-            requestingUser, // User requesting trade	
-            ad,             // Owner's ad	
-            userAd,         // User's offered ad	
-            true    // Active status of the trade	
-        ));	
 
-         return "redirect:/profile";	
+    @PostMapping("/ads/{id}/trade")
+    public String trade(@RequestParam(name = "ad") Long adid, @PathVariable Long id) throws AuthenticationException{
+        User requestingUser = getCurrentUser();
+        Ad ad = adsDao.findByIdAndPendingIsTrue(id);
+        Ad userAd = adsDao.findByIdAndPendingIsTrue(adid);
+        tradesDao.save( new TradeRequest(
+            ad.getSeller(), // Owner of ad
+            requestingUser, // User requesting trade
+            ad,             // Owner's ad
+            userAd,         // User's offered ad
+            true    // Active status of the trade
+        ));
+
+         return "redirect:/profile";
     }
 }
