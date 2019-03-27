@@ -42,9 +42,16 @@ public class AdsController {
         return "ads/index";
     }
     @GetMapping("/ads/view={id}")
-    public String getOneAd(Model model, @PathVariable Long id) throws AuthenticationException {
+    public String getOneAd(Model model, @PathVariable Long id) {
         model.addAttribute("ad", adsDao.findOne(id));
-        model.addAttribute("user", getCurrentUser());
+        try {
+            model.addAttribute("user", getCurrentUser());
+        } catch (ValidationException e){
+            model.addAttribute("error", e);
+            return "redirect:/error/validation";
+        } catch (Exception e){
+            // catch cast exception
+        }
         return "ads/single";
     }
 
@@ -87,6 +94,7 @@ public class AdsController {
 
     @GetMapping("/ads/{id}/delete")
     public String deleteForm(Model model, @PathVariable Long id){
+
         model.addAttribute("ad", adsDao.findOne(id));
         return "ads/delete";
     }
@@ -116,10 +124,10 @@ public class AdsController {
                     adsDao.findOne(ad.getId()).getSeller().getId()) {
 
                 Ad dbAd = adsDao.findOne(id);
-                dbAd.setTitle(ad.getTitle());
-                dbAd.setDescription(ad.getDescription());
-                dbAd.setPrice(ad.getPrice());
-                dbAd.setShipping(ad.getShipping());
+               dbAd.setAdTitle(ad.getAdTitle());
+               dbAd.setDescription(ad.getDescription());
+               dbAd.setPrice(ad.getPrice());
+               dbAd.setShipping(ad.getShipping());
 
                 adsDao.save(dbAd);
                 return "redirect:/profile";

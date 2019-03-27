@@ -39,24 +39,29 @@ public class Ad {
     )
     private List<Book> books;
 
+    @Column(name= "pending")
+    private boolean pending;
     @Transient
     ValidationException isvalid;
 
     public Ad(){
         this.books = new ArrayList<>(0);
+        pending = true;
         // DEFAULT
     }
+
 
     public Ad(User seller, String title, String description, double price, double shipping)
         throws ValidationException
     {
         this();
         this.seller = seller;
-        this.adTitle = title;
+        this.adTitle = adTitle;
         this.description = description;
         seller.addAd(this);
         this.price = price;
         this.shipping = shipping;
+        pending = true;
     }
 
     public long getId(){
@@ -64,7 +69,6 @@ public class Ad {
     }
 
     public void setId(long id) throws ValidationException {
-
         isvalid = Validator.checkId(id);
         if(isvalid != null){
             throw isvalid;
@@ -78,12 +82,10 @@ public class Ad {
     }
 
     public void setPrice(double price) throws ValidationException {
-
         isvalid = Validator.checkPrice(price);
         if(isvalid != null){
             throw isvalid;
         }
-
         this.price = price;
     }
 
@@ -92,12 +94,10 @@ public class Ad {
     }
 
     public void setShipping(double shipping) throws ValidationException {
-
         isvalid = Validator.checkShipping(shipping);
         if(isvalid != null){
             throw isvalid;
         }
-
         this.shipping = shipping;
     }
 
@@ -109,22 +109,19 @@ public class Ad {
         this.tradable = tradable;
     }
 
-    public void setTitle(String title) throws ValidationException {
-
-        isvalid = Validator.checkTitle(title);
+    public void setAdTitle(String adTitle) throws ValidationException {
+       isvalid = Validator.checkTitle(adTitle);
         if(isvalid != null){
             throw isvalid;
         }
-
-        this.adTitle = title;
+        this.adTitle = adTitle;
     }
 
-    public String getTitle(){
-        return this.adTitle;
+    public String getAdTitle() {
+        return adTitle;
     }
 
     public void setDescription(String description) throws ValidationException {
-
         isvalid = Validator.checkDescription(description);
         if(isvalid != null){
             throw isvalid;
@@ -165,6 +162,14 @@ public class Ad {
         this.books.add(book);
         book.addAd(this);
     }
+  
+    public boolean isPending() {
+        return pending;
+    }
+
+    public void setPending(boolean pending) {
+        this.pending = pending;
+    }
 
     // To String methods and helpers
 
@@ -183,6 +188,8 @@ public class Ad {
 
     public String toString(){
         return "{\n" +
+                "\t\"title\":\"" + this.adTitle + "\",\n" +
+                "\t\"description\":\"" + this.description + "\",\n" +
                 "\t\"price\":\"" + this.price + "\",\n" +
                 "\t\"shipping\":\"" + this.shipping + "\",\n" +
 //                "\ttradable:" + this.tradable + "\n" +

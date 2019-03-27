@@ -11,52 +11,55 @@
 <div th:if="${param.noads}" class="alert alert-warning" role="alert">
     You have no books to trade.
 </div>
-    <div th:object="${ad}" class="">
+<div th:object="${ad}" class="">
+    <div>
+        <h1 th:text="*{adTitle}"></h1>
+    </div>
+    <div>
+        <h5 th:text="*{description}"></h5>
+    </div>
+    <div th:each="book : *{books}">
+        <p th:text="${book.author}"></p>
+        <p th:text="'Condition: '+${book.wear}"></p>
         <div>
-            <h1 th:text="${ad.title}"></h1>
+            <th:block th:each="genre : ${book.genres}">
+                <span th:text="${genre}"></span>
+            </th:block>
         </div>
-        <div>
-            <h5 th:text="*{description}"></h5>
-        </div>
-        <div th:each="book : *{books}">
-            <p th:text="${book.author}"></p>
-            <p th:text="'Condition: '+${book.wear}"></p>
-            <div>
-                <th:block th:each="genre : ${book.genres}">
-                    <span th:text="${genre}"></span>
-                </th:block>
-            </div>
-        </div>
-        <div>
-            <p>Sold by: <span th:text="${ad.seller.username}"></span></p>
-            <p th:text="'Price: $'+*{price}"></p>
-            <p th:text="'Shipping: $'+*{shipping}" th:if="*{shipping>0}"></p>
-            <p th:text="'Shipping: '+'Free'" th:if="*{shipping==0}"></p>
-        </div>
-        <th:block th:if="${user.getId() == ad.seller.getId()}">
+    </div>
+    <div>
+        <p>Sold by: <span th:text="${ad.seller.username}"></span></p>
+        <p th:text="'Price: $'+*{price}"></p>
+        <p th:text="'Shipping: $'+*{shipping}" th:if="*{shipping>0}"></p>
+        <p th:text="'Shipping: '+'Free'" th:if="*{shipping==0}"></p>
+    </div>
+    <th:block sec:authorize="isAuthenticated()" >
+        <th:block th:if="${user.id == ad.seller.getId()}">
             <form th:action="@{/ads/{id}/edit (id=*{id})}">
-                <button class="btn btn-md btn-warning" type="submit" sec:authorize="isAuthenticated()">Edit</button>
+                <button class="btn btn-md btn-warning" type="submit">Edit</button>
             </form>
             <form th:action="@{/ads/{id}/delete (id=*{id})}" method="POST">
-            <button class="btn btn-md btn-danger" type="submit" sec:authorize="isAuthenticated()">Delete</button>
+                <button class="btn btn-md btn-danger" type="submit">Delete</button>
             </form>
         </th:block>
+    </th:block>
 
-        <th:block th:if="${false}">
+    <th:block th:if="${false}">
         <!-- TODO: Replace with paypal purchase button -->
         <form th:action="@{/ads/{id}/buy(id=*{id})}" th:method="GET">
             <button>Buy</button>
         </form>
         <!--TODO: match styling with paypal button -->
-        </th:block>
+    </th:block>
 
-        <form th:action="@{/ads/{id}/trade(id=*{id})}" th:method="GET" th:if="*{tradable}" sec:authorize="isAuthenticated()">
-            <button>Offer Trade</button>
-        </form>
-        <div th:if="*{tradable}" sec:authorize="!isAuthenticated()">
-            <button th:disabled="disabled">Offer Trade</button>
-            <a th:href="@{/login}">Sign in to trade</a>
-        </div>
+    <form th:action="@{/ads/{id}/trade(id=*{id})}" th:method="GET" th:if="*{tradable}"
+          sec:authorize="isAuthenticated()">
+        <button>Offer Trade</button>
+    </form>
+    <div th:if="*{tradable}" sec:authorize="!isAuthenticated()">
+        <button th:disabled="disabled">Offer Trade</button>
+        <a th:href="@{/login}">Sign in to trade</a>
     </div>
+</div>
 </body>
 </html>
