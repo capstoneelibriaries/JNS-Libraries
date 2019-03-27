@@ -6,26 +6,30 @@
         body {
             background: #233D4D;
             background: linear-gradient(to right, #233D4D, #619B8A);
+            color: whitesmoke;
         }
         .btn-primary {
             color: #fff;
             background-color: #233D4D;
             border-color: #233D4D;
         }
+
     </style>
 </head>
 <body>
     <div th:replace="partials/navbar :: navbar"></div>
+
+
     <div th:id="create-ad" class="container">
         <div class="row">
-            <div class="card mb-5 mb-lg-0 mt-5">
-                    <div class="card-body">
-                <h5 class="card-title text-center">Create a trade request</h5>
+            <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+                <div class="card-body">
+                <h3 class="card-title text-center">New Trade Request</h3>
 
             <!-- The Ad portion of the form -->
             <form th:method="post" th:action="@{/ads/create}" class="form-signin">
                 <div th:object="${ad}">
-                    <div class="form-label-group">
+                    <div>
                     <div>
                         <label>Title</label>
                         <input th:field="*{adTitle}"
@@ -123,35 +127,40 @@
                 </div>
                 <!-- A new book the user can add to the list of books -->
                 <div th:object="${newbook}">
-                    <h2>New Book</h2>
+                    <h3 class="card-title text-center mt-2">Book information</h3>
+                    <h5 class="card-title text-center">Enter a valid ISBN</h5>
                     <div>
                         <label>Isbn</label>
                         <input th:field="*{isbn}"
                                th:id="book-isbn"
                                th:minlength="10" th:maxlength="13"
                                type="number"
-                               required="required"/>
+                               required="required"
+                               class="form-control"/>
                     </div>
                     <div>
                         <label>Title</label>
                         <input th:field="*{title}"
                                th:id="book-title"
                                type="text"
-                               readonly="readonly" required="required"/>
+                               readonly="readonly" required="required"
+                               class="form-control"/>
                     </div>
                     <div>
                         <label>Author</label>
                         <input th:field="*{author}"
                                th:id="book-author"
                                type="text"
-                               readonly="readonly" required="required"/>
+                               readonly="readonly" required="required"
+                               class="form-control"/>
                     </div>
                     <div>
                         <label>
                             Synopsis
                             <textarea th:field="*{synopsis}"
                                       th:id="book-synopsis"
-                                      required="required"></textarea>
+                                      required="required"
+                                      class="form-control"></textarea>
                         </label>
                     </div>
                     <div>
@@ -159,23 +168,29 @@
                         <input th:field="*{wear}"
                                th:id="book-wear"
                                type="number" th:min="1" th:max="5" step="1"
-                               readonly="readonly" required="required"/>
+                               readonly="readonly" required="required"
+                               class="form-control"/>
                     </div>
                     <div>
                         <label>Image</label>
                         <input th:field="*{imageUrl}"
                                th:id="book-image"
                                type="text"
-                               readonly="readonly" required="required"/>
+                               readonly="readonly" required="required"
+                               class="form-control"/>
                     </div>
                 </div>
-                <button th:id="btn-new-ad"
-                        type="submit"
-                        disabled="disabled">Create New Ad</button>
-                <button th:id="btn-new-book"
+                <br/>
+                <button class="btn-primary" th:id="btn-new-book"
                         type="submit"
                         formaction="/ads/newbook"
-                        disabled="disabled">Add a New Book</button>
+                        disabled="disabled"><i class="fas fa-plus"></i> Add a New Book</button>
+                <hr/>
+                <button class="btn-primary" th:id="btn-new-ad"
+                        type="submit"
+                        disabled="disabled"><i class="fas fa-plus"></i> Create New Ad</button>
+                <br/>
+
             </form>
                 </div>
             </div>

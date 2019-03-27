@@ -42,6 +42,7 @@
                         <h5 th:text="*{ad.adTitle}"></h5>
                         <th:block th:each="book:${ad.books}">
                             <img class="img-fluid" th:src="${book.imageUrl}" alt="book-image"/>
+                            <p th:text="${book.title}"></p>
                             <p th:text="${book.author}"></p>
                         </th:block>
                     </a>
