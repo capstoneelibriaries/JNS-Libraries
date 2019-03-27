@@ -6,13 +6,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
 import capstone.elibraries.repositories.Users;
 import capstone.elibraries.repositories.Ads;
-import org.springframework.http.HttpStatus;
 import capstone.elibraries.models.*;
 import capstone.elibraries.error.*;
 import org.springframework.ui.Model;
-import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.List;
+
 
 @Controller
 public class AdsController {
@@ -59,21 +56,33 @@ public class AdsController {
     }
 
     @PostMapping("/ads/create")
-    public String createAd(@ModelAttribute Ad ad, @ModelAttribute Book book) throws AuthenticationException {
-        System.out.println(ad.toString());
-        System.out.println(book.toString());
-        ad.addBook(book);
-        ad.setSeller(getCurrentUser());
-        adsDao.save(ad);
-        return "redirect:/profile";
+    public String createAd(@ModelAttribute Ad ad, @ModelAttribute Book book, Model model)
+            throws AuthenticationException
+    {
+        try{
+            System.out.println(ad.toString());
+            System.out.println(book.toString());
+            ad.addBook(book);
+            ad.setSeller(getCurrentUser());
+            adsDao.save(ad);
+            return "redirect:/profile";
+        }catch(ValidationException e){
+            model.addAttribute("error", e);
+            return "redirect:/error/validation";
+        }
     }
 
     @PostMapping("/ads/newbook")
     public String addBook(@ModelAttribute Ad ad, @ModelAttribute Book book, Model model){
-        ad.addBook(book);
-        model.addAttribute("ad", ad);
-        model.addAttribute("newbook", new Book());
-        return "ads/create";
+        try{
+            ad.addBook(book);
+            model.addAttribute("ad", ad);
+            model.addAttribute("newbook", new Book());
+            return "ads/create";
+        }catch(ValidationException e){
+            model.addAttribute("error", e);
+            return "redirect:/error/validation";
+        }
     }
 
     @GetMapping("/ads/{id}/delete")
@@ -100,20 +109,25 @@ public class AdsController {
     }
 
     @PostMapping("/ads/{id}/edit")
-    public String editAd(@ModelAttribute Ad ad, @PathVariable Long id){
-        if (((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId() ==
-                adsDao.findOne(ad.getId()).getSeller().getId()) {
+    public String editAd(@ModelAttribute Ad ad, @PathVariable Long id, Model model){
+        try{
+            if (((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId() ==
+                    adsDao.findOne(ad.getId()).getSeller().getId()) {
 
-            Ad dbAd = adsDao.findOne(id);
-            dbAd.setTitle(ad.getTitle());
-            dbAd.setDescription(ad.getDescription());
-            dbAd.setPrice(ad.getPrice());
-            dbAd.setShipping(ad.getShipping());
+                Ad dbAd = adsDao.findOne(id);
+                dbAd.setTitle(ad.getTitle());
+                dbAd.setDescription(ad.getDescription());
+                dbAd.setPrice(ad.getPrice());
+                dbAd.setShipping(ad.getShipping());
 
-            adsDao.save(dbAd);
-            return "redirect:/profile";
-        }else{
-            return "redirect:/profile";
+                adsDao.save(dbAd);
+                return "redirect:/profile";
+            }else{
+                return "redirect:/profile";
+            }
+        }catch(ValidationException e){
+            model.addAttribute("error", e);
+            return "redirect:/error/validation";
         }
     }
 
