@@ -13,7 +13,7 @@
 </div>
 <div th:object="${ad}" class="">
     <div>
-        <h1 th:text="${ad.adTitle}"></h1>
+        <h1 th:text="*{adTitle}"></h1>
     </div>
     <div>
         <h5 th:text="*{description}"></h5>
@@ -33,13 +33,15 @@
         <p th:text="'Shipping: $'+*{shipping}" th:if="*{shipping>0}"></p>
         <p th:text="'Shipping: '+'Free'" th:if="*{shipping==0}"></p>
     </div>
-    <th:block th:if="${user.getId() == ad.seller.getId()}">
-        <form th:action="@{/ads/{id}/edit (id=*{id})}">
-            <button class="btn btn-md btn-warning" type="submit" sec:authorize="isAuthenticated()">Edit</button>
-        </form>
-        <form th:action="@{/ads/{id}/delete (id=*{id})}" method="POST">
-            <button class="btn btn-md btn-danger" type="submit" sec:authorize="isAuthenticated()">Delete</button>
-        </form>
+    <th:block sec:authorize="isAuthenticated()" >
+        <th:block th:if="${user.id == ad.seller.getId()}">
+            <form th:action="@{/ads/{id}/edit (id=*{id})}">
+                <button class="btn btn-md btn-warning" type="submit">Edit</button>
+            </form>
+            <form th:action="@{/ads/{id}/delete (id=*{id})}" method="POST">
+                <button class="btn btn-md btn-danger" type="submit">Delete</button>
+            </form>
+        </th:block>
     </th:block>
 
     <th:block th:if="${false}">

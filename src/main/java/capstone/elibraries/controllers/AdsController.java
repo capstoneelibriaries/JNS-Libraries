@@ -42,9 +42,16 @@ public class AdsController {
         return "ads/index";
     }
     @GetMapping("/ads/view={id}")
-    public String getOneAd(Model model, @PathVariable Long id) throws AuthenticationException {
+    public String getOneAd(Model model, @PathVariable Long id) {
         model.addAttribute("ad", adsDao.findOne(id));
-        model.addAttribute("user", getCurrentUser());
+        try {
+            model.addAttribute("user", getCurrentUser());
+        } catch (ValidationException e){
+            model.addAttribute("error", e);
+            return "redirect:/error/validation";
+        } catch (Exception e){
+            //
+        }
         return "ads/single";
     }
 
