@@ -70,13 +70,13 @@ public class AdTest {
     @Test(expected = ValidationException.class)
     public void adTitleCannotBeNull() throws Exception {
         ad = new Ad();
-        ad.setTitle(null);
+        ad.setAdTitle(null);
     }
 
     @Test(expected = ValidationException.class)
     public void adTitleCannotBeEmpty() throws Exception {
         ad = new Ad();
-        ad.setTitle("");
+        ad.setAdTitle("");
     }
 
     @Test
@@ -84,9 +84,9 @@ public class AdTest {
         String title = "Lorem Ipsum Dolor Set";
 
         ad = new Ad();
-        ad.setTitle(title);
+        ad.setAdTitle(title);
 
-        assert(ad.getTitle().equals(title));
+        assert(ad.getAdTitle().equals(title));
     }
 
     @Test(expected = ValidationException.class)
@@ -97,7 +97,7 @@ public class AdTest {
         }
 
         ad = new Ad();
-        ad.setTitle(oversizedTitle.toString());
+        ad.setAdTitle(oversizedTitle.toString());
     }
 
     /*

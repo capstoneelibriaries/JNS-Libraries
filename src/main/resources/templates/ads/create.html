@@ -28,7 +28,7 @@
                     <div class="form-label-group">
                     <div>
                         <label>Title</label>
-                        <input th:field="*{title}"
+                        <input th:field="*{adTitle}"
                                th:id="ad-title"
                                type="text"
                                required="required"
@@ -181,17 +181,6 @@
             </div>
         </div>
     </div>
-    <script th:src="@{/js/jquery.js}"></script>
-    <script th:src="@{/js/openbook.js}"></script>
-    <script th:src="@{/js/book.js}"></script>
-    <script th:src="@{/js/book_form.js}"></script>
-    <script th:src="@{/js/ad_form.js}"></script>
-    <script th:src="@{/js/create_ad.js}"></script>
-    <script th:inline="javascript">
-        /*<![CDATA[*/
-        const bookc = /*[[${ad.books.size()}]]*/ 0;
-        createAd(bookc);
-        /*]]>*/
-    </script>
+    <script th:replace="partials/footer-js :: scripts"></script>
 </body>
 </html>

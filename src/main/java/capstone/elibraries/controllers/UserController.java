@@ -1,5 +1,6 @@
 package capstone.elibraries.controllers;
 
+import capstone.elibraries.error.ValidationException;
 import capstone.elibraries.models.Address;
 import capstone.elibraries.models.TradeRequest;
 import capstone.elibraries.models.Transaction;
@@ -60,24 +61,33 @@ public class UserController {
     }
 
     @GetMapping("/profile/addresses")
-    public String getAddress(Model model){
+    public String getAddress(Model model) {
         User user = getCurrentUser();
 
-        if(user.getAddresses() == null || user.getAddresses().size() == 0){
-            user.addAddress(new Address());
+        try {
+            if(user.getAddresses() == null || user.getAddresses().size() == 0) {
+                user.addAddress(new Address());
+            }
+            model.addAttribute("user", user);
+            return "users/addresses";
+        }catch(ValidationException e){
+            model.addAttribute("error", e);
+            return "redirect:/error/validation";
         }
-
-        model.addAttribute("user", user);
-        return "users/addresses";
     }
 
     @PostMapping("/profile/addresses")
-    public String setAddress(@ModelAttribute User userAddr){
+    public String setAddress(@ModelAttribute User userAddr, Model model) {
         User user = getCurrentUser();
-        user.setAddresses(userAddr.getAddresses());
 
-        users.save(user);
-        return "redirect:users/profile";
+        try {
+            user.setAddresses(userAddr.getAddresses());
+            users.save(user);
+            return "redirect:users/profile";
+        }catch(ValidationException e){
+            model.addAttribute("error", e);
+            return "redirect:/error/validation";
+        }
     }
 
     @GetMapping("/profile/transactions")
@@ -122,17 +132,22 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public String saveUser(@ModelAttribute User user) {
-       if (user.getPassword().equals(user.getConfirmPassword())) {
+    public String saveUser(@ModelAttribute User user, Model model) {
+        try{
+            if (user.getPassword().equals(user.getConfirmPassword())) {
 
-           String hash = passwordEncoder.encode(user.getPassword());
-           user.setPassword(hash);
-           user.setConfirmPassword("");
-           users.save(user);
-           return "redirect:/login";
-       }else{
-           return "redirect:/register?error";
-       }
+                String hash = passwordEncoder.encode(user.getPassword());
+                user.setPassword(hash);
+                user.setConfirmPassword("");
+                users.save(user);
+                return "redirect:/login";
+            }else{
+                return "redirect:/register?error";
+            }
+        }catch(ValidationException e){
+            model.addAttribute("error", e);
+            return "redirect:/error/validation";
+        }
     }
 
 }
