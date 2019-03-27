@@ -29,7 +29,7 @@
             <!-- The Ad portion of the form -->
             <form th:method="post" th:action="@{/ads/create}" class="form-signin">
                 <div th:object="${ad}">
-                    <div class="form-label-group">
+                    <div>
                     <div>
                         <label>Title</label>
                         <input th:field="*{adTitle}"
@@ -127,7 +127,7 @@
                 </div>
                 <!-- A new book the user can add to the list of books -->
                 <div th:object="${newbook}">
-                    <h3 class="card-title text-center">Book information</h3>
+                    <h3 class="card-title text-center mt-2">Book information</h3>
                     <h5 class="card-title text-center">Enter a valid ISBN</h5>
                     <div>
                         <label>Isbn</label>
@@ -180,13 +180,17 @@
                                class="form-control"/>
                     </div>
                 </div>
-                <button class="btn-primary" th:id="btn-new-ad"
-                        type="submit"
-                        disabled="disabled">Create New Ad</button>
+                <br/>
                 <button class="btn-primary" th:id="btn-new-book"
                         type="submit"
                         formaction="/ads/newbook"
-                        disabled="disabled">Add a New Book</button>
+                        disabled="disabled"><i class="fas fa-plus"></i> Add a New Book</button>
+                <hr/>
+                <button class="btn-primary" th:id="btn-new-ad"
+                        type="submit"
+                        disabled="disabled"><i class="fas fa-plus"></i> Create New Ad</button>
+                <br/>
+
             </form>
                 </div>
             </div>
