@@ -107,10 +107,12 @@ public class UserTest {
     /*
     * Tests for phone input
     * */
-    @Test(expected = ValidationException.class)
-    public void userPhoneCannotBeEmpty() throws Exception {
+    @Test
+    public void userPhoneReturnsEmptyOnNullInput() throws Exception {
         user = new User();
-        user.setPhone("");
+        user.setPhone(null);
+
+        assert(user.getPhone().equals(""));
     }
 
     @Test(expected = ValidationException.class)
