@@ -125,27 +125,27 @@ public class Ad {
 
     // To String methods and helpers
 
-    private String booksToString(){
-        if(this.books == null){
-            return "none";
-        }else{
-            String bks = "[";
-            for(Book book : books){
-                bks = book.toString() + ",";
-            }
-            bks += "]";
-            return bks;
-        }
-    }
+//    private String booksToString(){
+//        if(this.books == null){
+//            return "none";
+//        }else{
+//            String bks = "[";
+//            for(Book book : books){
+//                bks = book.toString() + ",";
+//            }
+//            bks += "]";
+//            return bks;
+//        }
+//    }
 
-    public String toString(){
-        return "{\n" +
-                "\t\"price\":\"" + this.price + "\",\n" +
-                "\t\"shipping\":\"" + this.shipping + "\",\n" +
-//                "\ttradable:" + this.tradable + "\n" +
-                "\t\"books\":\"" + this.booksToString() + "\",\n" +
-                "}";
-    }
+//    public String toString(){
+//        return "{\n" +
+//                "\t\"price\":\"" + this.price + "\",\n" +
+//                "\t\"shipping\":\"" + this.shipping + "\",\n" +
+////                "\ttradable:" + this.tradable + "\n" +
+//                "\t\"books\":\"" + this.booksToString() + "\",\n" +
+//                "}";
+//    }
 
 
 }
