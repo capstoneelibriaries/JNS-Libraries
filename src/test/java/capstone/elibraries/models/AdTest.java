@@ -14,7 +14,7 @@ public class AdTest {
     /*
     * id tests
     * */
-    @Test(expected = NumberFormatException.class)
+    @Test(expected = ValidationException.class)
     public void adIdCannotBeNegative() throws Exception {
         ad = new Ad();
         ad.setId(-1);
@@ -33,7 +33,7 @@ public class AdTest {
     /*
     * price tests
     * */
-    @Test(expected = NumberFormatException.class)
+    @Test(expected = ValidationException.class)
     public void adPriceCannotBeNegative() throws Exception {
         ad = new Ad();
         ad.setPrice(-1.00);
@@ -52,13 +52,13 @@ public class AdTest {
     /*
     * shipping tests
     * */
-    @Test(expected = NumberFormatException.class)
+    @Test(expected = ValidationException.class)
     public void adShippingCannotBeLessThanOne() throws Exception {
         ad = new Ad();
         ad.setPrice(0.99);
     }
 
-    @Test(expected = NumberFormatException.class)
+    @Test(expected = ValidationException.class)
     public void adShippingCannotBeNegative() throws Exception {
         ad = new Ad();
         ad.setShipping(-2.00);
@@ -67,16 +67,16 @@ public class AdTest {
     /*
     * title tests
     * */
-    @Test(expected = NullPointerException.class)
+    @Test(expected = ValidationException.class)
     public void adTitleCannotBeNull() throws Exception {
         ad = new Ad();
-        ad.setTitle(null);
+        ad.setAdTitle(null);
     }
 
     @Test(expected = ValidationException.class)
     public void adTitleCannotBeEmpty() throws Exception {
         ad = new Ad();
-        ad.setTitle("");
+        ad.setAdTitle("");
     }
 
     @Test
@@ -84,9 +84,9 @@ public class AdTest {
         String title = "Lorem Ipsum Dolor Set";
 
         ad = new Ad();
-        ad.setTitle(title);
+        ad.setAdTitle(title);
 
-        assert(ad.getTitle().equals(title));
+        assert(ad.getAdTitle().equals(title));
     }
 
     @Test(expected = ValidationException.class)
@@ -97,13 +97,13 @@ public class AdTest {
         }
 
         ad = new Ad();
-        ad.setTitle(oversizedTitle.toString());
+        ad.setAdTitle(oversizedTitle.toString());
     }
 
     /*
     * description tests
     * */
-    @Test(expected = NullPointerException.class)
+    @Test(expected = ValidationException.class)
     public void adDescriptionCannotBeNull() throws Exception {
         ad = new Ad();
         ad.setDescription(null);
