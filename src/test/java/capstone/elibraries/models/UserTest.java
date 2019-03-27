@@ -17,7 +17,7 @@ public class UserTest {
     /*
     * User Id tests
     * */
-    @Test(expected = NumberFormatException.class)
+    @Test(expected = ValidationException.class)
     public void userIdCannotBeNegetive() throws Exception {
         long badId = -1 * randomLong();
 
@@ -43,7 +43,7 @@ public class UserTest {
     /*
     * User name tests
     * */
-    @Test(expected = NullPointerException.class)
+    @Test(expected = ValidationException.class)
     public void userNameCannotBeNull() throws Exception {
         user = new User();
         user.setUsername(null);
@@ -64,7 +64,7 @@ public class UserTest {
     /*
     * User email tests
     * */
-    @Test(expected = NullPointerException.class)
+    @Test(expected = ValidationException.class)
     public void userEmailCannotBeNull() throws Exception {
         user = new User();
         user.setEmail(null);

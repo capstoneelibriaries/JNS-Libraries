@@ -39,7 +39,7 @@
                 <div class="col-lg-3 col-md-4 col-6 mb-3 mt-1" th:each="ad:${user.ads}">
                     <!--d-block mb-4 h-100 img-thumbnail-->
                     <a th:href="@{/ads/view={id} (id=${ad.id})}" class="books module">
-                        <h5 th:text="*{ad.title}"></h5>
+                        <h5 th:text="*{ad.adTitle}"></h5>
                         <th:block th:each="book:${ad.books}">
                             <img class="img-fluid" th:src="${book.imageUrl}" alt="book-image"/>
                             <p th:text="${book.author}"></p>

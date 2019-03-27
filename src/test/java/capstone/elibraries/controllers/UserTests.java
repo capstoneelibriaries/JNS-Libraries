@@ -63,4 +63,5 @@ public class UserTests {
                 .andExpect(status().isFound())
                 .andExpect(redirectedUrl("/register?error"));
     }
+
 }

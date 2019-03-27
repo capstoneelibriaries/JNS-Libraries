@@ -1,5 +1,8 @@
 package capstone.elibraries.models;
 
+import capstone.elibraries.error.ValidationException;
+import capstone.elibraries.error.Validator;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,27 +39,41 @@ public class Ad {
     )
     private List<Book> books;
 
+    @Column(name= "pending")
+    private boolean pending;
+    @Transient
+    ValidationException isvalid;
+
     public Ad(){
         this.books = new ArrayList<>(0);
-        this.tradable = true;
+        pending = true;
         // DEFAULT
     }
 
-    public Ad(User seller, String title, String description, double price, double shipping){
+
+    public Ad(User seller, String title, String description, double price, double shipping)
+        throws ValidationException
+    {
         this();
         this.seller = seller;
-        this.adTitle = title;
+        this.adTitle = adTitle;
         this.description = description;
         seller.addAd(this);
         this.price = price;
         this.shipping = shipping;
+        pending = true;
     }
 
     public long getId(){
         return id;
     }
 
-    public void setId(long id){
+    public void setId(long id) throws ValidationException {
+        isvalid = Validator.checkId(id);
+        if(isvalid != null){
+            throw isvalid;
+        }
+
         this.id = id;
     }
 
@@ -64,7 +81,11 @@ public class Ad {
         return price;
     }
 
-    public void setPrice(double price){
+    public void setPrice(double price) throws ValidationException {
+        isvalid = Validator.checkPrice(price);
+        if(isvalid != null){
+            throw isvalid;
+        }
         this.price = price;
     }
 
@@ -72,7 +93,11 @@ public class Ad {
         return shipping;
     }
 
-    public void setShipping(double shipping){
+    public void setShipping(double shipping) throws ValidationException {
+        isvalid = Validator.checkShipping(shipping);
+        if(isvalid != null){
+            throw isvalid;
+        }
         this.shipping = shipping;
     }
 
@@ -80,20 +105,27 @@ public class Ad {
         return tradable;
     }
 
-    @Deprecated
     public void setTradable(boolean tradable){
-        this.tradable = true;
+        this.tradable = tradable;
     }
 
-    public void setTitle(String title){
-        this.adTitle = title;
+    public void setAdTitle(String adTitle) throws ValidationException {
+       isvalid = Validator.checkTitle(adTitle);
+        if(isvalid != null){
+            throw isvalid;
+        }
+        this.adTitle = adTitle;
     }
 
-    public String getTitle(){
-        return this.adTitle;
+    public String getAdTitle() {
+        return adTitle;
     }
 
-    public void setDescription(String description){
+    public void setDescription(String description) throws ValidationException {
+        isvalid = Validator.checkDescription(description);
+        if(isvalid != null){
+            throw isvalid;
+        }
         this.description = description;
     }
 
@@ -117,37 +149,50 @@ public class Ad {
         this.books = books;
     }
 
-    public void addBook(Book book){
+    public void addBook(Book book) throws ValidationException {
+
+        isvalid = Validator.checkNotNull(book);
+        if(isvalid != null){
+            throw isvalid;
+        }
+
         if(this.books == null){
             this.books = new ArrayList<>(1);
         }
         this.books.add(book);
         book.addAd(this);
     }
+  
+    public boolean isPending() {
+        return pending;
+    }
+
+    public void setPending(boolean pending) {
+        this.pending = pending;
+    }
 
     // To String methods and helpers
 
-    private String booksToString(){
-        if(this.books == null){
-            return "none";
-        }else{
-            String bks = "[";
-            for(Book book : books){
-                bks = book.toString() + ",";
-            }
-            bks += "]";
-            return bks;
-        }
-    }
+//    private String booksToString(){
+//        if(this.books == null){
+//            return "none";
+//        }else{
+//            String bks = "[";
+//            for(Book book : books){
+//                bks = book.toString() + ",";
+//            }
+//            bks += "]";
+//            return bks;
+//        }
+//    }
 
-    public String toString(){
-        return "{\n" +
-                "\t\"price\":\"" + this.price + "\",\n" +
-                "\t\"shipping\":\"" + this.shipping + "\",\n" +
-//                "\ttradable:" + this.tradable + "\n" +
-                "\t\"books\":\"" + this.booksToString() + "\",\n" +
-                "}";
-    }
-
+//    public String toString(){
+//        return "{\n" +
+//                "\t\"price\":\"" + this.price + "\",\n" +
+//                "\t\"shipping\":\"" + this.shipping + "\",\n" +
+////                "\ttradable:" + this.tradable + "\n" +
+//                "\t\"books\":\"" + this.booksToString() + "\",\n" +
+//                "}";
+//    }
 
 }

@@ -25,7 +25,7 @@ public class BookTest {
         assert(id == book.getId());
     }
 
-    @Test(expected = NumberFormatException.class)
+    @Test(expected = ValidationException.class)
     public void testIdCannotBeNegative() throws Exception {
         long id = -1 * randomLong();
 
@@ -36,7 +36,7 @@ public class BookTest {
     /*
     * title tests
     * */
-    @Test(expected = NullPointerException.class)
+    @Test(expected = ValidationException.class)
     public void testTitleCannotBeNull() throws Exception {
         book = new Book();
         book.setTitle(null);
@@ -61,7 +61,7 @@ public class BookTest {
     /*
     * author tests
     * */
-    @Test(expected = NullPointerException.class)
+    @Test(expected = ValidationException.class)
     public void testAuthorCannotBeNull() throws Exception {
         book = new Book();
         book.setAuthor(null);
@@ -85,7 +85,7 @@ public class BookTest {
     /*
     * Synopsis Tests
     * */
-    @Test(expected = NullPointerException.class)
+    @Test(expected = ValidationException.class)
     public void testSynopsisCannotBeNull() throws Exception{
         book = new Book();
         book.setSynopsis(null);
@@ -112,37 +112,37 @@ public class BookTest {
     /*
     * Isbn Tests
     * */
-    @Test(expected = IsbnException.class)
+    @Test(expected = ValidationException.class)
     public void testIsbnCannotBeNull() throws Exception {
         book = new Book();
         book.setIsbn(null);
     }
 
-    @Test(expected = IsbnException.class)
+    @Test(expected = ValidationException.class)
     public void testIsbnCannotBeEmpty() throws Exception {
         book = new Book();
         book.setIsbn("");
     }
 
-    @Test(expected = IsbnException.class)
+    @Test(expected = ValidationException.class)
     public void testIsbnCannotBeLessThanTen() throws Exception{
         book = new Book();
         book.setIsbn(randomString(9));
     }
 
-    @Test(expected = IsbnException.class)
+    @Test(expected = ValidationException.class)
     public void testIsbnCannotBeGreaterThanThirteen() throws Exception {
         book = new Book();
         book.setIsbn(randomString(14));
     }
 
-    @Test(expected = IsbnException.class)
+    @Test(expected = ValidationException.class)
     public void testIsbnCannotBeEleven() throws Exception {
         book = new Book();
         book.setIsbn(randomString(11));
     }
 
-    @Test(expected = IsbnException.class)
+    @Test(expected = ValidationException.class)
     public void testIsbnCannotBeTwelve() throws Exception {
         book = new Book();
         book.setIsbn(randomString(12));

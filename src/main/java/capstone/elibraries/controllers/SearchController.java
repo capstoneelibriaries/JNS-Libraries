@@ -48,6 +48,7 @@ public class SearchController {
     }
 
     // The advanced search page
+    @Deprecated
     @GetMapping("advanced")
     public String getAdvanced(@RequestParam("q") String query, @RequestParam("option") String option){
         // DEBUG

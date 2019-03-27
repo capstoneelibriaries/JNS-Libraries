@@ -1,5 +1,8 @@
 package capstone.elibraries.models;
 
+import capstone.elibraries.error.ValidationException;
+import capstone.elibraries.error.Validator;
+
 import java.util.Date;
 import javax.persistence.*;
 
@@ -19,7 +22,11 @@ public class Transaction {
     @Column
     private Date date;
 
+    @Transient
+    ValidationException isvalid;
+
     public Transaction(){
+        this.date = new Date();
         //default
     }
 
@@ -35,7 +42,13 @@ public class Transaction {
         return buyer;
     }
 
-    public void setBuyer(User buyer) {
+    public void setBuyer(User buyer) throws ValidationException {
+
+        isvalid = Validator.checkNotNull(buyer);
+        if(isvalid != null){
+            throw isvalid;
+        }
+
         this.buyer = buyer;
     }
 
@@ -43,7 +56,12 @@ public class Transaction {
         return seller;
     }
 
-    public void setSeller(User seller) {
+    public void setSeller(User seller) throws ValidationException {
+
+        isvalid = Validator.checkNotNull(seller);
+        if(isvalid != null){
+            throw isvalid;
+        }
         this.seller = seller;
     }
 
@@ -51,7 +69,13 @@ public class Transaction {
         return sellerItem;
     }
 
-    public void setItem(Ad item) {
+    public void setItem(Ad item) throws ValidationException {
+
+        isvalid = Validator.checkNotNull(item);
+        if(isvalid != null){
+            throw isvalid;
+        }
+
         this.sellerItem = item;
     }
 
@@ -59,7 +83,13 @@ public class Transaction {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(Date date) throws ValidationException {
+
+        isvalid = Validator.checkNotNull(date);
+        if(isvalid != null){
+            throw isvalid;
+        }
+
         this.date = date;
     }
 
@@ -67,7 +97,13 @@ public class Transaction {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(long id) throws ValidationException {
+
+        isvalid = Validator.checkId(id);
+        if(isvalid != null){
+            throw isvalid;
+        }
+
         this.id = id;
     }
 
@@ -75,7 +111,13 @@ public class Transaction {
         return trade;
     }
 
-    public void setTrade(TradeRequest trade) {
+    public void setTrade(TradeRequest trade) throws ValidationException {
+
+        isvalid = Validator.checkNotNull(trade);
+        if(isvalid != null){
+            throw isvalid;
+        }
+
         this.trade = trade;
     }
 }
