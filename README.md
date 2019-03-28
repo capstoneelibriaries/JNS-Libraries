@@ -1,39 +1,49 @@
 # Elibraries
+<br>
 
-###### Contents
+##### Contents
 
-- [Creators](creators)
-- [Technology Stack](tech)
-- [Spring](spring)
-- [Thymeleaf](thy)
-- [JUnit](junit)
-- [Javascript](js)
-- [OpenLibrary API](ob)
-- [jQuery](jq)
+- [Creators](#creators)
+- [Technology Stack](#tech)
+- [Spring](#spring)
+- [Thymeleaf](#thy)
+- [JUnit](#junit)
+- [Javascript](#js)
+- [OpenLibrary API](#ob)
+- [jQuery](#jq)
+<br>
+<br>
 
-![logo](src/main/resources/static/images/mobileIndex.png)
-
-##<a name="creators"></a>Creators
+## <a name="creators"></a>Creators
 
 - [James Meyer](https://www.linkedin.com/in/james-j-meyer/)
 - [Nathaniel Gumbs](https://www.linkedin.com/in/nathaniel-gumbs/)
 - [Sam Rodriguez](https://www.linkedin.com/in/oscar-sam-rodriguez/)
+<br>
+<br>
 
-##<a name="tech"></a>Technologies We Utilized
+## <a name="tech"></a>Technologies We Utilized
+<br>
 
 ### Server Side
 
-####<a name="spring"></a>Spring Boot
+<br>
+
+#### <a name="spring"></a>Spring Boot
 
 A **Spring boot** server was selected, where we took advantage of *form model* binding and automated SQL queries. 
 **Spring boot** also enforced the *builder* pattern, the *singleton* pattern, and the *model-view-controller* pattern. 
 This enforced clear, consistent code with a logical distribution of tasks.
 
-####<a name="thy"></a>Thymeleaf
+<br>
+
+#### <a name="thy"></a>Thymeleaf
 
 **Thymeleaf** was used for server side rendering of html pages. This enabled us to build many dynamic pages with only a few
 lines of code. In particular, the **create ad** page can be referenced as an example of how we used lists to generate an
 expanding html form.
+
+<br>
 
 #### Thymeleaf Extras: Springsecurity4
 
@@ -41,15 +51,21 @@ expanding html form.
 upon creation. This ensures no attackers - even system administrators have access to an individual's passwords. 
 **Springsecurity4** also provided access restriction on certain pages and also specify what pagers are accessible by everyone. 
 
-####<a name="junit"></a>JUnit4
+<br>
+
+#### <a name="junit"></a>JUnit4
 
 **JUnit** is the de-facto standard for testing in Java. Unit tests were leveraged to ensure the integrity of our security
 model, the mutability of our objects, and the synchronization of our workflow. In producing our application, over 100
 individual tests were created for server side objects and *HTTP responses*.
 
+<br>
+
 ### Client Side
 
-####<a name="js"></a>EMCA6 Javascript
+<br>
+
+#### <a name="js"></a>EMCA6 Javascript
 
 For certain client side logic, **EMCA6 Javascript** was used because of the idiomatic nature of modern JavaScript
 and it's capacity to represent collections of data as objects. While many proponents of server side computation argue
@@ -57,14 +73,18 @@ JavaScript is insecure, our use of **EMCA6 JavaScript** enabled us to tightly co
 In many cases, objects and functions were defined with the `const` keyword. When mutable objects were introduced to the
 client, we took advantage of the `Object.freeze()` method to introduce some kind of type safety.
 
-####<a name="ob"></a>Open Library API
+<br>
+
+#### <a name="ob"></a>Open Library API
 
 The OpenLibrary API was used to maintain the integrity of our database and also provide an auto-fill feature that enhanced
 the user experience. The OpenLibrary API responds to ISBN numbers. In the client side JavaScript, a specific OpenLibrary
 query is made requesting a `JSON` object. The `JSON` object is parsed into a book object, which we use to auto-fill
 various forms for the user.
 
-####<a name="jquery"></a>jQuery
+<br>
+
+#### <a name="jquery"></a>jQuery
 
 In order to manipulate the `DOM`, we introduced jQuery. Across the site, jquery is used to auto-fill forms with the we
 retrieved from the OpenBook API. This allowed us to make many html fields `readonly`, such as book titles, book authors,
