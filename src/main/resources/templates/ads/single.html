@@ -8,6 +8,10 @@
             background: linear-gradient(to right, #233D4D, #619B8A);
             color: gray();
         }
+        .book-cover{
+            height: 500px;
+            width: 400px;
+        }
     </style>
 </head>
 <body>
@@ -29,8 +33,10 @@
         </div>
         <div th:each="book : *{books}">
             <div class="card ml-2 mr-2">
-                <img class="img-thumbnail" th:src="${book.imageUrl}" alt="book-image"/>
-                <h4 th:text="${book.author}"></h4>
+
+                <img class="img-thumbnail book-cover center mx-auto" th:src="${book.imageUrl}" alt="book-image"/>
+
+                    <h4 th:text="${book.author}"></h4>
                 <h5 th:text="'Condition: '+${book.wear}"></h5>
                 <div>
                 </div>
