@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Single page display of a book</title>
+    <link th:href="@{/css/form.css}" href="/static/css/form.css"  rel="stylesheet" type="text/css"  />
+
+</head>
+<body>
+    <h1> this will be one book</h1>
+
+    <div th:object="${book}">
+
+        <!--<span th:text="*{cover}"> </span>-->
+        <span th:text="*{title}"> </span>
+        <span th:text="*{author}"> </span>
+        <span th:text="*{synopsis}"> </span>
+
+    </div>
+    
+</body>
+</html>

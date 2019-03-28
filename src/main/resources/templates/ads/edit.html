@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <link th:replace="partials/header :: header('Profile')"/>
+    <style>
+        body {
+            background: #233D4D;
+            background: linear-gradient(to right, #233D4D, #619B8A);
+        }
+    </style>
+    <meta charset="UTF-8"/>
+</head>
+<body>
+<div th:replace="partials/navbar :: navbar"></div>
+<div class="container">
+    <h1>Edit your ad</h1>
+    <div th:object="${ad}">
+        <h3><span th:="*{seller}"></span></h3>
+
+        <form th:action="@{/ads/{id}/edit (id=*{id})}" th:object="${ad}" th:method="post">
+            <input th:field="*{id}" hidden="hidden"/>
+            <h3>Title</h3>
+            <input th:field="*{adTitle}"/>
+            <br/>
+            <h3>Description</h3>
+            <input th:field="*{description}"/>
+            <br/>
+            <h3>Price</h3>
+            <input th:field="*{price}"/>
+            <br/>
+            <h3>Shipping Price</h3>
+            <input th:field="*{shipping}"/>
+            <br/>
+
+            <button class="btn btn-success" type="submit">Save Changes</button>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

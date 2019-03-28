@@ -1,0 +1,50 @@
+body {
+    background: #619B8A;
+    background: linear-gradient(to right, #619B8A, #A1C181);
+}
+
+div.radiogroup div.ad {
+    margin: 0;
+    padding: 0;
+    margin-left: 20px;
+    font-weight: bold;
+}
+
+label:focus, input:focus  {
+    background-color: lightgray;
+    border: 1px green solid;
+    border-radius: 1em;
+}
+
+.ad{
+    margin: 1em;
+}
+.card {
+    padding: 1em;
+    border-radius: 1rem;
+    margin-bottom: 1em;
+}
+#trade  {
+    margin: 5em auto;
+    max-height: 4em;
+    max-width: 8em;
+}
+@media screen and (max-width: 768px) {
+    #trade  {
+        transform: rotate(90deg);
+        margin: 2em auto;
+    }
+}
+
+.img-thumbnail{
+    background-color: #ffffff80;
+    border: 1px solid #79797938;
+}
+.completed{
+    color: #117F65;
+    border: 1px solid #21ce93;
+    padding: 2px 10px;
+    font-size: 79%;
+    margin-left: 8px;
+    text-transform: uppercase;
+}

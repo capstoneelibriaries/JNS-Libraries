@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <link th:replace="partials/header :: header('Addresses')"/>
+</head>
+<body>
+<div th:replace="partials/navbar :: navbar"></div>
+<h1>Your Addresses</h1>
+<form th:action="@{/profile/addresses}" th:method="post">
+    <div th:each="address, stat : ${user.addresses}">
+        <div>
+            <label>Street Address</label>
+            <input th:field="*{user.addresses[__${stat.index}__].streetAddr}"
+                   type="text"/>
+        </div>
+        <div>
+            <label>Apartment/Unit</label>
+            <input th:field="*{user.addresses[__${stat.index}__].subAddr}"
+                   type="text"/>
+        </div>
+        <div>
+            <label>Country</label>
+            <input th:field="*{user.addresses[__${stat.index}__].country}"
+                   type="text"/>
+        </div>
+        <div>
+            <label>City</label>
+            <input th:field="*{user.addresses[__${stat.index}__].city}"
+                   type="text"/>
+        </div>
+        <div>
+            <label>State</label>
+            <input th:field="*{user.addresses[__${stat.index}__].state}"
+                   type="text"/>
+        </div>
+        <div>
+            <label>Zip</label>
+            <input th:field="*{user.addresses[__${stat.index}__].zipcode}"
+                   type="text"/>
+        </div>
+    </div>
+    <button th:type="submit">Submit</button>
+</form>
+</body>
+</html>

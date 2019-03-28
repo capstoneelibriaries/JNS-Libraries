@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <link th:replace="partials/header :: header('Sign In')"/>
+    <style>
+        body {
+            background: #619B8A;
+            background: linear-gradient(to right, #619B8A, #A1C181);
+        }
+
+        .btn-primary {
+            color: #fff;
+            background-color: #233D4D;
+            border-color: #233D4D;
+        }
+    </style>
+</head>
+<body>
+<nav th:replace="partials/navbar :: navbar"></nav>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+            <div class="card card-signin my-5">
+                <div class="card-body">
+                    <h5 class="card-title text-center">Sign In <i class="fas fa-user"></i></h5>
+                    <div th:if="${param.error}" class="alert alert-danger" role="alert">
+                        Invalid credentials.
+                    </div>
+                    <div th:if="${param.logout}" class="alert alert-info" role="alert">
+                        You have logged out successfully.
+                    </div>
+                    <form class="form-signin" th:action="@{/login}" th:object="${user}" th:method="post">
+                        <div class="form-label-group">
+                            <input th:field="*{username}" id="inputUsername" class="form-control" placeholder="Username" required="required"/>
+                            <label for="inputUsername">Username</label>
+                        </div>
+                        <div class="form-label-group">
+                            <input th:field="*{password}" type="password" class="form-control" id="inputPassword" placeholder="Password" required="required" minlength="8"/>
+                            <label for="inputPassword">Password</label>
+                        </div>
+                        <button class="btn-sm btn-light" type="button" name="showpassword" id="showpassword" value="Show Password">Show password</button>
+                        <div class="custom-control custom-checkbox mb-3">
+                            <input type="checkbox" class="custom-control-input" id="customCheck1"/>
+                            <label class="custom-control-label" for="customCheck1">Remember password</label>
+                        </div>
+                        <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign in</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $("#showpassword").on('click', function () {
+
+        var pass = $("#inputPassword");
+        var fieldtype = pass.attr('type');
+        if (fieldtype == 'password') {
+            pass.attr('type', 'text');
+            $(this).text("Hide Password");
+        } else {
+            pass.attr('type', 'password');
+            $(this).text("Show Password");
+        }
+    });
+</script>
+</body>
+</html>

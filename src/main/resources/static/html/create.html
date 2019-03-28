@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8" />
+    <title>Create an Ad</title>
+</head>
+<body>
+<div>
+    <h1>Create an Ad</h1>
+</div>
+<div id="create-ad">
+    <form method="post" action="/ads/create">
+        <div id="ad-price">
+            <label for="create-ad-price">Price <abbr title="required">*</abbr></label>
+            <input id="create-ad-price" type="number" step="0.01" name="ad-price" />
+        </div>
+        <div id="ad-shipping">
+            <label for="create-ad-shipping">Shipping <abbr title="required">*</abbr></label>
+            <input id="create-ad-shipping" type="number" step="0.01" name="ad-shipping" />
+        </div>
+        <div id="ad-tradable">
+            <label for="create-ad-tradable">Tradable</label>
+            <input id="create-ad-tradable" type="checkbox" name="ad-tradable" />
+        </div>
+        <div id="ad-new-book">
+            <button id="btn-ad-new-book" type="button">Ad a book</button>
+        </div>
+        <div id="ad-new-book-form">
+            <!-- Empty by default -->
+        </div>
+        <div id="ad-submit-all">
+            <button id="btn-ad-submit-all" type="submit" disabled="disabled">Submit</button>
+        </div>
+        <input type="hidden" name="_csrf" value="c289fc1c-3ada-4f9b-bab9-ec466e1867be" /></form>
+</div>
+<script src="../js/jquery.js"></script>
+<script src="../js/openbook.js"></script>
+<script src="../js/book.js"></script>
+<script src="../js/book_form.js"></script>
+<script src="../js/ad.js"></script>
+<script src="../js/ad_form.js"></script>
+<script src="../js/create_ad.js"></script>
+</body>
+</html>

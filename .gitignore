@@ -1,6 +1,12 @@
 /target/
 !.mvn/wrapper/maven-wrapper.jar
 
+### Vim ###
+.swp
+
+### Maven ###
+.mvn/
+
 ### STS ###
 .apt_generated
 .classpath
@@ -24,3 +30,4 @@
 /.nb-gradle/
 /build/
 src/main/resources/application.properties
+**PayPalConfig.java

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <link th:replace="partials/header :: header('Profile')"/>
+    <style>
+        body {
+            background: #233D4D;
+            background: linear-gradient(to right, #233D4D, #619B8A);
+        }
+        .profile-header{
+            color: lightgrey;
+        }
+        .books{
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<div th:replace="partials/navbar :: navbar"></div>
+<div id="profile">
+
+
+    <div class="container">
+
+        <h1 class="font-weight-medium text-center text-lg-left mt-4 mb-0 profile-header"><i class="fas fa-book"></i> My Books</h1>
+
+        <hr class="mt-2 mb-5"/>
+
+        <div class="row text-center text-lg-left">
+            <th:block th:if="${user.ads.isEmpty()}">
+                <div class="offset-lg-3 col-lg-6  offset-md-3 col-md-6 col-sm-12">
+                    <div class="card text-center">
+                        <h4> No ads have been created.</h4>
+                    </div>
+                </div>
+            </th:block>
+            <th:block th:if="${!user.ads.isEmpty()}">
+
+                <div class="col-lg-3 col-md-4 col-6 mb-3 mt-1" th:each="ad:${user.ads}">
+                    <!--d-block mb-4 h-100 img-thumbnail-->
+                    <a th:href="@{/ads/view={id} (id=${ad.id})}" class="books module">
+                        <h5 th:text="*{ad.adTitle}"></h5>
+                        <th:block th:each="book:${ad.books}">
+                            <img class="img-fluid" th:src="${book.imageUrl}" alt="book-image"/>
+                            <p th:text="${book.author}"></p>
+                        </th:block>
+                    </a>
+                </div>
+            </th:block>
+        </div>
+    </div>
+    <!--<div class="container">-->
+    <!--<div class="row u-max-full-width">-->
+    <!--<div class="three columns" th:each="ad:${user.ads}">-->
+    <!--<div class="card" th:each="book:${ad.books}">-->
+    <!--<img th:src="${book.imageUrl}" alt="book"/>-->
+    <!--<h4 th:text="${book.title}"></h4>-->
+    <!--<h5 th:text="${book.author}"></h5>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+</div>
+</body>
+</html>
