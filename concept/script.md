@@ -1,7 +1,9 @@
 ## Introduction
+Good evening ladies and gentlemen, my name is Sam Rodriguez and joining me today are my partners, James Meyer, and Nathaniel Gumbs. Today we are 
+going to present to you our application *E-Libraries*.
 
 #### About
-
+What e-libraries is, is an online book 
 #### Registration
 
 #### Logging In
