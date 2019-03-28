@@ -1,10 +1,12 @@
 # Elibraries
 
+
+
 ## Creators
 
-- James Meyer
-- Nathaniel Gumbs
-- Sam Rodriguez
+- [James Meyer](https://www.linkedin.com/in/james-j-meyer/)
+- [Nathaniel Gumbs](https://www.linkedin.com/in/nathaniel-gumbs/)
+- [Sam Rodriguez](https://www.linkedin.com/in/oscar-sam-rodriguez/)
 
 ## Technologies We Utilized
 
