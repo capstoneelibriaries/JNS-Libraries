@@ -10,6 +10,8 @@ import capstone.elibraries.models.*;
 import capstone.elibraries.error.*;
 import org.springframework.ui.Model;
 
+import javax.servlet.http.HttpServletRequest;
+
 
 @Controller
 public class AdsController {
@@ -43,24 +45,23 @@ public class AdsController {
     }
 
     @GetMapping("/ads/view={id}")
-    public String getOneAd(Model model, @PathVariable Long id) {
+    public String getOneAd(@PathVariable Long id, Model model) {
+
+        if (adsDao.findByIdAndPendingIsTrue(id) != null) {
+            model.addAttribute("ad", adsDao.findByIdAndPendingIsTrue(id));
+        } else {
+            return "/ads/delete";
+        }
 
         try {
-            if (adsDao.findByIdAndPendingIsTrue(id) != null) {
-                model.addAttribute("ad", adsDao.findByIdAndPendingIsTrue(id));
-            } else {
-                return "ads/delete";
-            }
-
-            model.addAttribute("user", getCurrentUser());
+            User current = getCurrentUser();
+            model.addAttribute("user", current);
             return "ads/single";
         } catch (ValidationException e){
             model.addAttribute("error", e);
             return "/error/validation";
-        } catch (Exception e){
-            // catch cast exception
-            e.printStackTrace();    // TODO: this should never happen
-            return "/"; // TODO: change this...
+        } catch (ClassCastException e){
+            return "ads/single";
         }
     }
 
