@@ -26,39 +26,30 @@
             </div>
         </div>
         <div class="row">
-            <div th:object="${ad}" class="card">
-                <div class="column col-3">
-                    <div>
-                        <h2 th:text="*{adTitle}"></h2>
-                    </div>
-                    <div>
-                        <p th:text="*{description}"></p>
-                    </div>
-                    <div>
-                        <h3>Sold by: <span th:text="${ad.seller.username}"></span></h3>
-                        <h4 th:text="'Trade Value: $'+*{price}"></h4>
-                        <h5 th:text="'Shipping: $'+*{shipping}" th:if="*{shipping>0}"></h5>
-                        <h6 th:text="'Shipping: '+'Free'" th:if="*{shipping==0}"></h6>
-                    </div>
+            <div th:object="${ad}">
+                <div class="column col-lg-3">
+                    <h2 th:text="*{adTitle}"></h2>
+                    <p th:text="*{description}"></p>
+                    <h3>Sold by: <span th:text="${ad.seller.username}"></span></h3>
+                    <h4 th:text="'Trade Value: $'+*{price}"></h4>
+                    <h5 th:text="'Shipping: $'+*{shipping}" th:if="*{shipping>0}"></h5>
+                    <h6 th:text="'Shipping: '+'Free'" th:if="*{shipping==0}"></h6>
                 </div>
-                <div class="column col-9">
+                <div class="column col-lg-9">
                     <div th:each="book : *{books}" class="row">
-                        <div class="column col-6">
-                            <div>
-                                <h4 th:text="${book.author}"></h4>
-                            </div>
-                            <div>
-                                <h5 th:text="'Condition: '+${book.wear}"></h5>
-                            </div>
+                        <div class="column col-lg-6">
+                            <h4 th:text="'Title: ' + ${book.title}"></h4>
+                            <h4 th:text="'Author ' + ${book.author}"></h4>
+                            <h2 th:text="'Condition: ' + ${book.wear}"></h2>
                         </div>
-                        <div class="column col-6">
+                        <div class="column col-lg-6">
                             <img class="img-thumbnail book-cover center mx-auto" th:src="${book.imageUrl}" alt="book-image"/>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div th:object="${ad}" class="row">
             <!-- Edit/Delete button if you own the ad -->
             <th:block sec:authorize="isAuthenticated()">
                 <th:block th:if="${user.id == ad.seller.getId()}">
