@@ -44,20 +44,24 @@ public class AdsController {
 
     @GetMapping("/ads/view={id}")
     public String getOneAd(Model model, @PathVariable Long id) {
-        if ( adsDao.findByIdAndPendingIsTrue(id) != null) {
-            model.addAttribute("ad", adsDao.findByIdAndPendingIsTrue(id));
-        } else {
-            return "ads/delete";
-        }
+
         try {
+            if (adsDao.findByIdAndPendingIsTrue(id) != null) {
+                model.addAttribute("ad", adsDao.findByIdAndPendingIsTrue(id));
+            } else {
+                return "ads/delete";
+            }
+
             model.addAttribute("user", getCurrentUser());
+            return "ads/single";
         } catch (ValidationException e){
             model.addAttribute("error", e);
-            return "redirect:/error/validation";
+            return "/error/validation";
         } catch (Exception e){
             // catch cast exception
+            e.printStackTrace();    // TODO: this should never happen
+            return "/"; // TODO: change this...
         }
-        return "ads/single";
     }
 
     @GetMapping("/ads/create")
@@ -68,9 +72,7 @@ public class AdsController {
     }
 
     @PostMapping("/ads/create")
-    public String createAd(@ModelAttribute Ad ad, @ModelAttribute Book book, Model model)
-            throws AuthenticationException
-    {
+    public String createAd(@ModelAttribute Ad ad, @ModelAttribute Book book, Model model) {
         try{
             System.out.println(ad.toString());
             System.out.println(book.toString());
