@@ -1,19 +1,19 @@
 # Elibraries
 
-###### Contents
+##### Contents
 
-- [Creators](creators)
-- [Technology Stack](tech)
-- [Spring](spring)
-- [Thymeleaf](thy)
-- [JUnit](junit)
-- [Javascript](js)
-- [OpenLibrary API](ob)
-- [jQuery](jq)
+- [Creators](#creators)
+- [Technology Stack](#tech)
+- [Spring](#spring)
+- [Thymeleaf](#thy)
+- [JUnit](#junit)
+- [Javascript](#js)
+- [OpenLibrary API](#ob)
+- [jQuery](#jq)
 
 ![logo](src/main/resources/static/images/mobileIndex.png)
 
-##<a name="creators"></a>Creators
+## <a name="creators"></a>Creators
 
 - [James Meyer](https://www.linkedin.com/in/james-j-meyer/)
 - [Nathaniel Gumbs](https://www.linkedin.com/in/nathaniel-gumbs/)
