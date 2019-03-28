@@ -53,6 +53,9 @@
                     <!--<div class="dropdown-menu" aria-labelledby="navbarDropdown">-->
                     <!--</div>-->
                 </li>
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/about}">About</a>
+                </li>
             </ul>
             <form sec:authorize="isAuthenticated()" class="form-inline my-2 my-lg-0" th:action="@{/search}" th:method="get">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q"/>
