@@ -26,14 +26,14 @@ public class UserController {
     private Users users;
     private PasswordEncoder passwordEncoder;
     private TradeRequests trades;
-    private Addresses addresses;
+    private Addresses addrRepo;
     private Transactions transactions;
 
     public UserController(Users users, PasswordEncoder passwordEncoder, TradeRequests trades, Addresses addresses, Transactions transactions) {
         this.users = users;
         this.passwordEncoder = passwordEncoder;
         this.trades = trades;
-        this.addresses = addresses;
+        this.addrRepo = addresses;
         this.transactions = transactions;
     }
 
@@ -62,34 +62,39 @@ public class UserController {
 
     @GetMapping("/profile/addresses")
     public String getAddress(Model model) {
-//        User user = getCurrentUser();
-//
-//        try {
-//            if(user.getAddresses() == null || user.getAddresses().size() == 0) {
-//                user.addAddress(new Address());
-//            }
-//            model.addAttribute("user", user);
-//            return "users/addresses";
-//        }catch(ValidationException e){
-//            model.addAttribute("error", e);
-//            return "redirect:/error/validation";
-//        }
-        return "users/addresses";
+        User curUser = this.getCurrentUser();
+        try {
+
+        } catch(UnknownError e) {
+
+        }
+        Address shippingAddress = new Address();
+        Address billingAddress = new Address();
+        model.addAttribute("shippingAddress", shippingAddress);
+        model.addAttribute("billingAddress", billingAddress);
+        return "/users/addresses";
     }
 
     @PostMapping("/profile/addresses")
-    public String setAddress(@ModelAttribute User userAddr, Model model) {
-        User user = getCurrentUser();
+    public String postAddress(@ModelAttribute Address shippingAddress, @ModelAttribute Address billingAddress){
+        User current = getCurrentUser();
 
-//        try {
-//            user.setAddresses(userAddr.getAddresses());
-//            users.save(user);
-//            return "redirect:users/profile";
-//        }catch(ValidationException e){
-//            model.addAttribute("error", e);
-//            return "redirect:/error/validation";
-//        }
-        return "redirect:users/profile";
+        List<Address> addr = new ArrayList<>(2);
+        billingAddress.setBilling(true);
+        shippingAddress.setBilling(false);
+        addr.add(billingAddress);
+        addr.add(shippingAddress);
+
+        current.setAddress(addr);
+        users.save(current);
+
+//        shippingAddress.setBilling(false);
+//        shippingAddress.setUser(current);
+//        billingAddress.setBilling(true);
+//        billingAddress.setUser(current);
+//        this.addrRepo.save(shippingAddress);
+//        this.addrRepo.save(billingAddress);
+        return "redirect:/users/profile";
     }
 
     @GetMapping("/profile/transactions")

@@ -5,41 +5,95 @@
 </head>
 <body>
     <div th:replace="partials/navbar :: navbar"></div>
-    <h1>Your Addresses</h1>
-    <form th:action="@{/profile/addresses}" th:method="post">
-        <div th:each="address, stat : ${user.addresses}">
-            <div>
-                <label>Street Address</label>
-                <input th:field="*{user.addresses[__${stat.index}__].streetAddr}"
-                       type="text"/>
-            </div>
-            <div>
-                <label>Apartment/Unit</label>
-                <input th:field="*{user.addresses[__${stat.index}__].subAddr}"
-                       type="text"/>
-            </div>
-            <div>
-                <label>Country</label>
-                <input th:field="*{user.addresses[__${stat.index}__].country}"
-                       type="text"/>
-            </div>
-            <div>
-                <label>City</label>
-                <input th:field="*{user.addresses[__${stat.index}__].city}"
-                       type="text"/>
-            </div>
-            <div>
-                <label>State</label>
-                <input th:field="*{user.addresses[__${stat.index}__].state}"
-                       type="text"/>
-            </div>
-            <div>
-                <label>Zip</label>
-                <input th:field="*{user.addresses[__${stat.index}__].zipcode}"
-                       type="text"/>
-            </div>
+    <div class="container">
+        <div class="row">
+            <h2>Your Addresses</h2>
         </div>
-        <button th:type="submit">Submit</button>
-    </form>
+        <form th:action="@{/profile/addresses}" th:method="post">
+            <div class="row">
+                <div class="col-lg-6 card" th:object="${billingAddress}">
+                    <h4>Billing Address</h4>
+                    <div>
+                        <label>Street Address</label>
+                        <input th:field="*{streetAddr}"
+                               class="form-control"
+                               type="text"/>
+                    </div>
+                    <div>
+                        <label>Apartment/Unit</label>
+                        <input th:field="*{subAddr}"
+                               class="form-control"
+                               type="text"/>
+                    </div>
+                    <div>
+                        <label>Country</label>
+                        <input th:field="*{country}"
+                               class="form-control"
+                               type="text"/>
+                    </div>
+                    <div>
+                        <label>City</label>
+                        <input th:field="*{city}"
+                               class="form-control"
+                               type="text"/>
+                    </div>
+                    <div>
+                        <label>State</label>
+                        <input th:field="*{state}"
+                               class="form-control"
+                               type="text"/>
+                    </div>
+                    <div>
+                        <label>Zip</label>
+                        <input th:field="*{zipcode}"
+                               class="form-control"
+                               type="text"/>
+                    </div>
+                </div>
+                <div class="col-lg-6 card" th:object="${shippingAddress}">
+                    <h4>Shipping Address</h4>
+                    <div>
+                        <label>Street Address</label>
+                        <input th:field="*{streetAddr}"
+                               class="form-control"
+                               type="text"/>
+                    </div>
+                    <div>
+                        <label>Apartment/Unit</label>
+                        <input th:field="*{subAddr}"
+                               class="form-control"
+                               type="text"/>
+                    </div>
+                    <div>
+                        <label>Country</label>
+                        <input th:field="*{country}"
+                               class="form-control"
+                               type="text"/>
+                    </div>
+                    <div>
+                        <label>City</label>
+                        <input th:field="*{city}"
+                               class="form-control"
+                               type="text"/>
+                    </div>
+                    <div>
+                        <label>State</label>
+                        <input th:field="*{state}"
+                               class="form-control"
+                               type="text"/>
+                    </div>
+                    <div>
+                        <label>Zip</label>
+                        <input th:field="*{zipcode}"
+                               class="form-control"
+                               type="text"/>
+                    </div>
+                    <div>
+                        <button th:type="submit" class="btn-success btn-primary">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
 </body>
 </html>

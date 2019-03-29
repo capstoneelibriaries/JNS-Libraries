@@ -226,16 +226,15 @@ public class User {
         this.ads = ads;
     }
 
-    public void setBillingAddress(Address address){
-        this.address.set(0, address);
-    }
-
-    public void setShippingAddress(Address address){
-        this.address.set(1, address);
-    }
-
     public void setAddress(List<Address> address){
+        if(this.address == null){
+            this.address = new ArrayList<>(2);
+        }
+
         this.address = address;
+        for(Address addr : address){
+            addr.setUser(this);
+        }
     }
 
     public void addAd(Ad ad) throws ValidationException {
