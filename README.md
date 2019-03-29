@@ -8,6 +8,7 @@
 - [Spring](#spring)
 - [Thymeleaf](#thy)
 - [JUnit](#junit)
+- [BootStrap](#bs)
 - [Javascript](#js)
 - [OpenLibrary API](#ob)
 - [jQuery](#jq)
@@ -19,7 +20,7 @@
 - [James Meyer](https://www.linkedin.com/in/james-j-meyer/)
 - [Nathaniel Gumbs](https://www.linkedin.com/in/nathaniel-gumbs/)
 - [Sam Rodriguez](https://www.linkedin.com/in/oscar-sam-rodriguez/)
-<br>
+
 <br>
 
 ## <a name="tech"></a>Technologies We Utilized
@@ -33,7 +34,7 @@
 
 A **Spring boot** server was selected, where we took advantage of *form model* binding and automated SQL queries. 
 **Spring boot** also enforced the *builder* pattern, the *singleton* pattern, and the *model-view-controller* pattern. 
-This enforced clear, consistent code with a logical distribution of tasks.
+This lead to a clear, consistent code base with a logical distribution of tasks.
 
 <br>
 
@@ -62,6 +63,10 @@ individual tests were created for server side objects and *HTTP responses*.
 <br>
 
 ### Client Side
+
+<br>
+
+#### <a name="bs"></a>Boot Strap
 
 <br>
 
