@@ -7,61 +7,69 @@
             background: #619B8A;
             background: linear-gradient(to right, #619B8A, #A1C181);
         }
+
         .btn-primary {
             color: #fff;
             background-color: #233D4D;
             border-color: #233D4D;
         }
+
         .search {
             color: white;
             background-color: #FCCA46;
             border-color: black;
         }
-        .img{
+
+        .img {
             height: 250px;
             width: 250px;
         }
-        .bg{
-            border: .25rem solid #f8f9fa;
-            background-color: #f8f9fa;
+
+        .bg {
+            height: 350px;
         }
+         .bg-color {
+             background-color: #f8f9fa;
+             padding: 0 .5em .5em .5em;
+             width: 250px;
+         }
 
     </style>
 </head>
 <body>
 <div th:replace="partials/navbar :: navbar"></div>
-    <div class="container mt-3">
-        <h1 class="text-center">JNS Libs Team</h1>
-        <div class="row">
-            <div class="col-lg-3 col-xl-3 mx-auto col-sm-12">
-                <div class=" flex-row my-5">
-                    <div class="bg">
-                        <img class="img" th:src="@{/images/James.jpg}" />
-                        <h3>James Joshua Meyer</h3>
-                        <p>Software Developer</p>
-                    </div>
+<div class="container mt-3">
+    <h1 class="text-center">JNS Libs Team</h1>
+    <div class="row">
+        <div class="col-lg-3 col-xl-3 mx-auto col-sm-12">
+            <div class="bg">
+                    <img class="img" th:src="@{/images/James.jpg}"/>
+                <div class="bg-color">
+                    <h4 class="pt-2">James Joshua Meyer</h4>
+                    <p>Software Developer</p>
                 </div>
             </div>
-            <div class="col-lg-3 col-xl-3 mx-auto col-sm-12">
-                <div class="flex-row my-5">
-                    <div class="bg">
-                        <img class="img" th:src="@{/images/Nathaniel.jpg}" />
-                        <h3>Nathaniel Gumbs</h3>
-                        <p>Software Developer</p>
-                    </div>
+        </div>
+        <div class="col-lg-3 col-xl-3 mx-auto col-sm-12">
+            <div class="bg">
+                    <img class="img" th:src="@{/images/Nathaniel.jpg}"/>
+                <div class="bg-color">
+                    <h4 class="pt-2">Nathaniel Gumbs</h4>
+                    <p>Software Developer</p>
                 </div>
             </div>
-            <div class="col-lg-3 col-xl-3 mx-auto col-sm-12">
-                <div class=" flex-row my-5">
-                    <div class="bg">
-                        <img class="img" th:src="@{/images/Samuel.jpg}" />
-                        <h3>Sam Rodriguez</h3>
-                        <p>Software Developer</p>
-                    </div>
+        </div>
+        <div class="col-lg-3 col-xl-3 mx-auto col-sm-12">
+            <div class="bg">
+                    <img class="img" th:src="@{/images/Samuel.jpg}"/>
+                <div class="bg-color">
+                    <h4 class="pt-2">Sam Rodriguez</h4>
+                    <p>Software Developer</p>
                 </div>
             </div>
         </div>
     </div>
-    <footer th:replace="partials/footer :: footer"></footer>
+</div>
+<footer th:replace="partials/footer :: footer"></footer>
 </body>
 </html>
