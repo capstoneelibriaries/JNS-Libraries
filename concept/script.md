@@ -1,4 +1,5 @@
 ## Introduction
+
 Good evening ladies and gentlemen, my name is Sam Rodriguez and joining me today are my partners, James Meyer, and Nathaniel Gumbs. Today we are 
 going to present to you our application *E-Libraries*.
 
@@ -7,10 +8,12 @@ going to present to you our application *E-Libraries*.
 What e-libraries is, is an online book store that allows users to trade books from one user to another. This way, instead of going to your local 
 bookstore or checking on amazon for the book you're looking for, you can hop on E-libraries to list your old unwanted books in exchange for the 
 book you are looking for. Then, if anyone has your desired book, you can make a trade to satisfy both parties. 
+
 #### Registration
 
 We are now going to register as a new user under James, we used bootstrap for styling our page and the image you are seeing is being pulled in from
  up splash. Once all the fields in the form are properly filled out, you will be redirected to the login.
+
 #### Logging In
 
 We will now login as our new user, James. After filling out the login form information correctly, we will be redirected to the profile page.
@@ -51,21 +54,36 @@ can attempt to trade some of our books for this one. Nathaniel will walk us thro
 
 ## Transactions
 
-Thank you James, hello everyone, I'm Nathaniel and I will be walking through the process of performing a trade with 
-another user. From the single ad view, the ad's title, description, list of books and their information are 
-shown in detail. Using SQL queries in the Hibernate framework with Spring information is retrieved from our server's database.
- That information then is used to construct models of ads and books to send to the view. Let's *Offer Trade*. On this 
- page the user has the option of selecting any of the ads he or she posses to offer as a trade. Let's select an ad and 
- *Make Offer*. Now that an offer has been made let's log out of this user and log in as another to view the request.
+Thank you James, hello everyone, I'm Nathaniel and I will walk us through the process of performing a trade. We'll clikc 
+the **offer trade button**, which is only visible because of our **Spring Security Model**. If we weren't logged in, this
+button would not be available. 
+
+We're now taken to the trade page. On the left side, we have the owner of the ad and on the right side we have our ads
+that we can offer to trade. I did this by using SQL queries in **Hibernate framework** to retrieve information from both
+users, then constructed models of the Ads and displayed them, *iteratively* through **Thymeleaf**.
+
+We'll select the ad we just listed, and submit a trade offer. A *post* request is submitted, which builds a *trade reqeust
+object*, containing *references* to both users and ads, and it is saved to the database via *Hibernate*.
+
+Now we'll log out and log in as the trade recipient and see how the trade confirmation works.
 
 #### Viewing Pending Trade Requests
 
-Upon selecting *My Trade Requests* the server queries for all pending trade requests made to the currently logged in 
-user. The action of processing a trade requests involves a user confirming or rejecting a proposed offer. If a trade is 
-accepted, both ads will be altered in the database with a different status and a transaction object will be generated.
+Upon logging in, we'll navigate to *My Trade Reqeusts*, where we can see a list of *pending* trade requests. Like before,
+I constructed this using **Hibernate** and *form-model-binding*.
+
+Let's confirm the trade request. Behind the scenes the *pending* status of the trade request is terminated. A *transaction
+object is genrated*, which contains references to the trade request, the users involved, and the time of the trade. The
+transaction is saved to the database.
 
 #### Completing the Trades
 
-All transactions can be viewed in *My Past Transactions*. They store information on all trades that have taken place. 
-Each transaction is constructed using trade requests and both user models involved. As a final step in the 
- trade process the other user's shipping address is displayed here
+All transactions can be viewed in *My Past Transactions*. It is a list of all of the transactions belonging to this user
+that have taken place.
+
+<br>
+
+## Conclusion
+
+If you're looking for a place to exchange your used books and expand your literary horizons, you have until June 6th and
+then our certificates expire.
