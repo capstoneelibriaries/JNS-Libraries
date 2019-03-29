@@ -51,8 +51,21 @@ can attempt to trade some of our books for this one. Nathaniel will walk us thro
 
 ## Transactions
 
-#### Offering a Trade
+Thank you James, hello everyone, I'm Nathaniel and I will be walking through the process of performing a trade with 
+another user. From the single ad view, the ad's title, description, list of books and their information are 
+shown in detail. Using SQL queries in the Hibernate framework with Spring information is retrieved from our server's database.
+ That information then is used to construct models of ads and books to send to the view. Let's *Offer Trade*. On this 
+ page the user has the option of selecting any of the ads he or she posses to offer as a trade. Let's select an ad and 
+ *Make Offer*. Now that an offer has been made let's log out of this user and log in as another to view the request.
 
 #### Viewing Pending Trade Requests
 
+Upon selecting *My Trade Requests* the server queries for all pending trade requests made to the currently logged in 
+user. The action of processing a trade requests involves a user confirming or rejecting a proposed offer. If a trade is 
+accepted, both ads will be altered in the database with a different status and a transaction object will be generated.
+
 #### Completing the Trades
+
+All transactions can be viewed in *My Past Transactions*. They store information on all trades that have taken place. 
+Each transaction is constructed using trade requests and both user models involved. As a final step in the 
+ trade process the other user's shipping address is displayed here
