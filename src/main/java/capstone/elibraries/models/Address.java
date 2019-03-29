@@ -9,6 +9,7 @@ public class Address {
     private long id;
     @ManyToOne @JoinColumn(name = "addresses")
     private User user;
+
     @Column
     private boolean billing;
     @Column

@@ -62,32 +62,34 @@ public class UserController {
 
     @GetMapping("/profile/addresses")
     public String getAddress(Model model) {
-        User user = getCurrentUser();
-
-        try {
-            if(user.getAddresses() == null || user.getAddresses().size() == 0) {
-                user.addAddress(new Address());
-            }
-            model.addAttribute("user", user);
-            return "users/addresses";
-        }catch(ValidationException e){
-            model.addAttribute("error", e);
-            return "redirect:/error/validation";
-        }
+//        User user = getCurrentUser();
+//
+//        try {
+//            if(user.getAddresses() == null || user.getAddresses().size() == 0) {
+//                user.addAddress(new Address());
+//            }
+//            model.addAttribute("user", user);
+//            return "users/addresses";
+//        }catch(ValidationException e){
+//            model.addAttribute("error", e);
+//            return "redirect:/error/validation";
+//        }
+        return "users/addresses";
     }
 
     @PostMapping("/profile/addresses")
     public String setAddress(@ModelAttribute User userAddr, Model model) {
         User user = getCurrentUser();
 
-        try {
-            user.setAddresses(userAddr.getAddresses());
-            users.save(user);
-            return "redirect:users/profile";
-        }catch(ValidationException e){
-            model.addAttribute("error", e);
-            return "redirect:/error/validation";
-        }
+//        try {
+//            user.setAddresses(userAddr.getAddresses());
+//            users.save(user);
+//            return "redirect:users/profile";
+//        }catch(ValidationException e){
+//            model.addAttribute("error", e);
+//            return "redirect:/error/validation";
+//        }
+        return "redirect:users/profile";
     }
 
     @GetMapping("/profile/transactions")

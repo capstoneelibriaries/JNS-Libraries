@@ -89,15 +89,22 @@ public class AdsController {
 
     @PostMapping("/ads/newbook")
     public String addBook(@ModelAttribute Ad ad, @ModelAttribute Book book, Model model){
-        try{
+        ad.addBook(book);
+        model.addAttribute("ad", ad);
+        model.addAttribute("newbook", new Book());
+        return "ads/create";
+    }
+
+    @PostMapping("/ads/deletebook/{index}")
+    public String deleteBook(@PathVariable int index, @ModelAttribute Ad ad, @ModelAttribute Book book, Model model){
+
+        if(!book.getIsbn().equals("")){
             ad.addBook(book);
-            model.addAttribute("ad", ad);
-            model.addAttribute("newbook", new Book());
-            return "ads/create";
-        }catch(ValidationException e){
-            model.addAttribute("error", e);
-            return "redirect:/error/validation";
         }
+        ad.addRemoveBook(index);
+        model.addAttribute("ad", ad);
+        model.addAttribute("newbook", new Book());
+        return "ads/create";
     }
 
     @GetMapping("/ads/{id}/delete")
@@ -111,9 +118,7 @@ public class AdsController {
     public String deleteAd(@ModelAttribute Ad ad, @PathVariable Long id){
         if (((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId() ==
                 adsDao.findOne(ad.getId()).getSeller().getId()) {
-            Ad toDelete = adsDao.findOne(id);
-            toDelete.setPending(false);
-            adsDao.save(toDelete);
+            adsDao.delete(ad);
             return "redirect:/profile";
         } else {
             return "redirect:/profile";
