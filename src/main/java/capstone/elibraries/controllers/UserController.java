@@ -7,6 +7,7 @@ import capstone.elibraries.models.Transaction;
 import capstone.elibraries.repositories.TradeRequests;
 import capstone.elibraries.repositories.Transactions;
 import capstone.elibraries.repositories.Addresses;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -65,15 +66,25 @@ public class UserController {
     public String getAddress(Model model) {
         User current = this.getCurrentUser();
 
-        if(current.getAddresses() == null){
-            List<Address> addr = new ArrayList<>(2);
-            addr.add(new Address());
-            addr.add(new Address());
-            current.setAddresses(addr);
+        model.addAttribute("userId", current.getId());
+        return "/users/addresses";
+    }
+
+    @GetMapping("/profile/addresses/{userId}")
+    @ResponseBody
+    public String getAddressByUserId(@PathVariable long userId){
+        User current = getCurrentUser();
+        if(current.getId() != userId){
+            return String.format("%s", HttpStatus.FORBIDDEN);
         }
 
-        model.addAttribute("user", current);
-        return "/users/addresses";
+        Address billing = current.getBillingAddress();
+        Address shipping = current.getShippingAddress();
+
+        billing = (billing == null) ? new Address() : billing;
+        shipping = (shipping == null) ? new Address() : shipping;
+
+        return String.format("[%s,%s]", billing.toJson(), shipping.toJson());
     }
 
     @PostMapping("/profile/addresses")

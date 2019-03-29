@@ -118,7 +118,9 @@ public class AdsController {
     public String deleteAd(@ModelAttribute Ad ad, @PathVariable Long id){
         if (((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId() ==
                 adsDao.findOne(ad.getId()).getSeller().getId()) {
-            adsDao.delete(ad);
+            Ad toDelete = adsDao.findOne(id);
+            toDelete.setPending(false);
+            adsDao.save(toDelete);
             return "redirect:/profile";
         } else {
             return "redirect:/profile";

@@ -15,37 +15,43 @@
                     <h4>Billing Address</h4>
                     <div>
                         <label>Street Address</label>
-                        <input name="billing-streetAddr"
+                        <input id="billing-streetAddr"
+                               name="billing-streetAddr"
                                class="form-control"
                                type="text"/>
                     </div>
                     <div>
                         <label>Apartment/Unit</label>
-                        <input name="billing-subAddr"
+                        <input id="billing-subAddr"
+                                name="billing-subAddr"
                                class="form-control"
                                type="text"/>
                     </div>
                     <div>
                         <label>Country</label>
-                        <input name="billing-country"
+                        <input id="billing-country"
+                                name="billing-country"
                                class="form-control"
                                type="text"/>
                     </div>
                     <div>
                         <label>City</label>
-                        <input name="billing-city"
+                        <input id="billing-city"
+                                name="billing-city"
                                class="form-control"
                                type="text"/>
                     </div>
                     <div>
                         <label>State</label>
-                        <input name="billing-state"
+                        <input id="billing-state"
+                                name="billing-state"
                                class="form-control"
                                type="text"/>
                     </div>
                     <div>
                         <label>Zipcode</label>
-                        <input name="billing-zipcode"
+                        <input id="billing-zipcode"
+                                name="billing-zipcode"
                                class="form-control"
                                type="text"/>
                     </div>
@@ -55,37 +61,43 @@
                     <h4>Shipping Address</h4>
                     <div>
                         <label>Street Address</label>
-                        <input name="shipping-streetAddr"
+                        <input id="shipping-streetAddr"
+                                name="shipping-streetAddr"
                                class="form-control"
                                type="text"/>
                     </div>
                     <div>
                         <label>Apartment/Unit</label>
-                        <input name="shipping-subAddr"
+                        <input id="shipping-subAddr"
+                                name="shipping-subAddr"
                                class="form-control"
                                type="text"/>
                     </div>
                     <div>
                         <label>Country</label>
-                        <input name="shipping-country"
+                        <input id="shipping-country"
+                                name="shipping-country"
                                class="form-control"
                                type="text"/>
                     </div>
                     <div>
                         <label>City</label>
-                        <input name="shipping-city"
+                        <input id="shipping-city"
+                                name="shipping-city"
                                class="form-control"
                                type="text"/>
                     </div>
                     <div>
                         <label>State</label>
-                        <input name="shipping-state"
+                        <input id="shipping-state"
+                                name="shipping-state"
                                class="form-control"
                                type="text"/>
                     </div>
                     <div>
                         <label>Zipcode</label>
-                        <input name="shipping-zipcode"
+                        <input id="shipping-zipcode"
+                                name="shipping-zipcode"
                                class="form-control"
                                type="text"/>
                     </div>
@@ -96,5 +108,13 @@
             </div>
         </form>
     </div>
+    <script th:src="@{/js/jquery.js}"></script>
+    <script th:src="@{/js/addresses.js}"></script>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        const userId = /*[[${userId}]]*/ 0;
+        addresses(userId);
+        /*]]>*/
+    </script>
 </body>
 </html>

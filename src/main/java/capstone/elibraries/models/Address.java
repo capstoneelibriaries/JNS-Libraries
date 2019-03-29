@@ -128,4 +128,27 @@ public class Address {
                 "}";
     }
 
+    public String toJson(){
+        this.streetAddr = (this.streetAddr == null) ? "" : this.streetAddr;
+        this.subAddr = (this.subAddr == null) ? "" : this.subAddr;
+        this.country = (this.streetAddr == null) ? "" : this.streetAddr;
+        this.city = (this.city == null) ? "" : this.city;
+        this.state = (this.state == null) ? "" : this.state;
+        this.zipcode = (this.zipcode == null) ? "" : this.zipcode;
+
+        return String.format("{" +
+                "\"id\":\"%s\"," +
+                "\"user\":\"%s\"," +
+                "\"billing\":\"%s\"," +
+                "\"address1\":\"%s\"," +
+                "\"address2\":\"%s\"," +
+                "\"country\":\"%s\"," +
+                "\"city\":\"%s\"," +
+                "\"state\":\"%s\"," +
+                "\"zipcode\":\"%s\"" +
+                "}", this.id, this.user.getId(),
+                this.billing, this.streetAddr, this.subAddr,
+                this.country, this.city, this.state, this.zipcode);
+    }
+
 }
