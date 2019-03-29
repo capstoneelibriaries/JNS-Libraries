@@ -1,27 +1,29 @@
 ## Introduction
 
 Good evening ladies and gentlemen, my name is Sam Rodriguez and joining me today are my partners, James Meyer, and Nathaniel Gumbs. Today we are 
-going to present to you our application *E-Libraries*.
+going to present to you our application, *E-Libraries*. 
 
 #### About
 
-What e-libraries is, is an online book store that allows users to trade books from one user to another. This way, instead of going to your local 
-bookstore or checking on amazon for the book you're looking for, you can hop on E-libraries to list your old unwanted books in exchange for the 
-book you are looking for. Then, if anyone has your desired book, you can make a trade to satisfy both parties. 
+E-libraries is an online book store that enables users to trade used books. This application is constructed with **Spring
+Boot**, **Thymeleaf**, **Modern Javascript**, and it is styled with **Bootstrap**. It leverages the **OpenLibrary API**,
+and other technologies that we will explore throughout this presentation.
 
 #### Registration
 
-We are now going to register as a new user under James, we used bootstrap for styling our page and the image you are seeing is being pulled in from
- up splash. Once all the fields in the form are properly filled out, you will be redirected to the login.
+First, let's register as a new *Bob*. All of the forms in this application are locked down with **HTML5** attributes. Our 
+use of **HTML5** balances both security and a low memory footprint. The fields you see, are bound to the many **Java**
+*models* on the *backend*. When any of these forms are submitted, **Spring** automatically constructs the bound model.
 
 #### Logging In
 
-We will now login as our new user, James. After filling out the login form information correctly, we will be redirected to the profile page.
+We will now login as our new user, *Bob*. After filling out and submitting the login form, we will be redirected to the 
+profile page.
 
 #### Profile Page
 
-Upon entering the profile page, you will see all the users book listings that have been created. As a user, you can click on each individual book 
-to edit the information, or delete the listing all together, and now, my partner James Meyer will walk you through a few more features. 
+Upon navigating to the *profile page*, we will see all the users book listings. Right now, we don't have any listings 
+because we're a new user. So, let's go ahead and create a new Ad and see how the transactions take place.
 
 <br>
 
