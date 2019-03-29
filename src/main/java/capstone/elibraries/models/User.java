@@ -46,7 +46,7 @@ public class User {
     private List<Ad> ads;
 
     @OneToMany
-    private List<Address> address;
+    private List<Address> addresses;
 
     @Transient
     private List<Transaction> transactions;
@@ -67,7 +67,7 @@ public class User {
         this.phone = copy.phone;
         this.rating = copy.rating;
         this.ads = copy.ads;
-        this.address = copy.address;
+        this.addresses = copy.addresses;
         this.transactions = copy.transactions;
     }
 
@@ -84,7 +84,7 @@ public class User {
         this.phone = phone;
         this.rating = rating;
         this.ads = ads;
-        this.address = address;
+        this.addresses = address;
         this.transactions = transactions;
     }
 
@@ -131,12 +131,12 @@ public class User {
     }
 
     public List<Address> getAddress(){
-        return address;
+        return addresses;
     }
 
     public Address getBillingAddress(){
         try{
-            return address.get(0);
+            return addresses.get(0);
         }catch(Exception e){
             return null;
         }
@@ -144,7 +144,7 @@ public class User {
 
     public Address getShippingAddress(){
         try{
-            return address.get(1);
+            return addresses.get(1);
         }catch(Exception e){
             return null;
         }
@@ -227,11 +227,11 @@ public class User {
     }
 
     public void setAddress(List<Address> address){
-        if(this.address == null){
-            this.address = new ArrayList<>(2);
+        if(this.addresses == null){
+            this.addresses = new ArrayList<>(2);
         }
 
-        this.address = address;
+        this.addresses = address;
         for(Address addr : address){
             addr.setUser(this);
         }
