@@ -11,9 +11,13 @@ public interface Ads extends CrudRepository<Ad, Long> {
 
     Iterable<Ad> findAdBySeller(User user);
 
-    List<Ad> findByAdTitleIsLikeOrDescriptionIsLike(String title, String description);
+    List<Ad> findByAdTitleIsLikeOrDescriptionIsLikeAndPendingIsTrue(String title, String description);
 
     List<Ad> findByBooks(List<Book> books);
+
+    Ad findByIdAndPendingIsTrue(Long id);
+
+    Iterable<Ad> findAllByPendingIsTrue();
 
 }
 

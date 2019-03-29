@@ -7,6 +7,7 @@ going to present to you our application *E-Libraries*.
 What e-libraries is, is an online book store that allows users to trade books from one user to another. This way, instead of going to your local 
 bookstore or checking on amazon for the book you're looking for, you can hop on E-libraries to list your old unwanted books in exchange for the 
 book you are looking for. Then, if anyone has your desired book, you can make a trade to satisfy both parties. 
+
 #### Registration
 
 We are now going to register as a new user under James, we used bootstrap for styling our page and the image you are seeing is being pulled in from
