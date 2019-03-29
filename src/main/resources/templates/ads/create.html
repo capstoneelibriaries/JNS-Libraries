@@ -18,9 +18,9 @@
             background-color: #233D4D; !important;
             border-color: #233D4D; !important;
         }
-        .add-new{
-            display: none;
-        }
+        /*.add-new{*/
+            /*display: none;*/
+        /*}*/
 
     </style>
 </head>
@@ -76,18 +76,20 @@
                 </div>
                 <!-- The books that are already in the ad, on display and still editable -->
                 <div th:each="book, stat : ${ad.books}">
-                    <div>
+                    <div class="row col-12 p-1">
+                        <div class="col-4"></div>
                         <img th:src="${ad.books[__${stat.index}__].imageUrl}"
-                             width="200"
+                             class="col-4"
                              height="300"/>
                     </div>
                     <div>
-                        <label>Isbn</label>
+                        <label>ISBN</label>
                         <input th:field="*{ad.books[__${stat.index}__].isbn}"
                                th:id="'book-' + ${stat.index} + '-isbn'"
                                th:minlength="10"
                                th:maxlength="13"
                                type="number"
+                               class="form-control"
                                required="required"/>
                     </div>
                     <div>
@@ -95,6 +97,7 @@
                         <input th:field="*{ad.books[__${stat.index}__].title}"
                                th:id="'book-' + ${stat.index} + '-title'"
                                type="text"
+                               class="form-control"
                                readonly="readonly" required="required"/>
                     </div>
                     <div>
@@ -102,6 +105,7 @@
                         <input th:field="*{ad.books[__${stat.index}__].author}"
                                th:id="'book-' + ${stat.index} + '-author'"
                                type="text"
+                               class="form-control"
                                readonly="readonly" required="required"
                         />
                     </div>
@@ -111,6 +115,7 @@
                             <textarea th:field="*{ad.books[__${stat.index}__].synopsis}"
                                       th:id="'book-' + ${stat.index} + '-synopsis'"
                                       th:name="'synopsis-' + ${stat.index}"
+                                      class="form-control"
                                       required="required"></textarea>
                         </label>
                     </div>
@@ -120,6 +125,7 @@
                                th:id="'book-' + ${stat.index} + '-wear'"
                                th:min="1" th:max="5"
                                type="number" step="1"
+                               class="form-control"
                                required="required"/>
                     </div>
                     <div>
@@ -127,12 +133,12 @@
                         <input th:field="*{ad.books[__${stat.index}__].imageUrl}"
                                th:id="'book-' + ${stat.index} + '-image'"
                                type="text"
+                               class="form-control"
                                readonly="readonly" required="required"/>
                     </div>
-                    <div>
-                        <!--<input th:value="'Delete'" type="submit" th:formaction="@{/ads/deletebook/{id} (id = ${stat.index})}" /> NOT WORKING
-                        PROPERLY, upon hitting enter, you are redirected to a page that doesn't exist-->
-                    </div>
+                    <button class="btn-warning" th:id="delete-book"
+                            th:formaction="@{/ads/deletebook/{id} (id=${stat.index})}"
+                            type="submit"><i class="fas fa-plus"></i>Delete This Book</button>
                 </div>
                 <!-- A new book the user can add to the list of books -->
                 <div th:object="${newbook}">
@@ -194,8 +200,7 @@
                 <hr/>
                 <button class="btn-primary add-new" th:id="btn-new-book"
                         type="submit"
-                        formaction="/ads/newbook"
-                        disabled="disabled"><i class="fas fa-plus"
+                        formaction="/ads/newbook"><i class="fas fa-plus"
                         ></i> Add a New Book</button>
 
                 <button class="btn-primary btn-success" th:id="btn-new-ad"

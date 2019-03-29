@@ -5,41 +5,116 @@
 </head>
 <body>
     <div th:replace="partials/navbar :: navbar"></div>
-    <h1>Your Addresses</h1>
-    <form th:action="@{/profile/addresses}" th:method="post">
-        <div th:each="address, stat : ${user.addresses}">
-            <div>
-                <label>Street Address</label>
-                <input th:field="*{user.addresses[__${stat.index}__].streetAddr}"
-                       type="text"/>
-            </div>
-            <div>
-                <label>Apartment/Unit</label>
-                <input th:field="*{user.addresses[__${stat.index}__].subAddr}"
-                       type="text"/>
-            </div>
-            <div>
-                <label>Country</label>
-                <input th:field="*{user.addresses[__${stat.index}__].country}"
-                       type="text"/>
-            </div>
-            <div>
-                <label>City</label>
-                <input th:field="*{user.addresses[__${stat.index}__].city}"
-                       type="text"/>
-            </div>
-            <div>
-                <label>State</label>
-                <input th:field="*{user.addresses[__${stat.index}__].state}"
-                       type="text"/>
-            </div>
-            <div>
-                <label>Zip</label>
-                <input th:field="*{user.addresses[__${stat.index}__].zipcode}"
-                       type="text"/>
-            </div>
+    <div class="container">
+        <div class="row">
+            <h2>Your Addresses</h2>
         </div>
-        <button th:type="submit">Submit</button>
-    </form>
+        <form th:action="@{/profile/addresses}" th:method="post">
+            <div class="row">
+                <div class="col-lg-6 card">
+                    <h4>Billing Address</h4>
+                    <div>
+                        <label>Street Address</label>
+                        <input id="billing-streetAddr"
+                               name="billing-streetAddr"
+                               class="form-control"
+                               type="text"/>
+                    </div>
+                    <div>
+                        <label>Apartment/Unit</label>
+                        <input id="billing-subAddr"
+                                name="billing-subAddr"
+                               class="form-control"
+                               type="text"/>
+                    </div>
+                    <div>
+                        <label>Country</label>
+                        <input id="billing-country"
+                                name="billing-country"
+                               class="form-control"
+                               type="text"/>
+                    </div>
+                    <div>
+                        <label>City</label>
+                        <input id="billing-city"
+                                name="billing-city"
+                               class="form-control"
+                               type="text"/>
+                    </div>
+                    <div>
+                        <label>State</label>
+                        <input id="billing-state"
+                                name="billing-state"
+                               class="form-control"
+                               type="text"/>
+                    </div>
+                    <div>
+                        <label>Zipcode</label>
+                        <input id="billing-zipcode"
+                                name="billing-zipcode"
+                               class="form-control"
+                               type="text"/>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 card">
+                    <h4>Shipping Address</h4>
+                    <div>
+                        <label>Street Address</label>
+                        <input id="shipping-streetAddr"
+                                name="shipping-streetAddr"
+                               class="form-control"
+                               type="text"/>
+                    </div>
+                    <div>
+                        <label>Apartment/Unit</label>
+                        <input id="shipping-subAddr"
+                                name="shipping-subAddr"
+                               class="form-control"
+                               type="text"/>
+                    </div>
+                    <div>
+                        <label>Country</label>
+                        <input id="shipping-country"
+                                name="shipping-country"
+                               class="form-control"
+                               type="text"/>
+                    </div>
+                    <div>
+                        <label>City</label>
+                        <input id="shipping-city"
+                                name="shipping-city"
+                               class="form-control"
+                               type="text"/>
+                    </div>
+                    <div>
+                        <label>State</label>
+                        <input id="shipping-state"
+                                name="shipping-state"
+                               class="form-control"
+                               type="text"/>
+                    </div>
+                    <div>
+                        <label>Zipcode</label>
+                        <input id="shipping-zipcode"
+                                name="shipping-zipcode"
+                               class="form-control"
+                               type="text"/>
+                    </div>
+                    <div>
+                        <button type="submit" class="btn-primary btn-success">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script th:src="@{/js/jquery.js}"></script>
+    <script th:src="@{/js/addresses.js}"></script>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        const userId = /*[[${userId}]]*/ 0;
+        addresses(userId);
+        /*]]>*/
+    </script>
 </body>
 </html>
