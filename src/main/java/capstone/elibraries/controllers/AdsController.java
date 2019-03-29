@@ -10,6 +10,8 @@ import capstone.elibraries.models.*;
 import capstone.elibraries.error.*;
 import org.springframework.ui.Model;
 
+import javax.servlet.http.HttpServletRequest;
+
 
 @Controller
 public class AdsController {
@@ -43,21 +45,24 @@ public class AdsController {
     }
 
     @GetMapping("/ads/view={id}")
-    public String getOneAd(Model model, @PathVariable Long id) {
-        if ( adsDao.findByIdAndPendingIsTrue(id) != null) {
+    public String getOneAd(@PathVariable Long id, Model model) {
+
+        if (adsDao.findByIdAndPendingIsTrue(id) != null) {
             model.addAttribute("ad", adsDao.findByIdAndPendingIsTrue(id));
         } else {
-            return "ads/delete";
+            return "/ads/delete";
         }
+
         try {
-            model.addAttribute("user", getCurrentUser());
+            User current = getCurrentUser();
+            model.addAttribute("user", current);
+            return "ads/single";
         } catch (ValidationException e){
             model.addAttribute("error", e);
-            return "redirect:/error/validation";
-        } catch (Exception e){
-            // catch cast exception
+            return "/error/validation";
+        } catch (ClassCastException e){
+            return "ads/single";
         }
-        return "ads/single";
     }
 
     @GetMapping("/ads/create")
@@ -68,9 +73,7 @@ public class AdsController {
     }
 
     @PostMapping("/ads/create")
-    public String createAd(@ModelAttribute Ad ad, @ModelAttribute Book book, Model model)
-            throws AuthenticationException
-    {
+    public String createAd(@ModelAttribute Ad ad, @ModelAttribute Book book, Model model) {
         try{
             System.out.println(ad.toString());
             System.out.println(book.toString());
