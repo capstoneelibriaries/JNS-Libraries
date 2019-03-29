@@ -36,12 +36,13 @@
             </th:block>
             <th:block th:if="${!user.ads.isEmpty()}">
 
-                <div class="col-lg-3 col-md-4 col-6 mb-3 mt-1" th:each="ad:${user.ads}">
+                <div class="col-lg-3 col-md-4 col-6 mb-3 mt-1" th:each="ad:${user.ads}" th:if="${ad.pending}">
                     <!--d-block mb-4 h-100 img-thumbnail-->
                     <a th:href="@{/ads/view={id} (id=${ad.id})}" class="books module">
                         <h5 th:text="*{ad.adTitle}"></h5>
                         <th:block th:each="book:${ad.books}">
                             <img class="img-fluid" th:src="${book.imageUrl}" alt="book-image"/>
+                            <p th:text="${book.title}"></p>
                             <p th:text="${book.author}"></p>
                         </th:block>
                     </a>

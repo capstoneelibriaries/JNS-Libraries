@@ -22,6 +22,7 @@ INSERT into books (author, isbn, synopsis, title, wear, image_url)
 VALUES ("Harper Lee", "0060935464", "To Kill a Mockingbird takes place in the fictional town of Maycomb, Alabama, during the Great Depression. The
 protagonist is Jean Louise (“Scout”) Finch, an intelligent though unconventional girl who ages from six to nine years old during the course of the novel. She is raised with her brother, Jeremy Atticus (“Jem”), by their widowed father, Atticus Finch. He is a prominent lawyer who encourages his children to be empathetic and just. He notably tells them that it is “a sin to kill a mockingbird,” alluding to the fact that the birds are innocent and harmless.", "To Kill A Mocking Bird", 3, "https://covers.openlibrary.org/b/id/8410894-L.jpg"),
 
+
        ("Madeleine L''Engle", "0374386137",
         "Meg Murry and her little brother, Charles Wallace, have been without their scientist father, Mr. Murry, for five years, ever since he discovered a new planet and used the concept known as a tesseract to travel there. Joined by Meg''s classmate Calvin O''Keefe and guided by the three mysterious astral travelers known as Mrs. Whatsit, Mrs. Who and Mrs. Which, the children brave a dangerous journey to a planet that possesses all of the evil in the universe.", "A Wrinkle in Time", 2, "https://covers.openlibrary.org/b/id/7883940-L.jpg"),
 
@@ -72,7 +73,7 @@ VALUES
 ("Help", "I have all these books and no one to trade with.",8.89 ,1.78, true,1,true),
 ("Desperate for a trade", "Found this really old book in my attic, I'm looking for the original copy of spider-man if anyone has it?",10.99 ,3.78,
  true,1,true),
-("Can anyone help?", "Found this really old book in my attic, I'm looking for life of pi if anyone has it?",7.99 ,1.38, true,1,true),
+("Can anyone help?", "Found this really old book in my attic, I'm looking for life of pi if anyone has it?",7.99 ,1.38, true,2,true),
 ("Willing to trade 2 for 1", "Found this really old book in my attic, I'm looking for Of Mice and Men if anyone has it?",9.99 ,4.68, true,1,true),
 ("LOST", "I lost my favorite book two weeks ago, and I would love to trade some of my older books for the same book if anyone has a copy of The
 Internet For Dummies",33.99 ,6.72, true,1,true),
