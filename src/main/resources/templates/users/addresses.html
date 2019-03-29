@@ -11,85 +11,86 @@
         </div>
         <form th:action="@{/profile/addresses}" th:method="post">
             <div class="row">
-                <div class="col-lg-6 card" th:object="${billingAddress}">
+                <div class="col-lg-6 card">
                     <h4>Billing Address</h4>
                     <div>
                         <label>Street Address</label>
-                        <input th:field="*{streetAddr}"
+                        <input name="billing-streetAddr"
                                class="form-control"
                                type="text"/>
                     </div>
                     <div>
                         <label>Apartment/Unit</label>
-                        <input th:field="*{subAddr}"
+                        <input name="billing-subAddr"
                                class="form-control"
                                type="text"/>
                     </div>
                     <div>
                         <label>Country</label>
-                        <input th:field="*{country}"
+                        <input name="billing-country"
                                class="form-control"
                                type="text"/>
                     </div>
                     <div>
                         <label>City</label>
-                        <input th:field="*{city}"
+                        <input name="billing-city"
                                class="form-control"
                                type="text"/>
                     </div>
                     <div>
                         <label>State</label>
-                        <input th:field="*{state}"
+                        <input name="billing-state"
                                class="form-control"
                                type="text"/>
                     </div>
                     <div>
-                        <label>Zip</label>
-                        <input th:field="*{zipcode}"
+                        <label>Zipcode</label>
+                        <input name="billing-zipcode"
                                class="form-control"
                                type="text"/>
                     </div>
                 </div>
-                <div class="col-lg-6 card" th:object="${shippingAddress}">
+
+                <div class="col-lg-6 card">
                     <h4>Shipping Address</h4>
                     <div>
                         <label>Street Address</label>
-                        <input th:field="*{streetAddr}"
+                        <input name="shipping-streetAddr"
                                class="form-control"
                                type="text"/>
                     </div>
                     <div>
                         <label>Apartment/Unit</label>
-                        <input th:field="*{subAddr}"
+                        <input name="shipping-subAddr"
                                class="form-control"
                                type="text"/>
                     </div>
                     <div>
                         <label>Country</label>
-                        <input th:field="*{country}"
+                        <input name="shipping-country"
                                class="form-control"
                                type="text"/>
                     </div>
                     <div>
                         <label>City</label>
-                        <input th:field="*{city}"
+                        <input name="shipping-city"
                                class="form-control"
                                type="text"/>
                     </div>
                     <div>
                         <label>State</label>
-                        <input th:field="*{state}"
+                        <input name="shipping-state"
                                class="form-control"
                                type="text"/>
                     </div>
                     <div>
-                        <label>Zip</label>
-                        <input th:field="*{zipcode}"
+                        <label>Zipcode</label>
+                        <input name="shipping-zipcode"
                                class="form-control"
                                type="text"/>
                     </div>
                     <div>
-                        <button th:type="submit" class="btn-success btn-primary">Submit</button>
+                        <button type="submit" class="btn-primary btn-success">Submit</button>
                     </div>
                 </div>
             </div>

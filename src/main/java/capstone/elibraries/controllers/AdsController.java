@@ -50,7 +50,7 @@ public class AdsController {
         if (adsDao.findByIdAndPendingIsTrue(id) != null) {
             model.addAttribute("ad", adsDao.findByIdAndPendingIsTrue(id));
         } else {
-            return "/ads/delete";
+            return "ads/delete";
         }
 
         try {

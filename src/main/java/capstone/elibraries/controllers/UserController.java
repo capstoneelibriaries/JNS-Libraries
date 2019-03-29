@@ -15,6 +15,7 @@ import capstone.elibraries.repositories.Users;
 import capstone.elibraries.models.User;
 import org.springframework.ui.Model;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.Date;
 import java.sql.Timestamp;
@@ -62,39 +63,32 @@ public class UserController {
 
     @GetMapping("/profile/addresses")
     public String getAddress(Model model) {
-        User curUser = this.getCurrentUser();
-        try {
+        User current = this.getCurrentUser();
 
-        } catch(UnknownError e) {
-
+        if(current.getAddresses() == null){
+            List<Address> addr = new ArrayList<>(2);
+            addr.add(new Address());
+            addr.add(new Address());
+            current.setAddresses(addr);
         }
-        Address shippingAddress = new Address();
-        Address billingAddress = new Address();
-        model.addAttribute("shippingAddress", shippingAddress);
-        model.addAttribute("billingAddress", billingAddress);
+
+        model.addAttribute("user", current);
         return "/users/addresses";
     }
 
     @PostMapping("/profile/addresses")
-    public String postAddress(@ModelAttribute Address shippingAddress, @ModelAttribute Address billingAddress){
+    public String postAddress(HttpServletRequest req){
         User current = getCurrentUser();
 
         List<Address> addr = new ArrayList<>(2);
-        billingAddress.setBilling(true);
-        shippingAddress.setBilling(false);
-        addr.add(billingAddress);
-        addr.add(shippingAddress);
+        addr.add(new Address(req, "billing"));
+        addr.add(new Address(req, "shipping"));
+        current.setAddresses(addr);
 
-        current.setAddress(addr);
-        users.save(current);
+        this.addrRepo.save(addr.get(0));
+        this.addrRepo.save(addr.get(1));
 
-//        shippingAddress.setBilling(false);
-//        shippingAddress.setUser(current);
-//        billingAddress.setBilling(true);
-//        billingAddress.setUser(current);
-//        this.addrRepo.save(shippingAddress);
-//        this.addrRepo.save(billingAddress);
-        return "redirect:/users/profile";
+        return "redirect:/profile";
     }
 
     @GetMapping("/profile/transactions")

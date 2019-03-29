@@ -45,7 +45,7 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "seller")
     private List<Ad> ads;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Address> addresses;
 
     @Transient
@@ -130,22 +130,32 @@ public class User {
         return ads;
     }
 
-    public List<Address> getAddress(){
+    public List<Address> getAddresses(){
         return addresses;
     }
 
     public Address getBillingAddress(){
-        try{
-            return addresses.get(0);
-        }catch(Exception e){
+        if(this.addresses == null){
+            return null;
+        }else{
+            for(Address addr : this.addresses){
+                if(addr.isBilling()){
+                    return addr;
+                }
+            }
             return null;
         }
     }
 
     public Address getShippingAddress(){
-        try{
-            return addresses.get(1);
-        }catch(Exception e){
+        if(this.addresses == null){
+            return null;
+        }else{
+            for(Address addr : this.addresses){
+                if(!addr.isBilling()){
+                    return addr;
+                }
+            }
             return null;
         }
     }
@@ -226,7 +236,7 @@ public class User {
         this.ads = ads;
     }
 
-    public void setAddress(List<Address> address){
+    public void setAddresses(List<Address> address){
         if(this.addresses == null){
             this.addresses = new ArrayList<>(2);
         }

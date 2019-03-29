@@ -1,13 +1,14 @@
 package capstone.elibraries.models;
 
 import javax.persistence.*;
+import javax.servlet.http.HttpServletRequest;
 
 @Entity @Table(name = "addresses")
 public class Address {
 
     @Id @GeneratedValue
     private long id;
-    @ManyToOne @JoinColumn(name = "addresses")
+    @ManyToOne @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     @Column
@@ -27,6 +28,18 @@ public class Address {
 
     public Address(){
         // default
+    }
+
+    public Address(HttpServletRequest req, String name){
+        this.streetAddr = req.getParameter(String.format("%s-streetAddr", name));
+        this.subAddr = req.getParameter(String.format("%s-subAddr", name));
+        this.country = req.getParameter(String.format("%s-country", name));
+        this.city = req.getParameter(String.format("%s-city", name));
+        this.state = req.getParameter(String.format("%s-state", name));
+        this.zipcode = req.getParameter(String.format("%s-zipcode", name));
+        if(name.equals("billing")){
+            this.billing = true;
+        }
     }
 
     public long getId() {
