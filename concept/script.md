@@ -6,12 +6,12 @@ going to present to you our application, *E-Libraries*.
 #### About
 
 E-libraries is an online book store that enables users to trade used books. This application is constructed with **Spring
-Boot**, **Thymeleaf**, **Modern Javascript**, and it is styled with **Bootstrap**. It leverages the **OpenLibrary API**,
+Boot**, **Thymeleaf**, **Modern Javascript**, and it is styled with **Bootstrap**. It leverages the **OpenLibrary API**
 and other technologies that we will explore throughout this presentation.
 
 #### Registration
 
-First, let's register as a new *Bob*. All of the forms in this application are locked down with **HTML5** attributes. Our 
+First, let's register as a new user, *Bob*. All of the forms in this application are locked down with **HTML5** attributes. Our 
 use of **HTML5** balances both security and a low memory footprint. The fields you see, are bound to the many **Java**
 *models* on the *backend*. When any of these forms are submitted, **Spring** automatically constructs the bound model.
 
@@ -23,7 +23,8 @@ profile page.
 #### Profile Page
 
 Upon navigating to the *profile page*, we will see all the users book listings. Right now, we don't have any listings 
-because we're a new user. So, let's go ahead and create a new Ad and see how the transactions take place.
+because we're a new user. So, let's go ahead and create a new Ad and see how the transactions take place. Now, James is going to walk you through 
+some additional features.
 
 <br>
 
@@ -34,6 +35,8 @@ because we're a new user. So, let's go ahead and create a new Ad and see how the
 Upon logging in, we are greeted by the profile page where our ads are listed. First, let's list a new ad. In order to do
 this we'll need a title for the ad, a description, a value we believe our books are worth, a shipping value, and finally
 a book. 
+
+**ISNB to be used in the presentation: 0140177396**
 
 For the book itself, we only need to enter the ISBN. The reason for this is because I was able to automate the form
 creation by writing an autofill feature in JavaScript. The Javascript performs an AJAX request that queries the
@@ -56,8 +59,8 @@ can attempt to trade some of our books for this one. Nathaniel will walk us thro
 
 ## Transactions
 
-Thank you James, hello everyone, I'm Nathaniel and I will walk us through the process of performing a trade. We'll clikc 
-the **offer trade button**, which is only visible because of our **Spring Security Model**. If we weren't logged in, this
+Thank you James, hello everyone, I'm Nathaniel and I will walk us through the process of performing a trade. We'll click 
+the **offer trade button**, which is only visible because of our **Spring Security Model**. If we were not logged in, this
 button would not be available. 
 
 We're now taken to the trade page. On the left side, we have the owner of the ad and on the right side we have our ads
@@ -75,7 +78,7 @@ Upon logging in, we'll navigate to *My Trade Reqeusts*, where we can see a list 
 I constructed this using **Hibernate** and *form-model-binding*.
 
 Let's confirm the trade request. Behind the scenes the *pending* status of the trade request is terminated. A *transaction
-object is genrated*, which contains references to the trade request, the users involved, and the time of the trade. The
+object is generated*, which contains references to the trade request, the users involved, and the time of the trade. The
 transaction is saved to the database.
 
 #### Completing the Trades
