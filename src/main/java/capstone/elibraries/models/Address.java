@@ -1,14 +1,16 @@
 package capstone.elibraries.models;
 
 import javax.persistence.*;
+import javax.servlet.http.HttpServletRequest;
 
 @Entity @Table(name = "addresses")
 public class Address {
 
     @Id @GeneratedValue
     private long id;
-    @ManyToOne @JoinColumn(name = "addresses")
+    @ManyToOne @JoinColumn(name = "user_id", nullable = false)
     private User user;
+
     @Column
     private boolean billing;
     @Column
@@ -26,6 +28,18 @@ public class Address {
 
     public Address(){
         // default
+    }
+
+    public Address(HttpServletRequest req, String name){
+        this.streetAddr = req.getParameter(String.format("%s-streetAddr", name));
+        this.subAddr = req.getParameter(String.format("%s-subAddr", name));
+        this.country = req.getParameter(String.format("%s-country", name));
+        this.city = req.getParameter(String.format("%s-city", name));
+        this.state = req.getParameter(String.format("%s-state", name));
+        this.zipcode = req.getParameter(String.format("%s-zipcode", name));
+        if(name.equals("billing")){
+            this.billing = true;
+        }
     }
 
     public long getId() {
@@ -112,6 +126,29 @@ public class Address {
                 "\tstate:" + state + "\n" +
                 "\tzipcode:" + zipcode + "\n" +
                 "}";
+    }
+
+    public String toJson(){
+        this.streetAddr = (this.streetAddr == null) ? "" : this.streetAddr;
+        this.subAddr = (this.subAddr == null) ? "" : this.subAddr;
+        this.country = (this.streetAddr == null) ? "" : this.streetAddr;
+        this.city = (this.city == null) ? "" : this.city;
+        this.state = (this.state == null) ? "" : this.state;
+        this.zipcode = (this.zipcode == null) ? "" : this.zipcode;
+
+        return String.format("{" +
+                "\"id\":\"%s\"," +
+                "\"user\":\"%s\"," +
+                "\"billing\":\"%s\"," +
+                "\"address1\":\"%s\"," +
+                "\"address2\":\"%s\"," +
+                "\"country\":\"%s\"," +
+                "\"city\":\"%s\"," +
+                "\"state\":\"%s\"," +
+                "\"zipcode\":\"%s\"" +
+                "}", this.id, this.user.getId(),
+                this.billing, this.streetAddr, this.subAddr,
+                this.country, this.city, this.state, this.zipcode);
     }
 
 }

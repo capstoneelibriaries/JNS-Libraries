@@ -7,6 +7,7 @@ import capstone.elibraries.models.Transaction;
 import capstone.elibraries.repositories.TradeRequests;
 import capstone.elibraries.repositories.Transactions;
 import capstone.elibraries.repositories.Addresses;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,7 @@ import capstone.elibraries.repositories.Users;
 import capstone.elibraries.models.User;
 import org.springframework.ui.Model;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.Date;
 import java.sql.Timestamp;
@@ -26,14 +28,14 @@ public class UserController {
     private Users users;
     private PasswordEncoder passwordEncoder;
     private TradeRequests trades;
-    private Addresses addresses;
+    private Addresses addrRepo;
     private Transactions transactions;
 
     public UserController(Users users, PasswordEncoder passwordEncoder, TradeRequests trades, Addresses addresses, Transactions transactions) {
         this.users = users;
         this.passwordEncoder = passwordEncoder;
         this.trades = trades;
-        this.addresses = addresses;
+        this.addrRepo = addresses;
         this.transactions = transactions;
     }
 
@@ -62,32 +64,42 @@ public class UserController {
 
     @GetMapping("/profile/addresses")
     public String getAddress(Model model) {
-        User user = getCurrentUser();
+        User current = this.getCurrentUser();
 
-        try {
-            if(user.getAddresses() == null || user.getAddresses().size() == 0) {
-                user.addAddress(new Address());
-            }
-            model.addAttribute("user", user);
-            return "users/addresses";
-        }catch(ValidationException e){
-            model.addAttribute("error", e);
-            return "redirect:/error/validation";
+        model.addAttribute("userId", current.getId());
+        return "/users/addresses";
+    }
+
+    @GetMapping("/profile/addresses/{userId}")
+    @ResponseBody
+    public String getAddressByUserId(@PathVariable long userId){
+        User current = getCurrentUser();
+        if(current.getId() != userId){
+            return String.format("%s", HttpStatus.FORBIDDEN);
         }
+
+        Address billing = current.getBillingAddress();
+        Address shipping = current.getShippingAddress();
+
+        billing = (billing == null) ? new Address() : billing;
+        shipping = (shipping == null) ? new Address() : shipping;
+
+        return String.format("[%s,%s]", billing.toJson(), shipping.toJson());
     }
 
     @PostMapping("/profile/addresses")
-    public String setAddress(@ModelAttribute User userAddr, Model model) {
-        User user = getCurrentUser();
+    public String postAddress(HttpServletRequest req){
+        User current = getCurrentUser();
 
-        try {
-            user.setAddresses(userAddr.getAddresses());
-            users.save(user);
-            return "redirect:users/profile";
-        }catch(ValidationException e){
-            model.addAttribute("error", e);
-            return "redirect:/error/validation";
-        }
+        List<Address> addr = new ArrayList<>(2);
+        addr.add(new Address(req, "billing"));
+        addr.add(new Address(req, "shipping"));
+        current.setAddresses(addr);
+
+        this.addrRepo.save(addr.get(0));
+        this.addrRepo.save(addr.get(1));
+
+        return "redirect:/profile";
     }
 
     @GetMapping("/profile/transactions")
@@ -140,7 +152,7 @@ public class UserController {
                 user.setPassword(hash);
                 user.setConfirmPassword("");
                 users.save(user);
-                return "redirect:/login";
+                return "redirect:/login?success";
             }else{
                 return "redirect:/register?error";
             }

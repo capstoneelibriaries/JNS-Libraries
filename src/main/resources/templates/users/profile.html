@@ -1,25 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
-    <link th:replace="partials/header :: header('Profile')"/>
+    <link th:replace="partials/header :: header('My Books')"/>
     <style>
         body {
             background: #233D4D;
             background: linear-gradient(to right, #233D4D, #619B8A);
         }
-        .profile-header{
-            color: lightgrey;
-        }
-        .books{
-            color: white;
-        }
-        a{
-            color: white;
-        }
-        .book-cover{
-            height: 400px;
-            width: 300px;
-        }
+
+
         .row{
             height: 500px;
         }
@@ -40,7 +29,7 @@
             <th:block th:if="${user.ads.isEmpty()}">
                 <div class="offset-lg-3 col-lg-6  offset-md-3 col-md-6 col-sm-12">
                     <div class="card text-center">
-                        <h4> No ads have been created.</h4>
+                        <h4> No trades have been created.</h4>
                     </div>
                 </div>
             </th:block>
@@ -82,12 +71,6 @@
             </th:block>
         </div>
     </div>
-    <!--<th:block th:each="book:${ad.books}">
-                            <img class="img-fluid book-cover" th:src="${book.imageUrl}" alt="book-image"/>
-                            <p th:text="${book.title}"></p>
-                            <p th:text="${book.author}"></p>
-
-                        </th:block>-->
 </div>
 </body>
 </html>
