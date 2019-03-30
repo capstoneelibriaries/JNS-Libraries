@@ -3,45 +3,15 @@
 <head>
     <link th:replace="partials/header :: header('About Us')"/>
     <style>
-        body {
-            background: #233D4D;
-            background: linear-gradient(to right, #233D4D, #619B8A);
-        }
 
-        .btn-primary {
-            color: #fff;
-            background-color: #233D4D;
-            border-color: #233D4D;
-        }
-
-        .search {
-            color: white;
-            background-color: #FCCA46;
-            border-color: black;
-        }
-
-        .img {
-            height: 250px;
-            width: 250px;
-        }
 
         .bg {
             border: .25rem solid #f8f9fa;
             background-color: #f8f9fa;
-
         }
-         .bg-color {
-             background-color: #f8f9fa;
-             padding: 0 .5em .5em .5em;
-             width: 250px;
-         }
 
         a {
             color: black;
-        }
-
-        .heading {
-            color: whitesmoke;
         }
 
     </style>
@@ -57,6 +27,7 @@
                         <img class="rounded img-fluid" th:src="@{/images/James.jpg}"/>
                         <h3 class="text-center">James <br/> Meyer</h3>
                         <p class="text-center">Software Developer</p>
+                        <a class="text-center" th:href="@{https://alumni.codeup.com/students/592}"><i class="fas fa-user-tie"></i> Codeup</a>
                         <a class="text-center" th:href="@{https://github.com/jamesjmeyer210}"><i class="fab fa-github"></i> GitHub</a>
                         <a class="text-center" th:href="@{https://www.linkedin.com/in/james-j-meyer/}"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
                     </div>
@@ -68,9 +39,9 @@
                         <img class="rounded img-fluid" th:src="@{/images/Nathaniel.jpg}"/>
                         <h3 class="text-center">Nathaniel <br/> Gumbs</h3>
                         <p class="text-center">Software Developer</p>
+                        <a class="text-center" th:href="@{https://alumni.codeup.com/students/610}"><i class="fas fa-user-tie"></i> Codeup</a>
                         <a class="text-center" th:href="@{https://github.com/ngumbs37}"><i class="fab fa-github"></i> GitHub</a>
-                        <a class="text-center" th:href="@{https://www.linkedin.com/in/nathaniel-gumbs/}"><i class="fab fa-linkedin-in"></i>
-                            LinkedIn</a>
+                        <a class="text-center" th:href="@{https://www.linkedin.com/in/nathaniel-gumbs/}"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
                     </div>
                 </div>
             </div>
@@ -80,16 +51,13 @@
                         <img class="rounded img-fluid" th:src="@{/images/Samuel.jpg}"/>
                         <h3 class="text-center">Sam <br/> Rodriguez</h3>
                         <p class="text-center">Software Developer</p>
+                        <a class="text-center" th:href="@{https://alumni.codeup.com/students/594}"><i class="fas fa-user-tie"></i> Codeup</a>
                         <a class="text-center" th:href="@{https://github.com/samrooodriguez}"><i class="fab fa-github"></i> GitHub</a>
-                        <a class="text-center" th:href="@{https://www.linkedin.com/in/oscar-sam-rodriguez/}"><i class="fab fa-linkedin-in"></i>
-                            LinkedIn</a>
-
+                        <a class="text-center" th:href="@{https://www.linkedin.com/in/oscar-sam-rodriguez/}"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<footer th:replace="partials/footer :: footer"></footer>
 </body>
 </html>

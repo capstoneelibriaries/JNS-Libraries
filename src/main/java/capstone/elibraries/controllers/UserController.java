@@ -152,7 +152,7 @@ public class UserController {
                 user.setPassword(hash);
                 user.setConfirmPassword("");
                 users.save(user);
-                return "redirect:/login";
+                return "redirect:/login?success";
             }else{
                 return "redirect:/register?error";
             }

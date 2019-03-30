@@ -17,26 +17,34 @@
             background-color: #FCCA46;
             border-color: black;
         }
+        .form-label-group>label{
+            z-index: 10;
+            width: 50%
+        }
+        #custom-select{
+            border-radius: 0 2em 2em 0;
+            padding: .375rem 1.75rem .375rem .75rem;
+        }
     </style>
 </head>
 <body>
     <div th:replace="partials/navbar :: navbar"></div>
-    <div class="container">
+    <div class="container mt-5">
         <div class="row">
             <div class="col-lg-10 col-xl-9 mx-auto">
                 <div class="card card-signin flex-row my-5">
                     <div class="card-body">
                         <div>
-                            <h1 class="card-title text-center"><i class="fas fa-globe-americas"></i></h1>
+                            <h1 class="card-title text-center"><i class="fas fa-globe-americas"></i> Welcome to E-Libraries</h1>
                         </div>
-                        <label for="adSearch"></label>
                         <form id="adSearch" class="form-signin" th:action="@{/search}" th:method="get">
                             <div class="form-label-group">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" th:required="required" th:placeholder="Search..." name="q"/>
+                                <div class="input-group form-label-group">
+                                    <input type="text" class="form-control" id="search" th:required="required" placeholder="Search..." name="q"/>
+                                    <label for="search">Search</label>
                                     <div class="input-group-append">
-                                        <select class="custom-select" th:name="option">
-                                            <option th:value="ads">Ads</option>
+                                        <select class="custom-select" id="custom-select" th:name="option">
+                                            <option th:value="ads">Trades</option>
                                             <option th:value="books">Books</option>
                                         </select>
                                     </div>
@@ -45,7 +53,7 @@
                             <br/>
                             <div class="form-label-group">
                                 <button class="btn btn-lg btn-primary btn-block text-uppercase search"
-                                        th:type="submit"><i class="fas fa-search"></i>
+                                        th:type="submit">Search <i class="fas fa-search"></i>
                                 </button>
                             </div>
                         </form>
