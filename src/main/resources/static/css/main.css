@@ -151,7 +151,10 @@ label:focus, input:focus  {
     max-height: 4em;
     max-width: 8em;
 }
-
+.img{
+    height: 375px;
+    width: 250px;
+}
 .img-thumbnail{
     background-color: #ffffff80;
     border: 1px solid #79797938;
@@ -188,10 +191,22 @@ a:hover {
     color: white;
     text-decoration: none;
 }
-
+.brief{
+    max-width: 80%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.book-title{
+    height: 2.5em;
+}
 @media screen and (max-width: 768px) {
     #trade  {
         transform: rotate(90deg);
         margin: 2em auto;
+    }
+    .img {
+        height: 0%;
+        width: 70%;
     }
 }
