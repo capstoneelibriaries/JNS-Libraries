@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
-    <link th:replace="partials/header :: header('Create Ad')"/>
+    <link th:replace="partials/header :: header('New Trade Request')"/>
     <style>
         body {
             background: #233D4D;
@@ -29,7 +29,7 @@
 <body>
 <div th:replace="partials/navbar :: navbar"></div>
 
-<h1 class="text-center mt-3" style="color: whitesmoke">Create a new listing</h1>
+<h1 class="text-center mt-3" style="color: whitesmoke">Create A New Trade Request</h1>
 <div th:id="create-ad" class="container">
     <div class="row">
         <div class="col-lg-10 col-xl-9 mx-auto">
@@ -38,6 +38,7 @@
                 <form th:method="post" th:action="@{/ads/create}" class="form-signin">
                     <div th:object="${ad}">
                         <div>
+                            <h2 class="text-center mt-2">Trade Information</h2>
                             <div class="form-label-group">
                                 <input th:field="*{adTitle}"
                                        th:id="ad-title"
@@ -151,7 +152,7 @@
                     <!-- A new book the user can add to the list of books -->
                     <hr/>
                     <div th:object="${newbook}">
-                        <h1 class="text-center mt-2">Book information</h1>
+                        <h2 class="text-center mt-2">Book Information</h2>
                         <h6 class="text-center">Enter a valid ISBN</h6>
                         <div class="form-label-group">
                             <input th:field="*{isbn}"
@@ -195,12 +196,14 @@
                             <label for="book-synopsis">Synopsis</label>
                         </div>
                         <div class="form-label-group">
-                            <input th:field="*{wear}"
-                                   id="book-wear"
-                                   type="number" th:min="1" th:max="5" step="1"
-                                   required="required"
-                                   class="form-control"
-                                   placeholder="Condition"/>
+                            <select class="form-control" required="required" id="book-wear" th:field="*{wear}">
+                                <option th:value="0" selected="selected" disabled="disabled" hidden="hidden"></option>
+                                <option th:value="5">Like New</option>
+                                <option th:value="4">Good</option>
+                                <option th:value="3">Fair</option>
+                                <option th:value="2">Poor</option>
+                                <option th:value="1">Very Poor</option>
+                            </select>
                             <label for="book-wear">Condition</label>
                         </div>
                         <div class="form-label-group">
@@ -212,7 +215,7 @@
                                    hidden="hidden"
                                    class="form-control"
                                    placeholder="Image"/>
-                            <label for="book-image">Image</label>
+                            <label for="book-image" hidden="hidden">Image</label>
                         </div>
                     </div>
                     <hr/>
@@ -224,7 +227,7 @@
                     </button>
                     <button class="btn-primary btn-success mb-3" th:id="btn-new-ad"
                             type="submit"
-                            disabled="disabled"><i class="fas fa-plus"></i> Create New Ad
+                            disabled="disabled"><i class="fas fa-plus"></i> Create New Trade
                     </button>
 
                 </form>
