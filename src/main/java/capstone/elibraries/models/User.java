@@ -71,7 +71,12 @@ public class User {
         this.transactions = copy.transactions;
     }
 
-    public User(boolean isAdmin, String username, String email, String password, String phone, double rating, List<Ad> ads, List<Address> addresses, List<Transaction> transactions) {
+    public User(boolean isAdmin,
+                String username, String email, String password, String phone,
+                double rating, List<Ad> ads,
+                List<Address> address,
+                List<Transaction> transactions)
+    {
         this.isAdmin = isAdmin;
         this.username = username;
         this.email = email;
@@ -79,7 +84,7 @@ public class User {
         this.phone = phone;
         this.rating = rating;
         this.ads = ads;
-        this.addresses = addresses;
+        this.addresses = address;
         this.transactions = transactions;
     }
 
@@ -125,8 +130,34 @@ public class User {
         return ads;
     }
 
-    public List<Address> getAddresses() {
+    public List<Address> getAddresses(){
         return addresses;
+    }
+
+    public Address getBillingAddress(){
+        if(this.addresses == null){
+            return null;
+        }else{
+            for(Address addr : this.addresses){
+                if(addr.isBilling()){
+                    return addr;
+                }
+            }
+            return null;
+        }
+    }
+
+    public Address getShippingAddress(){
+        if(this.addresses == null){
+            return null;
+        }else{
+            for(Address addr : this.addresses){
+                if(!addr.isBilling()){
+                    return addr;
+                }
+            }
+            return null;
+        }
     }
 
     public void setId(long id) throws ValidationException{
@@ -205,27 +236,15 @@ public class User {
         this.ads = ads;
     }
 
-    public void setAddresses(List<Address> addresses) throws ValidationException {
-
-        isvalid = Validator.checkNotNull(addresses);
-        if(isvalid != null){
-            throw isvalid;
-        }
-
-        this.addresses = addresses;
-    }
-
-    public void addAddress(Address address) throws ValidationException {
-
-        isvalid = Validator.checkNotNull(address);
-        if(isvalid != null){
-            throw isvalid;
-        }
-
+    public void setAddresses(List<Address> address){
         if(this.addresses == null){
-            this.addresses = new ArrayList<>(1);
+            this.addresses = new ArrayList<>(2);
         }
-        this.addresses.add(address);
+
+        this.addresses = address;
+        for(Address addr : address){
+            addr.setUser(this);
+        }
     }
 
     public void addAd(Ad ad) throws ValidationException {
@@ -238,35 +257,11 @@ public class User {
         this.ads.add(ad);
     }
 
-    public void addTransaction(Transaction trn) throws ValidationException {
-
-        isvalid = Validator.checkNotNull(trn);
-        if(isvalid != null){
-            throw isvalid;
-        }
-
+    public void addTransaction(Transaction trn) {
         if(this.transactions == null){
             this.transactions = new ArrayList<>(1);
         }
         this.transactions.add(trn);
     }
 
-//    public Admin toAdmin(){
-//        if(!this.isAdmin){
-//            return null;
-//        }else{
-//            return (Admin)this;
-//        }
-//    }
-
-//    public String toString(){
-//        return "{\n" +
-//                "\tusername:" + username + ",\n" +
-//                "\temail:" + email + ",\n" +
-//                "\tphone:" + phone + ",\n" +
-//                "\tpassword:" + password + ",\n" +
-//                "\trating:" + rating + ",\n" +
-//                "\tads:" + ads.toString() + ",\n" +
-//                "}";
-//    }
 }
