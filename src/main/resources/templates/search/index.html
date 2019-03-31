@@ -6,11 +6,19 @@
         body {
             color: lightgrey;
         }
+        a:hover {
+            color: white !important;
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
 <div th:replace="partials/navbar :: navbar"></div>
+
 <div class="container mt-3">
+    <div class="my-3">
+        <a onclick="window.history.back()"><i class="fas fa-arrow-left"></i> Go Back</a>
+    </div>
     <div class="row" th:if="${ads.size() == 0}">
         <div class="p-3 bg-light text-dark">
             <p>The search came up empty!</p>

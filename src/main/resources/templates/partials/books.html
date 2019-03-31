@@ -7,13 +7,27 @@
 <body>
 
     <th:block th:each="book: ${listOfBooks}" th:fragment="trade-books(listOfBooks)">
-        <li class="border-bottom row p-3" >
-            <img class="col-4 my-2 trade-book-cover " th:src="@{${book.imageUrl}}" />
+        <ul class="list-unstyled">
+        <li class="border-bottom row p-3">
+            <img class="col-4 my-2 trade-book-cover " th:src="@{${book.imageUrl}}"/>
             <div class="col-7 mt-5">
                 <p th:text="${book.title} + ' by ' + ${book.author}"></p>
-                <p th:text="'Condition: '+ ${book.wear} + ' out of 5'"> </p>
+                <p th:text="'Condition: '+ ${book.wear} + ' out of 5'"></p>
             </div>
         </li>
+        </ul>
     </th:block>
+
+    <th:block th:each="book: ${listOfBooks}" th:fragment="trade(listOfBooks)">
+        <ul class="list-unstyled">
+            <li class="row">
+                <img class="col-5 my-2 trade-book-cover pl-0" th:src="@{${book.imageUrl}}"/>
+                <div class="col-5 mt-5 px-0">
+                    <p th:text="${book.title} + ' by ' + ${book.author}"></p>
+                </div>
+            </li>
+        </ul>
+    </th:block>
+
 </body>
 </html>

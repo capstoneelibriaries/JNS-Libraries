@@ -6,7 +6,6 @@
         body {
             background: #233D4D;
             background: linear-gradient(to right, #233D4D, #619B8A);
-            color: gray();
         }
 
         .btn-primary {
@@ -28,12 +27,15 @@
 </head>
 <body>
 <div th:replace="partials/navbar :: navbar"></div>
-
-<h1 class="text-center mt-3" style="color: whitesmoke">Create A New Trade Request</h1>
 <div th:id="create-ad" class="container">
+    <div class="my-3">
+        <a onclick="window.history.back()" href="#"><i class="fas fa-arrow-left"></i> Go Back</a>
+    </div>
+    <h1 class="heading">Create A New Trade Request</h1>
+    <hr class="mt-2 mb-5 w-100"/>
     <div class="row">
         <div class="col-lg-10 col-xl-9 mx-auto">
-            <div class="card card-signin flex-row my-5">
+            <div class="card card-signin flex-row mb-5">
                 <!-- The Ad portion of the form -->
                 <form th:method="post" th:action="@{/ads/create}" class="form-signin">
                     <div th:object="${ad}">

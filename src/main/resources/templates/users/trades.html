@@ -28,15 +28,11 @@
                         <div class="row">
                             <div class="offer col-lg-6 col-md-6 col-sm-12">
                                 <h5 class="text-center"><span th:text="*{from.username}" class="text-capitalize"></span> offers:</h5>
-                                <ul class="list-unstyled ">
-                                    <li th:replace="partials/books :: trade-books(*{wanted.books})"></li>
-                                </ul>
+                                    <ul th:replace="partials/books :: trade-books(*{wanted.books})"></ul>
                             </div>
                             <div class="yours col-lg-6 col-md-6 col-sm-12">
                                 <h5 class="text-center">In exchange for:</h5>
-                                <ul class="list-unstyled">
-                                    <li th:replace="partials/books :: trade-books(*{forSale.books})"></li>
-                                </ul>
+                                    <ul th:replace="partials/books :: trade-books(*{forSale.books})"></ul>
                             </div>
                         </div>
                         <form th:action="@{/profile/trades}" method="post">
