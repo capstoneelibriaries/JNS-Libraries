@@ -33,6 +33,7 @@
                     </div>
                 </div>
             </th:block>
+
             <th:block th:if="${!user.ads.isEmpty()}">
                 <div class="col-lg-3 col-md-4 col-6 mb-3 mt-1" th:each="ad:${user.ads}" th:if="${ad.pending}">
                     <a th:href="@{/ads/view={id} (id=${ad.id})}" class="books module">
@@ -43,6 +44,7 @@
 
                                 <!--<li data-target="#carouselExampleIndicators" data-slide-to="${index}" class="active"></li>-->
                                 <li th:attr="data-slide-to=${index}, data-target='#carouselExampleIndicators'" class="active"></li>
+                                <li data
 
                             </ol>
                             <div class="carousel-inner">
@@ -65,7 +67,7 @@
                                 <span class="sr-only">Next</span>
                             </a>
                         </div>
-
+123
                     </a>
                 </div>
             </th:block>
