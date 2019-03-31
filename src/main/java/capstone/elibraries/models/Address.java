@@ -114,18 +114,16 @@ public class Address {
         this.zipcode = zipcode;
     }
 
-    public String toString(){
-        return "{\n" +
-                "\tid:" + id + "\n" +
-                "\tuser:" + user.toString() + "\n" +
-                "\tbilling:" + billing + "\n" +
-                "\taddress1:" + streetAddr + "\n" +
-                "\taddress2:" + subAddr + "\n" +
-                "\tcountry:" + country + "\n" +
-                "\tcity:" + city + "\n" +
-                "\tstate:" + state + "\n" +
-                "\tzipcode:" + zipcode + "\n" +
-                "}";
+    public boolean isComplete(){
+        if(this.streetAddr == null || this.subAddr == null || this.country == null || this.city == null){
+            return false;
+        }else if(this.streetAddr.equals("") || this.country.equals("") || this.city.equals("")){
+            return false;
+        }else if(this.country.equals("United States") && (this.state.equals("") || this.zipcode.equals(""))){
+            return false;
+        }else{
+            return true;
+        }
     }
 
     public String toJson(){

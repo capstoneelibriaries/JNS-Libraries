@@ -221,6 +221,13 @@ public class User {
         this.transactions.add(trn);
     }
 
+    public boolean hasAddress(){
+        if(this.addresses == null || this.addresses.get(0) == null || this.addresses.get(1) == null){
+            return false;
+        }
+        return !(this.addresses.get(0).isComplete() && this.addresses.get(1).isComplete());
+    }
+
     public boolean equals(User other){
         return (this.id == other.id) &&
                 (this.username.equals(other.username)) &&
