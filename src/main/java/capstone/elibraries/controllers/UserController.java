@@ -1,6 +1,7 @@
 package capstone.elibraries.controllers;
 
 import capstone.elibraries.error.ValidationException;
+import capstone.elibraries.forms.UserSettings;
 import capstone.elibraries.models.Address;
 import capstone.elibraries.models.TradeRequest;
 import capstone.elibraries.models.Transaction;
@@ -66,20 +67,41 @@ public class UserController {
     public String getSettings(Model model){
         User current = this.getCurrentUser();
 
-        model.addAttribute("user", current);
+        model.addAttribute("setting", new UserSettings(current));
         return "/users/settings";
     }
 
     @PostMapping("/profile/settings")
-    public String postSettings(@ModelAttribute User user, Model model){
+    public String postSettings(@ModelAttribute UserSettings setting, Model model){
+        // get the current user
         User current = this.getCurrentUser();
-        current.setUsername(user.getUsername());
-        current.setEmail(user.getEmail());
-        current.setPhone(user.getPhone());
-        current.setPassword(user.getPassword());
+        User check = null;
 
-        model.addAttribute("user", current);
-        return "/users/settings";
+        // if the new password and the confirm password do not match
+        if(!setting.getNewpass().equals(setting.getConfnewpass())){
+            return "redirect:/profile/settings?mismatched";
+        }
+
+        check = users.findByUsername(setting.getUsername());
+
+        if(check != null && !check.equals(current)){
+            return "redirect:/profile/settings?username_taken";
+        }
+
+        check = users.findByEmail(setting.getEmail());
+
+        if(check != null && !check.equals(current)){
+            return "redirect:/profile/settings?email_taken";
+        }
+        // set the values of the current user
+        current.setUsername(setting.getUsername());
+        current.setEmail(setting.getEmail());
+        current.setPhone(setting.getPhone());
+        current.setPassword(passwordEncoder.encode(setting.getNewpass()));
+        // save the user to the database
+        this.users.save(current);
+        // redirect to the settings page with a success message
+        return "redirect:/profile/settings?success";
     }
 
     @GetMapping("/profile/addresses")
