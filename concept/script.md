@@ -70,25 +70,25 @@ users, then constructed models of the trades and displayed them, *iteratively* t
 We'll select the trade we just listed, and make offer. When this button is clicked, a *post* request is submitted, which builds 
 a *trade request object*, containing *references* to both users and trades, and is saved to the database via *Hibernate*.
 
-Now we'll log out and log in as the trade recipient to see how trade confirmation works.
+Now we'll log out of this user and log in as the trade recipient to see how trade confirmation works.
 
 #### Viewing Pending Trade Requests
 
 Upon logging in, we'll navigate to *My Trade Reqeusts*, where we can see a list of *pending* trade offers. Like before,
-I constructed this using **Hibernate** and *form-model-binding*.
+I constructed this using **Hibernate** and *form-model-binding* through **Thymeleaf**.
 
-Let's confirm the trade request. Behind the scenes the *pending* status of the trade request and trades are terminated. A *transaction
-object is generated*, which contains *references* to the trade request, the users involved, and the time of the confirmation . Then, 
-the transaction is saved to the database.
+Let's confirm the trade request. Behind the scenes the *pending* status of the trade request and trades are terminated. 
+A *transaction object is generated*, which contains *references* to the trade request, the users involved, and time of 
+confirmation. Then, the transaction is saved to the database.
 
 #### Completing the Trades
 
 All transactions can be viewed in *My Past Transactions*. This page displays all of the transactions belonging to this user
-that have taken place and contains information on which books were exchanged with whom, as well as a shipping 
-address to send the books to.
+and contains information on which books were exchanged with whom, as well as a shipping address to send the books to.
 
 <br>
 
 ## Conclusion
 
-Are you looking for a place to trade used books and expand your literary horizons, consider E-Libraries. If you'd like to know more about our site's additional features or the build process, like how we implemented **JUnit**, come see us at table X.
+Are you looking for a place to trade used books and expand your literary horizons, consider E-Libraries. If you'd like to know
+more about our site's additional features or the build process, like how we implemented **JUnit** testing, come see us at table X.
