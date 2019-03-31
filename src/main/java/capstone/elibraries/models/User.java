@@ -160,12 +160,7 @@ public class User {
         }
     }
 
-    public void setId(long id) throws ValidationException{
-        isvalid = Validator.checkId(id);
-        if(isvalid != null){
-            throw isvalid;
-        }
-
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -173,52 +168,23 @@ public class User {
         this.isAdmin = val;
     }
 
-    public void setUsername(String username) throws ValidationException{
-
-        isvalid = Validator.checkNotNull(username);
-        if(isvalid != null){
-            throw isvalid;
-        }
+    public void setUsername(String username){
         this.username = username;
     }
 
-    public void setEmail(String email) throws ValidationException{
-
-        isvalid = Validator.checkNotNull(email);
-        if(isvalid != null){
-            throw isvalid;
-        }
-
+    public void setEmail(String email){
         this.email = email;
     }
 
-    public void setPhone(String phone) throws ValidationException {
-
-        isvalid = Validator.checkNotNull(phone);
-        if(isvalid != null){
-            throw isvalid;
-        }
-
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
-    public void setPassword(String password) throws ValidationException {
-
-        isvalid = Validator.checkNotNull(password);
-        if(isvalid != null){
-            throw isvalid;
-        }
-
+    public void setPassword(String password) {
         this.password = password;
     }
 
-    public void setConfirmPassword(String confirmPassword) throws ValidationException {
-
-        isvalid = Validator.checkNotNull(confirmPassword);
-        if(isvalid != null){
-            throw isvalid;
-        }
-
+    public void setConfirmPassword(String confirmPassword) {
         this.confirmPassword = confirmPassword;
     }
 
@@ -226,13 +192,7 @@ public class User {
         this.rating = rating;
     }
 
-    public void setAds(List<Ad> ads) throws ValidationException {
-
-        isvalid = Validator.checkNotNull(ads);
-        if(isvalid != null){
-            throw isvalid;
-        }
-
+    public void setAds(List<Ad> ads) {
         this.ads = ads;
     }
 
@@ -247,13 +207,10 @@ public class User {
         }
     }
 
-    public void addAd(Ad ad) throws ValidationException {
-
-        isvalid = Validator.checkNotNull(ad);
-        if(isvalid != null){
-            throw isvalid;
+    public void addAd(Ad ad) {
+        if(this.ads == null){
+            this.ads = new ArrayList<>(1);
         }
-
         this.ads.add(ad);
     }
 

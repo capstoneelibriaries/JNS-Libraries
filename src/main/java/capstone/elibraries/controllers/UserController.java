@@ -165,20 +165,15 @@ public class UserController {
 
     @PostMapping("/register")
     public String saveUser(@ModelAttribute User user, Model model) {
-        try{
-            if (user.getPassword().equals(user.getConfirmPassword())) {
 
-                String hash = passwordEncoder.encode(user.getPassword());
-                user.setPassword(hash);
-                user.setConfirmPassword("");
-                users.save(user);
-                return "redirect:/login?success";
-            }else{
-                return "redirect:/register?error";
-            }
-        }catch(ValidationException e){
-            model.addAttribute("error", e);
-            return "redirect:/error/validation";
+        if (user.getPassword().equals(user.getConfirmPassword())) {
+            String hash = passwordEncoder.encode(user.getPassword());
+            user.setPassword(hash);
+            user.setConfirmPassword("");
+            users.save(user);
+            return "redirect:/login?success";
+        }else{
+            return "redirect:/register?error";
         }
     }
 
