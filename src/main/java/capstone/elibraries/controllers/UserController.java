@@ -62,6 +62,26 @@ public class UserController {
         return "users/profile";
     }
 
+    @GetMapping("/profile/settings")
+    public String getSettings(Model model){
+        User current = this.getCurrentUser();
+
+        model.addAttribute("user", current);
+        return "/users/settings";
+    }
+
+    @PostMapping("/profile/settings")
+    public String postSettings(@ModelAttribute User user, Model model){
+        User current = this.getCurrentUser();
+        current.setUsername(user.getUsername());
+        current.setEmail(user.getEmail());
+        current.setPhone(user.getPhone());
+        current.setPassword(user.getPassword());
+
+        model.addAttribute("user", current);
+        return "/users/settings";
+    }
+
     @GetMapping("/profile/addresses")
     public String getAddress(Model model) {
         User current = this.getCurrentUser();
