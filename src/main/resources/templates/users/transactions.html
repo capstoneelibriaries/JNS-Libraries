@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <link th:replace="partials/header :: header('Transactions')"/>
+    <link th:replace="partials/header :: header('My Past Transactions')"/>
     <style>
         body {
             background: #233D4D;
             background: linear-gradient(to right, #233D4D, #619B8A);
-            color: gray();
+            color: gray;
         }
     </style>
 
@@ -17,19 +17,20 @@
 
     <div class="container mt-3">
         <div class="my-3">
-            <a th:href="@{/profile}" style="display: inline-block;"><i class="fas fa-arrow-left"></i>Back to Profile</a>
+            <a th:href="@{/profile}" ><i class="fas fa-arrow-left"></i> Back to Profile</a>
         </div>
-        <h1 style="color: whitesmoke">Transactions</h1>
+        <h1 class="heading">My Past Transactions</h1>
+        <hr class="mt-2 mb-5"/>
         <th:block th:if="${!transactions.isEmpty()}">
             <div class="row" th:each="transaction:${transactions}">
                 <div class="col-12 mx-auto">
                     <div class="card" th:object="${transaction}">
                         <div class="row">
                             <div class="offer col-lg-6 col-md-6 col-sm-12">
-                                <h5 class="text-left" th:if="${!user.id == transaction.buyer.id}">Book trade with <span th:text="*{buyer.username}"
+                                <h5 class="text-left" th:if="${!(user.id == transaction.buyer.id)}">Book trade with <span th:text="*{buyer.username}"
                                                                                                                         class="text-capitalize"></span>
                                 </h5>
-                                <h5 class="text-left" th:if="${!user.id == transaction.seller.id}">Book trade with <span th:text="*{seller.username}"
+                                <h5 class="text-left" th:if="${!(user.id == transaction.seller.id)}">Book trade with <span th:text="*{seller.username}"
                                                                                                                          class="text-capitalize"></span>
                                 </h5>
                                 <p th:text="*{date}">Trade Status: <span class="completed">Completed</span></p>
@@ -56,7 +57,7 @@
             <div>
                 <div class="offset-lg-3 col-lg-6">
                     <div class="card text-center">
-                        <h4> There no transactions to display.</h4>
+                        <h4>No transactions to display.</h4>
                     </div>
                 </div>
             </div>

@@ -17,7 +17,7 @@ public class Book {
     private String title;
     @Column
     private String author;
-    @Column (length = 3000)
+    @Column (length = 4096)
     private String synopsis;
     @Column
     private String isbn;

@@ -3,65 +3,61 @@
 <head>
     <link th:replace="partials/header :: header('About Us')"/>
     <style>
-        body {
-            background: #619B8A;
-            background: linear-gradient(to right, #619B8A, #A1C181);
-        }
-        .btn-primary {
-            color: #fff;
-            background-color: #233D4D;
-            border-color: #233D4D;
-        }
-        .search {
-            color: white;
-            background-color: #FCCA46;
-            border-color: black;
-        }
-        .img{
-            height: 250px;
-            width: 250px;
-        }
-        .bg{
+
+
+        .bg {
             border: .25rem solid #f8f9fa;
             background-color: #f8f9fa;
+        }
+
+        a {
+            color: black;
         }
 
     </style>
 </head>
 <body>
-<div th:replace="partials/navbar :: navbar"></div>
+    <div th:replace="partials/navbar :: navbar"></div>
     <div class="container mt-3">
-        <h1 class="text-center">JNS Libs Team</h1>
+        <h1 class="text-center title heading mt-5">E-Libraries Developer Team</h1>
         <div class="row">
             <div class="col-lg-3 col-xl-3 mx-auto col-sm-12">
                 <div class=" flex-row my-5">
-                    <div class="bg">
-                        <img class="img" th:src="@{/images/James.jpg}" />
-                        <h3>James Joshua Meyer</h3>
-                        <p>Software Developer</p>
+                    <div class="bg card">
+                        <img class="rounded img-fluid" th:src="@{/images/James.jpg}"/>
+                        <h3 class="text-center">James <br/> Meyer</h3>
+                        <p class="text-center">Software Developer</p>
+                        <a class="text-center" th:href="@{https://alumni.codeup.com/students/592}"><i class="fas fa-user-tie"></i> Codeup</a>
+                        <a class="text-center" th:href="@{https://github.com/jamesjmeyer210}"><i class="fab fa-github"></i> GitHub</a>
+                        <a class="text-center" th:href="@{https://www.linkedin.com/in/james-j-meyer/}"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
                     </div>
                 </div>
             </div>
             <div class="col-lg-3 col-xl-3 mx-auto col-sm-12">
                 <div class="flex-row my-5">
-                    <div class="bg">
-                        <img class="img" th:src="@{/images/Nathaniel.jpg}" />
-                        <h3>Nathaniel Gumbs</h3>
-                        <p>Software Developer</p>
+                    <div class="bg card">
+                        <img class="rounded img-fluid" th:src="@{/images/Nathaniel.jpg}"/>
+                        <h3 class="text-center">Nathaniel <br/> Gumbs</h3>
+                        <p class="text-center">Software Developer</p>
+                        <a class="text-center" th:href="@{https://alumni.codeup.com/students/610}"><i class="fas fa-user-tie"></i> Codeup</a>
+                        <a class="text-center" th:href="@{https://github.com/ngumbs37}"><i class="fab fa-github"></i> GitHub</a>
+                        <a class="text-center" th:href="@{https://www.linkedin.com/in/nathaniel-gumbs/}"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
                     </div>
                 </div>
             </div>
             <div class="col-lg-3 col-xl-3 mx-auto col-sm-12">
-                <div class=" flex-row my-5">
-                    <div class="bg">
-                        <img class="img" th:src="@{/images/Samuel.jpg}" />
-                        <h3>Sam Rodriguez</h3>
-                        <p>Software Developer</p>
+                <div class=" flex-row my-5 mx-auto">
+                    <div class="card">
+                        <img class="rounded img-fluid" th:src="@{/images/Samuel.jpg}"/>
+                        <h3 class="text-center">Sam <br/> Rodriguez</h3>
+                        <p class="text-center">Software Developer</p>
+                        <a class="text-center" th:href="@{https://alumni.codeup.com/students/594}"><i class="fas fa-user-tie"></i> Codeup</a>
+                        <a class="text-center" th:href="@{https://github.com/samrooodriguez}"><i class="fab fa-github"></i> GitHub</a>
+                        <a class="text-center" th:href="@{https://www.linkedin.com/in/oscar-sam-rodriguez/}"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <footer th:replace="partials/footer :: footer"></footer>
 </body>
 </html>
