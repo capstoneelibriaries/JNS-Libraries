@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <link th:replace="partials/header :: header('Addresses')"/>
+</head>
+<body>
+    <div th:replace="partials/navbar :: navbar"></div>
+    <div class="container">
+        <div class="row">
+            <h2>Settings</h2>
+        </div>
+        <div th:if="${param.mismatched}" class="alert alert-danger" role="alert">
+            The new passwords you entered do not match.
+        </div>
+        <div th:if="${param.username_taken}" class="alert alert-danger" role="alert">
+            Sorry. That username is taken.
+        </div>
+        <div th:if="${param.email_taken}" class="alert alert-danger" role="alert">
+            Sorry. That email is taken.
+        </div>
+        <div th:if="${param.success}" class="alert alert-success" role="alert">
+            Changes successfully saved!
+        </div>
+        <form th:action="@{/profile/settings}" th:method="post" th:object="${setting}">
+            <div class="row">
+                <div class="col-lg-3"></div>
+                <div class="col-lg-6 card">
+                    <div>
+                        <label>Username</label>
+                        <input th:field="*{username}"
+                               class="form-control"
+                                type="text"/>
+                    </div>
+                    <div>
+                        <label>Email</label>
+                        <input th:field="*{email}"
+                               class="form-control"
+                               type="email"/>
+                    </div>
+                    <div>
+                        <label>Phone</label>
+                        <input th:field="*{phone}"
+                               class="form-control"
+                               type="number"/>
+                    </div>
+                    <div>
+                        <label>New Password</label>
+                        <input th:field="*{newpass}"
+                               class="form-control"
+                               type="password"/>
+                    </div>
+                    <div>
+                        <label>Confirm New Password</label>
+                        <input th:field="*{confnewpass}"
+                               class="form-control"
+                               type="password"/>
+                    </div>
+                    <br/>
+                    <div>
+                        <button type="submit" class="btn-primary btn-success">Submit</button>
+                    </div>
+                    <br/>
+                    <div class="btn">
+                        <a class="btn btn-warning" th:href="@{/profile/addresses}">Change Address</a>
+                    </div>
+                </div>
+                <div class="col-lg-3"></div>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

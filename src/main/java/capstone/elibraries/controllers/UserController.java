@@ -1,6 +1,7 @@
 package capstone.elibraries.controllers;
 
 import capstone.elibraries.error.ValidationException;
+import capstone.elibraries.forms.UserSettings;
 import capstone.elibraries.models.Address;
 import capstone.elibraries.models.TradeRequest;
 import capstone.elibraries.models.Transaction;
@@ -60,6 +61,45 @@ public class UserController {
 
         model.addAttribute("user", databaseUser);
         return "users/profile";
+    }
+
+    @GetMapping("/profile/settings")
+    public String getSettings(Model model){
+        User current = this.getCurrentUser();
+
+        model.addAttribute("setting", new UserSettings(current));
+        return "/users/settings";
+    }
+
+    @PostMapping("/profile/settings")
+    public String postSettings(@ModelAttribute UserSettings setting, Model model){
+        // get the current user
+        User current = this.getCurrentUser();
+        User check = null;
+
+        // if the new password and the confirm password do not match
+        if(!setting.getNewpass().equals(setting.getConfnewpass())){
+            return "redirect:/profile/settings?mismatched";
+        }
+        // see if the user by the name already exists
+        check = users.findByUsername(setting.getUsername());
+        if(check != null && !check.equals(current)){
+            return "redirect:/profile/settings?username_taken";
+        }
+        // see if a user with that email already exists
+        check = users.findByEmail(setting.getEmail());
+        if(check != null && !check.equals(current)){
+            return "redirect:/profile/settings?email_taken";
+        }
+        // set the values of the current user
+        current.setUsername(setting.getUsername());
+        current.setEmail(setting.getEmail());
+        current.setPhone(setting.getPhone());
+        current.setPassword(passwordEncoder.encode(setting.getNewpass()));
+        // save the user to the database
+        this.users.save(current);
+        // redirect to the settings page with a success message
+        return "redirect:/profile/settings?success";
     }
 
     @GetMapping("/profile/addresses")
@@ -145,20 +185,15 @@ public class UserController {
 
     @PostMapping("/register")
     public String saveUser(@ModelAttribute User user, Model model) {
-        try{
-            if (user.getPassword().equals(user.getConfirmPassword())) {
 
-                String hash = passwordEncoder.encode(user.getPassword());
-                user.setPassword(hash);
-                user.setConfirmPassword("");
-                users.save(user);
-                return "redirect:/login?success";
-            }else{
-                return "redirect:/register?error";
-            }
-        }catch(ValidationException e){
-            model.addAttribute("error", e);
-            return "redirect:/error/validation";
+        if (user.getPassword().equals(user.getConfirmPassword())) {
+            String hash = passwordEncoder.encode(user.getPassword());
+            user.setPassword(hash);
+            user.setConfirmPassword("");
+            users.save(user);
+            return "redirect:/login?success";
+        }else{
+            return "redirect:/register?error";
         }
     }
 
