@@ -74,11 +74,11 @@ Now we'll log out and log in as the trade recipient to see how trade confirmatio
 
 #### Viewing Pending Trade Requests
 
-Upon logging in, we'll navigate to *My Trade Reqeusts*, where we can see a list of *pending* transactions. Like before,
+Upon logging in, we'll navigate to *My Trade Reqeusts*, where we can see a list of *pending* trade offers. Like before,
 I constructed this using **Hibernate** and *form-model-binding*.
 
 Let's confirm the trade request. Behind the scenes the *pending* status of the trade request and trades are terminated. A *transaction
-object is generated*, which contains *references* to the trade request, the users involved, and the time of the trade. Then, 
+object is generated*, which contains *references* to the trade request, the users involved, and the time of the confirmation . Then, 
 the transaction is saved to the database.
 
 #### Completing the Trades
