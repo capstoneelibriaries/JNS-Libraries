@@ -221,4 +221,9 @@ public class User {
         this.transactions.add(trn);
     }
 
+    public boolean equals(User other){
+        return (this.id == other.id) &&
+                (this.username.equals(other.username)) &&
+                (this.email.equals(other.email));
+    }
 }

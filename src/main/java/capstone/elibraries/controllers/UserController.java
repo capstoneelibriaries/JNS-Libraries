@@ -81,15 +81,13 @@ public class UserController {
         if(!setting.getNewpass().equals(setting.getConfnewpass())){
             return "redirect:/profile/settings?mismatched";
         }
-
+        // see if the user by the name already exists
         check = users.findByUsername(setting.getUsername());
-
         if(check != null && !check.equals(current)){
             return "redirect:/profile/settings?username_taken";
         }
-
+        // see if a user with that email already exists
         check = users.findByEmail(setting.getEmail());
-
         if(check != null && !check.equals(current)){
             return "redirect:/profile/settings?email_taken";
         }
