@@ -1,34 +1,20 @@
 ## Introduction
-
-Good evening ladies and gentlemen, my name is Sam Rodriguez and joining me today are my partners, James Meyer, and 
-Nathaniel Gumbs. Today we are going to present to you our application, *E-Libraries*. 
-
+Good evening ladies and gentlemen, my name is Sam Rodriguez and joining me today are my partners, James Meyer, and Nathaniel Gumbs. Today we are 
+going to present to you our application *E-Libraries*.
 #### About
-
-E-libraries is an online book store that enables users to trade used books. This application is constructed with **Spring
-Boot**, **Thymeleaf**, **Modern Javascript**, and it is styled with **Bootstrap**. It leverages the **OpenLibrary API**,
-and other technologies that we will explore throughout this presentation. Our use of **Spring** caused our code to
-conform to common *Object Oriented Design Patterns* like the *Builder Pattern*, the *Singleton Pattern*, and the
-*Model-View-Controller Pattern*. 
-
+E-libraries is a mobile responsive online book store that enables users to trade used books with one another. This application was constructed 
+using the Spring Boot Framework on the back end; Thymeleaf, Modern Javascript and bootstrap on the front end. It leverages the Open Library API, 
+and other technologies that we will explore throughout this presentation. Our use of Spring caused our code to conform to common object oriented 
+design patters, such as the build pattern, the singleton pattern, and the model-view-controller pattern.  
 #### Registration
-
-First, let's register as a new user, *Bob*. All of the forms in this application are locked down with **HTML5** attributes. Our 
-use of **HTML5** balances both security and a low memory footprint. The fields you see, are bound to the many **Java**
-*models* on the *backend*. When any of these forms are submitted, **Spring** automatically constructs the bound model.
-
+Here we have the registration form, all fields in this form, and across the application are locked down with HTML5 attributes. Our use of such 
+technologies balances both a low memory footprint as well as security. The fields you are seeing here are bound to the many java models on the 
+backend. When any of these forms are submitted, spring automatically constructs the bound model.
 #### Logging In
-
-We will now login as our new user, *Bob*. After filling out and submitting the login form, we will be redirected to the 
-profile page.
-
+For the sake of time, we will be signing in as a pre-existing user. Upon logging in you will be redirected to the profile page.
 #### Profile Page
-
-Upon navigating to the *profile page*, we will see all the users book listings. Right now, we don't have any listings 
-because we're a new user. So, let's go ahead and create a new Ad and see how the transactions take place. James will
-walk us through the process of *creating a new ad* and *searching for ads*.
-
-<br>
+Upon entering the profile page, you will see all the users book listings that have been created. As a user, you can click on each individual book 
+to edit the information, or delete the listing all together, and now, my partner James Meyer will walk you through: 
 
 ## Creating New Trade and Searching
 
