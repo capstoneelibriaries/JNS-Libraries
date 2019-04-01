@@ -138,9 +138,12 @@ public class UserController {
         addr.add(new Address(req, "shipping"));
         current.setAddresses(addr);
 
-        this.users.save(current);
-        //this.addrRepo.save(addr.get(0));
-        //this.addrRepo.save(addr.get(1));
+        System.out.println(current.getBillingAddress().toJson());
+        System.out.println(current.getShippingAddress().toJson());
+
+        addrRepo.save(current.getBillingAddress());
+        addrRepo.save(current.getShippingAddress());
+
         return "redirect:/profile";
     }
 

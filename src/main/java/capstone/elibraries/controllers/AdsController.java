@@ -140,10 +140,10 @@ public class AdsController {
                     adsDao.findOne(ad.getId()).getSeller().getId()) {
 
                 Ad dbAd = adsDao.findOne(id);
-               dbAd.setAdTitle(ad.getAdTitle());
-               dbAd.setDescription(ad.getDescription());
-               dbAd.setPrice(ad.getPrice());
-               dbAd.setShipping(ad.getShipping());
+                dbAd.setAdTitle(ad.getAdTitle());
+                dbAd.setDescription(ad.getDescription());
+                dbAd.setPrice(ad.getPrice());
+                dbAd.setShipping(ad.getShipping());
 
                 adsDao.save(dbAd);
                 return "redirect:/profile";

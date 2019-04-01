@@ -5,5 +5,6 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface Addresses extends CrudRepository<Address, Long> {
 
+
 }
 
