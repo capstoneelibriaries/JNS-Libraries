@@ -72,7 +72,7 @@ label:focus, input:focus  {
 .form-label-group select,
 .form-label-group textarea {
     height: auto;
-    border-radius: 2rem !important;
+    border-radius: 2rem;
 }
 
 #book-wear{
