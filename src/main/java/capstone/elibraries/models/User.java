@@ -222,10 +222,11 @@ public class User {
     }
 
     public boolean hasAddress(){
-        if(this.addresses == null || this.addresses.get(0) == null || this.addresses.get(1) == null){
+        try {
+            return this.getBillingAddress().isComplete() && this.getShippingAddress().isComplete();
+        }catch(NullPointerException e){
             return false;
         }
-        return this.addresses.get(0).isComplete() && this.addresses.get(1).isComplete();
     }
 
     public boolean equals(User other){

@@ -129,14 +129,18 @@ public class Address implements Cloneable {
     }
 
     public boolean isComplete(){
-        if(this.streetAddr == null || this.subAddr == null || this.country == null || this.city == null){
+        try {
+            if (this.streetAddr == null || this.subAddr == null || this.country == null || this.city == null) {
+                return false;
+            } else if (this.streetAddr.equals("") || this.country.equals("") || this.city.equals("")) {
+                return false;
+            } else if (this.country.equals("United States") && (this.state.equals("") || this.zipcode.equals(""))) {
+                return false;
+            } else {
+                return true;
+            }
+        }catch(NullPointerException e){
             return false;
-        }else if(this.streetAddr.equals("") || this.country.equals("") || this.city.equals("")){
-            return false;
-        }else if(this.country.equals("United States") && (this.state.equals("") || this.zipcode.equals(""))){
-            return false;
-        }else{
-            return true;
         }
     }
 
@@ -150,7 +154,6 @@ public class Address implements Cloneable {
 
         return String.format("{" +
                 "\"id\":\"%s\"," +
-                "\"user\":\"%s\"," +
                 "\"billing\":\"%s\"," +
                 "\"address1\":\"%s\"," +
                 "\"address2\":\"%s\"," +
@@ -158,7 +161,7 @@ public class Address implements Cloneable {
                 "\"city\":\"%s\"," +
                 "\"state\":\"%s\"," +
                 "\"zipcode\":\"%s\"" +
-                "}", this.id, this.user.getId(),
+                "}", this.id,
                 this.billing, this.streetAddr, this.subAddr,
                 this.country, this.city, this.state, this.zipcode);
     }

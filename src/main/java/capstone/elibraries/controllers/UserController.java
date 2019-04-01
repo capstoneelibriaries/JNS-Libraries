@@ -138,9 +138,9 @@ public class UserController {
         addr.add(new Address(req, "shipping"));
         current.setAddresses(addr);
 
-        this.addrRepo.save(addr.get(0));
-        this.addrRepo.save(addr.get(1));
-
+        this.users.save(current);
+        //this.addrRepo.save(addr.get(0));
+        //this.addrRepo.save(addr.get(1));
         return "redirect:/profile";
     }
 
