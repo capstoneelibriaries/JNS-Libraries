@@ -59,7 +59,7 @@ We're now taken to the trade page. On the left side, we have the owner's trade a
 that we can use to make an offer. I did this by using SQL queries in the **Hibernate ORM** to retrieve information from both
 users and trades. Then constructed models of the trades and displayed them, *iteratively* through **Thymeleaf**.
 
-We'll select the trade we just listed, and make an offer. When this button is clicked, a *post* request is submitted, which builds 
+We'll select the trade we just listed, and make an offer. When this button is clicked, a *post* request is submitted, whichbuilds 
 a *trade request object*, containing *references* to both users and trades, and is saved to the database via *Hibernate*.
 
 Now we'll log out of this user and log in as the trade recipient to see how trade confirmation works.
@@ -82,6 +82,4 @@ and contains information on which books were exchanged with whom, as well as a s
 
 ## Conclusion
 
-Are you looking for a place to trade used books and expand your literary horizons, consider E-Libraries. If you'd like to know
-more about our site's additional features or the build process, like how we implemented **JUnit** testing, our our use of the build pattern, and 
-the singleton pattern, come see us at table X.
+If you'd like to know more about our site's additional features such as our settings page or our build process, like how we implemented **JUnit** with over 100 unique tests, come see us at table X.
