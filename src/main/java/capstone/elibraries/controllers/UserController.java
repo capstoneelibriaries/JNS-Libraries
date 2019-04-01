@@ -191,11 +191,8 @@ public class UserController {
             user.setConfirmPassword("");
             // create a list of address
             List<Address> addrs = new ArrayList<>(2);
-            Address addr = new Address();
-            addr.setEmpty();
-            addrs.add(addr);
-            // perform a deep copy
-            addrs.add(addr.clone());
+            addrs.add(new Address().asEmpty());
+            addrs.add(new Address().asEmpty());
             // set the addresses, then save
             user.setAddresses(addrs);
             users.save(user);
