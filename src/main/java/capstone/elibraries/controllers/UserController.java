@@ -57,7 +57,7 @@ public class UserController {
 
     @GetMapping("/profile")
     public String showProfileForm(Model model) {
-        User databaseUser = users.findOne(((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId());
+        User databaseUser = this.getCurrentUser();
 
         model.addAttribute("user", databaseUser);
         return "users/profile";
@@ -144,7 +144,7 @@ public class UserController {
 
     @GetMapping("/profile/transactions")
     public String showTransactions(Model model) {
-        User databaseUser = users.findOne(((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId());
+        User databaseUser = this.getCurrentUser();
         model.addAttribute("transactions", transactions.findAllBySellerOrBuyerOrderByDateAsc(databaseUser, databaseUser));
         model.addAttribute("user", databaseUser);
         return "users/transactions";
@@ -152,7 +152,7 @@ public class UserController {
 
     @GetMapping("/profile/trades")
     public String showTradeRequests(Model model) {
-        User databaseUser = users.findOne(((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId());
+        User databaseUser = this.getCurrentUser();
         List<TradeRequest> t = (List<TradeRequest>) trades.findTradeRequestByPendingIsTrueAndTo(databaseUser) ;
         model.addAttribute("trades", t);
         return "users/trades";
@@ -164,7 +164,7 @@ public class UserController {
         tradeRequest.setPending(false);
 
         if (choice.equalsIgnoreCase("confirm")){
-            User databaseUser = users.findOne(((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId());
+            User databaseUser = this.getCurrentUser();
 
             tradeRequest.getWanted().setSeller(tradeRequest.getForSale().getSeller());
             tradeRequest.getForSale().setSeller(databaseUser);
