@@ -225,7 +225,7 @@ public class User {
         if(this.addresses == null || this.addresses.get(0) == null || this.addresses.get(1) == null){
             return false;
         }
-        return !(this.addresses.get(0).isComplete() && this.addresses.get(1).isComplete());
+        return this.addresses.get(0).isComplete() && this.addresses.get(1).isComplete();
     }
 
     public boolean equals(User other){

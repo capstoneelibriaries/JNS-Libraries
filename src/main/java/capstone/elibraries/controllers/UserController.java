@@ -58,6 +58,9 @@ public class UserController {
     @GetMapping("/profile")
     public String showProfileForm(Model model) {
         User current = this.getCurrentUser();
+
+        System.out.format("DEBUG: user.hasAddress(): %s\n",  current.hasAddress());
+
         model.addAttribute("user", current);
         return "users/profile";
     }
