@@ -15,10 +15,6 @@
         .row{
             height: 500px;
         }
-        .book-cover-profile{
-            height: 150px;
-            width: 75px;
-        }
     </style>
 </head>
 <body>
@@ -51,29 +47,30 @@
                 </div>
                 </th:block>
                 <th:block th:if="${!user.ads.isEmpty()}">
-                    <div class="col-lg-3 col-md-4 col-6 mb-3 mt-1" th:each="ad:${user.ads}" th:if="${ad.pending}">
+                    <div class="col-lg-3 col-md-4 col-6 mb-3 mt-1" th:each="ad, stat :${user.ads}" th:if="${ad.pending}">
                         <a th:href="@{/ads/view={id} (id=${ad.id})}" class="books module">
                         <h5 th:text="*{ad.adTitle}"></h5>
-                        </a>
-
-
-                        <div class="card">
-                            <button class="btn btn-primary" type="button"
-                                    data-toggle="collapse" data-target="#collapseExample"
-                                    aria-expanded="false" aria-controls="collapseExample"
-                            >See Books</button>
-                        </div>
-                        <div class="collapse" id="collapseExample">
-                            <div class="card card-body">
-                                <a th:href="@{/ads/view={id} (id=${ad.id})}" class="books module">
-                                    <th:block th:each="book:${ad.books}">
-                                        <img class="img-fluid book-cover-profile" th:src="${book.imageUrl}" alt="book-image"/>
+                            <div th:id="'carouselExampleIndicators-'+__${stat.index}__" class="carousel slide" data-ride="carousel" th:attr="data-interval=${5000+(__${stat.index}__*500)}">
+                                <div class="carousel-inner">
+                                    <th:block th:each="book, stat : *{ad.books}">
+                                        <div class="carousel-item active" th:if="${__${stat.index}__ == 0}">
+                                            <img class="d-block w-100 book-cover" th:src="@{${book.imageUrl}}"/>
+                                        </div>
+                                        <div class="carousel-item" th:if="${__${stat.index}__ != 0}">
+                                            <img class="d-block w-100 book-cover" th:src="@{${book.imageUrl}}"/>
+                                        </div>
                                     </th:block>
+                                </div>
+                                <a class="carousel-control-prev" th:href="'#carouselExampleIndicators-'+__${stat.index}__" role="button" data-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="carousel-control-next" th:href="'#carouselExampleIndicators-'+__${stat.index}__" role="button" data-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Next</span>
                                 </a>
                             </div>
-                        </div>
-
-
+                        </a>
                     </div>
                 </th:block>
             </div>

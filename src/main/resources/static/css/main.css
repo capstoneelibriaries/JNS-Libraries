@@ -189,8 +189,10 @@ a {
     color: lightgrey;
 }
 .book-cover{
-    max-height: 350px;
-    max-width: 250px;
+    max-height: 350px !important;
+    max-width: 250px !important;
+    height: 350px !important;
+    width: 250px !important;
 }
 
 .trade-book-cover{
