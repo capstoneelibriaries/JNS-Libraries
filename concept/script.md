@@ -59,15 +59,15 @@ can attempt to trade some of our books for this one. Nathaniel will walk us thro
 
 ## Transactions
 
-Thank you James, I will walk us through the process of performing a trade. We'll click the **offer trade button**, 
+Thank you James, I'll walk us through the process of performing a trade. We'll click the **offer trade button**, 
 which is only visible because of our **Spring Security Component**. If we weren't logged in, this
-option would not be available. 
+option wouldn't be available. 
 
 We're now taken to the trade page. On the left side, we have the owner's trade and on the right side we have our trades
 that we can use to make an offer. I did this by using SQL queries in the **Hibernate ORM** to retrieve information from both
-users, then constructed models of the trades and displayed them, *iteratively* through **Thymeleaf**.
+users and trades. Then constructed models of the trades and displayed them, *iteratively* through **Thymeleaf**.
 
-We'll select the trade we just listed, and make offer. When this button is clicked, a *post* request is submitted, which builds 
+We'll select the trade we just listed, and make an offer. When this button is clicked, a *post* request is submitted, which builds 
 a *trade request object*, containing *references* to both users and trades, and is saved to the database via *Hibernate*.
 
 Now we'll log out of this user and log in as the trade recipient to see how trade confirmation works.
@@ -77,7 +77,7 @@ Now we'll log out of this user and log in as the trade recipient to see how trad
 Upon logging in, we'll navigate to *My Trade Reqeusts*, where we can see a list of *pending* trade offers. Like before,
 I constructed this using **Hibernate** and *form-model-binding* through **Thymeleaf**.
 
-Let's confirm the trade request. Behind the scenes the *pending* status of the trade request and trades are terminated. 
+Let's confirm the trade request. Behind the scenes, the *pending* status of the trade request and trades are terminated. 
 A *transaction object is generated*, which contains *references* to the trade request, the users involved, and time of 
 confirmation. Then, the transaction is saved to the database.
 
