@@ -23,7 +23,7 @@
 
         <h1 class="font-weight-medium text-center text-lg-left mt-4 mb-0 profile-header"><i class="fas fa-book"></i> My Books</h1>
 
-        <div th:if="${param.noaddr}" class="alert alert-danger" role="alert">
+        <div th:if="${!user.hasAddress()}" class="alert alert-danger" role="alert">
             It looks like haven't set up and address yet.
             <a th:href="@{/profile/addresses}">Click here to complete the address form</a>
         </div>

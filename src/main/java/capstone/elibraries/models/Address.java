@@ -123,6 +123,11 @@ public class Address implements Cloneable {
         this.zipcode = "";
     }
 
+    public Address asEmpty(){
+        this.setEmpty();
+        return this;
+    }
+
     public boolean isComplete(){
         if(this.streetAddr == null || this.subAddr == null || this.country == null || this.city == null){
             return false;

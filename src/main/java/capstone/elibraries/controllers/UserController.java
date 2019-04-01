@@ -58,11 +58,6 @@ public class UserController {
     @GetMapping("/profile")
     public String showProfileForm(Model model) {
         User current = this.getCurrentUser();
-
-        if(!current.hasAddress()){
-            return "redirect:/profile?noaddr";
-        }
-
         model.addAttribute("user", current);
         return "users/profile";
     }
@@ -125,8 +120,8 @@ public class UserController {
         Address billing = current.getBillingAddress();
         Address shipping = current.getShippingAddress();
 
-        billing = (billing == null) ? new Address() : billing;
-        shipping = (shipping == null) ? new Address() : shipping;
+        billing = (billing == null) ? new Address().asEmpty() : billing;
+        shipping = (shipping == null) ? new Address().asEmpty() : shipping;
 
         return String.format("[%s,%s]", billing.toJson(), shipping.toJson());
     }
