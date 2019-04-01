@@ -191,6 +191,11 @@ a:hover {
     color: white;
     text-decoration: none;
 }
+.btn-primary {
+    color: #fff;
+    background-color: #233D4D;
+    border-color: #233D4D;
+}
 .brief{
     max-width: 80%;
     text-overflow: ellipsis;
@@ -208,5 +213,9 @@ a:hover {
     .img {
         height: auto;
         width: 70%;
+    }
+    .yours {
+        border-left: 0 !important;
+        border-bottom: 1px solid #dee2e6!important ;
     }
 }

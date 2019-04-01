@@ -6,48 +6,51 @@
         body {
             background: #233D4D;
             background: linear-gradient(to right, #233D4D, #619B8A);
-            color: lightgray;
         }
     </style>
 
 </head>
 <body>
-    <nav th:replace="partials/navbar :: navbar"></nav>
-    <form id="offer" th:action="@{/ads/{id}/trade (id=${ad.id})}" th:method="POST">
-        <div class="container my-5">
-            <div class="row">
-                <div class="col-lg-6 col-md-4 col-sm-12">
-                    <div class="row">
-                        <div class="col-lg-9 col-md-9 col-sm-12" th:object="${ad}">
-                            <p th:text="*{adTitle}"></p>
+<nav th:replace="partials/navbar :: navbar"></nav>
+<form id="offer" th:action="@{/ads/{id}/trade (id=${ad.id})}" th:method="POST">
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-lg-6 col-md-4 col-sm-12 ">
+                <div class="row">
+                    <div class="col-lg-9 col-md-9 col-sm-12" th:object="${ad}">
+                        <div class="img-thumbnail p-3">
+                            <p><span class="text-capitalize" th:text="*{seller.username}"></span>: <span th:text="*{adTitle}"></span></p>
                             <p th:text="*{description}"></p>
-                            <div class="">
-                                <p th:replace="partials/books :: trade-books(*{books})"></p>
+                            <div>
+                                <ul class="list-unstyled">
+                                    <p th:replace="partials/books :: trade(*{books})"></p>
+                                </ul>
                             </div>
                         </div>
-                        <img class="col-lg-3 col-md-3 col-sm-12" th:src="@{/images/trade-arrow.png}" alt="trade icon"
-                             id="trade"/>
                     </div>
-                    <div class="row">
-                        <button class="offset-3 col-6 btn btn-lg btn-primary btn-block text-uppercase mb-3" id="send-offer" type="submit">Make Offer
-                        </button>
-                    </div>
+                    <img class="col-lg-3 col-md-3 col-sm-12" th:src="@{/images/trade-arrow.png}" alt="trade icon" id="trade"/>
                 </div>
-                <div class="col-lg-6 col-md-4 col-sm-12">
-                    <div class="row">
-                        <div class="col-lg-6 col-sm-12" th:each="ad:${user.ads}" th:object="${ad}">
-
-                                <label class="img-thumbnail">
-                                    <input type="radio" name="ad" th:value="${ad.id}" required="required"/>
-                                    <span class="d-block" th:text="*{adTitle}"></span>
+                <div class="row my-3">
+                    <button class="offset-lg-2 col-lg-5 offset-3 col-6 btn-primary btn-success btn-block" id="send-offer" type="submit">Make Offer</button>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-4 col-sm-12">
+                <div class="row">
+                    <div class="col-lg-6 col-sm-12 mb-3 mb-lg-2 px-lg-1" th:each="ad:${user.ads}" th:object="${ad}">
+                        <div class="img-thumbnail">
+                            <label>
+                                <input type="radio" name="ad" th:value="${ad.id}" required="required"/>
+                                <span class="d-block ml-3" th:text="*{adTitle}"></span>
+                                <ul class="list-unstyled">
                                     <span th:replace="partials/books :: trade(*{books})"></span>
-                                </label>
-
+                                </ul>
+                            </label>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </form>
+    </div>
+</form>
 </body>
 </html>

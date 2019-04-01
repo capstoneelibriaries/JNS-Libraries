@@ -7,7 +7,7 @@
             color: lightgrey;
         }
         a:hover {
-            color: white !important;
+            color: white;
             text-decoration: none;
         }
     </style>
@@ -17,7 +17,7 @@
 
 <div class="container mt-3">
     <div class="my-3">
-        <a onclick="window.history.back()"><i class="fas fa-arrow-left"></i> Go Back</a>
+        <a onclick="window.history.back()" href="#"><i class="fas fa-arrow-left"></i> Go Back</a>
     </div>
     <div class="row" th:if="${ads.size() == 0}">
         <div class="p-3 bg-light text-dark">
@@ -33,9 +33,9 @@
             <h3 th:text="${ad.adTitle}"></h3>
             <p class="brief" th:text="${ad.description}"></p>
             <p>Trade owner: <span class="text-capitalize" th:text="${ad.seller.username}"></span></p>
-            <div class="my-5">
-                <a class="offset-3 col-6 btn btn-primary" th:href="@{/ads/view={id} (id=${ad.id})}">View Details</a>
-            </div>
+            <form th:action="@{/ads/view={id} (id=${ad.id})}" th:method="get" class="my-5">
+                <button class="btn-primary btn-success offset-3 col-6" th:id="btn-new-ad" type="submit">View Details</button>
+            </form>
         </div>
 
         <div class="col-lg-6 col-sm-12">

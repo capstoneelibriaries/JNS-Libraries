@@ -80,7 +80,7 @@ public class AdsController {
             ad.addBook(book);
             ad.setSeller(getCurrentUser());
             adsDao.save(ad);
-            return "redirect:/profile";
+            return "redirect:/profile?trade";
         }catch(ValidationException e){
             model.addAttribute("error", e);
             return "redirect:/error/validation";
@@ -156,11 +156,11 @@ public class AdsController {
         }
     }
 
-    @GetMapping("/ads/{id}/buy")
-    public String buyForm(Model model, @PathVariable Long id){
-        model.addAttribute("ad", adsDao.findOne(id));
-        return "ads/buy";
-    }
+//    @GetMapping("/ads/{id}/buy")
+//    public String buyForm(Model model, @PathVariable Long id){
+//        model.addAttribute("ad", adsDao.findOne(id));
+//        return "ads/buy";
+//    }
 
     @GetMapping("/ads/{id}/trade")
     public String tradeForm(Model model, @PathVariable Long id) throws AuthenticationException{
@@ -190,6 +190,6 @@ public class AdsController {
             true    // Active status of the trade
         ));
 
-         return "redirect:/profile";
+         return "redirect:/profile?offer";
     }
 }
