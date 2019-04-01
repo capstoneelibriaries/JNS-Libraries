@@ -26,6 +26,11 @@
 
             <h1 class="font-weight-medium text-center text-lg-left mt-4 mb-0 profile-header"><i class="fas fa-book"></i> My Books</h1>
 
+        <div th:if="${!user.hasAddress()}" class="alert alert-danger" role="alert">
+            It looks like haven't set up and address yet.
+            <a th:href="@{/profile/addresses}">Click here to complete the address form</a>
+        </div>
+
         <hr class="mt-2 mb-5"/>
         <div th:if="${param.trade}" class="alert alert-success" role="alert">
             Successfully created a new Trade.
