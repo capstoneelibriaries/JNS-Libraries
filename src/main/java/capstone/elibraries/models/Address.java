@@ -163,15 +163,15 @@ public class Address implements Cloneable {
                 this.country, this.city, this.state, this.zipcode);
     }
 
-    @Override
-    public Address clone(){
-        Address clone = new Address();
-        clone.setStreetAddr(this.streetAddr);
-        clone.setSubAddr(this.subAddr);
-        clone.setCountry(this.country);
-        clone.setState(this.state);
-        clone.setCity(this.city);
-        clone.setZipcode(this.zipcode);
-        return clone;
-    }
+//    @Override
+//    public Address clone(){
+//        Address clone = new Address();
+//        clone.setStreetAddr(this.streetAddr);
+//        clone.setSubAddr(this.subAddr);
+//        clone.setCountry(this.country);
+//        clone.setState(this.state);
+//        clone.setCity(this.city);
+//        clone.setZipcode(this.zipcode);
+//        return clone;
+//    }
 }
