@@ -1,10 +1,13 @@
 package capstone.elibraries.repositories;
 
 import capstone.elibraries.models.Address;
+import capstone.elibraries.models.User;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
+
+import java.util.List;
 
 public interface Addresses extends CrudRepository<Address, Long> {
 
@@ -24,6 +27,8 @@ public interface Addresses extends CrudRepository<Address, Long> {
                             @Param("state") String state,
                             @Param("streetAddr") String streetAddr,
                             @Param("subAddr") String subAddr);
+
+    List<Address> findAllByUser(User user);
 
 }
 

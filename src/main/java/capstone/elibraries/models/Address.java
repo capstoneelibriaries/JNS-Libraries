@@ -147,7 +147,7 @@ public class Address implements Cloneable {
     public String toJson(){
         this.streetAddr = (this.streetAddr == null) ? "" : this.streetAddr;
         this.subAddr = (this.subAddr == null) ? "" : this.subAddr;
-        this.country = (this.streetAddr == null) ? "" : this.streetAddr;
+        this.country = (this.country == null) ? "" : this.country;
         this.city = (this.city == null) ? "" : this.city;
         this.state = (this.state == null) ? "" : this.state;
         this.zipcode = (this.zipcode == null) ? "" : this.zipcode;
