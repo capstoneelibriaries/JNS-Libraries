@@ -4,7 +4,7 @@ import javax.persistence.*;
 import javax.servlet.http.HttpServletRequest;
 
 @Entity @Table(name = "addresses")
-public class Address {
+public class Address implements Cloneable {
 
     @Id @GeneratedValue
     private long id;
@@ -114,6 +114,15 @@ public class Address {
         this.zipcode = zipcode;
     }
 
+    public void setEmpty(){
+        this.streetAddr = "";
+        this.subAddr = "";
+        this.country = "";
+        this.state = "";
+        this.city = "";
+        this.zipcode = "";
+    }
+
     public boolean isComplete(){
         if(this.streetAddr == null || this.subAddr == null || this.country == null || this.city == null){
             return false;
@@ -149,4 +158,15 @@ public class Address {
                 this.country, this.city, this.state, this.zipcode);
     }
 
+    @Override
+    public Address clone(){
+        Address clone = new Address();
+        clone.setStreetAddr(this.streetAddr);
+        clone.setSubAddr(this.subAddr);
+        clone.setCountry(this.country);
+        clone.setState(this.state);
+        clone.setCity(this.city);
+        clone.setZipcode(this.zipcode);
+        return clone;
+    }
 }

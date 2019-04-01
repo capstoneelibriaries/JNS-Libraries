@@ -57,9 +57,13 @@ public class UserController {
 
     @GetMapping("/profile")
     public String showProfileForm(Model model) {
-        User databaseUser = this.getCurrentUser();
+        User current = this.getCurrentUser();
 
-        model.addAttribute("user", databaseUser);
+        if(!current.hasAddress()){
+            return "redirect:/profile?noaddr";
+        }
+
+        model.addAttribute("user", current);
         return "users/profile";
     }
 
@@ -190,6 +194,15 @@ public class UserController {
             String hash = passwordEncoder.encode(user.getPassword());
             user.setPassword(hash);
             user.setConfirmPassword("");
+            // create a list of address
+            List<Address> addrs = new ArrayList<>(2);
+            Address addr = new Address();
+            addr.setEmpty();
+            addrs.add(addr);
+            // perform a deep copy
+            addrs.add(addr.clone());
+            // set the addresses, then save
+            user.setAddresses(addrs);
             users.save(user);
             return "redirect:/login?success";
         }else{
