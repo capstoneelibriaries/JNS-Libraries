@@ -34,10 +34,10 @@
                 <!-- Edit/Delete button if you own the ad -->
                 <th:block th:if="${user.id == ad.seller.getId()}">
                     <form th:action="@{/ads/{id}/edit (id=*{id})}">
-                        <button class="btn btn-lg btn-warning btn-block ml-2 mr-2 my-4" type="submit">Edit</button>
+                        <button class="btn-warning btn-block ml-2 mr-2 my-4" type="submit">Edit</button>
                     </form>
                     <form th:action="@{/ads/{id}/delete (id=*{id})}" method="POST">
-                        <button class="btn btn-lg btn-danger btn-block ml-2 mr-2" type="submit">Delete</button>
+                        <button class="btn-danger btn-block ml-2 mr-2" type="submit">Delete</button>
                     </form>
                 </th:block>
             </th:block>
@@ -66,7 +66,6 @@
             </div>
         </div>
     </div>
-
 </div>
 <script th:src="@{/js/jquery.js}"></script>
 <script th:src="@{/js/scroll-view.js}"></script>
