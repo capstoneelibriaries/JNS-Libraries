@@ -6,9 +6,11 @@
 <body>
     <div th:replace="partials/navbar :: navbar"></div>
     <div class="container">
-        <div class="row">
-            <h2>Settings</h2>
+        <div class="my-3">
+            <a th:href="@{/profile}"><i class="fas fa-arrow-left"></i> Back to Profile</a>
         </div>
+        <h1 class="heading">My Settings</h1>
+        <hr class="mt-2 mb-5"/>
         <div th:if="${param.mismatched}" class="alert alert-danger" role="alert">
             The new passwords you entered do not match.
         </div>
@@ -23,48 +25,56 @@
         </div>
         <form th:action="@{/profile/settings}" th:method="post" th:object="${setting}">
             <div class="row">
-                <div class="col-lg-3"></div>
-                <div class="col-lg-6 card">
-                    <div>
-                        <label>Username</label>
-                        <input th:field="*{username}"
+                <div class="col-lg-10 mx-auto">
+                <div class="card">
+                    <div class="form-label-group">
+                        <input id="username"
+                               th:field="*{username}"
                                class="form-control"
-                                type="text"/>
+                               placeholder="Username"
+                               type="text"/>
+                        <label for="username">Username</label>
                     </div>
-                    <div>
-                        <label>Email</label>
-                        <input th:field="*{email}"
+                    <div class="form-label-group">
+                        <input id="email"
+                               th:field="*{email}"
                                class="form-control"
+                               placeholder="Email"
                                type="email"/>
+                        <label for="email">Email</label>
                     </div>
-                    <div>
-                        <label>Phone</label>
-                        <input th:field="*{phone}"
+                    <div class="form-label-group">
+                        <input id="phone"
+                               th:field="*{phone}"
                                class="form-control"
+                               placeholder="Phone"
                                type="number"/>
+                        <label for="phone">Phone</label>
                     </div>
-                    <div>
-                        <label>New Password</label>
-                        <input th:field="*{newpass}"
+                    <div class="form-label-group">
+                        <input id="newpass"
+                               th:field="*{newpass}"
+                               placeholder="New Password"
                                class="form-control"
                                type="password"/>
+                        <label for="newpass">New Password</label>
                     </div>
-                    <div>
-                        <label>Confirm New Password</label>
-                        <input th:field="*{confnewpass}"
+                    <div class="form-label-group">
+                        <input id="confnewpass"
+                               th:field="*{confnewpass}"
                                class="form-control"
+                               placeholder="Confirm New Password"
                                type="password"/>
+                        <label for="confnewpass">Confirm New Password</label>
                     </div>
-                    <br/>
-                    <div>
-                        <button type="submit" class="btn-primary btn-success">Submit</button>
+                    <div class="mt-3">
+                        <button type="submit" class="btn-primary btn-success col-5">Submit</button>
                     </div>
-                    <br/>
-                    <div class="btn">
-                        <a class="btn btn-warning" th:href="@{/profile/addresses}">Change Address</a>
+                    <div class="btn mt-3" id="address" >
+                        <a class="btn btn-warning" th:href="@{/profile/addresses}">Change Addresses</a>
                     </div>
                 </div>
-                <div class="col-lg-3"></div>
+                </div>
             </div>
         </form>
     </div>
