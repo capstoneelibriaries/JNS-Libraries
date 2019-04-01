@@ -21,6 +21,12 @@ label:focus, input:focus  {
     --input-padding-y: .75rem;
 }
 
+.btn-primary {
+    color: #fff;
+    background-color: #233D4D;
+    border-color: #233D4D;
+}
+
 .card-signin {
     border: 0;
     border-radius: 1rem;
@@ -150,6 +156,10 @@ label:focus, input:focus  {
     margin: 5em auto;
     max-height: 4em;
     max-width: 8em;
+}
+
+#address{
+    text-align: right;
 }
 
 .img-thumbnail{

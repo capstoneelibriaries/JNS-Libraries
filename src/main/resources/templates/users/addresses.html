@@ -4,120 +4,125 @@
     <link th:replace="partials/header :: header('Addresses')"/>
 </head>
 <body>
-    <div th:replace="partials/navbar :: navbar"></div>
-    <div class="container">
+<div th:replace="partials/navbar :: navbar"></div>
+<div class="container mt-3">
+    <div class="my-3">
+        <a th:href="@{/profile/settings}"><i class="fas fa-arrow-left"></i> Back to Settings</a>
+    </div>
+    <h1 class="heading">My Addresses</h1>
+    <hr class="mt-2 mb-5"/>
+    <form th:action="@{/profile/addresses}" th:method="post" class="form-signin">
         <div class="row">
-            <h2>Your Addresses</h2>
-        </div>
-        <form th:action="@{/profile/addresses}" th:method="post">
-            <div class="row">
-                <div class="col-lg-6 card">
-                    <h4>Billing Address</h4>
-                    <div>
-                        <label>Street Address</label>
+            <div class="col-lg-10 col-sm-12 mx-auto">
+                <div class="card">
+                    <h5 class="card-title text-center">Billing Address</h5>
+                    <div class="form-label-group">
                         <input id="billing-streetAddr"
                                name="billing-streetAddr"
                                class="form-control"
                                type="text"/>
+                        <label for="billing-streetAddr">Street Address</label>
                     </div>
-                    <div>
-                        <label>Apartment/Unit</label>
+                    <div class="form-label-group">
                         <input id="billing-subAddr"
-                                name="billing-subAddr"
+                               name="billing-subAddr"
                                class="form-control"
                                type="text"/>
+                        <label for="billing-subAddr">Apartment/Unit</label>
                     </div>
-                    <div>
-                        <label>Country</label>
+                    <div class="form-label-group">
                         <input id="billing-country"
-                                name="billing-country"
+                               name="billing-country"
                                class="form-control"
                                type="text"/>
+                        <label for="billing-country">Country</label>
                     </div>
-                    <div>
-                        <label>City</label>
+                    <div class="form-label-group">
                         <input id="billing-city"
-                                name="billing-city"
+                               name="billing-city"
                                class="form-control"
                                type="text"/>
+                        <label for="billing-city">City</label>
                     </div>
-                    <div>
-                        <label>State</label>
+                    <div class="form-label-group">
                         <input id="billing-state"
-                                name="billing-state"
+                               name="billing-state"
                                class="form-control"
                                type="text"/>
+                        <label for="billing-state">State</label>
                     </div>
-                    <div>
-                        <label>Zipcode</label>
+                    <div class="form-label-group">
                         <input id="billing-zipcode"
-                                name="billing-zipcode"
+                               name="billing-zipcode"
                                class="form-control"
                                type="text"/>
+                        <label for="billing-zipcode">Zipcode</label>
                     </div>
                 </div>
-
-                <div class="col-lg-6 card">
-                    <h4>Shipping Address</h4>
-                    <div>
-                        <label>Street Address</label>
+            </div>
+            <div class="col-lg-10 col-sm-12 mx-auto">
+                <div class="card">
+                    <h5 class="card-title text-center">Shipping Address</h5>
+                    <div class="form-label-group">
                         <input id="shipping-streetAddr"
-                                name="shipping-streetAddr"
+                               name="shipping-streetAddr"
                                class="form-control"
                                type="text"/>
+                        <label for="shipping-streetAddr">Street Address</label>
                     </div>
-                    <div>
-                        <label>Apartment/Unit</label>
+                    <div class="form-label-group">
                         <input id="shipping-subAddr"
-                                name="shipping-subAddr"
+                               name="shipping-subAddr"
                                class="form-control"
                                type="text"/>
+                        <label for="shipping-subAddr">Apartment/Unit</label>
                     </div>
-                    <div>
-                        <label>Country</label>
+                    <div class="form-label-group">
                         <input id="shipping-country"
-                                name="shipping-country"
+                               name="shipping-country"
                                class="form-control"
                                type="text"/>
+                        <label for="shipping-country">Country</label>
                     </div>
-                    <div>
-                        <label>City</label>
+                    <div class="form-label-group">
                         <input id="shipping-city"
-                                name="shipping-city"
+                               name="shipping-city"
                                class="form-control"
                                type="text"/>
+                        <label for="shipping-city">City</label>
                     </div>
-                    <div>
-                        <label>State</label>
+                    <div class="form-label-group">
                         <input id="shipping-state"
-                                name="shipping-state"
+                               name="shipping-state"
                                class="form-control"
                                type="text"/>
+                        <label for="shipping-state">State</label>
                     </div>
-                    <div>
-                        <label>Zipcode</label>
+                    <div class="form-label-group">
                         <input id="shipping-zipcode"
-                                name="shipping-zipcode"
+                               name="shipping-zipcode"
                                class="form-control"
                                type="text"/>
+                        <label for="shipping-zipcode">Zipcode</label>
                     </div>
-                    <div>
-                        <button type="submit" class="btn-primary btn-success">Submit</button>
+                    <div class="my-3">
+                        <button type="submit" class="btn-primary btn-success col-5">Submit</button>
                     </div>
                     <div class="btn">
                         <a class="btn btn-warning" th:href="@{/profile/settings}">Back to Settings</a>
                     </div>
                 </div>
             </div>
-        </form>
-    </div>
-    <script th:src="@{/js/jquery.js}"></script>
-    <script th:src="@{/js/addresses.js}"></script>
-    <script th:inline="javascript">
-        /*<![CDATA[*/
-        const userId = /*[[${userId}]]*/ 0;
-        addresses(userId);
-        /*]]>*/
-    </script>
+        </div>
+    </form>
+</div>
+<script th:src="@{/js/jquery.js}"></script>
+<script th:src="@{/js/addresses.js}"></script>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    const userId = /*[[${userId}]]*/ 0;
+    addresses(userId);
+    /*]]>*/
+</script>
 </body>
 </html>
