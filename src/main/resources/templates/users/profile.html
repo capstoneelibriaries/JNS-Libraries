@@ -8,7 +8,10 @@
             background: linear-gradient(to right, #233D4D, #619B8A);
         }
 
-
+        a:hover {
+            color: lightgray;
+            text-decoration: none;
+        }
         .row{
             height: 500px;
         }
@@ -27,14 +30,18 @@
 
             <h1 class="font-weight-medium text-center text-lg-left mt-4 mb-0 profile-header"><i class="fas fa-book"></i> My Books</h1>
 
-            <hr class="mt-2 mb-5"/>
-
-            <div class="row text-center text-lg-left">
-                <th:block th:if="${user.ads.isEmpty()}">
-                    <div class="offset-lg-3 col-lg-6  offset-md-3 col-md-6 col-sm-12">
-                        <div class="card text-center">
-                            <h4> No trades have been created.</h4>
-                        </div>
+        <hr class="mt-2 mb-5"/>
+        <div th:if="${param.trade}" class="alert alert-success" role="alert">
+            Successfully created a new Trade.
+        </div>
+        <div th:if="${param.offer}" class="alert alert-success" role="alert">
+            Offer successfully made.
+        </div>
+        <div class="row text-center text-lg-left">
+            <th:block th:if="${user.ads.isEmpty()}">
+                <div class="offset-lg-3 col-lg-6  offset-md-3 col-md-6 col-sm-12">
+                    <div class="card text-center">
+                        <h4> No trades have been created.</h4>
                     </div>
                 </th:block>
                 <th:block th:if="${!user.ads.isEmpty()}">

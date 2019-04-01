@@ -6,70 +6,68 @@
         body {
             background: #233D4D;
             background: linear-gradient(to right, #233D4D, #619B8A);
-            color: gray();
-        }
-        .book-cover{
-            height: 500px;
-            width: 400px;
+            color: lightgray;
         }
     </style>
 </head>
 <body>
-    <nav th:replace="partials/navbar :: navbar"></nav>
-    <div class="container mt-3">
-        <div th:if="${param}" class="row">
-            <div th:if="${param.error}" class="alert alert-warning" role="alert">
-                You can not trade with yourself.
-            </div>
-            <div th:if="${param.noads}" class="alert alert-warning" role="alert">
-                You have no books to trade.
-            </div>
+<nav th:replace="partials/navbar :: navbar"></nav>
+<div class="container mt-3">
+    <div class="my-3">
+        <a onclick="window.history.back()" href="#"><i class="fas fa-arrow-left"></i> Go Back</a>
+    </div>
+    <div th:if="${param.error}" class="alert alert-warning" role="alert">
+        You can not trade with yourself.
+    </div>
+    <div th:if="${param.noads}" class="alert alert-warning" role="alert">
+        You have no books to trade.
+    </div>
+    <div class="row" th:object="${ad}">
+        <div class="col-lg-4 col-sm-12" id="trade-block">
+            <h1 th:text="*{adTitle}"></h1>
+            <h4 th:text="*{description}"></h4>
+            <h5>Trade Owner: <span class="text-capitalize" th:text="${ad.seller.username}"></span></h5>
+            <h6 class="text-right" th:text="'Trade Value: $'+*{price}"></h6>
+            <h6 class="text-right" th:text="'Shipping: '+'Free'" th:if="*{shipping==0}"></h6>
+            <h6 class="text-right" th:text="'Shipping: $'+*{shipping}" th:if="*{shipping>0}"></h6>
+            <th:block sec:authorize="isAuthenticated()" th:object="${ad}">
+                <!-- Edit/Delete button if you own the ad -->
+                <th:block th:if="${user.id == ad.seller.getId()}">
+                    <form th:action="@{/ads/{id}/edit (id=*{id})}">
+                        <button class="btn-warning btn-block ml-2 mr-2 my-4" type="submit">Edit</button>
+                    </form>
+                    <form th:action="@{/ads/{id}/delete (id=*{id})}" method="POST">
+                        <button class="btn-danger btn-block ml-2 mr-2" type="submit">Delete</button>
+                    </form>
+                </th:block>
+            </th:block>
+            <th:block th:object="${ad}">
+                <form class="mt-3" th:action="@{/ads/{id}/trade(id=*{id})}" th:method="GET">
+                    <button class="offset-3 col-6 btn-primary btn-success" type="submit" sec:authorize="isAuthenticated()" th:if="${user.id != ad.seller.getId()}">Offer Trade</button>
+                    <button class="offset-3 col-6 btn-primary" type="submit" sec:authorize="!isAuthenticated()">Sign in to trade</button>
+                </form>
+            </th:block>
         </div>
-        <div class="row">
-            <div th:object="${ad}">
-                <div class="column col-lg-3">
-                    <h2 th:text="*{adTitle}"></h2>
-                    <p th:text="*{description}"></p>
-                    <h3>Sold by: <span th:text="${ad.seller.username}"></span></h3>
-                    <h4 th:text="'Trade Value: $'+*{price}"></h4>
-                    <h5 th:text="'Shipping: $'+*{shipping}" th:if="*{shipping>0}"></h5>
-                    <h6 th:text="'Shipping: '+'Free'" th:if="*{shipping==0}"></h6>
-                </div>
-                <div class="column col-lg-9">
-                    <div th:each="book : *{books}" class="row">
-                        <div class="column col-lg-6">
-                            <h4 th:text="'Title: ' + ${book.title}"></h4>
-                            <h4 th:text="'Author ' + ${book.author}"></h4>
-                            <h2 th:text="'Condition: ' + ${book.wear}"></h2>
+        <div class="col-lg-8 col-sm-12">
+            <div class="row" th:each="book : ${ad.books}">
+                <div class="col-12">
+                    <div class="row">
+                        <div class="my-3 col-lg-5 col-sm-12 ">
+                            <img class="img img-thumbnail rounded d-block mx-auto" th:src="${book.getImageUrl()}"/>
                         </div>
-                        <div class="column col-lg-6">
-                            <img class="img-thumbnail book-cover center mx-auto" th:src="${book.imageUrl}" alt="book-image"/>
+                        <div class="mt-3 col-lg-7 col-sm-12">
+                            <h5 class="" th:text="${book.title}"></h5>
+                            <p th:text="'By ' + ${book.author}"></p>
+                            <p th:text="'Condition: '+${book.wear}+ ' out of 5'"></p>
+                            <p th:text="'Synopsis: '+ ${book.synopsis}"></p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div th:object="${ad}" class="row">
-            <!-- Edit/Delete button if you own the ad -->
-            <th:block sec:authorize="isAuthenticated()">
-                <th:block th:if="${user.id == ad.seller.getId()}">
-                    <form th:action="@{/ads/{id}/edit (id=*{id})}">
-                        <button class="btn btn-lg btn-warning btn-block ml-2 mr-2 mb-4" type="submit">Edit</button>
-                    </form>
-                    <form th:action="@{/ads/{id}/delete (id=*{id})}" method="POST">
-                        <button class="btn btn-lg btn-danger btn-block ml-2 mr-2" type="submit">Delete</button>
-                    </form>
-                </th:block>
-            </th:block>
-            <!-- Offer trade button is available if the user is signed in -->
-            <div th:if="${user} != null" class="card ml-2 mr-2">
-                <a th:href="@{/ads/{id}/trade (id = *{id})}">Offer Trade</a>
-            </div>
-            <!-- Message if not signed in -->
-            <div th:if="${user} == null" class="card ml-2 mr-2">
-                <p>You must be signed in to trade</p>
-            </div>
-        </div>
     </div>
+</div>
+<script th:src="@{/js/jquery.js}"></script>
+<script th:src="@{/js/scroll-view.js}"></script>
 </body>
 </html>

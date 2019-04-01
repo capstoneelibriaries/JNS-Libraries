@@ -1,6 +1,6 @@
 body {
-    background: #619B8A;
-    background: linear-gradient(to right, #619B8A, #A1C181);
+    background: #233D4D;
+    background: linear-gradient(to right, #233D4D, #619B8A);
 }
 
 div.radiogroup div.ad {
@@ -158,6 +158,11 @@ label:focus, input:focus  {
     max-width: 8em;
 }
 
+.img{
+    height: 375px;
+    width: 250px;
+}
+
 #address{
     text-align: right;
 }
@@ -198,10 +203,31 @@ a:hover {
     color: white;
     text-decoration: none;
 }
-
-@media screen and (max-width: 768px) {
+.btn-primary {
+    color: #fff;
+    background-color: #233D4D;
+    border-color: #233D4D;
+}
+.brief{
+    max-width: 80%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.book-title{
+    height: 2.5em;
+}
+@media screen and (max-width: 991px) {
     #trade  {
         transform: rotate(90deg);
         margin: 2em auto;
+    }
+    .img {
+        height: auto;
+        width: 70%;
+    }
+    .yours {
+        border-left: 0 !important;
+        border-bottom: 1px solid #dee2e6!important ;
     }
 }
