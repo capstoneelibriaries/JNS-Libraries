@@ -51,9 +51,6 @@ public class User {
     @Transient
     private List<Transaction> transactions;
 
-    @Transient
-    private ValidationException isvalid;
-
     public User(){
         // default
     }
@@ -71,7 +68,12 @@ public class User {
         this.transactions = copy.transactions;
     }
 
-    public User(boolean isAdmin, String username, String email, String password, String phone, double rating, List<Ad> ads, List<Address> addresses, List<Transaction> transactions) {
+    public User(boolean isAdmin,
+                String username, String email, String password, String phone,
+                double rating, List<Ad> ads,
+                List<Address> address,
+                List<Transaction> transactions)
+    {
         this.isAdmin = isAdmin;
         this.username = username;
         this.email = email;
@@ -79,7 +81,7 @@ public class User {
         this.phone = phone;
         this.rating = rating;
         this.ads = ads;
-        this.addresses = addresses;
+        this.addresses = address;
         this.transactions = transactions;
     }
 
@@ -125,16 +127,37 @@ public class User {
         return ads;
     }
 
-    public List<Address> getAddresses() {
+    public List<Address> getAddresses(){
         return addresses;
     }
 
-    public void setId(long id) throws ValidationException{
-        isvalid = Validator.checkId(id);
-        if(isvalid != null){
-            throw isvalid;
+    public Address getBillingAddress(){
+        if(this.addresses == null){
+            return null;
+        }else{
+            for(Address addr : this.addresses){
+                if(addr.isBilling()){
+                    return addr;
+                }
+            }
+            return null;
         }
+    }
 
+    public Address getShippingAddress(){
+        if(this.addresses == null){
+            return null;
+        }else{
+            for(Address addr : this.addresses){
+                if(!addr.isBilling()){
+                    return addr;
+                }
+            }
+            return null;
+        }
+    }
+
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -142,52 +165,23 @@ public class User {
         this.isAdmin = val;
     }
 
-    public void setUsername(String username) throws ValidationException{
-
-        isvalid = Validator.checkNotNull(username);
-        if(isvalid != null){
-            throw isvalid;
-        }
+    public void setUsername(String username){
         this.username = username;
     }
 
-    public void setEmail(String email) throws ValidationException{
-
-        isvalid = Validator.checkNotNull(email);
-        if(isvalid != null){
-            throw isvalid;
-        }
-
+    public void setEmail(String email){
         this.email = email;
     }
 
-    public void setPhone(String phone) throws ValidationException {
-
-        isvalid = Validator.checkNotNull(phone);
-        if(isvalid != null){
-            throw isvalid;
-        }
-
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
-    public void setPassword(String password) throws ValidationException {
-
-        isvalid = Validator.checkNotNull(password);
-        if(isvalid != null){
-            throw isvalid;
-        }
-
+    public void setPassword(String password) {
         this.password = password;
     }
 
-    public void setConfirmPassword(String confirmPassword) throws ValidationException {
-
-        isvalid = Validator.checkNotNull(confirmPassword);
-        if(isvalid != null){
-            throw isvalid;
-        }
-
+    public void setConfirmPassword(String confirmPassword) {
         this.confirmPassword = confirmPassword;
     }
 
@@ -195,78 +189,51 @@ public class User {
         this.rating = rating;
     }
 
-    public void setAds(List<Ad> ads) throws ValidationException {
-
-        isvalid = Validator.checkNotNull(ads);
-        if(isvalid != null){
-            throw isvalid;
-        }
-
+    public void setAds(List<Ad> ads) {
         this.ads = ads;
     }
 
-    public void setAddresses(List<Address> addresses) throws ValidationException {
-
-        isvalid = Validator.checkNotNull(addresses);
-        if(isvalid != null){
-            throw isvalid;
-        }
-
-        this.addresses = addresses;
-    }
-
-    public void addAddress(Address address) throws ValidationException {
-
-        isvalid = Validator.checkNotNull(address);
-        if(isvalid != null){
-            throw isvalid;
-        }
-
+    public void setAddresses(final List<Address> address){
         if(this.addresses == null){
-            this.addresses = new ArrayList<>(1);
+            this.addresses = new ArrayList<>(2);
         }
-        this.addresses.add(address);
+
+        this.addresses = address;
+        for(Address addr : this.addresses){
+            addr.setUser(this);
+            if(addr.isBilling()){
+                addr.setId((this.id * 2) - 1);
+            }else{
+                addr.setId(this.id * 2);
+            }
+        }
     }
 
-    public void addAd(Ad ad) throws ValidationException {
-
-        isvalid = Validator.checkNotNull(ad);
-        if(isvalid != null){
-            throw isvalid;
+    public void addAd(Ad ad) {
+        if(this.ads == null){
+            this.ads = new ArrayList<>(1);
         }
-
         this.ads.add(ad);
     }
 
-    public void addTransaction(Transaction trn) throws ValidationException {
-
-        isvalid = Validator.checkNotNull(trn);
-        if(isvalid != null){
-            throw isvalid;
-        }
-
+    public void addTransaction(Transaction trn) {
         if(this.transactions == null){
             this.transactions = new ArrayList<>(1);
         }
         this.transactions.add(trn);
     }
 
-//    public Admin toAdmin(){
-//        if(!this.isAdmin){
-//            return null;
-//        }else{
-//            return (Admin)this;
-//        }
-//    }
+    public boolean hasAddress(){
+        try {
+            return this.getBillingAddress().isComplete() && this.getShippingAddress().isComplete();
+        }catch(NullPointerException e){
+            return false;
+        }
+    }
 
-//    public String toString(){
-//        return "{\n" +
-//                "\tusername:" + username + ",\n" +
-//                "\temail:" + email + ",\n" +
-//                "\tphone:" + phone + ",\n" +
-//                "\tpassword:" + password + ",\n" +
-//                "\trating:" + rating + ",\n" +
-//                "\tads:" + ads.toString() + ",\n" +
-//                "}";
-//    }
+    public boolean equals(User other){
+        return (this.id == other.id) &&
+                (this.username.equals(other.username)) &&
+                (this.email.equals(other.email));
+    }
 }

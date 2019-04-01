@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <link th:replace="partials/header :: header('400')"/>
+</head>
+<body>
+<div th:replace="partials/navbar :: navbar"></div>
+<div class="container mt-3">
+    <a th:href="@{/}" style="display: inline-block;"><h5>&lt; Home</h5></a>
+</div>
+<div class="container mt-3">
+    <h1>400 Bad Request</h1>
+    <h4>Incorrect URL pattern and/or pattern is not decipherable.</h4>
+</div>
+</body>
+</html>

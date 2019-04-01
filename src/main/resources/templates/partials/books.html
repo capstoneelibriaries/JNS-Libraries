@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.springframework.org/schema/jdbc">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+<body>
+
+    <th:block th:each="book: ${listOfBooks}" th:fragment="trade-books(listOfBooks)">
+        <li class="border-top row">
+            <img class="col-4 my-2 trade-book-cover " th:src="@{${book.imageUrl}}"/>
+            <div class="col-7 mt-5">
+                <p th:text="${book.title} + ' by ' + ${book.author}"></p>
+                <p th:text="'Condition: '+ ${book.wear} + ' out of 5'"></p>
+            </div>
+        </li>
+    </th:block>
+
+    <th:block th:each="book: ${listOfBooks}" th:fragment="trade(listOfBooks)">
+            <li class="row px-3">
+                <img class="col-5 my-2 trade-book-cover" th:src="@{${book.imageUrl}}"/>
+                <div class="col-5 mt-5 px-0">
+                    <p th:text="${book.title} + ' by ' + ${book.author}"></p>
+                </div>
+            </li>
+    </th:block>
+
+</body>
+</html>

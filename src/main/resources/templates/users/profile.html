@@ -1,65 +1,81 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
-    <link th:replace="partials/header :: header('Profile')"/>
+    <link th:replace="partials/header :: header('My Books')"/>
     <style>
         body {
             background: #233D4D;
             background: linear-gradient(to right, #233D4D, #619B8A);
         }
-        .profile-header{
-            color: lightgrey;
+
+        a:hover {
+            color: lightgray;
+            text-decoration: none;
         }
-        .books{
-            color: white;
+        .row{
+            height: 500px;
         }
     </style>
 </head>
 <body>
-<div th:replace="partials/navbar :: navbar"></div>
-<div id="profile">
+    <div th:replace="partials/navbar :: navbar"></div>
+    <div id="profile">
 
 
-    <div class="container">
+        <div class="container">
 
-        <h1 class="font-weight-medium text-center text-lg-left mt-4 mb-0 profile-header"><i class="fas fa-book"></i> My Books</h1>
+            <h1 class="font-weight-medium text-center text-lg-left mt-4 mb-0 profile-header"><i class="fas fa-book"></i> My Books</h1>
+
+        <div th:if="${!user.hasAddress()}" class="alert alert-danger" role="alert">
+            It looks like haven't set up and address yet.
+            <a th:href="@{/profile/addresses}">Click here to complete the address form</a>
+        </div>
 
         <hr class="mt-2 mb-5"/>
-
+        <div th:if="${param.trade}" class="alert alert-success" role="alert">
+            Successfully created a new Trade.
+        </div>
+        <div th:if="${param.offer}" class="alert alert-success" role="alert">
+            Offer successfully made.
+        </div>
         <div class="row text-center text-lg-left">
             <th:block th:if="${user.ads.isEmpty()}">
                 <div class="offset-lg-3 col-lg-6  offset-md-3 col-md-6 col-sm-12">
                     <div class="card text-center">
-                        <h4> No ads have been created.</h4>
+                        <h4> No trades have been created.</h4>
                     </div>
                 </div>
-            </th:block>
-            <th:block th:if="${!user.ads.isEmpty()}">
-
-                <div class="col-lg-3 col-md-4 col-6 mb-3 mt-1" th:each="ad:${user.ads}">
-                    <!--d-block mb-4 h-100 img-thumbnail-->
-                    <a th:href="@{/ads/view={id} (id=${ad.id})}" class="books module">
+                </th:block>
+                <th:block th:if="${!user.ads.isEmpty()}">
+                    <div class="col-lg-3 col-md-4 col-6 mb-3 mt-1" th:each="ad, stat :${user.ads}" th:if="${ad.pending}">
+                        <a th:href="@{/ads/view={id} (id=${ad.id})}" class="books module">
                         <h5 th:text="*{ad.adTitle}"></h5>
-                        <th:block th:each="book:${ad.books}">
-                            <img class="img-fluid" th:src="${book.imageUrl}" alt="book-image"/>
-                            <p th:text="${book.author}"></p>
-                        </th:block>
-                    </a>
-                </div>
-            </th:block>
+                            <div th:id="'carouselExampleIndicators-'+__${stat.index}__" class="carousel slide" data-ride="carousel" th:attr="data-interval=${5000+(__${stat.index}__*500)}">
+                                <div class="carousel-inner">
+                                    <th:block th:each="book, stat : *{ad.books}">
+                                        <div class="carousel-item active" th:if="${__${stat.index}__ == 0}">
+                                            <img class="d-block w-100 book-cover" th:src="@{${book.imageUrl}}"/>
+                                        </div>
+                                        <div class="carousel-item" th:if="${__${stat.index}__ != 0}">
+                                            <img class="d-block w-100 book-cover" th:src="@{${book.imageUrl}}"/>
+                                        </div>
+                                    </th:block>
+                                </div>
+                                <a class="carousel-control-prev" th:href="'#carouselExampleIndicators-'+__${stat.index}__" role="button" data-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="carousel-control-next" th:href="'#carouselExampleIndicators-'+__${stat.index}__" role="button" data-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </div>
+                        </a>
+                    </div>
+                </th:block>
+            </div>
         </div>
+
     </div>
-    <!--<div class="container">-->
-    <!--<div class="row u-max-full-width">-->
-    <!--<div class="three columns" th:each="ad:${user.ads}">-->
-    <!--<div class="card" th:each="book:${ad.books}">-->
-    <!--<img th:src="${book.imageUrl}" alt="book"/>-->
-    <!--<h4 th:text="${book.title}"></h4>-->
-    <!--<h5 th:text="${book.author}"></h5>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--</div>-->
-</div>
 </body>
 </html>

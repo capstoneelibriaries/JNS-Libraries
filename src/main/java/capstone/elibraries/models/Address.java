@@ -1,14 +1,16 @@
 package capstone.elibraries.models;
 
 import javax.persistence.*;
+import javax.servlet.http.HttpServletRequest;
 
 @Entity @Table(name = "addresses")
-public class Address {
+public class Address implements Cloneable {
 
     @Id @GeneratedValue
     private long id;
-    @ManyToOne @JoinColumn(name = "addresses")
+    @ManyToOne @JoinColumn(name = "user_id", nullable = false)
     private User user;
+
     @Column
     private boolean billing;
     @Column
@@ -26,6 +28,18 @@ public class Address {
 
     public Address(){
         // default
+    }
+
+    public Address(HttpServletRequest req, String name){
+        this.streetAddr = req.getParameter(String.format("%s-streetAddr", name));
+        this.subAddr = req.getParameter(String.format("%s-subAddr", name));
+        this.country = req.getParameter(String.format("%s-country", name));
+        this.city = req.getParameter(String.format("%s-city", name));
+        this.state = req.getParameter(String.format("%s-state", name));
+        this.zipcode = req.getParameter(String.format("%s-zipcode", name));
+        if(name.equals("billing")){
+            this.billing = true;
+        }
     }
 
     public long getId() {
@@ -100,18 +114,67 @@ public class Address {
         this.zipcode = zipcode;
     }
 
-    public String toString(){
-        return "{\n" +
-                "\tid:" + id + "\n" +
-                "\tuser:" + user.toString() + "\n" +
-                "\tbilling:" + billing + "\n" +
-                "\taddress1:" + streetAddr + "\n" +
-                "\taddress2:" + subAddr + "\n" +
-                "\tcountry:" + country + "\n" +
-                "\tcity:" + city + "\n" +
-                "\tstate:" + state + "\n" +
-                "\tzipcode:" + zipcode + "\n" +
-                "}";
+    public void setEmpty(){
+        this.streetAddr = "";
+        this.subAddr = "";
+        this.country = "";
+        this.state = "";
+        this.city = "";
+        this.zipcode = "";
     }
 
+    public Address asEmpty(){
+        this.setEmpty();
+        return this;
+    }
+
+    public boolean isComplete(){
+        try {
+            if (this.streetAddr == null || this.subAddr == null || this.country == null || this.city == null) {
+                return false;
+            } else if (this.streetAddr.equals("") || this.country.equals("") || this.city.equals("")) {
+                return false;
+            } else if (this.country.equals("United States") && (this.state.equals("") || this.zipcode.equals(""))) {
+                return false;
+            } else {
+                return true;
+            }
+        }catch(NullPointerException e){
+            return false;
+        }
+    }
+
+    public String toJson(){
+        this.streetAddr = (this.streetAddr == null) ? "" : this.streetAddr;
+        this.subAddr = (this.subAddr == null) ? "" : this.subAddr;
+        this.country = (this.country == null) ? "" : this.country;
+        this.city = (this.city == null) ? "" : this.city;
+        this.state = (this.state == null) ? "" : this.state;
+        this.zipcode = (this.zipcode == null) ? "" : this.zipcode;
+
+        return String.format("{" +
+                "\"id\":\"%s\"," +
+                "\"billing\":\"%s\"," +
+                "\"address1\":\"%s\"," +
+                "\"address2\":\"%s\"," +
+                "\"country\":\"%s\"," +
+                "\"city\":\"%s\"," +
+                "\"state\":\"%s\"," +
+                "\"zipcode\":\"%s\"" +
+                "}", this.id,
+                this.billing, this.streetAddr, this.subAddr,
+                this.country, this.city, this.state, this.zipcode);
+    }
+
+//    @Override
+//    public Address clone(){
+//        Address clone = new Address();
+//        clone.setStreetAddr(this.streetAddr);
+//        clone.setSubAddr(this.subAddr);
+//        clone.setCountry(this.country);
+//        clone.setState(this.state);
+//        clone.setCity(this.city);
+//        clone.setZipcode(this.zipcode);
+//        return clone;
+//    }
 }

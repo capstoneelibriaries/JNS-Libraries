@@ -31,6 +31,10 @@ public class Ad {
     @ManyToOne @JoinColumn (name = "user_id", nullable = false)
     private User seller;
 
+
+//    @OneToMany(cascade=CascadeType.ALL, mappedBy="post")
+//    @JsonIgnore
+//    private List<Books> bookList;
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name="ads_books",
@@ -47,11 +51,12 @@ public class Ad {
     public Ad(){
         this.books = new ArrayList<>(0);
         pending = true;
+        tradable = true;
         // DEFAULT
     }
 
 
-    public Ad(User seller, String title, String description, double price, double shipping)
+    public Ad(User seller, String adTitle, String description, double price, double shipping)
         throws ValidationException
     {
         this();
@@ -149,12 +154,7 @@ public class Ad {
         this.books = books;
     }
 
-    public void addBook(Book book) throws ValidationException {
-
-        isvalid = Validator.checkNotNull(book);
-        if(isvalid != null){
-            throw isvalid;
-        }
+    public void addBook(Book book) {
 
         if(this.books == null){
             this.books = new ArrayList<>(1);
@@ -162,7 +162,15 @@ public class Ad {
         this.books.add(book);
         book.addAd(this);
     }
-  
+
+    public void addRemoveBook(int index){
+        try{
+            this.books.remove(index);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
     public boolean isPending() {
         return pending;
     }

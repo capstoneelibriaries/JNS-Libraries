@@ -1,13 +1,18 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
-    <meta charset="UTF-8"/>
-    <title></title>
+    <link th:replace="partials/header :: header('Missing Forever')"/>
 </head>
 <body>
 
 
-    <h1>Your ad has been successfully deleted!</h1>
+<div th:replace="partials/navbar :: navbar"></div>
+<div class="container mt-3">
+    <div>
+        <a th:href="@{/}" style="display: inline-block;"><h5>&lt; Home</h5></a>
+    </div>
+    <h1>Listing does not exist or was deleted by owner</h1>
+</div>
 
 
 </body>

@@ -23,7 +23,7 @@
             <div class="card card-signin flex-row my-5">
                 <div class="card-img-left d-none d-md-flex"></div>
                 <div class="card-body">
-                    <h5 class="card-title text-center">Register <i class="fas fa-user-plus"></i></h5>
+                    <h4 class="card-title text-center">Register <i class="fas fa-user-plus"></i></h4>
                     <div th:if="${param.error}" class="alert alert-danger" role="alert">
                         Passwords do not match.
                     </div>
@@ -31,14 +31,14 @@
                         <div class="form-label-group">
                             <input th:field="*{username}"
                                    type="text"
-                                   id="inputUserame"
+                                   id="inputUsername"
                                    class="form-control"
                                    placeholder="Username"
                                    required="required"
                                    minlength="2"
                                    maxlength="35"
                             />
-                            <label for="inputUserame">Username</label>
+                            <label for="inputUsername">Username</label>
                         </div>
                         <div class="form-label-group">
                             <input th:field="*{email}"

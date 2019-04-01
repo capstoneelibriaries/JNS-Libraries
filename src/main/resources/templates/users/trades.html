@@ -1,56 +1,64 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <link th:replace="partials/header :: header('Profile')"/>
+    <link th:replace="partials/header :: header('My Trade Requests')"/>
+    <style>
+        body {
+            background: #233D4D;
+            background: linear-gradient(to right, #233D4D, #619B8A);
+            color: gray;
+        }
+    </style>
 
 </head>
 <body>
-<div th:replace="partials/navbar :: navbar"></div>
+    <div th:replace="partials/navbar :: navbar"></div>
 
 
-<div class="container mt-3">
-    <th:block th:if="${!trades.isEmpty()}">
-        <div class="row" th:each="trade:${trades}" th:if="${trade.pending}">
-            <div class="col-12 mx-auto">
-                <div class="card" th:object="${trade}">
-                    <div class="row">
-                        <div class="offer col-lg-6 col-md-6 col-sm-12">
-                            <h5 class="text-center"><span th:text="*{from.username}" class="text-capitalize"></span>
-                                offers:</h5>
-                            <ul class="list-unstyled ">
-                                <th:block th:each="book: *{wanted.books}">
-                                    <li class="border-bottom" th:text="${book.title} + ' by ' + ${book.author}"></li>
-                                </th:block>
-                            </ul>
+    <div class="container mt-3">
+        <div class="my-3">
+            <a th:href="@{/profile}" ><i class="fas fa-arrow-left"></i> Back to Profile</a>
+        </div>
+        <h1 class="heading">My Trade Requests</h1>
+        <th:block th:if="${!trades.isEmpty()}">
+            <div class="row" th:each="trade:${trades}" th:if="${trade.pending}">
+                <hr class="mt-2 mb-5 w-100"/>
+                <div class="col-12 mx-auto">
+                    <div class="card" th:object="${trade}">
+                        <div class="row">
+                            <div class="offer col-lg-6 col-md-6 col-sm-12">
+                                <h5 class="text-center"><span th:text="*{from.username}" class="text-capitalize"></span> offers:</h5>
+                                <ul class="list-unstyled">
+                                    <li th:replace="partials/books :: trade-books(*{wanted.books})"></li>
+                                </ul>
+                            </div>
+                            <div class="yours col-lg-6 col-md-6 col-sm-12 border-left">
+                                <h5 class="text-center">In exchange for:</h5>
+                                <ul class="list-unstyled">
+                                    <li th:replace="partials/books :: trade-books(*{forSale.books})"></li>
+                                </ul>
+                            </div>
                         </div>
-                        <div class="yours col-lg-6 col-md-6 col-sm-12">
-                            <h5 class="text-center">In exchange for:</h5>
-                            <ul class="list-unstyled">
-                                <th:block th:each="book: *{forSale.books}">
-                                    <li class="border-bottom" th:text="${book.title} + ' by ' + ${book.author}"></li>
-                                </th:block>
-                            </ul>
-                        </div>
+                        <form th:action="@{/profile/trades}" method="post" class="my-3">
+                            <input type="text" name="id" th:value="*{id}" hidden="hidden"/>
+                            <button class="btn btn-success offset-1 col-4" name="choice" th:value="'confirm'">Confirm
+                                Trade
+                            </button>
+                            <button class="btn btn-danger offset-2 col-4" name="choice" th:value="'deny'">Reject Trade
+                            </button>
+                        </form>
                     </div>
-                    <form th:action="@{/profile/trades}" method="post">
-                        <input type="text" name="id" th:value="*{id}" hidden="hidden"/>
-                        <button class="btn btn-success offset-1 col-4" name="choice" th:value="'confirm'">Confirm
-                            Trade
-                        </button>
-                        <button class="btn btn-danger offset-2 col-4" name="choice" th:value="'deny'">Reject Trade
-                        </button>
-                    </form>
                 </div>
             </div>
-        </div>
-    </th:block>
-    <th:block th:if="${trades.isEmpty()}">
-        <div class="offset-lg-3 col-lg-6">
-            <div class="card text-center">
-                <h4> You have no pending trade requests.</h4>
+        </th:block>
+        <th:block th:if="${trades.isEmpty()}">
+            <hr class="mt-2 mb-5 w-100"/>
+            <div class="offset-lg-3 col-lg-6 col">
+                <div class="card text-center">
+                    <h4>No pending trade requests.</h4>
+                </div>
             </div>
-        </div>
-    </th:block>
-</div>
+        </th:block>
+    </div>
 </body>
 </html>

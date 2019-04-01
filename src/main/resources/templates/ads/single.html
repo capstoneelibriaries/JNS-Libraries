@@ -1,65 +1,73 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
-    <link th:replace="partials/header :: header('Viewing Ad')"/>
+    <link th:replace="partials/header :: header('Viewing Ad: '+${ad.adTitle})"/>
+    <style>
+        body {
+            background: #233D4D;
+            background: linear-gradient(to right, #233D4D, #619B8A);
+            color: lightgray;
+        }
+    </style>
 </head>
 <body>
 <nav th:replace="partials/navbar :: navbar"></nav>
-<div th:if="${param.error}" class="alert alert-warning" role="alert">
-    You can not trade with yourself.
-</div>
-<div th:if="${param.noads}" class="alert alert-warning" role="alert">
-    You have no books to trade.
-</div>
-<div th:object="${ad}" class="">
-    <div>
-        <h1 th:text="*{adTitle}"></h1>
+<div class="container mt-3">
+    <div class="my-3">
+        <a onclick="window.history.back()" href="#"><i class="fas fa-arrow-left"></i> Go Back</a>
     </div>
-    <div>
-        <h5 th:text="*{description}"></h5>
+    <div th:if="${param.error}" class="alert alert-warning" role="alert">
+        You can not trade with yourself.
     </div>
-    <div th:each="book : *{books}">
-        <p th:text="${book.author}"></p>
-        <p th:text="'Condition: '+${book.wear}"></p>
-        <div>
-            <th:block th:each="genre : ${book.genres}">
-                <span th:text="${genre}"></span>
+    <div th:if="${param.noads}" class="alert alert-warning" role="alert">
+        You have no books to trade.
+    </div>
+    <div class="row" th:object="${ad}">
+        <div class="col-lg-4 col-sm-12" id="trade-block">
+            <h1 th:text="*{adTitle}"></h1>
+            <h4 th:text="*{description}"></h4>
+            <h5>Trade Owner: <span class="text-capitalize" th:text="${ad.seller.username}"></span></h5>
+            <h6 class="text-right" th:text="'Trade Value: $'+*{price}"></h6>
+            <h6 class="text-right" th:text="'Shipping: '+'Free'" th:if="*{shipping==0}"></h6>
+            <h6 class="text-right" th:text="'Shipping: $'+*{shipping}" th:if="*{shipping>0}"></h6>
+            <th:block sec:authorize="isAuthenticated()" th:object="${ad}">
+                <!-- Edit/Delete button if you own the ad -->
+                <th:block th:if="${user.id == ad.seller.getId()}">
+                    <form th:action="@{/ads/{id}/edit (id=*{id})}">
+                        <button class="btn-warning btn-block ml-2 mr-2 my-4" type="submit">Edit</button>
+                    </form>
+                    <form th:action="@{/ads/{id}/delete (id=*{id})}" method="POST">
+                        <button class="btn-danger btn-block ml-2 mr-2" type="submit">Delete</button>
+                    </form>
+                </th:block>
+            </th:block>
+            <th:block th:object="${ad}">
+                <form class="mt-3" th:action="@{/ads/{id}/trade(id=*{id})}" th:method="GET">
+                    <button class="offset-3 col-6 btn-primary btn-success" type="submit" sec:authorize="isAuthenticated()" th:if="${user.id != ad.seller.getId()}">Offer Trade</button>
+                    <button class="offset-3 col-6 btn-primary" type="submit" sec:authorize="!isAuthenticated()">Sign in to trade</button>
+                </form>
             </th:block>
         </div>
-    </div>
-    <div>
-        <p>Sold by: <span th:text="${ad.seller.username}"></span></p>
-        <p th:text="'Price: $'+*{price}"></p>
-        <p th:text="'Shipping: $'+*{shipping}" th:if="*{shipping>0}"></p>
-        <p th:text="'Shipping: '+'Free'" th:if="*{shipping==0}"></p>
-    </div>
-    <th:block sec:authorize="isAuthenticated()" >
-        <th:block th:if="${user.id == ad.seller.getId()}">
-            <form th:action="@{/ads/{id}/edit (id=*{id})}">
-                <button class="btn btn-md btn-warning" type="submit">Edit</button>
-            </form>
-            <form th:action="@{/ads/{id}/delete (id=*{id})}" method="POST">
-                <button class="btn btn-md btn-danger" type="submit">Delete</button>
-            </form>
-        </th:block>
-    </th:block>
-
-    <th:block th:if="${false}">
-        <!-- TODO: Replace with paypal purchase button -->
-        <form th:action="@{/ads/{id}/buy(id=*{id})}" th:method="GET">
-            <button>Buy</button>
-        </form>
-        <!--TODO: match styling with paypal button -->
-    </th:block>
-
-    <form th:action="@{/ads/{id}/trade(id=*{id})}" th:method="GET" th:if="*{tradable}"
-          sec:authorize="isAuthenticated()">
-        <button>Offer Trade</button>
-    </form>
-    <div th:if="*{tradable}" sec:authorize="!isAuthenticated()">
-        <button th:disabled="disabled">Offer Trade</button>
-        <a th:href="@{/login}">Sign in to trade</a>
+        <div class="col-lg-8 col-sm-12">
+            <div class="row" th:each="book : ${ad.books}">
+                <div class="col-12">
+                    <div class="row">
+                        <div class="my-3 col-lg-5 col-sm-12 ">
+                            <img class="img img-thumbnail rounded d-block mx-auto" th:src="${book.getImageUrl()}"/>
+                        </div>
+                        <div class="mt-3 col-lg-7 col-sm-12">
+                            <h5 class="" th:text="${book.title}"></h5>
+                            <p th:text="'By ' + ${book.author}"></p>
+                            <p th:text="'Condition: '+${book.wear}+ ' out of 5'"></p>
+                            <p th:text="'Synopsis: '+ ${book.synopsis}"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+<script th:src="@{/js/jquery.js}"></script>
+<script th:src="@{/js/scroll-view.js}"></script>
 </body>
 </html>

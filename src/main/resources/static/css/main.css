@@ -1,6 +1,6 @@
 body {
-    background: #619B8A;
-    background: linear-gradient(to right, #619B8A, #A1C181);
+    background: #233D4D;
+    background: linear-gradient(to right, #233D4D, #619B8A);
 }
 
 div.radiogroup div.ad {
@@ -16,6 +16,133 @@ label:focus, input:focus  {
     border-radius: 1em;
 }
 
+:root {
+    --input-padding-x: 1.5rem;
+    --input-padding-y: .75rem;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #233D4D;
+    border-color: #233D4D;
+}
+
+.card-signin {
+    border: 0;
+    border-radius: 1rem;
+    box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.card-signin .card-title {
+    margin-bottom: 2rem;
+    font-weight: 300;
+    font-size: 1.5rem;
+}
+
+.card-signin .card-img-left {
+    width: 45%;
+    background: scroll center url('https://source.unsplash.com/HH4WBGNyltc/414x512');
+    background-size: cover;
+}
+
+.card-signin .card-body {
+    padding: 2rem;
+}
+
+.form-signin {
+    width: 100%;
+}
+
+.form-signin .btn {
+    font-size: 80%;
+    border-radius: 5rem;
+    letter-spacing: .1rem;
+    font-weight: bold;
+    padding: 1rem;
+    transition: all 0.2s;
+}
+
+.form-label-group {
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+.form-label-group input,
+.form-label-group select,
+.form-label-group textarea {
+    height: auto;
+    border-radius: 2rem;
+}
+
+.form-label-group>input,
+.form-label-group>select,
+.form-label-group>label,
+.form-label-group>textarea{
+    padding: var(--input-padding-y) var(--input-padding-x);
+}
+
+.form-label-group>label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    margin-bottom: 0;
+    /* Override default `<label>` margin */
+    line-height: 1.5;
+    color: #495057;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+    transition: all .1s ease-in-out;
+}
+
+.form-label-group input::-webkit-input-placeholder,
+.form-label-group select::-webkit-input-placeholder,
+.form-label-group textarea::-webkit-input-placeholder {
+    color: transparent;
+}
+
+.form-label-group input:-ms-input-placeholder,
+.form-label-group select:-ms-input-placeholder,
+.form-label-group textarea:-ms-input-placeholder {
+    color: transparent;
+}
+
+.form-label-group input::-ms-input-placeholder,
+.form-label-group select::-ms-input-placeholder,
+.form-label-group textarea::-ms-input-placeholder {
+    color: transparent;
+}
+
+.form-label-group input::-moz-placeholder,
+.form-label-group select::-moz-placeholder,
+.form-label-group textarea::-moz-placeholder {
+    color: transparent;
+}
+
+.form-label-group input::placeholder,
+.form-label-group select::placeholder,
+.form-label-group textarea::placeholder {
+    color: transparent;
+}
+
+.form-label-group input:not(:placeholder-shown),
+.form-label-group select:not(:placeholder-shown),
+.form-label-group textarea:not(:placeholder-shown) {
+    padding-top: calc(var(--input-padding-y) + var(--input-padding-y) * (2 / 3));
+    padding-bottom: calc(var(--input-padding-y) / 3);
+}
+
+.form-label-group input:not(:placeholder-shown)~label,
+.form-label-group select:not(:placeholder-shown)~label,
+.form-label-group textarea:not(:placeholder-shown)~label {
+    padding-top: calc(var(--input-padding-y) / 3);
+    padding-bottom: calc(var(--input-padding-y) / 3);
+    font-size: 12px;
+    color: #777;
+}
+
 .ad{
     margin: 1em;
 }
@@ -23,17 +150,21 @@ label:focus, input:focus  {
     padding: 1em;
     border-radius: 1rem;
     margin-bottom: 1em;
+    background-color: #f8f9fa!important;
 }
 #trade  {
     margin: 5em auto;
     max-height: 4em;
     max-width: 8em;
 }
-@media screen and (max-width: 768px) {
-    #trade  {
-        transform: rotate(90deg);
-        margin: 2em auto;
-    }
+
+.img{
+    height: 375px;
+    width: 250px;
+}
+
+#address{
+    text-align: right;
 }
 
 .img-thumbnail{
@@ -47,4 +178,58 @@ label:focus, input:focus  {
     font-size: 79%;
     margin-left: 8px;
     text-transform: uppercase;
+}
+.mt {
+    margin-top: 10rem!important;
+}
+.heading,
+.profile-header,
+.books,
+a {
+    color: lightgrey;
+}
+.book-cover{
+    max-height: 350px !important;
+    max-width: 250px !important;
+    height: 350px !important;
+    width: 250px !important;
+}
+
+.trade-book-cover{
+    height: 200px !important;
+    width: 150px !important;
+    max-height: 200px !important;
+    max-width: 150px !important;
+}
+a:hover {
+    color: white;
+    text-decoration: none;
+}
+.btn-primary {
+    color: #fff;
+    background-color: #233D4D;
+    border-color: #233D4D;
+}
+.brief{
+    max-width: 80%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.book-title{
+    height: 2.5em;
+}
+@media screen and (max-width: 991px) {
+    #trade  {
+        transform: rotate(90deg);
+        margin: 2em auto;
+    }
+    .img {
+        height: auto;
+        width: 70%;
+    }
+    .yours {
+        border-left: 0 !important;
+        border-bottom: 1px solid #dee2e6!important ;
+    }
 }
