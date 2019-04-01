@@ -17,6 +17,9 @@
         <div th:if="${param.username_taken}" class="alert alert-danger" role="alert">
             Sorry. That username is taken.
         </div>
+        <div th:if="${param.password}" class="alert alert-danger" role="alert">
+            Password field can not be empty.
+        </div>
         <div th:if="${param.email_taken}" class="alert alert-danger" role="alert">
             Sorry. That email is taken.
         </div>

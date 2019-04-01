@@ -5,9 +5,9 @@ import capstone.elibraries.forms.UserSettings;
 import capstone.elibraries.models.Address;
 import capstone.elibraries.models.TradeRequest;
 import capstone.elibraries.models.Transaction;
+import capstone.elibraries.repositories.Addresses;
 import capstone.elibraries.repositories.TradeRequests;
 import capstone.elibraries.repositories.Transactions;
-import capstone.elibraries.repositories.Addresses;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -83,6 +83,10 @@ public class UserController {
         if(!setting.getNewpass().equals(setting.getConfnewpass())){
             return "redirect:/profile/settings?mismatched";
         }
+        // if the passwords are empty
+        if(!setting.getNewpass().isEmpty() && !setting.getConfnewpass().isEmpty()){
+            return "redirect:/profile/settings?password";
+        }
         // see if the user by the name already exists
         check = users.findByUsername(setting.getUsername());
         if(check != null && !check.equals(current)){
@@ -130,30 +134,34 @@ public class UserController {
     }
 
     @PostMapping("/profile/addresses")
-    public String postAddress(HttpServletRequest req){
+    public String postAddress(HttpServletRequest req) {
         User current = getCurrentUser();
+        List<Address> oldAddr = addrRepo.findAllByUser(current);
+        Address oldBilling = oldAddr.get(0);
+        Address oldShipping = oldAddr.get(1);
+        Address billing = new Address(req, "billing");
+        Address shipping = new Address(req, "shipping");
 
-        List<Address> addr = new ArrayList<>(2);
-        addr.add(new Address(req, "billing"));
-        addr.add(new Address(req, "shipping"));
-        current.setAddresses(addr);
+        oldBilling.setStreetAddr(billing.getStreetAddr());
+        oldBilling.setSubAddr(billing.getSubAddr());
+        oldBilling.setCountry(billing.getCountry());
+        oldBilling.setCity(billing.getCity());
+        oldBilling.setState(billing.getState());
+        oldBilling.setZipcode(billing.getZipcode());
 
-        System.out.println(current.getBillingAddress().toJson());
-        System.out.println(current.getShippingAddress().toJson());
+        oldShipping.setStreetAddr(shipping.getStreetAddr());
+        oldShipping.setSubAddr(shipping.getSubAddr());
+        oldShipping.setCountry(shipping.getCountry());
+        oldShipping.setCity(shipping.getCity());
+        oldShipping.setState(shipping.getState());
+        oldShipping.setZipcode(shipping.getZipcode());
 
-        addrRepo.updateById(current.getBillingAddress().getId(),
-                current.getBillingAddress().isBilling(), current.getBillingAddress().getCity(),
-                current.getBillingAddress().getCountry(), current.getBillingAddress().getState(),
-                current.getBillingAddress().getStreetAddr(), current.getBillingAddress().getSubAddr());
-        addrRepo.updateById(current.getShippingAddress().getId(),
-                current.getShippingAddress().isBilling(), current.getShippingAddress().getCity(),
-                current.getShippingAddress().getCountry(), current.getShippingAddress().getState(),
-                current.getShippingAddress().getStreetAddr(), current.getShippingAddress().getSubAddr());
-//        addrRepo.save(current.getBillingAddress());
-//        addrRepo.save(current.getShippingAddress());
+        users.save(current);
 
         return "redirect:/profile";
     }
+
+
 
     @GetMapping("/profile/transactions")
     public String showTransactions(Model model) {
