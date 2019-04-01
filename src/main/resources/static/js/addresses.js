@@ -1,19 +1,19 @@
 const address = {
-    streetAddr: "-streetAddr",
-    subAddr: "-subAddr",
-    country: "-country",
-    city: "-city",
-    state: "-state",
-    zipcode: "-zipcode"
+    streetAddr: "",
+    subAddr: "",
+    country: "",
+    city: "",
+    state: "",
+    zipcode: ""
 };
 
 const newAddress = (name) => {
     console.log("DEBUG: newAddress(...)");
 
-    let self = address;
+    let self = Object.create(address);
 
     Object.keys(address).forEach( (key) => {
-        self[key] = `${name}-${key}`;
+        self[key] = `#${name}-${key}`;
     });
 
     return self;
@@ -21,14 +21,12 @@ const newAddress = (name) => {
 
 const autofill = (form, data) => {
     console.log("DEBUG: autofill(...)");
-    console.log(this);
-
-    $(`#${form.streetAddr}`).val(data.address1);
-    $(`#${form.subAddr}`).val(data.address2);
-    $(`#${form.country}`).val(data.country);
-    $(`#${form.city}`).val(data.city);
-    $(`#${form.state}`).val(data.state);
-    $(`#${form.zipcode}`).val(data.zipcode);
+    $(`${form.streetAddr}`).val(data.address1);
+    $(`${form.subAddr}`).val(data.address2);
+    $(`${form.country}`).val(data.country);
+    $(`${form.city}`).val(data.city);
+    $(`${form.state}`).val(data.state);
+    $(`${form.zipcode}`).val(data.zipcode);
 };
 
 function addresses(userId){
@@ -42,11 +40,11 @@ function addresses(userId){
         const addr = JSON.parse(req.responseText);
         console.log(addr);
 
-        let billing = newAddress("billing");
-        let shipping = newAddress("shipping");
+        const billing = newAddress("billing");
+        const shipping = newAddress("shipping");
 
-        autofill(addr[0]);
-        autofill(addr[1]);
+        autofill(billing, addr[0]);
+        autofill(shipping, addr[1]);
 
         console.log(billing);
         console.log(shipping);

@@ -15,16 +15,20 @@
         .row{
             height: 500px;
         }
+        .book-cover-profile{
+            height: 150px;
+            width: 75px;
+        }
     </style>
 </head>
 <body>
-<div th:replace="partials/navbar :: navbar"></div>
-<div id="profile">
+    <div th:replace="partials/navbar :: navbar"></div>
+    <div id="profile">
 
 
-    <div class="container">
+        <div class="container">
 
-        <h1 class="font-weight-medium text-center text-lg-left mt-4 mb-0 profile-header"><i class="fas fa-book"></i> My Books</h1>
+            <h1 class="font-weight-medium text-center text-lg-left mt-4 mb-0 profile-header"><i class="fas fa-book"></i> My Books</h1>
 
         <hr class="mt-2 mb-5"/>
         <div th:if="${param.trade}" class="alert alert-success" role="alert">
@@ -39,41 +43,36 @@
                     <div class="card text-center">
                         <h4> No trades have been created.</h4>
                     </div>
-                </div>
-            </th:block>
-            <th:block th:if="${!user.ads.isEmpty()}">
-                <div class="col-lg-3 col-md-4 col-6 mb-3 mt-1" th:each="ad:${user.ads}" th:if="${ad.pending}">
-                    <a th:href="@{/ads/view={id} (id=${ad.id})}" class="books module">
+                </th:block>
+                <th:block th:if="${!user.ads.isEmpty()}">
+                    <div class="col-lg-3 col-md-4 col-6 mb-3 mt-1" th:each="ad:${user.ads}" th:if="${ad.pending}">
+                        <a th:href="@{/ads/view={id} (id=${ad.id})}" class="books module">
                         <h5 th:text="*{ad.adTitle}"></h5>
-                        <th:block th:each="book:${ad.books}">
-                            <img class="img-fluid book-cover" th:src="${book.imageUrl}" alt="book-image"/>
-                            <p th:text="${book.title}"></p>
-                            <p th:text="${book.author}"></p>
-                        </th:block>
-                    </a>
-                </div>
-            </th:block>
-        </div>
-    </div>
-    <!--<div class="container">-->
-    <!--<div class="row u-max-full-width">-->
-    <!--<div class="three columns" th:each="ad:${user.ads}">-->
-    <!--<div class="card" th:each="book:${ad.books}">-->
-    <!--<img th:src="${book.imageUrl}" alt="book"/>-->
-    <!--<h4 th:text="${book.title}"></h4>-->
-    <!--<h5 th:text="${book.author}"></h5>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--</div>-->
-    <div class="carousel-item">
-        <img src="..." alt="..."/>
-        <div class="carousel-caption d-none d-md-block">
-            <h5>...</h5>
-            <p>...</p>
-        </div>
-    </div>
+                        </a>
 
-</div>
+
+                        <div class="card">
+                            <button class="btn btn-primary" type="button"
+                                    data-toggle="collapse" data-target="#collapseExample"
+                                    aria-expanded="false" aria-controls="collapseExample"
+                            >See Books</button>
+                        </div>
+                        <div class="collapse" id="collapseExample">
+                            <div class="card card-body">
+                                <a th:href="@{/ads/view={id} (id=${ad.id})}" class="books module">
+                                    <th:block th:each="book:${ad.books}">
+                                        <img class="img-fluid book-cover-profile" th:src="${book.imageUrl}" alt="book-image"/>
+                                    </th:block>
+                                </a>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </th:block>
+            </div>
+        </div>
+
+    </div>
 </body>
 </html>

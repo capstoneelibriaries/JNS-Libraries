@@ -40,7 +40,7 @@
                 <form th:method="post" th:action="@{/ads/create}" class="form-signin">
                     <div th:object="${ad}">
                         <div>
-                            <h2 class="text-center mt-2">Trade Information</h2>
+                            <h4 class="text-center mt-2">Trade Information</h4>
                             <div class="form-label-group">
                                 <input th:field="*{adTitle}"
                                        th:id="ad-title"
@@ -154,7 +154,7 @@
                     <!-- A new book the user can add to the list of books -->
                     <hr/>
                     <div th:object="${newbook}">
-                        <h2 class="text-center mt-2">Book Information</h2>
+                        <h4 class="text-center mt-2">Book Information</h4>
                         <h6 class="text-center">Enter a valid ISBN</h6>
                         <div class="form-label-group">
                             <input th:field="*{isbn}"
