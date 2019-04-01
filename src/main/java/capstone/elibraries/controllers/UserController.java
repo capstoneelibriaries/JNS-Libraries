@@ -57,9 +57,11 @@ public class UserController {
 
     @GetMapping("/profile")
     public String showProfileForm(Model model) {
-        User databaseUser = users.findOne(((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId());
+        User current = this.getCurrentUser();
 
-        model.addAttribute("user", databaseUser);
+        System.out.format("DEBUG: user.hasAddress(): %s\n",  current.hasAddress());
+
+        model.addAttribute("user", current);
         return "users/profile";
     }
 
@@ -121,8 +123,8 @@ public class UserController {
         Address billing = current.getBillingAddress();
         Address shipping = current.getShippingAddress();
 
-        billing = (billing == null) ? new Address() : billing;
-        shipping = (shipping == null) ? new Address() : shipping;
+        billing = (billing == null) ? new Address().asEmpty() : billing;
+        shipping = (shipping == null) ? new Address().asEmpty() : shipping;
 
         return String.format("[%s,%s]", billing.toJson(), shipping.toJson());
     }
@@ -136,15 +138,26 @@ public class UserController {
         addr.add(new Address(req, "shipping"));
         current.setAddresses(addr);
 
-        this.addrRepo.save(addr.get(0));
-        this.addrRepo.save(addr.get(1));
+        System.out.println(current.getBillingAddress().toJson());
+        System.out.println(current.getShippingAddress().toJson());
+
+        addrRepo.updateById(current.getBillingAddress().getId(),
+                current.getBillingAddress().isBilling(), current.getBillingAddress().getCity(),
+                current.getBillingAddress().getCountry(), current.getBillingAddress().getState(),
+                current.getBillingAddress().getStreetAddr(), current.getBillingAddress().getSubAddr());
+        addrRepo.updateById(current.getShippingAddress().getId(),
+                current.getShippingAddress().isBilling(), current.getShippingAddress().getCity(),
+                current.getShippingAddress().getCountry(), current.getShippingAddress().getState(),
+                current.getShippingAddress().getStreetAddr(), current.getShippingAddress().getSubAddr());
+//        addrRepo.save(current.getBillingAddress());
+//        addrRepo.save(current.getShippingAddress());
 
         return "redirect:/profile";
     }
 
     @GetMapping("/profile/transactions")
     public String showTransactions(Model model) {
-        User databaseUser = users.findOne(((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId());
+        User databaseUser = this.getCurrentUser();
         model.addAttribute("transactions", transactions.findAllBySellerOrBuyerOrderByDateAsc(databaseUser, databaseUser));
         model.addAttribute("user", databaseUser);
         return "users/transactions";
@@ -152,7 +165,7 @@ public class UserController {
 
     @GetMapping("/profile/trades")
     public String showTradeRequests(Model model) {
-        User databaseUser = users.findOne(((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId());
+        User databaseUser = this.getCurrentUser();
         List<TradeRequest> t = (List<TradeRequest>) trades.findTradeRequestByPendingIsTrueAndTo(databaseUser) ;
         model.addAttribute("trades", t);
         return "users/trades";
@@ -164,7 +177,7 @@ public class UserController {
         tradeRequest.setPending(false);
 
         if (choice.equalsIgnoreCase("confirm")){
-            User databaseUser = users.findOne(((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId());
+            User databaseUser = this.getCurrentUser();
 
             tradeRequest.getWanted().setSeller(tradeRequest.getForSale().getSeller());
             tradeRequest.getForSale().setSeller(databaseUser);
@@ -190,6 +203,12 @@ public class UserController {
             String hash = passwordEncoder.encode(user.getPassword());
             user.setPassword(hash);
             user.setConfirmPassword("");
+            // create a list of address
+            List<Address> addrs = new ArrayList<>(2);
+            addrs.add(new Address().asEmpty());
+            addrs.add(new Address().asEmpty());
+            // set the addresses, then save
+            user.setAddresses(addrs);
             users.save(user);
             return "redirect:/login?success";
         }else{

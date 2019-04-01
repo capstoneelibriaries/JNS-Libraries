@@ -51,9 +51,6 @@ public class User {
     @Transient
     private List<Transaction> transactions;
 
-    @Transient
-    private ValidationException isvalid;
-
     public User(){
         // default
     }
@@ -196,14 +193,19 @@ public class User {
         this.ads = ads;
     }
 
-    public void setAddresses(List<Address> address){
+    public void setAddresses(final List<Address> address){
         if(this.addresses == null){
             this.addresses = new ArrayList<>(2);
         }
 
         this.addresses = address;
-        for(Address addr : address){
+        for(Address addr : this.addresses){
             addr.setUser(this);
+            if(addr.isBilling()){
+                addr.setId((this.id * 2) - 1);
+            }else{
+                addr.setId(this.id * 2);
+            }
         }
     }
 
@@ -222,10 +224,11 @@ public class User {
     }
 
     public boolean hasAddress(){
-        if(this.addresses == null || this.addresses.get(0) == null || this.addresses.get(1) == null){
+        try {
+            return this.getBillingAddress().isComplete() && this.getShippingAddress().isComplete();
+        }catch(NullPointerException e){
             return false;
         }
-        return !(this.addresses.get(0).isComplete() && this.addresses.get(1).isComplete());
     }
 
     public boolean equals(User other){

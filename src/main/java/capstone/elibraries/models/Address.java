@@ -4,7 +4,7 @@ import javax.persistence.*;
 import javax.servlet.http.HttpServletRequest;
 
 @Entity @Table(name = "addresses")
-public class Address {
+public class Address implements Cloneable {
 
     @Id @GeneratedValue
     private long id;
@@ -114,15 +114,33 @@ public class Address {
         this.zipcode = zipcode;
     }
 
+    public void setEmpty(){
+        this.streetAddr = "";
+        this.subAddr = "";
+        this.country = "";
+        this.state = "";
+        this.city = "";
+        this.zipcode = "";
+    }
+
+    public Address asEmpty(){
+        this.setEmpty();
+        return this;
+    }
+
     public boolean isComplete(){
-        if(this.streetAddr == null || this.subAddr == null || this.country == null || this.city == null){
+        try {
+            if (this.streetAddr == null || this.subAddr == null || this.country == null || this.city == null) {
+                return false;
+            } else if (this.streetAddr.equals("") || this.country.equals("") || this.city.equals("")) {
+                return false;
+            } else if (this.country.equals("United States") && (this.state.equals("") || this.zipcode.equals(""))) {
+                return false;
+            } else {
+                return true;
+            }
+        }catch(NullPointerException e){
             return false;
-        }else if(this.streetAddr.equals("") || this.country.equals("") || this.city.equals("")){
-            return false;
-        }else if(this.country.equals("United States") && (this.state.equals("") || this.zipcode.equals(""))){
-            return false;
-        }else{
-            return true;
         }
     }
 
@@ -136,7 +154,6 @@ public class Address {
 
         return String.format("{" +
                 "\"id\":\"%s\"," +
-                "\"user\":\"%s\"," +
                 "\"billing\":\"%s\"," +
                 "\"address1\":\"%s\"," +
                 "\"address2\":\"%s\"," +
@@ -144,9 +161,20 @@ public class Address {
                 "\"city\":\"%s\"," +
                 "\"state\":\"%s\"," +
                 "\"zipcode\":\"%s\"" +
-                "}", this.id, this.user.getId(),
+                "}", this.id,
                 this.billing, this.streetAddr, this.subAddr,
                 this.country, this.city, this.state, this.zipcode);
     }
 
+//    @Override
+//    public Address clone(){
+//        Address clone = new Address();
+//        clone.setStreetAddr(this.streetAddr);
+//        clone.setSubAddr(this.subAddr);
+//        clone.setCountry(this.country);
+//        clone.setState(this.state);
+//        clone.setCity(this.city);
+//        clone.setZipcode(this.zipcode);
+//        return clone;
+//    }
 }
