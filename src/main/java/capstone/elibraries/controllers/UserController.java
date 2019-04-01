@@ -141,8 +141,16 @@ public class UserController {
         System.out.println(current.getBillingAddress().toJson());
         System.out.println(current.getShippingAddress().toJson());
 
-        addrRepo.save(current.getBillingAddress());
-        addrRepo.save(current.getShippingAddress());
+        addrRepo.updateById(current.getBillingAddress().getId(),
+                current.getBillingAddress().isBilling(), current.getBillingAddress().getCity(),
+                current.getBillingAddress().getCountry(), current.getBillingAddress().getState(),
+                current.getBillingAddress().getStreetAddr(), current.getBillingAddress().getSubAddr());
+        addrRepo.updateById(current.getShippingAddress().getId(),
+                current.getShippingAddress().isBilling(), current.getShippingAddress().getCity(),
+                current.getShippingAddress().getCountry(), current.getShippingAddress().getState(),
+                current.getShippingAddress().getStreetAddr(), current.getShippingAddress().getSubAddr());
+//        addrRepo.save(current.getBillingAddress());
+//        addrRepo.save(current.getShippingAddress());
 
         return "redirect:/profile";
     }

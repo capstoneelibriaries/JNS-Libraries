@@ -51,9 +51,6 @@ public class User {
     @Transient
     private List<Transaction> transactions;
 
-    @Transient
-    private ValidationException isvalid;
-
     public User(){
         // default
     }
