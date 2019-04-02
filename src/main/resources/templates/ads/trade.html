@@ -7,6 +7,14 @@
             background: #233D4D;
             background: linear-gradient(to right, #233D4D, #619B8A);
         }
+        .make-offer{
+            background-color: #28a745;
+            border-color: #28a745;
+        }
+        .img-thumbnail {
+            background-color: whitesmoke;
+            border: 1px solid #79797938;
+        }
     </style>
 
 </head>
@@ -31,7 +39,9 @@
                     <img class="col-lg-3 col-md-3 col-sm-12" th:src="@{/images/trade-arrow.png}" alt="trade icon" id="trade"/>
                 </div>
                 <div class="row my-3">
-                    <button class="offset-lg-2 col-lg-5 offset-3 col-6 btn-primary btn-success btn-block" id="send-offer" type="submit">Make Offer</button>
+                    <button class="offset-lg-2 col-lg-5 offset-3 col-6 btn-primary btn-success btn-block make-offer" id="send-offer"
+                            type="submit">Make
+                        Offer</button>
                 </div>
             </div>
             <div class="col-lg-6 col-md-4 col-sm-12">

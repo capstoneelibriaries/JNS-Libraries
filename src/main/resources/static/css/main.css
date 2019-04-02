@@ -163,7 +163,7 @@ label:focus, input:focus  {
 }
 
 .img{
-    height: 375px;
+    height: 350px;
     width: 250px;
 }
 
@@ -211,8 +211,12 @@ a:hover {
 }
 .btn-primary {
     color: #fff;
-    background-color: #233D4D;
-    border-color: #233D4D;
+    background-color: #28a745;
+    border-color: #28a745;
+}
+.btn-success{
+    background-color: #28a745;
+    border-color: #28a745;
 }
 .brief{
     max-width: 80%;
