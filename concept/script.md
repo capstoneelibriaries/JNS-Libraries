@@ -66,8 +66,7 @@ We're now taken to the trade page. On the left side, we have the owner's trade a
 that we can use to make an offer. I did this by using SQL queries in the **Hibernate ORM** to retrieve information from both
 users and trades. Then constructed models of the trades and displayed them, *iteratively* through **Thymeleaf**.
 
-We'll select the trade we just listed, and make an offer. When this button is clicked, a *post* request is submitted, whichbuilds 
-a *trade request object*, containing *references* to both users and trades, and is saved to the database via *Hibernate*.
+We'll select the trade we just listed, and make an offer. When this button is clicked, a *post* request is submitted, which builds a *trade request object*, containing *references* to both users and trades, and is saved to the database via *Hibernate*.
 
 Now we'll log out of this user and log in as the trade recipient to see how trade confirmation works.
 
