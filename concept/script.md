@@ -26,9 +26,15 @@ to edit the information, or delete the listing all together, and now, my partner
 
 ## Creating New Trade and Searching
 
+#### The Address Form
+
+Thank you Sam. One the profile page, you'll see there's a big warning message saying our address information is incomplete.
+We'll need to submit some address information. With incomplete address info, we won't be able to trade with any other users.
+Once the address form is complete, we can go about creating an ad and listing books.
+
 #### Listing a Book
 
-Thank you Sam. Let's create a new trade. In order to do this we'll need a title for the trade, a description, a value we believe 
+Let's submit some books to trade. In order to do this we'll need a title for the trade, a description, a value we believe 
 our books are worth, a shipping value, and finally a book. 
 
 For the book itself, we only need to enter the *ISBN*. The reason for this is because I was able to automate the form
