@@ -66,7 +66,7 @@ Now we'll log out of this user and log in as the trade recipient to see how trad
 
 #### Viewing Pending Trade Requests
 
-Upon logging in, we'll navigate to *My Trade Reqeusts*, where we can see a list of *pending* trade offers. Like before,
+Upon logging in, we'll navigate to *My Trade Requests*, where we can see a list of *pending* trade offers. Like before,
 I constructed this using **Hibernate** and *form-model-binding* through **Thymeleaf**.
 
 Let's confirm the trade request. Behind the scenes, the *pending* status of the trade request and trades are terminated. 
