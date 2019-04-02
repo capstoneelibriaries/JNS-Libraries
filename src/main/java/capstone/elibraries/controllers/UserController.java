@@ -70,7 +70,7 @@ public class UserController {
         User current = this.getCurrentUser();
 
         model.addAttribute("setting", new UserSettings(current));
-        return "/users/settings";
+        return "users/settings";
     }
 
     @PostMapping("/profile/settings")
@@ -113,7 +113,7 @@ public class UserController {
         User current = this.getCurrentUser();
 
         model.addAttribute("userId", current.getId());
-        return "/users/addresses";
+        return "users/addresses";
     }
 
     @GetMapping("/profile/addresses/{userId}")

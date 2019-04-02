@@ -59,7 +59,7 @@ public class AdsController {
             return "ads/single";
         } catch (ValidationException e){
             model.addAttribute("error", e);
-            return "/error/validation";
+            return "error/validation";
         } catch (ClassCastException e){
             return "ads/single";
         }

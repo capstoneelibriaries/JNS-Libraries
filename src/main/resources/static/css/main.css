@@ -75,6 +75,10 @@ label:focus, input:focus  {
     border-radius: 2rem;
 }
 
+#book-wear{
+    height: 3em;
+}
+
 .form-label-group>input,
 .form-label-group>select,
 .form-label-group>label,

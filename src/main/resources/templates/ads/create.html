@@ -199,14 +199,14 @@
                         </div>
                         <div class="form-label-group">
                             <select class="form-control" required="required" id="book-wear" th:field="*{wear}">
-                                <option th:value="0" selected="selected" disabled="disabled" hidden="hidden"></option>
+                                <option th:value="0" selected="selected" disabled="disabled" hidden="hidden">Condition</option>
                                 <option th:value="5">Like New</option>
                                 <option th:value="4">Good</option>
                                 <option th:value="3">Fair</option>
                                 <option th:value="2">Poor</option>
                                 <option th:value="1">Very Poor</option>
                             </select>
-                            <label for="book-wear">Condition</label>
+                            <!--<label for="book-wear" class="w-25">Condition</label>-->
                         </div>
                         <div class="form-label-group">
                             <input th:field="*{imageUrl}"
