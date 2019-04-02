@@ -54,6 +54,6 @@ function ImplBook(obResponse){
   this.pages = obResponse.number_of_pages;        // TODO: use this
   this.publishDate = obResponse.publish_date;     // TODO: use this
   this.image = Book.parseImage(obResponse);
-  this.wear = 1;
+  this.wear = 3;
   // TODO: get weight as well
 }
