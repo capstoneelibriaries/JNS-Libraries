@@ -37,7 +37,8 @@ Once the address form is complete, we can go about creating an ad and listing bo
 Let's submit some books to trade. In order to do this we'll need a title for the trade, a description, a value we believe 
 our books are worth, a shipping value, and finally a book. 
 
-For the book itself, we only need to enter the *ISBN*. The reason for this is because I was able to automate the form
+For the book itself, we only need to enter the *ISBN*. The *ISBN* is the *International Standard Book Number*, which can be
+found on the back of any book or inside the cover. The reason for this is because I was able to automate the form
 creation by writing an *autofill* feature in **JavaScript**. **The Javascript** performs an **AJAX** request that queries 
 the **OpenLibrary API** and retrieves book information. With that information, I used **jQuery** to autofill the rest of 
 the form.
@@ -88,4 +89,5 @@ and contains information on which books were exchanged with whom, as well as a s
 
 ## Conclusion
 
-If you'd like to know more about our site's additional features such as our settings page or our build process, like how we implemented **JUnit** with over 100 unique tests, come see us at table X.
+If you'd like to know more about our site's additional features such as our settings page or how we implemented over 100
+unique **JUNIT** tests, come see us at table X.
