@@ -27,21 +27,21 @@
                     <div class="card" th:object="${transaction}">
                         <div class="row">
                             <div class="offer col-lg-6 col-md-6 col-sm-12">
+                                <p th:text="*{date}" id="time"></p>
                                 <h5 class="text-left" th:if="${!(user.id == transaction.buyer.id)}">Book trade with <span th:text="*{buyer.username}"
                                                                                                                         class="text-capitalize"></span>
                                 </h5>
                                 <h5 class="text-left" th:if="${!(user.id == transaction.seller.id)}">Book trade with <span th:text="*{seller.username}"
                                                                                                                          class="text-capitalize"></span>
                                 </h5>
-                                <p th:text="*{date}">Trade Status: <span class="completed">Completed</span></p>
                                 <ul class="list-unstyled">
                                     <th:block th:each="book:*{trade.wanted.books}">
                                         <li class="border-bottom" th:text="${book.title}+' by '+${book.author}"></li>
                                     </th:block>
                                 </ul>
                             </div>
-                            <div class="yours col-lg-6 col-md-6 col-sm-12">
-                                <h5 class="text-center">In exchange for:</h5>
+                            <div class="yours col-lg-6 col-md-6 col-sm-12 mt-lg-5">
+                                <h5 class="text-center spacing">In exchange for:</h5>
                                 <ul class="list-unstyled">
                                     <th:block th:each="book: *{trade.forSale.books}">
                                         <li class="border-bottom" th:text="${book.title}+' by '+${book.author}"></li>

@@ -227,6 +227,12 @@ a:hover {
 .book-title{
     height: 2.5em;
 }
+@media screen and (max-width: 992px) {
+    .spacing{
+        margin-top: 2.45em;
+    }
+}
+
 @media screen and (max-width: 991px) {
     #trade  {
         transform: rotate(90deg);
@@ -236,6 +242,23 @@ a:hover {
         height: auto;
         width: 70%;
     }
+
+    .book-cover {
+        max-height: 250px !important;
+        max-width: 150px !important;
+        height: 250px !important;
+        width: 100% !important;
+        margin: 0 auto;
+    }
+    #time{
+        margin-top: 0;
+        margin-bottom: 1rem;
+        text-overflow: clip;
+        overflow: hidden;
+        white-space: nowrap;
+        max-width: 10em;
+    }
+
     .yours {
         border-left: 0 !important;
         border-bottom: 1px solid #dee2e6!important ;
