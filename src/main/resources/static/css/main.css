@@ -227,9 +227,9 @@ a:hover {
 .book-title{
     height: 2.5em;
 }
-@media screen and (max-width: 992px) {
+@media screen and (min-width: 992px) {
     .spacing{
-        margin-top: 2.45em;
+        margin-top: 2.5em;
     }
 }
 
@@ -256,11 +256,12 @@ a:hover {
         text-overflow: clip;
         overflow: hidden;
         white-space: nowrap;
-        max-width: 10em;
+        max-width: 9em;
     }
 
     .yours {
         border-left: 0 !important;
-        border-bottom: 1px solid #dee2e6!important ;
+        border-bottom: 1px solid #dee2e6;
+        margin: 0;
     }
 }

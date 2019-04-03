@@ -8,6 +8,18 @@
             background: linear-gradient(to right, #233D4D, #619B8A);
             color: black;
         }
+        #time{
+            margin-top: 0;
+            margin-bottom: 1rem;
+            text-overflow: clip;
+            overflow: hidden;
+            white-space: nowrap;
+            max-width: 9em;
+        }
+        .yours {
+            border-left: 0 !important;
+            border-bottom: 0;
+        }
     </style>
 
 </head>
@@ -40,8 +52,8 @@
                                     </th:block>
                                 </ul>
                             </div>
-                            <div class="yours col-lg-6 col-md-6 col-sm-12 mt-lg-5">
-                                <h5 class="text-center spacing">In exchange for:</h5>
+                            <div class="yours col-lg-6 col-md-6 col-sm-12 spacing">
+                                <h5 class="text-center">In exchange for:</h5>
                                 <ul class="list-unstyled">
                                     <th:block th:each="book: *{trade.forSale.books}">
                                         <li class="border-bottom" th:text="${book.title}+' by '+${book.author}"></li>
