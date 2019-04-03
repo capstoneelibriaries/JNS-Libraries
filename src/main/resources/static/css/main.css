@@ -75,6 +75,10 @@ label:focus, input:focus  {
     border-radius: 2rem;
 }
 
+#book-wear{
+    height: 3em;
+}
+
 .form-label-group>input,
 .form-label-group>select,
 .form-label-group>label,
@@ -159,7 +163,7 @@ label:focus, input:focus  {
 }
 
 .img{
-    height: 375px;
+    height: 350px;
     width: 250px;
 }
 
@@ -207,8 +211,12 @@ a:hover {
 }
 .btn-primary {
     color: #fff;
-    background-color: #233D4D;
-    border-color: #233D4D;
+    background-color: #28a745;
+    border-color: #28a745;
+}
+.btn-success{
+    background-color: #28a745;
+    border-color: #28a745;
 }
 .brief{
     max-width: 80%;
@@ -219,6 +227,12 @@ a:hover {
 .book-title{
     height: 2.5em;
 }
+@media screen and (min-width: 992px) {
+    .spacing{
+        margin-top: 2.5em;
+    }
+}
+
 @media screen and (max-width: 991px) {
     #trade  {
         transform: rotate(90deg);
@@ -228,8 +242,26 @@ a:hover {
         height: auto;
         width: 70%;
     }
+
+    .book-cover {
+        max-height: 250px !important;
+        max-width: 150px !important;
+        height: 250px !important;
+        width: 100% !important;
+        margin: 0 auto;
+    }
+    #time{
+        margin-top: 0;
+        margin-bottom: 1rem;
+        text-overflow: clip;
+        overflow: hidden;
+        white-space: nowrap;
+        max-width: 9em;
+    }
+
     .yours {
         border-left: 0 !important;
-        border-bottom: 1px solid #dee2e6!important ;
+        border-bottom: 1px solid #dee2e6;
+        margin: 0;
     }
 }
