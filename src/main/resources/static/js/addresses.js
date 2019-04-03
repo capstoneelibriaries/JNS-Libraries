@@ -29,8 +29,40 @@ const autofill = (form, data) => {
     $(`${form.zipcode}`).val(data.zipcode);
 };
 
+const keyLeft = 37;
+const keyRight = 39;
+const keyUp = 38;
+const keyDown = 40;
+const keyLowA = 65;
+const keyLowB = 66;
+
+const konami = [
+    keyUp,
+    keyUp,
+    keyDown,
+    keyDown,
+    keyLeft,
+    keyRight,
+    keyLeft,
+    keyRight,
+    keyLowA,
+    keyLowB,
+];
+
+function execKonami(form){
+    $(`${form.streetAddr}`).val("600 Navaro");
+    $(`${form.subAddr}`).val("Floor 3");
+    $(`${form.country}`).val("United States");
+    $(`${form.city}`).val("San Antonio");
+    $(`${form.state}`).val("Texas");
+    $(`${form.zipcode}`).val("78259");
+}
+
 function addresses(userId){
     console.log(`DEBUG: addresses(${userId})`);
+
+    const billing = newAddress("billing");
+    const shipping = newAddress("shipping");
 
     let req = new XMLHttpRequest();
     req.open("GET", `${window.origin}/profile/addresses/${userId}`);
@@ -40,9 +72,6 @@ function addresses(userId){
         const addr = JSON.parse(req.responseText);
         console.log(addr);
 
-        const billing = newAddress("billing");
-        const shipping = newAddress("shipping");
-
         autofill(billing, addr[0]);
         autofill(shipping, addr[1]);
 
@@ -51,4 +80,24 @@ function addresses(userId){
     };
 
     req.send();
+
+    var keyStack = [];
+    $(document).keyup(function(event){
+        keyStack.push(event.keyCode);
+
+        if(keyStack.length === konami.length){
+            var i = 0;
+            keyStack.forEach(function(key){
+                if(key === konami[i]){
+                    i++;
+                }
+            });
+            if(i === konami.length){
+                execKonami(billing);
+                execKonami(shipping);
+            }
+            keyStack = [];
+        }
+    });
+
 }
